@@ -3,6 +3,7 @@ package com.example.gamifyliving
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.navigation.compose.rememberNavController
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
@@ -16,10 +17,14 @@ class MainActivity : ComponentActivity() {
                 val items = listOf(
                     Screen.Home,
                     Screen.Tasks,
+                    Screen.Home, // For FAB space
                     Screen.Rewards,
                     Screen.Profile,
                 )
                 Scaffold (
+                    floatingActionButton = { AddTaskFAB() },
+                    isFloatingActionButtonDocked = true,
+                    floatingActionButtonPosition = FabPosition.Center,
                     bottomBar = { BottomNavigationBar(items = items, navController = navController) }
                 ) {
                     Navigation(navController = navController)
