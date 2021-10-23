@@ -15,7 +15,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val items = listOf(
                     Screen.Home,
-                    Screen.Profile
+                    Screen.Tasks,
+                    Screen.Rewards,
+                    Screen.Profile,
                 )
                 Scaffold (
                     bottomBar = { BottomNavigationBar(items = items, navController = navController) }

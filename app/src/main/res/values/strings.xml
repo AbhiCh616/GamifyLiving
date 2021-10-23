@@ -2,4 +2,6 @@
     <string name="app_name">Gamify Living</string>
     <string name="home">home</string>
     <string name="profile">profile</string>
+    <string name="tasks">tasks</string>
+    <string name="rewards">rewards</string>
 </resources>
