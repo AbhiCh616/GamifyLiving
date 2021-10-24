@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Home.route) {
+    NavHost(navController = navController, startDestination = Screen.Profile.route) {
         composable(Screen.Home.route) { Home() }
         composable(Screen.Tasks.route) { Tasks() }
         composable(Screen.Rewards.route) { Rewards() }
