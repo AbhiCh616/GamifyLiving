@@ -1,7 +1,10 @@
 package com.example.gamifyliving
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -45,8 +48,31 @@ fun StatsBox() {
         Column(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
         ) {
-            Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h6)
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h6)
+                StatsEditButton()
+            }
         }
+    }
+}
+
+@Composable
+fun StatsEditButton() {
+    Button(
+        onClick = {},
+        shape = RoundedCornerShape(50)
+    ) {
+        Icon(
+            Icons.Filled.Edit,
+            contentDescription = "Edit Stats",
+            modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+        Text("Edit")
     }
 }
 
