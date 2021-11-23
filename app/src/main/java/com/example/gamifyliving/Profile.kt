@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
@@ -77,7 +78,7 @@ fun StatsEditButton() {
 }
 
 @Composable
-fun Stat(statDesc: String, progress: Float) {
+fun Stat(statDetails: Stat) {
     Column(
         modifier = Modifier.width(260.dp)
     ) {
@@ -85,12 +86,12 @@ fun Stat(statDesc: String, progress: Float) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(statDesc)
-            Text("$progress%")
+            Text(statDetails.name)
+            Text("${statDetails.value}%")
         }
         Spacer(modifier = Modifier.height(8.dp))
         LinearProgressIndicator(
-            progress = progress
+            progress = statDetails.value
         )
     }
 }
@@ -98,7 +99,8 @@ fun Stat(statDesc: String, progress: Float) {
 @Preview
 @Composable
 fun StatPreview() {
-    Stat(statDesc = "Health", progress = 50.5F)
+    val statDetails = Stat("health", 20.5F)
+    Stat(statDetails = statDetails)
 }
 
 @Preview
