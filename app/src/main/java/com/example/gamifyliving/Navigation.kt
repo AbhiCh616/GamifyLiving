@@ -11,6 +11,6 @@ fun Navigation(navController: NavHostController) {
         composable(Screen.Home.route) { Home() }
         composable(Screen.Tasks.route) { Tasks() }
         composable(Screen.Rewards.route) { Rewards() }
-        composable(Screen.Profile.route) { Rewards() }
+        composable(Screen.Profile.route) { Profile() }
     }
 }
