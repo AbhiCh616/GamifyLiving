@@ -34,20 +34,23 @@ fun Profile(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
         ) {
-            StatsBox()
+            StatsBox(stats)
         }
     }
 }
 
 @Composable
-fun StatsBox() {
+fun StatsBox(
+    stats: List<Stat>?
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
     ) {
         Column(
-            modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+            modifier = Modifier
+                .padding(vertical = 8.dp, horizontal = 16.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -56,6 +59,10 @@ fun StatsBox() {
             ) {
                 Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h6)
                 StatsEditButton()
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            stats?.forEach {
+                StatBar(it)
             }
         }
     }
@@ -69,18 +76,18 @@ fun StatsEditButton() {
     ) {
         Icon(
             Icons.Filled.Edit,
-            contentDescription = "Edit Stats",
+            contentDescription = stringResource(R.string.edit),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
         Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
-        Text("Edit")
+        Text(stringResource(R.string.edit))
     }
 }
 
 @Composable
-fun Stat(statDetails: Stat) {
+fun StatBar(statDetails: Stat) {
     Column(
-        modifier = Modifier.width(260.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -91,20 +98,22 @@ fun Stat(statDetails: Stat) {
         }
         Spacer(modifier = Modifier.height(8.dp))
         LinearProgressIndicator(
-            progress = statDetails.value
+            progress = statDetails.value / 100,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
 
 @Preview
 @Composable
-fun StatPreview() {
+fun StatBarPreview() {
     val statDetails = Stat("health", 20.5F)
-    Stat(statDetails = statDetails)
+    StatBar(statDetails = statDetails)
 }
 
 @Preview
 @Composable
 fun StatsBoxPreview() {
-    StatsBox()
+    val stats = listOf<Stat>(Stat("health", 20.5F))
+    StatsBox(stats)
 }
