@@ -1,4 +1,4 @@
-package com.example.gamifyliving
+package com.example.gamifyliving.ui.component
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon

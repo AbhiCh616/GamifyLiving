@@ -1,4 +1,4 @@
-package com.example.gamifyliving
+package com.example.gamifyliving.util
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -7,6 +7,7 @@ import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.gamifyliving.R
 
 sealed class Screen(
     val route: String,

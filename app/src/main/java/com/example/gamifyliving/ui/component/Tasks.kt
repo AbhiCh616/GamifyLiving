@@ -1,4 +1,4 @@
-package com.example.gamifyliving
+package com.example.gamifyliving.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

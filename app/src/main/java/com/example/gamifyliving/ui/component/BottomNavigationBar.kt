@@ -1,4 +1,4 @@
-package com.example.gamifyliving
+package com.example.gamifyliving.ui.component
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.gamifyliving.util.Screen
 
 @Composable
 fun BottomNavigationBar(

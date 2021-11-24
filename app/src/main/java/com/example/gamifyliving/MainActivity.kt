@@ -6,7 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.navigation.compose.rememberNavController
+import com.example.gamifyliving.ui.component.AddTaskFAB
+import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.Navigation
+import com.example.gamifyliving.util.Screen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
