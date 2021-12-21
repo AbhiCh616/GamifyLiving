@@ -26,7 +26,7 @@ fun BottomNavigationBar(
             items.forEachIndexed { index, screen ->
                 if(index != 2) {
                     BottomNavigationItem(
-                        icon = { Icon(screen.icon, contentDescription = null) },
+                        icon = { Icon(screen.icon!!, contentDescription = null) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
                             navController.navigate(screen.route) {

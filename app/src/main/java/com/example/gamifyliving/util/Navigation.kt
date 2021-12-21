@@ -12,10 +12,10 @@ import com.example.gamifyliving.util.Screen
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Profile.route) {
+    NavHost(navController = navController, startDestination = Screen.ProfileScreen.route) {
         composable(Screen.Home.route) { Home() }
         composable(Screen.Tasks.route) { Tasks() }
         composable(Screen.Rewards.route) { Rewards() }
-        composable(Screen.Profile.route) { Profile() }
+        profileGraph(navController)
     }
 }
