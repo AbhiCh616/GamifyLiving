@@ -56,6 +56,7 @@ fun IndividualStat(statDetails: Stat) {
         shape = RoundedCornerShape(30),
         modifier = Modifier
             .fillMaxWidth()
+            .padding(vertical = 8.dp)
     ) {
         Row(
             modifier = Modifier
@@ -103,13 +104,16 @@ fun ViewAllButton() {
 @Preview
 @Composable
 fun StatBarPreview() {
-    val statDetails = Stat("health", 20.5F)
+    val statDetails = Stat("health", 0.25F)
     IndividualStat(statDetails = statDetails)
 }
 
 @Preview
 @Composable
 fun StatsBoxPreview() {
-    val stats = listOf<Stat>(Stat("health", 20.5F))
+    val stats = listOf<Stat>(
+        Stat("health", 0.25F),
+        Stat("relationship", 0.10F)
+    )
     StatsBox(stats)
 }
