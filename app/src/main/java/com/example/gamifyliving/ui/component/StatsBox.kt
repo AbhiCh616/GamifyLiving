@@ -1,12 +1,10 @@
 package com.example.gamifyliving.ui.component
 
-import android.widget.Space
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
@@ -14,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -89,7 +86,7 @@ fun IndividualStat(statDetails: Stat, inEditMode: Boolean) {
                 Text(statDetails.name)
                 IndividualStatBar(progress = statDetails.value * 100)
             }
-            if(inEditMode) {
+            if (inEditMode) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
@@ -110,7 +107,7 @@ fun IndividualStat(statDetails: Stat, inEditMode: Boolean) {
 }
 
 @Composable
-fun IndividualStatBar(progress : Float) {
+fun IndividualStatBar(progress: Float) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -153,7 +150,7 @@ fun StatBarPreview() {
 @Preview
 @Composable
 fun StatsListPreview() {
-    val stats = listOf<Stat>(
+    val stats = listOf(
         Stat("health", 0.25F),
         Stat("relationship", 0.10F)
     )

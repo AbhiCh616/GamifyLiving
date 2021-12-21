@@ -13,7 +13,7 @@ sealed class Screen(
     val route: String,
     @StringRes val resourceId: Int?,
     val icon: ImageVector?
-    ) {
+) {
     object Home : Screen("home", R.string.home, Icons.Rounded.Home)
 
     object Profile : Screen("profile", R.string.profile, Icons.Rounded.Person)

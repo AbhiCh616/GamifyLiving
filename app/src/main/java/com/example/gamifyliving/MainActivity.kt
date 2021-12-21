@@ -25,11 +25,16 @@ class MainActivity : ComponentActivity() {
                     Screen.Rewards,
                     Screen.Profile,
                 )
-                Scaffold (
+                Scaffold(
                     floatingActionButton = { AddTaskFAB() },
                     isFloatingActionButtonDocked = true,
                     floatingActionButtonPosition = FabPosition.Center,
-                    bottomBar = { BottomNavigationBar(items = items, navController = navController) }
+                    bottomBar = {
+                        BottomNavigationBar(
+                            items = items,
+                            navController = navController
+                        )
+                    }
                 ) {
                     Navigation(navController = navController)
                 }

@@ -19,12 +19,12 @@ fun BottomNavigationBar(
     navController: NavController
 ) {
     BottomAppBar(cutoutShape = RoundedCornerShape(50)) {
-        BottomNavigation() {
+        BottomNavigation {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
 
             items.forEachIndexed { index, screen ->
-                if(index != 2) {
+                if (index != 2) {
                     BottomNavigationItem(
                         icon = { Icon(screen.icon!!, contentDescription = null) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
@@ -38,8 +38,7 @@ fun BottomNavigationBar(
                             }
                         }
                     )
-                }
-                else {
+                } else {
                     BottomNavigationItem(
                         icon = { },
                         selected = false,
