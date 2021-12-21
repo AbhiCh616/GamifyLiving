@@ -18,11 +18,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.util.Screen
 
 @Composable
 fun StatsBox(
+    navController: NavController,
     stats: List<Stat>?,
     inEditMode: Boolean
 ) {
@@ -32,11 +35,21 @@ fun StatsBox(
     ) {
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
+        StatsList(stats, inEditMode)
+        Spacer(modifier = Modifier.height(12.dp))
+        ViewAllButton(navController)
+    }
+}
+
+@Composable
+fun StatsList(
+    stats: List<Stat>?,
+    inEditMode: Boolean
+) {
+    Column {
         stats?.forEach {
             IndividualStat(it, inEditMode)
         }
-        Spacer(modifier = Modifier.height(12.dp))
-        ViewAllButton()
     }
 }
 
@@ -114,12 +127,16 @@ fun IndividualStatBar(progress : Float) {
 }
 
 @Composable
-fun ViewAllButton() {
+fun ViewAllButton(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextButton(onClick = { }) {
+        TextButton(onClick = {
+            navController.navigate(Screen.Stats.route) {
+                launchSingleTop = true
+            }
+        }) {
             Text(text = stringResource(id = R.string.view_all))
         }
     }
@@ -135,10 +152,10 @@ fun StatBarPreview() {
 
 @Preview
 @Composable
-fun StatsBoxPreview() {
+fun StatsListPreview() {
     val stats = listOf<Stat>(
         Stat("health", 0.25F),
         Stat("relationship", 0.10F)
     )
-    StatsBox(stats, false)
+    StatsList(stats, false)
 }

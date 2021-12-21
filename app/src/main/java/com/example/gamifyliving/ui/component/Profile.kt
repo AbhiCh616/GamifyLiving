@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
@@ -23,6 +24,7 @@ import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
 @Composable
 fun Profile(
+    navController: NavController,
     viewModel: ProfileViewModel = viewModel(
         factory = ProfileViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
@@ -36,7 +38,7 @@ fun Profile(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
         ) {
-            StatsBox(stats, inEditMode = false)
+            StatsBox(navController, stats, inEditMode = false)
         }
     }
 }
