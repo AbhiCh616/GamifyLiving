@@ -1,14 +1,19 @@
 package com.example.gamifyliving.ui.component
 
+import android.widget.Space
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,7 +23,8 @@ import com.example.gamifyliving.data.model.Stat
 
 @Composable
 fun StatsBox(
-    stats: List<Stat>?
+    stats: List<Stat>?,
+    inEditMode: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -27,7 +33,7 @@ fun StatsBox(
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
         stats?.forEach {
-            IndividualStat(it)
+            IndividualStat(it, inEditMode)
         }
         Spacer(modifier = Modifier.height(12.dp))
         ViewAllButton()
@@ -51,22 +57,41 @@ fun StatsEditButton() {
 }
 
 @Composable
-fun IndividualStat(statDetails: Stat) {
+fun IndividualStat(statDetails: Stat, inEditMode: Boolean) {
     Card(
         shape = RoundedCornerShape(30),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
         ) {
-            Text(statDetails.name)
-            IndividualStatBar(progress = statDetails.value * 100)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(statDetails.name)
+                IndividualStatBar(progress = statDetails.value * 100)
+            }
+            if(inEditMode) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    IconButton(onClick = { }) {
+                        Icon(Icons.Rounded.Edit, "edit stat")
+                    }
+                    IconButton(onClick = { }) {
+                        Icon(Icons.Rounded.Delete, "delete stat", tint = Color.Red)
+                    }
+                }
+            }
         }
     }
 }
@@ -105,7 +130,7 @@ fun ViewAllButton() {
 @Composable
 fun StatBarPreview() {
     val statDetails = Stat("health", 0.25F)
-    IndividualStat(statDetails = statDetails)
+    IndividualStat(statDetails = statDetails, true)
 }
 
 @Preview
@@ -115,5 +140,5 @@ fun StatsBoxPreview() {
         Stat("health", 0.25F),
         Stat("relationship", 0.10F)
     )
-    StatsBox(stats)
+    StatsBox(stats, false)
 }

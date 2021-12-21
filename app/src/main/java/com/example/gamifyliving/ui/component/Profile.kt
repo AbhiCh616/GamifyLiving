@@ -36,7 +36,7 @@ fun Profile(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
         ) {
-            StatsBox(stats)
+            StatsBox(stats, inEditMode = false)
         }
     }
 }
