@@ -9,8 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.gamifyliving.ui.component.AddTaskFAB
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
-import com.example.gamifyliving.util.Navigation
-import com.example.gamifyliving.util.Screen
+import com.example.gamifyliving.util.navigation.Navigation
+import com.example.gamifyliving.util.navigation.Screen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

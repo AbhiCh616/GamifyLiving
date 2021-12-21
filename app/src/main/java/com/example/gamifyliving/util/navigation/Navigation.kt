@@ -1,12 +1,12 @@
-package com.example.gamifyliving.util
+package com.example.gamifyliving.util.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.gamifyliving.ui.component.Home
-import com.example.gamifyliving.ui.component.Rewards
-import com.example.gamifyliving.ui.component.Tasks
+import com.example.gamifyliving.ui.screen.home.Home
+import com.example.gamifyliving.ui.screen.rewards.Rewards
+import com.example.gamifyliving.ui.screen.tasks.Tasks
 
 @Composable
 fun Navigation(navController: NavHostController) {

@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.gamifyliving.util.Screen
+import com.example.gamifyliving.util.navigation.Screen
 
 @Composable
 fun BottomNavigationBar(

@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.component
+package com.example.gamifyliving.ui.screen.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
-import com.example.gamifyliving.util.Screen
+import com.example.gamifyliving.util.navigation.Screen
 
 @Composable
 fun StatsBox(

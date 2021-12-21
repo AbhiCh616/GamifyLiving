@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.component
+package com.example.gamifyliving.ui.screen.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*

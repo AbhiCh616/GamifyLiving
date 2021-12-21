@@ -1,4 +1,4 @@
-package com.example.gamifyliving.util
+package com.example.gamifyliving.util.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

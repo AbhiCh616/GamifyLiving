@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.component
+package com.example.gamifyliving.ui.screen.rewards
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,13 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Tasks() {
+fun Rewards() {
     Surface(color = MaterialTheme.colors.background) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text("Tasks")
+            Text("Rewards")
         }
     }
 }
