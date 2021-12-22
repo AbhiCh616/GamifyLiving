@@ -15,7 +15,7 @@ import com.example.gamifyliving.data.model.Stat
 @Composable
 fun IndividualStat(statDetails: Stat) {
     Card(
-        shape = RoundedCornerShape(30),
+        shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
