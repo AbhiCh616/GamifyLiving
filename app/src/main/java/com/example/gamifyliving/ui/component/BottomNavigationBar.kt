@@ -23,8 +23,7 @@ fun BottomNavigationBar(
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
 
-            items.forEachIndexed { index, screen ->
-                if (index != 2) {
+            items.forEachIndexed { _, screen ->
                     BottomNavigationItem(
                         icon = { Icon(screen.icon!!, contentDescription = null) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
@@ -38,13 +37,6 @@ fun BottomNavigationBar(
                             }
                         }
                     )
-                } else {
-                    BottomNavigationItem(
-                        icon = { },
-                        selected = false,
-                        onClick = { }
-                    )
-                }
             }
         }
     }
