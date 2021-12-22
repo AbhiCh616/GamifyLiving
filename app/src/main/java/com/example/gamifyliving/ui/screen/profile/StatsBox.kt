@@ -48,19 +48,3 @@ fun ViewAllButton(navController: NavController) {
         }
     }
 }
-
-@Composable
-fun StatsEditButton() {
-    Button(
-        onClick = {},
-        shape = RoundedCornerShape(50)
-    ) {
-        Icon(
-            Icons.Filled.Edit,
-            contentDescription = stringResource(R.string.edit),
-            modifier = Modifier.size(ButtonDefaults.IconSize)
-        )
-        Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
-        Text(stringResource(R.string.edit))
-    }
-}
