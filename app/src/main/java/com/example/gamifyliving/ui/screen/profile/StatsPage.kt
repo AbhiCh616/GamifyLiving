@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -18,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
+import com.example.gamifyliving.ui.component.BottomNavigationBar
+import com.example.gamifyliving.ui.component.bottomNavigationItems
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
@@ -31,15 +31,20 @@ fun StatsPage(
 ) {
     val stats by viewModel.stats.observeAsState()
 
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(vertical = 8.dp, horizontal = 16.dp)
-        ) {
-            Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
-            Spacer(modifier = Modifier.height(16.dp))
-            StatsList(stats)
+    Scaffold(
+        floatingActionButton = { AddStatFAB(viewModel) },
+        floatingActionButtonPosition = FabPosition.Center
+    ) {
+        Surface(color = MaterialTheme.colors.background) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+            ) {
+                Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
+                Spacer(modifier = Modifier.height(16.dp))
+                StatsList(stats)
+            }
         }
     }
 }
