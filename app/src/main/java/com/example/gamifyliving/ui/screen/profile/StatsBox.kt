@@ -1,10 +1,7 @@
 package com.example.gamifyliving.ui.screen.profile
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,8 +15,7 @@ import com.example.gamifyliving.util.navigation.Screen
 @Composable
 fun StatsBox(
     navController: NavController,
-    stats: List<Stat>?,
-    inEditMode: Boolean
+    stats: List<Stat>?
 ) {
     Column(
         modifier = Modifier
@@ -27,7 +23,7 @@ fun StatsBox(
     ) {
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
-        StatsList(stats, inEditMode)
+        StatsList(stats)
         Spacer(modifier = Modifier.height(12.dp))
         ViewAllButton(navController)
     }

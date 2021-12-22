@@ -7,12 +7,11 @@ import com.example.gamifyliving.data.model.Stat
 
 @Composable
 fun StatsList(
-    stats: List<Stat>?,
-    inEditMode: Boolean
+    stats: List<Stat>?
 ) {
     Column {
         stats?.forEach {
-            IndividualStat(it, inEditMode)
+            IndividualStat(it)
         }
     }
 }
@@ -24,5 +23,5 @@ fun StatsListPreview() {
         Stat("health", 0.25F),
         Stat("relationship", 0.10F)
     )
-    StatsList(stats, false)
+    StatsList(stats)
 }

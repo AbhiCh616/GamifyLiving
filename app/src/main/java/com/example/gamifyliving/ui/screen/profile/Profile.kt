@@ -31,7 +31,7 @@ fun Profile(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(8.dp)
         ) {
-            StatsBox(navController, stats, inEditMode = false)
+            StatsBox(navController, stats)
         }
     }
 }
