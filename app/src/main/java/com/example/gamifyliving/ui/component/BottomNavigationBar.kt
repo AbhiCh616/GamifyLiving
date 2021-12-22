@@ -11,6 +11,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gamifyliving.util.navigation.Screen
 
+val bottomNavigationItems = listOf(
+    Screen.Home,
+    Screen.Tasks,
+    Screen.Rewards,
+    Screen.Profile,
+)
+
 @Composable
 fun BottomNavigationBar(
     items: List<Screen>,

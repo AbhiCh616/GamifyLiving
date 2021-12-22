@@ -11,9 +11,9 @@ import com.example.gamifyliving.ui.screen.tasks.Tasks
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.ProfileScreen.route) {
-        composable(Screen.Home.route) { Home() }
-        composable(Screen.Tasks.route) { Tasks() }
-        composable(Screen.Rewards.route) { Rewards() }
+        composable(Screen.Home.route) { Home(navController) }
+        composable(Screen.Tasks.route) { Tasks(navController) }
+        composable(Screen.Rewards.route) { Rewards(navController) }
         profileGraph(navController)
     }
 }
