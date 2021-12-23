@@ -15,11 +15,12 @@ import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @Composable
-fun IndividualStat(statDetails: Stat) {
+fun IndividualStat(
+    statDetails: Stat,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
+        modifier = modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier

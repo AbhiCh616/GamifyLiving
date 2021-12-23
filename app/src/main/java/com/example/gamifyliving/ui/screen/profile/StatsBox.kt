@@ -21,7 +21,9 @@ fun StatsBox(
     ) {
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
-        stats.take(3).forEach { IndividualStat(it) }
+        stats.take(3).forEach {
+            IndividualStat(it, Modifier.padding(vertical = 8.dp))
+        }
         Spacer(modifier = Modifier.height(12.dp))
         ViewAllButton(onViewAllClick)
     }
