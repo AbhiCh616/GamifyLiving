@@ -15,7 +15,7 @@ import com.example.gamifyliving.util.navigation.Screen
 @Composable
 fun StatsBox(
     navController: NavController,
-    stats: List<Stat>?
+    stats: List<Stat>
 ) {
     Column(
         modifier = Modifier
@@ -23,7 +23,7 @@ fun StatsBox(
     ) {
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
-        stats?.take(3)?.forEach { IndividualStat(it) }
+        stats.take(3).forEach { IndividualStat(it) }
         Spacer(modifier = Modifier.height(12.dp))
         ViewAllButton(navController)
     }

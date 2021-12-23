@@ -1,6 +1,5 @@
 package com.example.gamifyliving.ui.screen.profile
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -9,13 +8,11 @@ import com.example.gamifyliving.data.model.Stat
 
 @Composable
 fun StatsList(
-    stats: List<Stat>?
+    stats: List<Stat>
 ) {
     LazyColumn {
-        if(stats != null) {
-            items(stats) {
-                IndividualStat(it)
-            }
+        items(stats) {
+            IndividualStat(it)
         }
     }
 }

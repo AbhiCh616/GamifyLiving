@@ -30,7 +30,7 @@ fun StatsPage(
         )
     )
 ) {
-    val stats by viewModel.stats.observeAsState()
+    val stats by viewModel.stats.observeAsState(emptyList())
     var showAddStatDialog by remember { mutableStateOf(false) }
 
     if(!showAddStatDialog) {

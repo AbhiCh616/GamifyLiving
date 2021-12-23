@@ -29,7 +29,7 @@ fun Profile(
         )
     )
 ) {
-    val stats by viewModel.stats.observeAsState()
+    val stats by viewModel.stats.observeAsState(emptyList())
 
     Scaffold(
         bottomBar = {
