@@ -49,7 +49,7 @@ fun IndividualStatBar(progress: Float) {
                 .clip(RoundedCornerShape(50))
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Text("$progress%")
+        Text("${progress.toInt()}%")
     }
 }
 
