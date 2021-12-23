@@ -7,15 +7,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
-import com.example.gamifyliving.util.navigation.Screen
 
 @Composable
 fun StatsBox(
-    navController: NavController,
-    stats: List<Stat>
+    stats: List<Stat>,
+    onViewAllClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -25,21 +23,17 @@ fun StatsBox(
         Spacer(modifier = Modifier.height(16.dp))
         stats.take(3).forEach { IndividualStat(it) }
         Spacer(modifier = Modifier.height(12.dp))
-        ViewAllButton(navController)
+        ViewAllButton(onViewAllClick)
     }
 }
 
 @Composable
-fun ViewAllButton(navController: NavController) {
+fun ViewAllButton(onClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextButton(onClick = {
-            navController.navigate(Screen.Stats.route) {
-                launchSingleTop = true
-            }
-        }) {
+        TextButton(onClick = onClick) {
             Text(text = stringResource(id = R.string.view_all))
         }
     }

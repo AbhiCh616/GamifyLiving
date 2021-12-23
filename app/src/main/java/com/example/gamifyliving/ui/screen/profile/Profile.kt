@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.component.bottomNavigationItems
+import com.example.gamifyliving.util.navigation.Screen
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
@@ -44,8 +45,12 @@ fun Profile(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(8.dp)
             ) {
-                StatsBox(navController, stats)
+                StatsBox(stats) {
+                    navController.navigate(Screen.Stats.route) {
+                    launchSingleTop = true
+                }}
             }
         }
     }
 }
+
