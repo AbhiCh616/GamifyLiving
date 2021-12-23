@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @Composable
 fun IndividualStat(statDetails: Stat) {
@@ -54,5 +55,8 @@ fun IndividualStatBar(progress: Float) {
 @Composable
 fun IndividualStatPreview() {
     val statDetails = Stat("health", 0.25F)
-    IndividualStat(statDetails = statDetails)
+
+    GamifyLivingTheme {
+        IndividualStat(statDetails = statDetails)
+    }
 }

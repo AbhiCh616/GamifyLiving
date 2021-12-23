@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @Composable
 fun StatsList(
@@ -24,5 +25,8 @@ fun StatsListPreview() {
         Stat("health", 0.25F),
         Stat("relationship", 0.10F)
     )
-    StatsList(stats)
+
+    GamifyLivingTheme {
+        StatsList(stats)
+    }
 }
