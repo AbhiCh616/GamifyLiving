@@ -1,6 +1,8 @@
 package com.example.gamifyliving.ui.screen.profile
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.gamifyliving.data.model.Stat
@@ -9,9 +11,11 @@ import com.example.gamifyliving.data.model.Stat
 fun StatsList(
     stats: List<Stat>?
 ) {
-    Column {
-        stats?.forEach {
-            IndividualStat(it)
+    LazyColumn {
+        if(stats != null) {
+            items(stats) {
+                IndividualStat(it)
+            }
         }
     }
 }
