@@ -45,7 +45,10 @@ fun Profile(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(8.dp)
             ) {
-                StatsBox(stats) {
+                StatsBox(
+                    stats,
+                    Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+                ) {
                     navController.navigate(Screen.Stats.route) {
                     launchSingleTop = true
                 }}

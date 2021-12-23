@@ -13,11 +13,11 @@ import com.example.gamifyliving.data.model.Stat
 @Composable
 fun StatsBox(
     stats: List<Stat>,
+    modifier: Modifier = Modifier,
     onViewAllClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .padding(vertical = 8.dp, horizontal = 16.dp)
+        modifier = modifier
     ) {
         Text(text = stringResource(id = R.string.stats), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))
