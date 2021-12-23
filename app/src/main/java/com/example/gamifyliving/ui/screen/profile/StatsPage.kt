@@ -53,6 +53,7 @@ fun StatsPage(
     }
     else {
         AddStatDialog(
+            viewModel,
             onClose = {
                 showAddStatDialog = false
             }
