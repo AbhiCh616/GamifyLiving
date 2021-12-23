@@ -9,8 +9,10 @@ import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 
 @Composable
-fun AddStatFAB(viewModel: ProfileViewModel) {
-    FloatingActionButton(onClick = { viewModel.insertStat(Stat("ABC", 0.5F)) }) {
+fun AddStatFAB(
+    showAddStatDialog: () -> Unit
+) {
+    FloatingActionButton(onClick = { showAddStatDialog() }) {
         Icon(Icons.Rounded.Add, null)
     }
 }
