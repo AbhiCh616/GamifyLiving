@@ -1,12 +1,15 @@
 package com.example.gamifyliving.ui.screen.profile
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
@@ -34,16 +37,24 @@ fun AddStatDialog(
             } }
         ) {
             Surface(color = MaterialTheme.colors.background) {
-                Column {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     TextField(
                         value = statName,
                         onValueChange = {statName = it},
                         label = { Text(stringResource(id = R.string.statName)) }
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
                     Slider(
                         value = statValue,
                         onValueChange = {statValue = it}
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "${(statValue * 100).toInt()}%")
                 }
             }
         }
