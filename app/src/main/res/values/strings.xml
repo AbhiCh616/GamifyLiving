@@ -8,4 +8,6 @@
     <string name="edit">edit</string>
     <string name="view_all">View all</string>
     <string name="statName">Stat Name</string>
+    <string name="addStat">Add Stat</string>
+    <string name="create">Create</string>
 </resources>

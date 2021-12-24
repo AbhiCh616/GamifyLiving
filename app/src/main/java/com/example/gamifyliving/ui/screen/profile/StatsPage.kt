@@ -16,10 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
+import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.component.bottomNavigationItems
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
+import kotlin.math.truncate
 
 @ExperimentalComposeUiApi
 @Composable
@@ -52,11 +54,12 @@ fun StatsPage(
         }
     }
     else {
-        AddStatDialog(
-            viewModel,
-            onClose = {
-                showAddStatDialog = false
+        AddStatDialog(onClose = {
+            showAddStatDialog = false
+        }) { statName, statValue ->
+            if(statName != "") {
+                viewModel.insertStat(Stat(statName, truncate(statValue * 100) / 100))
             }
-        )
+        }
     }
 }
