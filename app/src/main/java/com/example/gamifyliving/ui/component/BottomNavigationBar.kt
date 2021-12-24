@@ -20,8 +20,8 @@ val bottomNavigationItems = listOf(
 
 @Composable
 fun BottomNavigationBar(
-    items: List<Screen>,
-    navController: NavController
+    navController: NavController,
+    items: List<Screen> = bottomNavigationItems
 ) {
     BottomAppBar(cutoutShape = RoundedCornerShape(50)) {
         BottomNavigation {
