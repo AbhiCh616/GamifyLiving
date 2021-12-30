@@ -17,8 +17,13 @@ class ProfileViewModel(
         statRepository.addStat(stat)
     }
 
-    fun updateStat(stat: Stat) = viewModelScope.launch {
+    private fun updateStat(stat: Stat) = viewModelScope.launch {
         statRepository.updateStat(stat)
+    }
+
+    fun updateStatValues(stat: Stat, statName: String, statValue: Float) {
+        val newStat = stat.copy(name = statName, value = statValue)
+        updateStat(newStat)
     }
 
     fun deleteStat(stat: Stat) = viewModelScope.launch {
