@@ -1,5 +1,6 @@
 package com.example.gamifyliving.util.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -9,6 +10,7 @@ import com.example.gamifyliving.ui.screen.profile.Profile
 import com.example.gamifyliving.ui.screen.profile.StatsPage
 import com.example.gamifyliving.util.navigation.Screen
 
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 fun NavGraphBuilder.profileGraph(navController: NavController) {
     navigation(startDestination = Screen.Profile.route, route = Screen.ProfileScreen.route) {

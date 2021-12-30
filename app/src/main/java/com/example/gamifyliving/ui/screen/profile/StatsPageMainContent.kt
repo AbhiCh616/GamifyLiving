@@ -15,10 +15,12 @@ import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
+@ExperimentalMaterialApi
 @Composable
 fun StatsPageMainContent(
     stats: List<Stat>,
-    showAddStatDialog: () -> Unit
+    onIndividualStatClick: (Stat) -> Unit,
+    showAddStatDialog: () -> Unit,
 ) {
     Scaffold(
         floatingActionButton = { AddStatFAB(showAddStatDialog = showAddStatDialog) },
@@ -35,18 +37,19 @@ fun StatsPageMainContent(
                     style = MaterialTheme.typography.h5
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                StatsList(stats)
+                StatsList(stats, onIndividualStatClick)
             }
         }
     }
 }
 
+@ExperimentalMaterialApi
 @Preview
 @Composable
 fun StatsPageMainContentPreview() {
     val stats = listOf(Stat("Health", 0.4F), Stat("Life", 0.35F))
 
     GamifyLivingTheme{
-        StatsPageMainContent(stats = stats) { }
+        StatsPageMainContent(stats = stats, {}) { }
     }
 }

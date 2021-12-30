@@ -1,5 +1,6 @@
 package com.example.gamifyliving.util.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import com.example.gamifyliving.ui.screen.home.Home
 import com.example.gamifyliving.ui.screen.rewards.Rewards
 import com.example.gamifyliving.ui.screen.tasks.Tasks
 
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
 fun Navigation(navController: NavHostController) {

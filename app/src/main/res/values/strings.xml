@@ -10,4 +10,6 @@
     <string name="statName">Stat Name</string>
     <string name="addStat">Add Stat</string>
     <string name="create">Create</string>
+    <string name="editStat">Edit Stat</string>
+    <string name="delete">Delete</string>
 </resources>

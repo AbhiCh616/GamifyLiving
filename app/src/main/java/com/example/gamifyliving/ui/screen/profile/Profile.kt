@@ -2,6 +2,7 @@ package com.example.gamifyliving.ui.screen.profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -23,6 +24,7 @@ import com.example.gamifyliving.util.navigation.Screen
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
+@ExperimentalMaterialApi
 @Composable
 fun Profile(
     navController: NavController,
@@ -37,6 +39,7 @@ fun Profile(
     ProfileContent(stats = stats, navController = navController)
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun ProfileContent(
     stats: List<Stat>,
@@ -57,6 +60,7 @@ fun ProfileContent(
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun ProfileMainContent(
     stats: List<Stat>,
@@ -76,6 +80,7 @@ fun ProfileMainContent(
     }
 }
 
+@ExperimentalMaterialApi
 @Preview
 @Composable
 fun ProfileMainContentPreview() {

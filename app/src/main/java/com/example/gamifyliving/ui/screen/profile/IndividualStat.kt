@@ -3,6 +3,7 @@ package com.example.gamifyliving.ui.screen.profile
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,13 +15,18 @@ import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
+@ExperimentalMaterialApi
 @Composable
 fun IndividualStat(
     statDetails: Stat,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Stat) -> Unit,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
+        onClick = {
+            onClick(statDetails)
+        }
     ) {
         Row(
             modifier = Modifier
@@ -52,12 +58,13 @@ fun IndividualStatBar(progress: Float) {
     }
 }
 
+@ExperimentalMaterialApi
 @Preview
 @Composable
 fun IndividualStatPreview() {
     val statDetails = Stat("health", 0.25F)
 
     GamifyLivingTheme {
-        IndividualStat(statDetails = statDetails)
+        IndividualStat(statDetails = statDetails) {}
     }
 }
