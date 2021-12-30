@@ -16,6 +16,14 @@ class ProfileViewModel(
     fun insertStat(stat: Stat) = viewModelScope.launch {
         statRepository.addStat(stat)
     }
+
+    fun updateStat(stat: Stat) = viewModelScope.launch {
+        statRepository.updateStat(stat)
+    }
+
+    fun deleteStat(stat: Stat) = viewModelScope.launch {
+        statRepository.deleteStat(stat)
+    }
 }
 
 class ProfileViewModelFactory(

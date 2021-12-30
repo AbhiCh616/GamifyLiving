@@ -12,4 +12,12 @@ class StatRepository(
     suspend fun addStat(stat: Stat) {
         statDao.insert(stat)
     }
+
+    suspend fun updateStat(stat: Stat) {
+        statDao.update(stat)
+    }
+
+    suspend fun deleteStat(stat: Stat) {
+        statDao.delete(stat)
+    }
 }
