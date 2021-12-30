@@ -17,6 +17,10 @@ class ProfileViewModel(
         statRepository.addStat(stat)
     }
 
+    fun getStatByName(statName: String) = viewModelScope.launch {
+        statRepository.getStatByName(statName)
+    }
+
     private fun updateStat(stat: Stat) = viewModelScope.launch {
         statRepository.updateStat(stat)
     }
