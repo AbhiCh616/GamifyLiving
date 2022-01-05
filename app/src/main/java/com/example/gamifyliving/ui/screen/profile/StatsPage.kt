@@ -38,7 +38,6 @@ fun StatsPage(
             }
         },
         isEditStatDialogVisible = isEditStatDialogVisible,
-        showEditStatDialog = { isEditStatDialogVisible = true },
         hideEditStatDialog = { isEditStatDialogVisible = false },
         editStat = { stat, statName, statValue ->
             if (statName != "") {
@@ -67,7 +66,6 @@ fun StatsPageContent(
     hideAddStatDialog: () -> Unit,
     createNewStat: (String, Float) -> Unit,
     isEditStatDialogVisible: Boolean,
-    showEditStatDialog: () -> Unit,
     hideEditStatDialog: () -> Unit,
     editStat: (Stat, String, Float) -> Unit,
     onIndividualStatClick: (Stat) -> Unit,
@@ -76,13 +74,18 @@ fun StatsPageContent(
 ) {
     if (isAddStatDialogVisible) {
         AddStatDialog(onClose = hideAddStatDialog, onSave = createNewStat)
-    }
-    else if(isEditStatDialogVisible) {
-        if (selectedStat != null) {
-            EditStatDialog(stat = selectedStat, onClose = hideEditStatDialog, onSave = editStat, onStatDelete = onStatDelete)
-        }
-    }
-    else {
-        StatsPageMainContent(stats = stats, showAddStatDialog = showAddStatDialog, onIndividualStatClick = onIndividualStatClick)
+    } else if (isEditStatDialogVisible && selectedStat != null) {
+        EditStatDialog(
+            stat = selectedStat,
+            onClose = hideEditStatDialog,
+            onSave = editStat,
+            onStatDelete = onStatDelete
+        )
+    } else {
+        StatsPageMainContent(
+            stats = stats,
+            showAddStatDialog = showAddStatDialog,
+            onIndividualStatClick = onIndividualStatClick
+        )
     }
 }

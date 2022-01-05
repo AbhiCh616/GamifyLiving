@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.getProgressFromStatValue
 
 @ExperimentalMaterialApi
 @Composable
@@ -36,7 +37,7 @@ fun IndividualStat(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(statDetails.name)
-            IndividualStatBar(progress = statDetails.value * 100)
+            IndividualStatBar(getProgressFromStatValue(statDetails.value))
         }
     }
 }

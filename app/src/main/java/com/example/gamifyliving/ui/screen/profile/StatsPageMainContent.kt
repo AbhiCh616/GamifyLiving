@@ -49,7 +49,7 @@ fun StatsPageMainContent(
 fun StatsPageMainContentPreview() {
     val stats = listOf(Stat("Health", 0.4F), Stat("Life", 0.35F))
 
-    GamifyLivingTheme{
+    GamifyLivingTheme {
         StatsPageMainContent(stats = stats, {}) { }
     }
 }

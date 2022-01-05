@@ -14,7 +14,6 @@ import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
-import java.nio.file.Files.delete
 
 @ExperimentalComposeUiApi
 @Composable
@@ -26,7 +25,7 @@ fun EditStatDialog(
 ) {
     var statName by remember { mutableStateOf(stat.name) }
     var statValue by remember { mutableStateOf(stat.value) }
-    
+
     EditStatDialogContent(
         onClose = onClose,
         onSave = { onSave(stat, statName, statValue) },
@@ -57,11 +56,11 @@ fun EditStatDialogContent(
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Scaffold(
-            topBar = { 
+            topBar = {
                 EditStatTopAppBar(onClose = onClose) {
                     onSave()
-                    onClose() 
-                } 
+                    onClose()
+                }
             }
         ) {
             EditStatDialogContentBody(
@@ -77,9 +76,9 @@ fun EditStatDialogContent(
 
 @Composable
 fun EditStatDialogContentBody(
-    statName: String, 
-    statValue: Float, 
-    onStatNameChange: (String) -> Unit, 
+    statName: String,
+    statValue: Float,
+    onStatNameChange: (String) -> Unit,
     onStatValueChange: (Float) -> Unit,
     onStatDelete: () -> Unit
 ) {

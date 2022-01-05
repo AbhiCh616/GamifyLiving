@@ -29,20 +29,25 @@ fun BottomNavigationBar(
             val currentDestination = navBackStackEntry?.destination
 
             items.forEachIndexed { _, screen ->
-                    BottomNavigationItem(
-                        icon = { Icon(screen.icon!!, contentDescription = stringResource(id = screen.resourceId!!)) },
-                        label = { Text(stringResource(id = screen.resourceId!!)) },
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
+                BottomNavigationItem(
+                    icon = {
+                        Icon(
+                            screen.icon!!,
+                            contentDescription = stringResource(id = screen.resourceId!!)
+                        )
+                    },
+                    label = { Text(stringResource(id = screen.resourceId!!)) },
+                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    onClick = {
+                        navController.navigate(screen.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
                             }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                    )
+                    }
+                )
             }
         }
     }
