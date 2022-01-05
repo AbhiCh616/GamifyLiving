@@ -25,7 +25,7 @@ class ProfileViewModel(
         statRepository.updateStat(stat)
     }
 
-    fun updateStatValues(stat: Stat, statName: String, statValue: Float) {
+    fun updateStatValues(stat: Stat, statName: String, statValue: Int) {
         val newStat = stat.copy(name = statName, value = statValue)
         updateStat(newStat)
     }

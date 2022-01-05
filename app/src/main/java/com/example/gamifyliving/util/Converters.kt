@@ -1,5 +1,9 @@
 package com.example.gamifyliving.util
 
-fun getProgressFromStatValue(statValue: Float) : Float {
-    return statValue * 100
+fun getProgressFromStatValue(statValue: Int): Float {
+    return (statValue.toFloat() / (5 * 100))
+}
+
+fun getStatValueFromProgress(progress: Float): Int {
+    return (progress * 100 * 5).toInt()
 }

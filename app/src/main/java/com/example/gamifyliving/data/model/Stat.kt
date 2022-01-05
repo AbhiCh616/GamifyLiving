@@ -12,7 +12,7 @@ data class Stat(
     val name: String,
 
     @ColumnInfo(name = "value")
-    val value: Float,
+    val value: Int,
 
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0

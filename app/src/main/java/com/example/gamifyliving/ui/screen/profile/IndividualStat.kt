@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.util.getProgressFromStatValue
+import com.example.gamifyliving.util.getStatValueFromProgress
 
 @ExperimentalMaterialApi
 @Composable
@@ -48,14 +49,14 @@ fun IndividualStatBar(progress: Float) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         LinearProgressIndicator(
-            progress = progress / 100,
+            progress = progress,
             modifier = Modifier
                 .width(64.dp)
                 .height(12.dp)
                 .clip(RoundedCornerShape(50))
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Text("${progress.toInt()}%")
+        Text("${(progress * 100).toInt()}%")
     }
 }
 
@@ -63,7 +64,7 @@ fun IndividualStatBar(progress: Float) {
 @Preview
 @Composable
 fun IndividualStatPreview() {
-    val statDetails = Stat("health", 0.25F)
+    val statDetails = Stat("health", getStatValueFromProgress(0.25F))
 
     GamifyLivingTheme {
         IndividualStat(statDetails = statDetails) {}

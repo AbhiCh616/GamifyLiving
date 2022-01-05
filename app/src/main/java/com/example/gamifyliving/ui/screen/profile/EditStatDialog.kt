@@ -14,6 +14,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.getProgressFromStatValue
 
 @ExperimentalComposeUiApi
 @Composable
@@ -24,19 +25,19 @@ fun EditStatDialog(
     onStatDelete: (Stat) -> Unit
 ) {
     var statName by remember { mutableStateOf(stat.name) }
-    var statValue by remember { mutableStateOf(stat.value) }
+    var sliderValue by remember { mutableStateOf(getProgressFromStatValue(stat.value)) }
 
     EditStatDialogContent(
         onClose = onClose,
-        onSave = { onSave(stat, statName, statValue) },
+        onSave = { onSave(stat, statName, sliderValue) },
         onStatDelete = {
             onStatDelete(stat)
             onClose()
         },
         statName = statName,
-        statValue = statValue,
+        statValue = sliderValue,
         onStatNameChange = { statName = it },
-        onStatValueChange = { statValue = it }
+        onStatValueChange = { sliderValue = it }
     )
 }
 

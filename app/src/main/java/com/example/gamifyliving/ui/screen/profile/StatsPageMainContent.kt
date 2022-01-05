@@ -47,7 +47,7 @@ fun StatsPageMainContent(
 @Preview
 @Composable
 fun StatsPageMainContentPreview() {
-    val stats = listOf(Stat("Health", 0.4F), Stat("Life", 0.35F))
+    val stats = listOf(Stat("Health", 40), Stat("Life", 35))
 
     GamifyLivingTheme {
         StatsPageMainContent(stats = stats, {}) { }

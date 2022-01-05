@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.getStatValueFromProgress
 
 @ExperimentalMaterialApi
 @Composable
@@ -33,8 +34,8 @@ fun StatsList(
 @Composable
 fun StatsListPreview() {
     val stats = listOf(
-        Stat("health", 0.25F),
-        Stat("relationship", 0.10F)
+        Stat("health", getStatValueFromProgress(0.25F)),
+        Stat("relationship", getStatValueFromProgress(0.50F))
     )
 
     GamifyLivingTheme {

@@ -20,6 +20,7 @@ import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.getStatValueFromProgress
 import com.example.gamifyliving.util.navigation.Screen
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
@@ -84,7 +85,7 @@ fun ProfileMainContent(
 @Preview
 @Composable
 fun ProfileMainContentPreview() {
-    val stats = listOf(Stat("Health", 0.5F))
+    val stats = listOf(Stat("Health", getStatValueFromProgress(0.5F)))
 
     GamifyLivingTheme {
         ProfileMainContent(stats = stats) { }
