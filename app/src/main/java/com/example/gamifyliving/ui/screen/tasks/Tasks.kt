@@ -36,11 +36,11 @@ fun Tasks(
 ) {
     val tasks by viewModel.tasks.observeAsState(emptyList())
 
-    TasksContent(tasks, navController)
+    TasksContent(tasks, navController) { viewModel.changeTaskStatus(it) }
 }
 
 @Composable
-fun TasksContent(tasks: List<Task>, navController: NavController) {
+fun TasksContent(tasks: List<Task>, navController: NavController, changeTaskStatus: (Task) -> Unit) {
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
@@ -49,12 +49,12 @@ fun TasksContent(tasks: List<Task>, navController: NavController) {
             )
         }
     ) {
-        TasksMainContent(tasks)
+        TasksMainContent(tasks, changeTaskStatus)
     }
 }
 
 @Composable
-fun TasksMainContent(tasks: List<Task>) {
+fun TasksMainContent(tasks: List<Task>, changeTaskStatus: (Task) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
@@ -62,7 +62,7 @@ fun TasksMainContent(tasks: List<Task>) {
         ) {
             Text(text = stringResource(id = R.string.tasks), style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(16.dp))
-            TasksList(tasks)
+            TasksList(tasks, changeTaskStatus)
         }
     }
 }
@@ -73,6 +73,6 @@ fun TasksMainContentPreview() {
     val tasks = listOf(Task("abc"), Task("xyz"))
 
     GamifyLivingTheme {
-        TasksMainContent(tasks)
+        TasksMainContent(tasks, {})
     }
 }

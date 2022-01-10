@@ -1,10 +1,8 @@
 package com.example.gamifyliving.ui.screen.tasks
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +15,7 @@ import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.util.getProgressFromStatValue
 
 @Composable
-fun IndividualTask(task: Task, modifier: Modifier = Modifier) {
+fun IndividualTask(task: Task, modifier: Modifier = Modifier, onCheckboxClicked: (Task) -> Unit) {
     Card(
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -25,9 +23,11 @@ fun IndividualTask(task: Task, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Checkbox(checked = task.status, onCheckedChange = {onCheckboxClicked(task)})
+            Spacer(modifier = Modifier.width(16.dp))
             Text(task.name)
         }
     }
@@ -36,8 +36,8 @@ fun IndividualTask(task: Task, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun IndividualTaskPreview() {
-    val task = Task("Untitled Task")
+    val task = Task("Untitled Task", true)
     GamifyLivingTheme {
-        IndividualTask(task)
+        IndividualTask(task, onCheckboxClicked = {})
     }
 }

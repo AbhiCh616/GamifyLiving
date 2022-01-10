@@ -24,6 +24,11 @@ class TasksViewModel (
     fun deleteTask(task: Task) = viewModelScope.launch {
         taskRepository.deleteTask(task)
     }
+
+    fun changeTaskStatus(task: Task) = viewModelScope.launch {
+        val newTask = task.copy(status = !task.status)
+        updateTask(newTask)
+    }
 }
 
 class TasksViewModelFactory(

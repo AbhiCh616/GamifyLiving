@@ -12,13 +12,15 @@ import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @Composable
 fun TasksList(
-    tasks: List<Task>
+    tasks: List<Task>,
+    changeTaskStatus: (Task) -> Unit
 ) {
     LazyColumn {
         items(tasks) {
             IndividualTask(
                 it,
-                Modifier.padding(vertical = 8.dp)
+                Modifier.padding(vertical = 8.dp),
+                changeTaskStatus
             )
         }
     }
@@ -30,6 +32,6 @@ fun TasksListPreview() {
     val tasks = listOf(Task("abc"), Task("xyz 123"))
 
     GamifyLivingTheme() {
-        TasksList(tasks)
+        TasksList(tasks, {})
     }
 }
