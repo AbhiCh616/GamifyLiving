@@ -7,11 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.data.model.Task
 
-@Database(entities = [Stat::class], version = 2)
+@Database(entities = [Stat::class, Task::class], version = 3, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun statDao(): StatDao
+    abstract fun taskDao(): TaskDao
 
     companion object {
 
@@ -21,6 +23,12 @@ abstract class AppDatabase : RoomDatabase() {
                 database.execSQL("DROP TABLE Stat")
                 // create new table
                 database.execSQL("CREATE TABLE Stat (uid INTEGER, name TEXT, value INTEGER, PRIMARY KEY(uid) )")
+            }
+        }
+
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE Task (uid INTEGER, name TEXT, status INTEGER, PRIMARY KEY(uid))")
             }
         }
 
