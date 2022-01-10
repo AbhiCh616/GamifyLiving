@@ -1,7 +1,6 @@
 package com.example.gamifyliving.ui.screen.tasks
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -12,9 +11,12 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
+import com.example.gamifyliving.R
 import com.example.gamifyliving.data.model.Task
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.component.bottomNavigationItems
@@ -52,11 +54,13 @@ fun TasksContent(tasks: List<Task>, navController: NavController) {
 @Composable
 fun TasksMainContent(tasks: List<Task>) {
     Surface(color = MaterialTheme.colors.background) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+        Column(
+            modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Tasks")
+            Text(text = stringResource(id = R.string.tasks), style = MaterialTheme.typography.h5)
+            Spacer(modifier = Modifier.height(16.dp))
+            TasksList(tasks)
         }
     }
 }
