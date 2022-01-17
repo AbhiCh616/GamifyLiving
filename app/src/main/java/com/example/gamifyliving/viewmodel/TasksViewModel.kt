@@ -3,14 +3,14 @@ package com.example.gamifyliving.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.data.model.Task
 import com.example.gamifyliving.repository.TaskRepository
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class TasksViewModel (
+class TasksViewModel(
     private val taskRepository: TaskRepository
-): ViewModel() {
+) : ViewModel() {
     val tasks = taskRepository.allTasks.asLiveData()
 
     fun addTask(task: Task) = viewModelScope.launch {
@@ -19,6 +19,11 @@ class TasksViewModel (
 
     fun updateTask(task: Task) = viewModelScope.launch {
         taskRepository.updateTask(task)
+    }
+
+    fun updateTaskValues(task: Task, taskName: String) {
+        val newTask = task.copy(name = taskName)
+        updateTask(newTask)
     }
 
     fun deleteTask(task: Task) = viewModelScope.launch {
