@@ -13,6 +13,7 @@ import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.data.model.Task
 import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.component.bottomNavigationItems
+import com.example.gamifyliving.ui.screen.profile.AddStatFAB
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.viewmodel.TasksViewModel
 import com.example.gamifyliving.viewmodel.TasksViewModelFactory
@@ -32,6 +33,7 @@ fun Tasks(
 
     var isEditTaskDialogVisible by remember { mutableStateOf(false) }
     var selectedTask: Task? by remember { mutableStateOf(null) }
+    var isAddTaskDialogVisible by remember { mutableStateOf(false) }
 
     TasksContent(
         tasks,
@@ -51,6 +53,14 @@ fun Tasks(
         selectedTask = selectedTask,
         onTaskDelete = {
             viewModel.deleteTask(it)
+        },
+        isAddTaskDialogVisible = isAddTaskDialogVisible,
+        showAddTaskDialog = { isAddTaskDialogVisible = true },
+        hideAddTaskDialog = { isAddTaskDialogVisible = false },
+        createNewTask = { taskName ->
+            if (taskName != "") {
+                viewModel.addTask(Task(taskName))
+            }
         }
     )
 }
@@ -67,9 +77,14 @@ fun TasksContent(
     hideEditTaskDialog: () -> Unit,
     editTask: (Task, String) -> Unit,
     selectedTask: Task?,
-    onTaskDelete: (Task) -> Unit
+    onTaskDelete: (Task) -> Unit,
+    isAddTaskDialogVisible: Boolean,
+    showAddTaskDialog: () -> Unit,
+    hideAddTaskDialog: () -> Unit,
+    createNewTask: (String) -> Unit
 ) {
     Scaffold(
+        floatingActionButton = { AddStatFAB(showAddStatDialog = showAddTaskDialog) },
         bottomBar = {
             BottomNavigationBar(
                 items = bottomNavigationItems,
@@ -85,7 +100,10 @@ fun TasksContent(
             hideEditTaskDialog,
             editTask,
             selectedTask,
-            onTaskDelete
+            onTaskDelete,
+            isAddTaskDialogVisible,
+            hideAddTaskDialog,
+            createNewTask,
         )
     }
 }
@@ -101,7 +119,10 @@ fun TasksContentBody(
     hideEditTaskDialog: () -> Unit,
     editTask: (Task, String) -> Unit,
     selectedTask: Task?,
-    onTaskDelete: (Task) -> Unit
+    onTaskDelete: (Task) -> Unit,
+    isAddTaskDialogVisible: Boolean,
+    hideAddTaskDialog: () -> Unit,
+    createNewTask: (String) -> Unit
 ) {
     if (isEditTaskDialogVisible && selectedTask != null) {
         EditTaskDialog(
@@ -110,11 +131,13 @@ fun TasksContentBody(
             onSave = editTask,
             onTaskDelete = onTaskDelete
         )
+    } else if (isAddTaskDialogVisible) {
+        AddTaskDialog(onClose = hideAddTaskDialog, onSave = createNewTask)
     } else {
         TasksMainContent(
             tasks,
             changeTaskStatus,
-            onIndividualTaskClick,
+            onIndividualTaskClick
         )
     }
 }
@@ -127,6 +150,9 @@ fun TasksMainContentPreview() {
     val tasks = listOf(Task("abc"), Task("xyz"))
 
     GamifyLivingTheme {
-        TasksContentBody(tasks, {}, {}, false, {}, { Task, String -> }, null, {})
+        TasksContentBody(
+            tasks, {}, {}, false,
+            {}, { _, _ -> }, null,
+            {}, false, {}, {})
     }
 }

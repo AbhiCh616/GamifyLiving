@@ -28,7 +28,10 @@ fun TasksMainContent(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.tasks), style = MaterialTheme.typography.h5)
+            Text(
+                text = stringResource(id = R.string.tasks),
+                style = MaterialTheme.typography.h5
+            )
             Spacer(modifier = Modifier.height(16.dp))
             TasksList(tasks, changeTaskStatus, onIndividualTaskClick)
         }
