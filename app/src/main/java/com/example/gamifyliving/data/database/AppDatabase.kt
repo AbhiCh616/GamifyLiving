@@ -6,14 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.gamifyliving.data.model.Reward
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.data.model.Task
 
-@Database(entities = [Stat::class, Task::class], version = 3, exportSchema = true)
+@Database(entities = [Stat::class, Task::class, Reward::class], version = 4, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun statDao(): StatDao
     abstract fun taskDao(): TaskDao
+    abstract fun rewardDao(): RewardDAO
 
     companion object {
 
@@ -29,6 +31,12 @@ abstract class AppDatabase : RoomDatabase() {
         val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE Task (uid INTEGER, name TEXT, status INTEGER, PRIMARY KEY(uid))")
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE Reward (uid INTEGER, taskId INTEGER REFERENCES Task (uid), statId INTEGER REFERENCES Stat (uid), points INTEGER, PRIMARY KEY(uid))")
             }
         }
 

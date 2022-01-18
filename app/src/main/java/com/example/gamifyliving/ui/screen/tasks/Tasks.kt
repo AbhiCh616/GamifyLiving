@@ -25,7 +25,8 @@ fun Tasks(
     navController: NavController,
     viewModel: TasksViewModel = viewModel(
         factory = TasksViewModelFactory(
-            (LocalContext.current.applicationContext as GamifyLivingApplication).taskRepository
+            (LocalContext.current.applicationContext as GamifyLivingApplication).taskRepository,
+            (LocalContext.current.applicationContext as GamifyLivingApplication).rewardRepository
         )
     )
 ) {
