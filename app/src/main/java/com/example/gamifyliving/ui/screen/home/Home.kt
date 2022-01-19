@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.gamifyliving.ui.component.BottomNavigationBar
-import com.example.gamifyliving.ui.component.bottomNavigationItems
 
 @Composable
 fun Home(
@@ -20,7 +19,6 @@ fun Home(
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
-                items = bottomNavigationItems,
                 navController = navController
             )
         }
