@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity (indices = [Index(value = ["name"], unique = true)])
+@Entity(tableName = "Stat", indices = [Index(value = ["name"], unique = true)])
 
 data class Stat(
     @ColumnInfo(name = "name")
