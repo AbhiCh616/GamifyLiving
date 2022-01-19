@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 class TaskRepository(
     private val taskDao: TaskDao
 ) {
-    val allTasks: Flow<List<Task>> = taskDao.getAll()
 
     suspend fun addTask(task: Task) {
         taskDao.insert(task)
@@ -20,4 +19,7 @@ class TaskRepository(
     suspend fun deleteTask(task: Task) {
         taskDao.delete(task)
     }
+
+    fun observeTasks(): Flow<List<Task>> = taskDao.getAll()
+
 }

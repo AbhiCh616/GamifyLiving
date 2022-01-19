@@ -6,6 +6,7 @@ import com.example.gamifyliving.data.model.Reward
 class RewardRepository(
     private val rewardDAO: RewardDAO
 ) {
+
     suspend fun addReward(reward: Reward) {
         rewardDAO.insert(reward)
     }
@@ -17,4 +18,5 @@ class RewardRepository(
     suspend fun deleteReward(reward: Reward) {
         rewardDAO.delete(reward)
     }
+
 }

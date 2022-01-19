@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val statRepository: StatRepository
 ) : ViewModel() {
-    val stats = statRepository.allStats.asLiveData()
+    val stats = statRepository.observeStats().asLiveData()
 
     fun insertStat(stat: Stat) = viewModelScope.launch {
         statRepository.addStat(stat)

@@ -14,7 +14,7 @@ class TasksViewModel(
     private val taskRepository: TaskRepository,
     private val rewardRepository: RewardRepository
 ) : ViewModel() {
-    val tasks = taskRepository.allTasks.asLiveData()
+    val tasks = taskRepository.observeTasks().asLiveData()
 
     fun addTask(task: Task) = viewModelScope.launch {
         taskRepository.addTask(task)
