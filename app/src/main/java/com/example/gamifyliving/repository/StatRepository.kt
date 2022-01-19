@@ -9,10 +9,6 @@ class StatRepository(
 ) {
     val allStats: Flow<List<Stat>> = statDao.getAll()
 
-    suspend fun getStatByName(statName: String) {
-        statDao.get(statName)
-    }
-
     suspend fun addStat(stat: Stat) {
         statDao.insert(stat)
     }

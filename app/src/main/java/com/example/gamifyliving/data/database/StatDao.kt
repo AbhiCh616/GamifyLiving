@@ -16,10 +16,7 @@ interface StatDao {
     @Delete
     suspend fun delete(stat: Stat)
 
-    @Query("SELECT * FROM stat WHERE name = :name")
-    suspend fun get(name: String): Stat
-
-    @Query("SELECT * FROM stat ORDER BY value, name ASC")
+    @Query("SELECT * FROM stat")
     fun getAll(): Flow<List<Stat>>
 
 }
