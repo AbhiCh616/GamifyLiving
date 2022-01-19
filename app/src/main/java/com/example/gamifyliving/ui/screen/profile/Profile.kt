@@ -35,7 +35,7 @@ fun Profile(
         )
     )
 ) {
-    val stats by viewModel.stats.observeAsState(emptyList())
+    val stats by viewModel.getAllStats().observeAsState(emptyList())
 
     ProfileContent(stats = stats, navController = navController)
 }

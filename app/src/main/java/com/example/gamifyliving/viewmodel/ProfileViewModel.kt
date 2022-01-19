@@ -1,9 +1,6 @@
 package com.example.gamifyliving.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.gamifyliving.data.model.Stat
 import com.example.gamifyliving.repository.StatRepository
 import kotlinx.coroutines.launch
@@ -11,9 +8,8 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val statRepository: StatRepository
 ) : ViewModel() {
-    val stats = statRepository.observeStats().asLiveData()
 
-    fun insertStat(stat: Stat) = viewModelScope.launch {
+    fun addStat(stat: Stat) = viewModelScope.launch {
         statRepository.addStat(stat)
     }
 
@@ -29,6 +25,9 @@ class ProfileViewModel(
     fun deleteStat(stat: Stat) = viewModelScope.launch {
         statRepository.deleteStat(stat)
     }
+
+    fun getAllStats(): LiveData<List<Stat>> = statRepository.observeStats().asLiveData()
+
 }
 
 class ProfileViewModelFactory(

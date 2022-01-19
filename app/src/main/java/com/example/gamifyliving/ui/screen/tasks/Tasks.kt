@@ -30,7 +30,7 @@ fun Tasks(
         )
     )
 ) {
-    val tasks by viewModel.tasks.observeAsState(emptyList())
+    val tasks by viewModel.getAllTasks().observeAsState(emptyList())
 
     var isEditTaskDialogVisible by remember { mutableStateOf(false) }
     var selectedTask: Task? by remember { mutableStateOf(null) }
@@ -48,7 +48,7 @@ fun Tasks(
         hideEditTaskDialog = { isEditTaskDialogVisible = false },
         editTask = { task, taskName ->
             if (taskName != "") {
-                viewModel.updateTaskValues(task, taskName)
+                viewModel.updateTaskName(task, taskName)
             }
         },
         selectedTask = selectedTask,

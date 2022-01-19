@@ -22,7 +22,7 @@ fun StatsPage(
         )
     )
 ) {
-    val stats by viewModel.stats.observeAsState(emptyList())
+    val stats by viewModel.getAllStats().observeAsState(emptyList())
     var isAddStatDialogVisible by remember { mutableStateOf(false) }
     var isEditStatDialogVisible by remember { mutableStateOf(false) }
     var selectedStat: Stat? by remember { mutableStateOf(null) }
@@ -34,7 +34,7 @@ fun StatsPage(
         hideAddStatDialog = { isAddStatDialogVisible = false },
         createNewStat = { statName, statValue ->
             if (statName != "") {
-                viewModel.insertStat(Stat(statName, getStatValueFromProgress(statValue)))
+                viewModel.addStat(Stat(statName, getStatValueFromProgress(statValue)))
             }
         },
         isEditStatDialogVisible = isEditStatDialogVisible,
