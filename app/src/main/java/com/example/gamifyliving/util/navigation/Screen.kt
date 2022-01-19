@@ -10,17 +10,46 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.gamifyliving.R
 
 sealed class Screen(
-    val route: String,
-    @StringRes val resourceId: Int?,
-    val icon: ImageVector?
+    val route: String
 ) {
-    object Home : Screen("home", R.string.home, Icons.Rounded.Home)
 
-    object Profile : Screen("profile", R.string.profile, Icons.Rounded.Person)
-    object ProfileScreen : Screen("profile_screen", null, null)
-    object Stats : Screen("stats", null, null)
+    object Stats : Screen(route = "stats")
+    object Profile : Screen(route = "profile")
 
-    object Tasks : Screen("tasks", R.string.tasks, Icons.Rounded.CheckCircle)
+}
 
-    object Rewards : Screen("rewards", R.string.rewards, Icons.Rounded.Star)
+sealed class BottomNavigationScreen(
+    route: String,
+    @StringRes val resourceId: Int,
+    val icon: ImageVector
+) : Screen(route) {
+
+    object Home :
+        BottomNavigationScreen(
+            route = "home",
+            resourceId = R.string.home,
+            icon = Icons.Rounded.Home
+        )
+
+    object Tasks :
+        BottomNavigationScreen(
+            route = "tasks",
+            resourceId = R.string.tasks,
+            icon = Icons.Rounded.CheckCircle
+        )
+
+    object Rewards :
+        BottomNavigationScreen(
+            route = "rewards",
+            resourceId = R.string.rewards,
+            icon = Icons.Rounded.Star
+        )
+
+    object ProfileGroup :
+        BottomNavigationScreen(
+            route = "profile_group",
+            resourceId = R.string.profile,
+            icon = Icons.Rounded.Person
+        )
+
 }

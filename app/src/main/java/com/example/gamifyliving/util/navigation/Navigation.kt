@@ -14,10 +14,10 @@ import com.example.gamifyliving.ui.screen.tasks.Tasks
 @ExperimentalComposeUiApi
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.ProfileScreen.route) {
-        composable(Screen.Home.route) { Home(navController) }
-        composable(Screen.Tasks.route) { Tasks(navController) }
-        composable(Screen.Rewards.route) { Rewards(navController) }
+    NavHost(navController = navController, startDestination = BottomNavigationScreen.Home.route) {
+        composable(BottomNavigationScreen.Home.route) { Home(navController) }
+        composable(BottomNavigationScreen.Tasks.route) { Tasks(navController) }
+        composable(BottomNavigationScreen.Rewards.route) { Rewards(navController) }
         profileGraph(navController)
     }
 }

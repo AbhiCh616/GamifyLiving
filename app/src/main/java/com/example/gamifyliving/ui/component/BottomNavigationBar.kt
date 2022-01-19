@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.gamifyliving.util.navigation.Screen
+import com.example.gamifyliving.util.navigation.BottomNavigationScreen
 
 @Composable
 fun BottomNavigationBar(
@@ -19,10 +19,10 @@ fun BottomNavigationBar(
 ) {
 
     val bottomNavigationItems = listOf(
-        Screen.Home,
-        Screen.Tasks,
-        Screen.Rewards,
-        Screen.Profile,
+        BottomNavigationScreen.Home,
+        BottomNavigationScreen.Tasks,
+        BottomNavigationScreen.Rewards,
+        BottomNavigationScreen.ProfileGroup,
     )
 
     BottomNavigation {
@@ -33,11 +33,11 @@ fun BottomNavigationBar(
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        screen.icon!!,
-                        contentDescription = stringResource(id = screen.resourceId!!)
+                        screen.icon,
+                        contentDescription = stringResource(id = screen.resourceId)
                     )
                 },
-                label = { Text(stringResource(id = screen.resourceId!!)) },
+                label = { Text(stringResource(id = screen.resourceId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
