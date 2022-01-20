@@ -13,11 +13,20 @@ import com.example.gamifyliving.ui.screen.tasks.Tasks
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, setBottomNavBar: (Boolean) -> Unit) {
     NavHost(navController = navController, startDestination = BottomNavigationScreen.Home.route) {
-        composable(BottomNavigationScreen.Home.route) { Home(navController) }
-        composable(BottomNavigationScreen.Tasks.route) { Tasks(navController) }
-        composable(BottomNavigationScreen.Rewards.route) { Rewards(navController) }
-        profileGraph(navController)
+        composable(BottomNavigationScreen.Home.route) {
+            setBottomNavBar(BottomNavigationScreen.Home.hasBottomNavBar)
+            Home()
+        }
+        composable(BottomNavigationScreen.Tasks.route) {
+            setBottomNavBar(BottomNavigationScreen.Tasks.hasBottomNavBar)
+            Tasks(navController)
+        }
+        composable(BottomNavigationScreen.Rewards.route) {
+            setBottomNavBar(BottomNavigationScreen.Rewards.hasBottomNavBar)
+            Rewards()
+        }
+        profileGraph(navController, setBottomNavBar)
     }
 }

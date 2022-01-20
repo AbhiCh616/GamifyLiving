@@ -10,19 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.gamifyliving.ui.component.BottomNavigationBar
 
 @Composable
 fun Home(
-    navController: NavController
 ) {
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                navController = navController
-            )
-        }
-    ) {
+    Scaffold {
         Surface(color = MaterialTheme.colors.background) {
             Box(
                 modifier = Modifier.fillMaxSize(),

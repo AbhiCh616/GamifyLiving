@@ -11,7 +11,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.data.model.Task
-import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.screen.profile.AddStatFAB
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.viewmodel.TasksViewModel
@@ -85,11 +84,6 @@ fun TasksContent(
 ) {
     Scaffold(
         floatingActionButton = { AddStatFAB(showAddStatDialog = showAddTaskDialog) },
-        bottomBar = {
-            BottomNavigationBar(
-                navController = navController
-            )
-        }
     ) {
         TasksContentBody(
             tasks,

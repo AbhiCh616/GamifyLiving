@@ -11,12 +11,18 @@ import com.example.gamifyliving.ui.screen.profile.StatsPage
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
-fun NavGraphBuilder.profileGraph(navController: NavController) {
+fun NavGraphBuilder.profileGraph(navController: NavController, setBottomNavBar: (Boolean) -> Unit) {
     navigation(
         startDestination = Screen.Profile.route,
         route = BottomNavigationScreen.ProfileGroup.route
     ) {
-        composable(Screen.Profile.route) { Profile(navController) }
-        composable(Screen.Stats.route) { StatsPage() }
+        composable(Screen.Profile.route) {
+            setBottomNavBar(Screen.Profile.hasBottomNavBar)
+            Profile(navController)
+        }
+        composable(Screen.Stats.route) {
+            setBottomNavBar(Screen.Stats.hasBottomNavBar)
+            StatsPage()
+        }
     }
 }

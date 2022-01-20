@@ -10,39 +10,44 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.gamifyliving.R
 
 sealed class Screen(
-    val route: String
+    val route: String,
+    val hasBottomNavBar: Boolean = false
 ) {
 
     object Stats : Screen(route = "stats")
-    object Profile : Screen(route = "profile")
+    object Profile : Screen(route = "profile", hasBottomNavBar = true)
 
 }
 
 sealed class BottomNavigationScreen(
     route: String,
     @StringRes val resourceId: Int,
-    val icon: ImageVector
-) : Screen(route) {
+    val icon: ImageVector,
+    hasBottomNavBar: Boolean = false,
+) : Screen(route, hasBottomNavBar) {
 
     object Home :
         BottomNavigationScreen(
             route = "home",
             resourceId = R.string.home,
-            icon = Icons.Rounded.Home
+            icon = Icons.Rounded.Home,
+            hasBottomNavBar = true
         )
 
     object Tasks :
         BottomNavigationScreen(
             route = "tasks",
             resourceId = R.string.tasks,
-            icon = Icons.Rounded.CheckCircle
+            icon = Icons.Rounded.CheckCircle,
+            hasBottomNavBar = true
         )
 
     object Rewards :
         BottomNavigationScreen(
             route = "rewards",
             resourceId = R.string.rewards,
-            icon = Icons.Rounded.Star
+            icon = Icons.Rounded.Star,
+            hasBottomNavBar = true
         )
 
     object ProfileGroup :

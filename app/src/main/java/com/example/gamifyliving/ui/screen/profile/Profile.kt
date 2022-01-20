@@ -18,7 +18,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.data.model.Stat
-import com.example.gamifyliving.ui.component.BottomNavigationBar
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.util.getStatValueFromProgress
 import com.example.gamifyliving.util.navigation.Screen
@@ -46,13 +45,7 @@ fun ProfileContent(
     stats: List<Stat>,
     navController: NavController,
 ) {
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                navController = navController
-            )
-        }
-    ) {
+    Scaffold {
         ProfileMainContent(stats = stats) {
             navController.navigate(Screen.Stats.route) {
                 launchSingleTop = true
