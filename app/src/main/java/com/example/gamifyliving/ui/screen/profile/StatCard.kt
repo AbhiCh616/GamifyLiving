@@ -20,14 +20,14 @@ import com.example.gamifyliving.util.getStatValueFromProgress
 @ExperimentalMaterialApi
 @Composable
 fun StatCard(
-    statDetails: Stat,
+    stat: Stat,
     modifier: Modifier = Modifier,
     onClick: (Stat) -> Unit,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         onClick = {
-            onClick(statDetails)
+            onClick(stat)
         }
     ) {
         Row(
@@ -37,14 +37,14 @@ fun StatCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(statDetails.name)
-            IndividualStatBar(getProgressFromStatValue(statDetails.value))
+            Text(text = stat.name)
+            StatProgressBar(progress = getProgressFromStatValue(stat.value))
         }
     }
 }
 
 @Composable
-fun IndividualStatBar(progress: Float) {
+fun StatProgressBar(progress: Float) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -56,17 +56,17 @@ fun IndividualStatBar(progress: Float) {
                 .clip(RoundedCornerShape(50))
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Text("${(progress * 100).toInt()}%")
+        Text(text = "${(progress * 100).toInt()}%")
     }
 }
 
 @ExperimentalMaterialApi
 @Preview
 @Composable
-fun IndividualStatPreview() {
-    val statDetails = Stat("health", getStatValueFromProgress(0.25F))
+fun StatCardPreview() {
+    val statDetails = Stat(name = "health", getStatValueFromProgress(progress = 0.25F))
 
     GamifyLivingTheme {
-        StatCard(statDetails = statDetails) {}
+        StatCard(stat = statDetails) {}
     }
 }

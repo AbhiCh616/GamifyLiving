@@ -16,14 +16,14 @@ import com.example.gamifyliving.util.getStatValueFromProgress
 @Composable
 fun StatsList(
     stats: List<Stat>,
-    onIndividualStatClick: (Stat) -> Unit,
+    onStatClick: (Stat) -> Unit,
 ) {
     LazyColumn {
-        items(stats) {
+        items(stats) { stat ->
             StatCard(
-                it,
-                Modifier.padding(vertical = 8.dp),
-                onIndividualStatClick
+                stat = stat,
+                modifier = Modifier.padding(vertical = 8.dp),
+                onClick = onStatClick
             )
         }
     }
@@ -34,8 +34,8 @@ fun StatsList(
 @Composable
 fun StatsListPreview() {
     val stats = listOf(
-        Stat("health", getStatValueFromProgress(0.25F)),
-        Stat("relationship", getStatValueFromProgress(0.50F))
+        Stat(name = "health", getStatValueFromProgress(progress = 0.25F)),
+        Stat(name = "relationship", getStatValueFromProgress(progress = 0.50F))
     )
 
     GamifyLivingTheme {
