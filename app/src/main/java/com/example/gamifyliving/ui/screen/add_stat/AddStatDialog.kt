@@ -1,52 +1,62 @@
-package com.example.gamifyliving.ui.screen.profile
+package com.example.gamifyliving.ui.screen.add_stat
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
-import com.example.gamifyliving.util.getProgressFromStatValue
+import com.example.gamifyliving.util.getStatValueFromProgress
+import com.example.gamifyliving.viewmodel.ProfileViewModel
+import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
 @ExperimentalComposeUiApi
 @Composable
-fun EditStatDialog(
-    stat: Stat,
+fun AddStatDialog(
     onClose: () -> Unit,
-    onSave: (Stat, String, Float) -> Unit,
-    onStatDelete: (Stat) -> Unit
+    //onSave: (String, Float) -> Unit,
+    viewModel: ProfileViewModel = viewModel(
+        factory = ProfileViewModelFactory(
+            (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
+        )
+    )
 ) {
-    var statName by remember { mutableStateOf(stat.name) }
-    var sliderValue by remember { mutableStateOf(getProgressFromStatValue(stat.value)) }
+    var statName by remember { mutableStateOf("") }
+    var statValue by remember { mutableStateOf(0F) }
 
-    EditStatDialogContent(
+    AddStatDialogContent(
         onClose = onClose,
-        onSave = { onSave(stat, statName, sliderValue) },
-        onStatDelete = {
-            onStatDelete(stat)
-            onClose()
+        onSave = {
+            if (statName != "") {
+                viewModel.addStat(Stat(statName, getStatValueFromProgress(statValue)))
+            }
         },
         statName = statName,
-        statValue = sliderValue,
+        statValue = statValue,
         onStatNameChange = { statName = it },
-        onStatValueChange = { sliderValue = it }
+        onStatValueChange = { statValue = it }
     )
+
 }
 
 @ExperimentalComposeUiApi
 @Composable
-fun EditStatDialogContent(
+fun AddStatDialogContent(
     onClose: () -> Unit,
     onSave: () -> Unit,
-    onStatDelete: () -> Unit,
     statName: String,
     statValue: Float,
     onStatNameChange: (String) -> Unit,
@@ -58,30 +68,28 @@ fun EditStatDialogContent(
     ) {
         Scaffold(
             topBar = {
-                EditStatTopAppBar(onClose = onClose) {
+                AddStatTopAppBar(onClose = onClose) {
                     onSave()
                     onClose()
                 }
             }
         ) {
-            EditStatDialogContentBody(
+            AddStatDialogContentBody(
                 statName = statName,
                 statValue = statValue,
                 onStatNameChange = onStatNameChange,
-                onStatValueChange = onStatValueChange,
-                onStatDelete = onStatDelete
+                onStatValueChange = onStatValueChange
             )
         }
     }
 }
 
 @Composable
-fun EditStatDialogContentBody(
+fun AddStatDialogContentBody(
     statName: String,
     statValue: Float,
     onStatNameChange: (String) -> Unit,
-    onStatValueChange: (Float) -> Unit,
-    onStatDelete: () -> Unit
+    onStatValueChange: (Float) -> Unit
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
@@ -102,10 +110,6 @@ fun EditStatDialogContentBody(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "${(statValue * 100).toInt()}%")
-            Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = onStatDelete) {
-                Text(stringResource(id = R.string.delete))
-            }
         }
     }
 }
@@ -113,14 +117,44 @@ fun EditStatDialogContentBody(
 @ExperimentalComposeUiApi
 @Preview
 @Composable
-fun EditStatDialogContentBodyPreview() {
+fun AddStatDialogContentBodyPreview() {
+    var statName by remember { mutableStateOf("") }
+    var statValue by remember { mutableStateOf(0F) }
+
     GamifyLivingTheme {
-        EditStatDialogContentBody(
-            statName = "",
-            statValue = 0F,
-            onStatNameChange = {},
-            onStatValueChange = {},
-            onStatDelete = {}
+        AddStatDialogContentBody(
+            statName = statName,
+            statValue = statValue,
+            onStatNameChange = { statName = it },
+            onStatValueChange = { statValue = it }
         )
+    }
+}
+
+@Composable
+fun AddStatTopAppBar(
+    onClose: () -> Unit,
+    onSave: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.addStat)) },
+        navigationIcon = {
+            IconButton(onClick = onClose) {
+                Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+            }
+        },
+        actions = {
+            TextButton(onClick = onSave) {
+                Text(stringResource(id = R.string.create))
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun AddStatTopAppBarPreview() {
+    GamifyLivingTheme {
+        AddStatTopAppBar(onClose = { }) { }
     }
 }

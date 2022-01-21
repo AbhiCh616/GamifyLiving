@@ -21,8 +21,8 @@ import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.ui.screen.component.StatsList
-import com.example.gamifyliving.ui.screen.profile.AddStatDialog
-import com.example.gamifyliving.ui.screen.profile.EditStatDialog
+import com.example.gamifyliving.ui.screen.add_stat.AddStatDialog
+import com.example.gamifyliving.ui.screen.edit_stat.EditStatDialog
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.util.getStatValueFromProgress
 import com.example.gamifyliving.viewmodel.ProfileViewModel
@@ -89,7 +89,7 @@ fun StatsPageContent(
     onStatDelete: (Stat) -> Unit
 ) {
     if (isAddStatDialogVisible) {
-        AddStatDialog(onClose = hideAddStatDialog, onSave = createNewStat)
+        AddStatDialog(onClose = hideAddStatDialog)
     } else if (isEditStatDialogVisible && selectedStat != null) {
         EditStatDialog(
             stat = selectedStat,

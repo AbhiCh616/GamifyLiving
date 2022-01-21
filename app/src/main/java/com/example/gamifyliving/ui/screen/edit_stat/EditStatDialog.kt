@@ -1,7 +1,9 @@
-package com.example.gamifyliving.ui.screen.profile
+package com.example.gamifyliving.ui.screen.edit_stat
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -12,33 +14,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
+import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
+import com.example.gamifyliving.util.getProgressFromStatValue
 
 @ExperimentalComposeUiApi
 @Composable
-fun AddStatDialog(
+fun EditStatDialog(
+    stat: Stat,
     onClose: () -> Unit,
-    onSave: (String, Float) -> Unit
+    onSave: (Stat, String, Float) -> Unit,
+    onStatDelete: (Stat) -> Unit
 ) {
-    var statName by remember { mutableStateOf("") }
-    var statValue by remember { mutableStateOf(0F) }
+    var statName by remember { mutableStateOf(stat.name) }
+    var sliderValue by remember { mutableStateOf(getProgressFromStatValue(stat.value)) }
 
-    AddStatDialogContent(
+    EditStatDialogContent(
         onClose = onClose,
-        onSave = { onSave(statName, statValue) },
+        onSave = { onSave(stat, statName, sliderValue) },
+        onStatDelete = {
+            onStatDelete(stat)
+            onClose()
+        },
         statName = statName,
-        statValue = statValue,
+        statValue = sliderValue,
         onStatNameChange = { statName = it },
-        onStatValueChange = { statValue = it }
+        onStatValueChange = { sliderValue = it }
     )
-
 }
 
 @ExperimentalComposeUiApi
 @Composable
-fun AddStatDialogContent(
+fun EditStatDialogContent(
     onClose: () -> Unit,
     onSave: () -> Unit,
+    onStatDelete: () -> Unit,
     statName: String,
     statValue: Float,
     onStatNameChange: (String) -> Unit,
@@ -50,28 +60,30 @@ fun AddStatDialogContent(
     ) {
         Scaffold(
             topBar = {
-                AddStatTopAppBar(onClose = onClose) {
+                EditStatTopAppBar(onClose = onClose) {
                     onSave()
                     onClose()
                 }
             }
         ) {
-            AddStatDialogContentBody(
+            EditStatDialogContentBody(
                 statName = statName,
                 statValue = statValue,
                 onStatNameChange = onStatNameChange,
-                onStatValueChange = onStatValueChange
+                onStatValueChange = onStatValueChange,
+                onStatDelete = onStatDelete
             )
         }
     }
 }
 
 @Composable
-fun AddStatDialogContentBody(
+fun EditStatDialogContentBody(
     statName: String,
     statValue: Float,
     onStatNameChange: (String) -> Unit,
-    onStatValueChange: (Float) -> Unit
+    onStatValueChange: (Float) -> Unit,
+    onStatDelete: () -> Unit
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
@@ -92,6 +104,10 @@ fun AddStatDialogContentBody(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "${(statValue * 100).toInt()}%")
+            Spacer(modifier = Modifier.height(16.dp))
+            TextButton(onClick = onStatDelete) {
+                Text(stringResource(id = R.string.delete))
+            }
         }
     }
 }
@@ -99,16 +115,42 @@ fun AddStatDialogContentBody(
 @ExperimentalComposeUiApi
 @Preview
 @Composable
-fun AddStatDialogContentBodyPreview() {
-    var statName by remember { mutableStateOf("") }
-    var statValue by remember { mutableStateOf(0F) }
-
+fun EditStatDialogContentBodyPreview() {
     GamifyLivingTheme {
-        AddStatDialogContentBody(
-            statName = statName,
-            statValue = statValue,
-            onStatNameChange = { statName = it },
-            onStatValueChange = { statValue = it }
+        EditStatDialogContentBody(
+            statName = "",
+            statValue = 0F,
+            onStatNameChange = {},
+            onStatValueChange = {},
+            onStatDelete = {}
         )
+    }
+}
+
+@Composable
+fun EditStatTopAppBar(
+    onClose: () -> Unit,
+    onSave: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.editStat)) },
+        navigationIcon = {
+            IconButton(onClick = onClose) {
+                Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+            }
+        },
+        actions = {
+            TextButton(onClick = onSave) {
+                Text(stringResource(id = R.string.edit))
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun EditStatTopAppBarPreview() {
+    GamifyLivingTheme {
+        EditStatTopAppBar(onClose = { }) { }
     }
 }
