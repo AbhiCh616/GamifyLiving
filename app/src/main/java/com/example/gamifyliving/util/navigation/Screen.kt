@@ -14,7 +14,7 @@ sealed class Screen(
     val hasBottomNavBar: Boolean = false
 ) {
 
-    object Stats : Screen(route = "stats")
+    object Stats : Screen(route = "stats", hasBottomNavBar = true)
     object Profile : Screen(route = "profile", hasBottomNavBar = true)
 
 }

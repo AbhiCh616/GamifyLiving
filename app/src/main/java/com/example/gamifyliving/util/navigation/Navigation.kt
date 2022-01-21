@@ -27,6 +27,6 @@ fun Navigation(navController: NavHostController, setBottomNavBar: (Boolean) -> U
             setBottomNavBar(BottomNavigationScreen.Rewards.hasBottomNavBar)
             Rewards()
         }
-        profileGraph(navController, setBottomNavBar)
+        profileGraph(setBottomNavBar = setBottomNavBar)
     }
 }

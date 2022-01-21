@@ -15,7 +15,7 @@ import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
-fun StatsPage(
+fun StatsScreen(
     viewModel: ProfileViewModel = viewModel(
         factory = ProfileViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
