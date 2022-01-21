@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @ExperimentalComposeUiApi

@@ -1,8 +1,7 @@
 package com.example.gamifyliving.data.database
 
 import androidx.room.*
-import com.example.gamifyliving.data.model.Reward
-import kotlinx.coroutines.flow.Flow
+import com.example.gamifyliving.domain.model.Reward
 
 @Dao
 interface RewardDAO {

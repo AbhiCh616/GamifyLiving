@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.gamifyliving.data.model.Reward
-import com.example.gamifyliving.data.model.Stat
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Reward
+import com.example.gamifyliving.domain.model.Stat
+import com.example.gamifyliving.domain.model.Task
 
 @Database(entities = [Stat::class, Task::class, Reward::class], version = 4, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {

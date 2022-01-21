@@ -7,7 +7,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
-import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.util.getStatValueFromProgress
 import com.example.gamifyliving.viewmodel.ProfileViewModel
 import com.example.gamifyliving.viewmodel.ProfileViewModelFactory

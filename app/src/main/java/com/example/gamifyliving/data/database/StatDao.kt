@@ -1,7 +1,7 @@
 package com.example.gamifyliving.data.database
 
 import androidx.room.*
-import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.domain.model.Stat
 import kotlinx.coroutines.flow.Flow
 
 @Dao

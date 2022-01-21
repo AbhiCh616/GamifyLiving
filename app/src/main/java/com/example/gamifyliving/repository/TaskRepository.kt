@@ -1,7 +1,7 @@
 package com.example.gamifyliving.repository
 
 import com.example.gamifyliving.data.database.TaskDao
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository(

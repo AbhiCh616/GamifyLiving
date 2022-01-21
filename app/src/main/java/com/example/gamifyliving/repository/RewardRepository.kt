@@ -1,7 +1,7 @@
 package com.example.gamifyliving.repository
 
 import com.example.gamifyliving.data.database.RewardDAO
-import com.example.gamifyliving.data.model.Reward
+import com.example.gamifyliving.domain.model.Reward
 
 class RewardRepository(
     private val rewardDAO: RewardDAO

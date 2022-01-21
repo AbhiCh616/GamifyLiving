@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
-import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.util.getProgressFromStatValue
 

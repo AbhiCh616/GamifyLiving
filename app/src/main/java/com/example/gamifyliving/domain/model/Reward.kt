@@ -1,4 +1,4 @@
-package com.example.gamifyliving.data.model
+package com.example.gamifyliving.domain.model
 
 import androidx.room.*
 

@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Task
 
 @ExperimentalMaterialApi
 @Composable

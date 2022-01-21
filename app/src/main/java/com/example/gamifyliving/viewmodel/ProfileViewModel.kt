@@ -1,7 +1,7 @@
 package com.example.gamifyliving.viewmodel
 
 import androidx.lifecycle.*
-import com.example.gamifyliving.data.model.Stat
+import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.repository.StatRepository
 import kotlinx.coroutines.launch
 

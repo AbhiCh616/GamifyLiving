@@ -1,7 +1,7 @@
 package com.example.gamifyliving.viewmodel
 
 import androidx.lifecycle.*
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.repository.RewardRepository
 import com.example.gamifyliving.repository.TaskRepository
 import kotlinx.coroutines.launch

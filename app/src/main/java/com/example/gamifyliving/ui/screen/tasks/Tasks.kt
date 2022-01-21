@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
-import com.example.gamifyliving.data.model.Task
+import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.ui.screen.profile.AddStatFAB
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.viewmodel.TasksViewModel
