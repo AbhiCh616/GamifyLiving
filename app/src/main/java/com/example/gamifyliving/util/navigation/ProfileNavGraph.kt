@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.gamifyliving.ui.screen.profile.Profile
-import com.example.gamifyliving.ui.screen.profile.StatsScreen
+import com.example.gamifyliving.ui.screen.stats.StatsScreen
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi

@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.screen.profile
+package com.example.gamifyliving.ui.screen.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn

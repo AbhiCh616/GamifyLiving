@@ -1,7 +1,11 @@
 package com.example.gamifyliving.ui.screen.tasks
 
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -11,7 +15,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.ui.screen.profile.AddStatFAB
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.viewmodel.TasksViewModel
 import com.example.gamifyliving.viewmodel.TasksViewModelFactory
@@ -147,5 +150,14 @@ fun TasksMainContentPreview() {
             tasks, {}, {}, false,
             {}, { _, _ -> }, null,
             {}, false, {}, {})
+    }
+}
+
+@Composable
+fun AddStatFAB(
+    showAddStatDialog: () -> Unit
+) {
+    FloatingActionButton(onClick = showAddStatDialog) {
+        Icon(Icons.Rounded.Add, null)
     }
 }
