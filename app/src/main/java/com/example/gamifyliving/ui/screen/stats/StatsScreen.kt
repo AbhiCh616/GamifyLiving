@@ -36,83 +36,11 @@ fun StatsScreen(
         factory = ProfileViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
         )
-    )
+    ),
+    showAddStatDialog: () -> Unit,
+    onIndividualStatClick: (Stat) -> Unit
 ) {
     val stats by viewModel.getAllStats().observeAsState(emptyList())
-    var isAddStatDialogVisible by remember { mutableStateOf(false) }
-    var isEditStatDialogVisible by remember { mutableStateOf(false) }
-    var selectedStat: Stat? by remember { mutableStateOf(null) }
-
-    StatsPageContent(
-        stats = stats,
-        isAddStatDialogVisible = isAddStatDialogVisible,
-        showAddStatDialog = { isAddStatDialogVisible = true },
-        hideAddStatDialog = { isAddStatDialogVisible = false },
-        createNewStat = { statName, statValue ->
-            if (statName != "") {
-                viewModel.addStat(Stat(statName, getStatValueFromProgress(statValue)))
-            }
-        },
-        isEditStatDialogVisible = isEditStatDialogVisible,
-        hideEditStatDialog = { isEditStatDialogVisible = false },
-        editStat = { stat, statName, statValue ->
-            if (statName != "") {
-                viewModel.updateStatValues(stat, statName, getStatValueFromProgress(statValue))
-            }
-        },
-        onIndividualStatClick = {
-            selectedStat = it
-            isEditStatDialogVisible = true
-        },
-        selectedStat = selectedStat,
-        onStatDelete = {
-            viewModel.deleteStat(it)
-        }
-    )
-
-}
-
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@Composable
-fun StatsPageContent(
-    stats: List<Stat>,
-    isAddStatDialogVisible: Boolean,
-    showAddStatDialog: () -> Unit,
-    hideAddStatDialog: () -> Unit,
-    createNewStat: (String, Float) -> Unit,
-    isEditStatDialogVisible: Boolean,
-    hideEditStatDialog: () -> Unit,
-    editStat: (Stat, String, Float) -> Unit,
-    onIndividualStatClick: (Stat) -> Unit,
-    selectedStat: Stat?,
-    onStatDelete: (Stat) -> Unit
-) {
-    if (isAddStatDialogVisible) {
-        AddStatDialog(onClose = hideAddStatDialog)
-    } else if (isEditStatDialogVisible && selectedStat != null) {
-        EditStatDialog(
-            stat = selectedStat,
-            onClose = hideEditStatDialog,
-            onSave = editStat,
-            onStatDelete = onStatDelete
-        )
-    } else {
-        StatsPageMainContent(
-            stats = stats,
-            showAddStatDialog = showAddStatDialog,
-            onIndividualStatClick = onIndividualStatClick
-        )
-    }
-}
-
-@ExperimentalMaterialApi
-@Composable
-fun StatsPageMainContent(
-    stats: List<Stat>,
-    onIndividualStatClick: (Stat) -> Unit,
-    showAddStatDialog: () -> Unit,
-) {
     Scaffold(
         floatingActionButton = { AddStatFAB(showAddStatDialog = showAddStatDialog) },
         floatingActionButtonPosition = FabPosition.Center
@@ -132,6 +60,7 @@ fun StatsPageMainContent(
             }
         }
     }
+
 }
 
 @Composable
@@ -140,24 +69,5 @@ fun AddStatFAB(
 ) {
     FloatingActionButton(onClick = showAddStatDialog) {
         Icon(Icons.Rounded.Add, null)
-    }
-}
-
-@ExperimentalMaterialApi
-@Preview
-@Composable
-fun StatsPageMainContentPreview() {
-    val stats = listOf(Stat("Health", 40), Stat("Life", 35))
-
-    GamifyLivingTheme {
-        StatsPageMainContent(stats = stats, {}) { }
-    }
-}
-
-@Preview
-@Composable
-fun AddStatFABPreview() {
-    GamifyLivingTheme {
-        AddStatFAB {}
     }
 }
