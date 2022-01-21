@@ -7,43 +7,41 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.ui.screen.component.StatsList
-import com.example.gamifyliving.ui.screen.add_stat.AddStatDialog
-import com.example.gamifyliving.ui.screen.edit_stat.EditStatDialog
-import com.example.gamifyliving.ui.theme.GamifyLivingTheme
-import com.example.gamifyliving.util.getStatValueFromProgress
-import com.example.gamifyliving.viewmodel.ProfileViewModel
-import com.example.gamifyliving.viewmodel.ProfileViewModelFactory
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
 fun StatsScreen(
-    viewModel: ProfileViewModel = viewModel(
-        factory = ProfileViewModelFactory(
+    viewModel: StatsViewModel = viewModel(
+        factory = StatsViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
         )
     ),
-    showAddStatDialog: () -> Unit,
-    onIndividualStatClick: (Stat) -> Unit
+    onAddButtonClick: () -> Unit,
+    onStatClick: (Stat) -> Unit
 ) {
-    val stats by viewModel.getAllStats().observeAsState(emptyList())
+    val stats by viewModel.stats.collectAsState(initial = emptyList())
+
     Scaffold(
-        floatingActionButton = { AddStatFAB(showAddStatDialog = showAddStatDialog) },
-        floatingActionButtonPosition = FabPosition.Center
+        floatingActionButton = {
+            FloatingActionButton(onClick = onAddButtonClick) {
+                Icon(Icons.Rounded.Add, null)
+            }
+        },
     ) {
         Surface(color = MaterialTheme.colors.background) {
             Column(
@@ -56,18 +54,9 @@ fun StatsScreen(
                     style = MaterialTheme.typography.h5
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                StatsList(stats, onIndividualStatClick)
+                StatsList(stats = stats, onStatClick = onStatClick)
             }
         }
     }
 
-}
-
-@Composable
-fun AddStatFAB(
-    showAddStatDialog: () -> Unit
-) {
-    FloatingActionButton(onClick = showAddStatDialog) {
-        Icon(Icons.Rounded.Add, null)
-    }
 }

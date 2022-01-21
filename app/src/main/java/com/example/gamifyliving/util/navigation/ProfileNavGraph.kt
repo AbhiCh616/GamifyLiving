@@ -27,10 +27,10 @@ fun NavGraphBuilder.profileGraph(
         composable(Screen.Stats.route) {
             setBottomNavBar(Screen.Stats.hasBottomNavBar)
             StatsScreen(
-                showAddStatDialog = {
+                onAddButtonClick = {
                     navController.navigate(Screen.AddStat.route)
                 },
-                onIndividualStatClick = {
+                onStatClick = {
                 }
             )
         }
