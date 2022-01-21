@@ -19,7 +19,7 @@ import com.example.gamifyliving.util.getStatValueFromProgress
 
 @ExperimentalMaterialApi
 @Composable
-fun IndividualStat(
+fun StatCard(
     statDetails: Stat,
     modifier: Modifier = Modifier,
     onClick: (Stat) -> Unit,
@@ -67,6 +67,6 @@ fun IndividualStatPreview() {
     val statDetails = Stat("health", getStatValueFromProgress(0.25F))
 
     GamifyLivingTheme {
-        IndividualStat(statDetails = statDetails) {}
+        StatCard(statDetails = statDetails) {}
     }
 }

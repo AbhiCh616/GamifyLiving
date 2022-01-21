@@ -20,7 +20,7 @@ fun StatsList(
 ) {
     LazyColumn {
         items(stats) {
-            IndividualStat(
+            StatCard(
                 it,
                 Modifier.padding(vertical = 8.dp),
                 onIndividualStatClick
