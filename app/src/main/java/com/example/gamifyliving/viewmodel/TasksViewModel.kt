@@ -2,13 +2,13 @@ package com.example.gamifyliving.viewmodel
 
 import androidx.lifecycle.*
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.repository.RewardRepository
-import com.example.gamifyliving.repository.TaskRepository
+import com.example.gamifyliving.data.repository.RewardRepositoryImpl
+import com.example.gamifyliving.data.repository.TaskRepositoryImpl
 import kotlinx.coroutines.launch
 
 class TasksViewModel(
-    private val taskRepository: TaskRepository,
-    private val rewardRepository: RewardRepository
+    private val taskRepository: TaskRepositoryImpl,
+    private val rewardRepository: RewardRepositoryImpl
 ) : ViewModel() {
 
     fun addTask(task: Task) = viewModelScope.launch {
@@ -50,8 +50,8 @@ class TasksViewModel(
 }
 
 class TasksViewModelFactory(
-    private val taskRepository: TaskRepository,
-    private val rewardRepository: RewardRepository
+    private val taskRepository: TaskRepositoryImpl,
+    private val rewardRepository: RewardRepositoryImpl
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TasksViewModel::class.java)) {

@@ -2,11 +2,11 @@ package com.example.gamifyliving.viewmodel
 
 import androidx.lifecycle.*
 import com.example.gamifyliving.domain.model.Stat
-import com.example.gamifyliving.repository.StatRepository
+import com.example.gamifyliving.data.repository.StatRepositoryImpl
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-    private val statRepository: StatRepository
+    private val statRepository: StatRepositoryImpl
 ) : ViewModel() {
 
     fun addStat(stat: Stat) = viewModelScope.launch {
@@ -31,7 +31,7 @@ class ProfileViewModel(
 }
 
 class ProfileViewModelFactory(
-    private val statRepository: StatRepository
+    private val statRepository: StatRepositoryImpl
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
