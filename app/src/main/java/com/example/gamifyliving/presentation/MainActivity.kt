@@ -13,8 +13,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.gamifyliving.presentation.component.BottomNavigationBar
-import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 import com.example.gamifyliving.presentation.navigation.Navigation
+import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 class MainActivity : ComponentActivity() {
     @ExperimentalMaterialApi
@@ -22,7 +22,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             GamifyLivingTheme {
+
                 val navController = rememberNavController()
                 val isBottomNavBarVisible = rememberSaveable { (mutableStateOf(false)) }
 
@@ -33,13 +35,20 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)) {
-                        Navigation(navController = navController, setBottomNavBar = {
-                            isBottomNavBarVisible.value = it
-                        })
+                    Box(
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        Navigation(
+                            navController = navController,
+                            setBottomBarVisibility = {
+                                isBottomNavBarVisible.value = it
+                            }
+                        )
                     }
                 }
+
             }
+
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.repository.StatRepository
+import com.example.gamifyliving.presentation.util.getStatValueFromProgress
 import kotlinx.coroutines.launch
 
 class AddStatViewModel(
@@ -29,7 +30,7 @@ class AddStatViewModel(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        statRepository.addStat(Stat(name = name, value = (value * 100 * 5).toInt()))
+        statRepository.addStat(Stat(name = name, value = getStatValueFromProgress(value)))
     }
 
 }

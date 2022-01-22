@@ -20,7 +20,7 @@ fun BottomNavigationBar(
 
     val bottomNavigationItems = listOf(
         BottomNavigationScreen.Home,
-        BottomNavigationScreen.Tasks,
+        BottomNavigationScreen.TaskGroup,
         BottomNavigationScreen.Rewards,
         BottomNavigationScreen.ProfileGroup,
     )

@@ -16,29 +16,32 @@ import com.example.gamifyliving.presentation.util.Screen
 @ExperimentalComposeUiApi
 fun NavGraphBuilder.profileGraph(
     navController: NavHostController,
-    setBottomNavBar: (Boolean) -> Unit
+    setBottomBarVisibility: (Boolean) -> Unit
 ) {
     navigation(
         startDestination = Screen.Stats.route,
         route = BottomNavigationScreen.ProfileGroup.route
     ) {
         composable(Screen.Profile.route) {
-            setBottomNavBar(Screen.Profile.hasBottomNavBar)
+            setBottomBarVisibility(Screen.Profile.hasBottomNavBar)
             Profile()
         }
         composable(Screen.Stats.route) {
-            setBottomNavBar(Screen.Stats.hasBottomNavBar)
+            setBottomBarVisibility(Screen.Stats.hasBottomNavBar)
             StatsScreen(
                 onAddButtonClick = {
                     navController.navigate(Screen.AddStat.route)
                 },
-                onStatClick = {
-                }
+                onStatClick = {}
             )
         }
         composable(Screen.AddStat.route) {
-            setBottomNavBar(Screen.AddStat.hasBottomNavBar)
-            AddStatHandler(onClose = { navController.popBackStack() })
+            setBottomBarVisibility(Screen.AddStat.hasBottomNavBar)
+            AddStatHandler(
+                onClose = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
