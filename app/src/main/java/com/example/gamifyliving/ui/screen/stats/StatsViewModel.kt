@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.gamifyliving.domain.repository.StatRepository
 
 class StatsViewModel(
-    private val statRepository: StatRepository
+    statRepository: StatRepository
 ) : ViewModel() {
 
     val stats = statRepository.observeStats()

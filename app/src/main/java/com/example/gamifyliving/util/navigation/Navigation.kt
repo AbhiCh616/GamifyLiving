@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.gamifyliving.ui.screen.home.Home
 import com.example.gamifyliving.ui.screen.rewards.Rewards
-import com.example.gamifyliving.ui.screen.tasks.Tasks
+import com.example.gamifyliving.ui.screen.tasks.TasksScreen
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -21,7 +21,10 @@ fun Navigation(navController: NavHostController, setBottomNavBar: (Boolean) -> U
         }
         composable(BottomNavigationScreen.Tasks.route) {
             setBottomNavBar(BottomNavigationScreen.Tasks.hasBottomNavBar)
-            Tasks(navController)
+            TasksScreen(
+                onTaskClick = {},
+                onAddButtonClick = {}
+            )
         }
         composable(BottomNavigationScreen.Rewards.route) {
             setBottomNavBar(BottomNavigationScreen.Rewards.hasBottomNavBar)
