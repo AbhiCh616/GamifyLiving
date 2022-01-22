@@ -7,20 +7,29 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 
 @Composable
 fun EditTaskHandler(
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    viewModel: EditTaskViewModel =
+        (LocalContext.current.applicationContext as GamifyLivingApplication)
+            .editTaskViewModelFactory
+            .create(EditTaskViewModel::class.java)
 ) {
     EditTask(
-        name = "",
-        onNameChange = {},
-        onDelete = {},
-        onClose = {},
-        onSave = {}
+        name = viewModel.name,
+        onNameChange = viewModel::onNameChange,
+        onDelete = viewModel::onDelete,
+        onClose = onClose,
+        onSave = {
+            viewModel.onSaveClicked()
+            onClose()
+        }
     )
 }
 
