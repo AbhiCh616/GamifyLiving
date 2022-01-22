@@ -1,7 +1,7 @@
 package com.example.gamifyliving
 
 import android.app.Application
-import com.example.gamifyliving.data.database.AppDatabase
+import com.example.gamifyliving.data.data_source.AppDatabase
 import com.example.gamifyliving.data.repository.RewardRepositoryImpl
 import com.example.gamifyliving.data.repository.StatRepositoryImpl
 import com.example.gamifyliving.data.repository.TaskRepositoryImpl
