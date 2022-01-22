@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.gamifyliving.ui.screen.add_stat.AddStatDialog
+import com.example.gamifyliving.ui.screen.add_stat.AddStatHandler
 import com.example.gamifyliving.ui.screen.profile.Profile
 import com.example.gamifyliving.ui.screen.stats.StatsScreen
 
@@ -36,7 +36,7 @@ fun NavGraphBuilder.profileGraph(
         }
         composable(Screen.AddStat.route) {
             setBottomNavBar(Screen.AddStat.hasBottomNavBar)
-            AddStatDialog(onClose = { navController.popBackStack() })
+            AddStatHandler(onClose = { navController.popBackStack() })
         }
     }
 }
