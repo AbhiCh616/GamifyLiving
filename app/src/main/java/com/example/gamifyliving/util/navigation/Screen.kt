@@ -17,6 +17,7 @@ sealed class Screen(
     object Stats : Screen(route = "stats", hasBottomNavBar = true)
     object Profile : Screen(route = "profile", hasBottomNavBar = true)
     object AddStat : Screen(route = "add_stat")
+    object AddTask : Screen(route = "add_task")
 
 }
 
