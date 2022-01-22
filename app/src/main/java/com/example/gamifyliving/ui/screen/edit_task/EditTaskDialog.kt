@@ -1,9 +1,9 @@
-package com.example.gamifyliving.ui.screen.tasks
+package com.example.gamifyliving.ui.screen.edit_task
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -14,20 +14,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
+import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @ExperimentalComposeUiApi
 @Composable
-fun AddTaskDialog(
+fun EditTaskDialog(
+    task: Task,
     onClose: () -> Unit,
-    onSave: (String) -> Unit
+    onSave: (Task, String) -> Unit,
+    onTaskDelete: (Task) -> Unit
 ) {
-    var taskName by remember { mutableStateOf("") }
+    var taskName by remember { mutableStateOf(task.name) }
 
-    AddTaskDialogContent(
-        onClose = onClose,
+    EditTaskDialogContent(
+        onClose,
         onSave = {
-            onSave(taskName)
+            onSave(task, taskName)
+            onClose()
+        },
+        onTaskDelete = {
+            onTaskDelete(task)
             onClose()
         },
         taskName,
@@ -37,11 +44,12 @@ fun AddTaskDialog(
 
 @ExperimentalComposeUiApi
 @Composable
-fun AddTaskDialogContent(
+fun EditTaskDialogContent(
     onClose: () -> Unit,
     onSave: () -> Unit,
+    onTaskDelete: () -> Unit,
     taskName: String,
-    onTaskNameChange: (String) -> Unit,
+    onTaskNameChange: (String) -> Unit
 ) {
     Dialog(
         onDismissRequest = onClose,
@@ -49,24 +57,22 @@ fun AddTaskDialogContent(
     ) {
         Scaffold(
             topBar = {
-                AddTaskTopAppBar(onClose = onClose) {
+                EditTaskTopAppBar(onClose = onClose) {
                     onSave()
                     onClose()
                 }
             }
         ) {
-            AddTaskDialogContentBody(
-                taskName,
-                onTaskNameChange,
-            )
+            EditTaskDialogContentBody(taskName, onTaskNameChange, onTaskDelete)
         }
     }
 }
 
 @Composable
-fun AddTaskDialogContentBody(
+fun EditTaskDialogContentBody(
     taskName: String,
     onTaskNameChange: (String) -> Unit,
+    onTaskDelete: () -> Unit,
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
@@ -80,6 +86,10 @@ fun AddTaskDialogContentBody(
                 onValueChange = onTaskNameChange,
                 label = { Text(stringResource(id = R.string.taskName)) }
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            TextButton(onClick = onTaskDelete) {
+                Text(stringResource(id = R.string.delete))
+            }
         }
     }
 }
@@ -87,12 +97,40 @@ fun AddTaskDialogContentBody(
 @ExperimentalComposeUiApi
 @Preview
 @Composable
-fun AddTaskDialogContentBodyPreview() {
-
+fun EditTaskDialogContentBodyPreview() {
     GamifyLivingTheme {
-        AddTaskDialogContentBody(
+        EditTaskDialogContentBody(
             taskName = "",
             onTaskNameChange = {},
+            onTaskDelete = {},
         )
+    }
+}
+
+@Composable
+fun EditTaskTopAppBar(
+    onClose: () -> Unit,
+    onSave: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.editTask)) },
+        navigationIcon = {
+            IconButton(onClick = onClose) {
+                Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+            }
+        },
+        actions = {
+            TextButton(onClick = onSave) {
+                Text(stringResource(id = R.string.save))
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun EditTaskTopAppBarPreview() {
+    GamifyLivingTheme {
+        EditTaskTopAppBar(onClose = { }) { }
     }
 }

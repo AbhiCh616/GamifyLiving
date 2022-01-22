@@ -1,7 +1,12 @@
-package com.example.gamifyliving.ui.screen.tasks
+package com.example.gamifyliving.ui.screen.add_task
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -12,27 +17,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @ExperimentalComposeUiApi
 @Composable
-fun EditTaskDialog(
-    task: Task,
+fun AddTaskDialog(
     onClose: () -> Unit,
-    onSave: (Task, String) -> Unit,
-    onTaskDelete: (Task) -> Unit
+    onSave: (String) -> Unit
 ) {
-    var taskName by remember { mutableStateOf(task.name) }
+    var taskName by remember { mutableStateOf("") }
 
-    EditTaskDialogContent(
-        onClose,
+    AddTaskDialogContent(
+        onClose = onClose,
         onSave = {
-            onSave(task, taskName)
-            onClose()
-        },
-        onTaskDelete = {
-            onTaskDelete(task)
+            onSave(taskName)
             onClose()
         },
         taskName,
@@ -42,12 +40,11 @@ fun EditTaskDialog(
 
 @ExperimentalComposeUiApi
 @Composable
-fun EditTaskDialogContent(
+fun AddTaskDialogContent(
     onClose: () -> Unit,
     onSave: () -> Unit,
-    onTaskDelete: () -> Unit,
     taskName: String,
-    onTaskNameChange: (String) -> Unit
+    onTaskNameChange: (String) -> Unit,
 ) {
     Dialog(
         onDismissRequest = onClose,
@@ -55,22 +52,24 @@ fun EditTaskDialogContent(
     ) {
         Scaffold(
             topBar = {
-                EditTaskTopAppBar(onClose = onClose) {
+                AddTaskTopAppBar(onClose = onClose) {
                     onSave()
                     onClose()
                 }
             }
         ) {
-            EditTaskDialogContentBody(taskName, onTaskNameChange, onTaskDelete)
+            AddTaskDialogContentBody(
+                taskName,
+                onTaskNameChange,
+            )
         }
     }
 }
 
 @Composable
-fun EditTaskDialogContentBody(
+fun AddTaskDialogContentBody(
     taskName: String,
     onTaskNameChange: (String) -> Unit,
-    onTaskDelete: () -> Unit,
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
@@ -84,10 +83,6 @@ fun EditTaskDialogContentBody(
                 onValueChange = onTaskNameChange,
                 label = { Text(stringResource(id = R.string.taskName)) }
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = onTaskDelete) {
-                Text(stringResource(id = R.string.delete))
-            }
         }
     }
 }
@@ -95,12 +90,57 @@ fun EditTaskDialogContentBody(
 @ExperimentalComposeUiApi
 @Preview
 @Composable
-fun EditTaskDialogContentBodyPreview() {
+fun AddTaskDialogContentBodyPreview() {
+
     GamifyLivingTheme {
-        EditTaskDialogContentBody(
+        AddTaskDialogContentBody(
             taskName = "",
             onTaskNameChange = {},
-            onTaskDelete = {},
         )
+    }
+}
+
+@Composable
+fun AddTaskFAB(
+    showAddTaskDialog: () -> Unit
+) {
+    FloatingActionButton(onClick = showAddTaskDialog) {
+        Icon(Icons.Rounded.Add, null)
+    }
+}
+
+@Preview
+@Composable
+fun AddStatFABPreview() {
+    GamifyLivingTheme {
+        AddTaskFAB {}
+    }
+}
+
+@Composable
+fun AddTaskTopAppBar(
+    onClose: () -> Unit,
+    onSave: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.addTask)) },
+        navigationIcon = {
+            IconButton(onClick = onClose) {
+                Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+            }
+        },
+        actions = {
+            TextButton(onClick = onSave) {
+                Text(stringResource(id = R.string.create))
+            }
+        }
+    )
+}
+
+@Preview
+@Composable
+fun AddTaskTopAppBarPreview() {
+    GamifyLivingTheme {
+        AddTaskTopAppBar(onClose = { }) { }
     }
 }

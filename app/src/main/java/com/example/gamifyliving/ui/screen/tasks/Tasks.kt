@@ -15,6 +15,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.ui.screen.add_task.AddTaskDialog
+import com.example.gamifyliving.ui.screen.edit_task.EditTaskDialog
 import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 import com.example.gamifyliving.viewmodel.TasksViewModel
 import com.example.gamifyliving.viewmodel.TasksViewModelFactory
