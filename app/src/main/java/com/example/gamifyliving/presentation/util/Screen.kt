@@ -20,6 +20,7 @@ sealed class Screen(
     object AddStat : Screen(route = "add_stat")
     object EditStat : Screen(route = "edit_stat")
     object AddTask : Screen(route = "add_task")
+    object EditTask : Screen(route = "edit_task")
 
 }
 

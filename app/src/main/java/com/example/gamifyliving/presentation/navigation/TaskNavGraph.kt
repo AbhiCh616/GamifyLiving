@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.gamifyliving.presentation.add_task.AddTaskHandler
+import com.example.gamifyliving.presentation.edit_task.EditTaskHandler
 import com.example.gamifyliving.presentation.tasks.TasksScreen
 import com.example.gamifyliving.presentation.util.BottomNavigationScreen
 import com.example.gamifyliving.presentation.util.Screen
@@ -22,7 +23,9 @@ fun NavGraphBuilder.taskGraph(
         composable(Screen.Tasks.route) {
             setBottomBarVisibility(Screen.Tasks.hasBottomNavBar)
             TasksScreen(
-                onTaskClick = {},
+                onTaskClick = {
+                    navController.navigate(Screen.EditTask.route)
+                },
                 onAddButtonClick = {
                     navController.navigate(Screen.AddTask.route)
                 }
@@ -31,6 +34,14 @@ fun NavGraphBuilder.taskGraph(
         composable(Screen.AddTask.route) {
             setBottomBarVisibility(Screen.AddTask.hasBottomNavBar)
             AddTaskHandler(
+                onClose = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable(Screen.EditTask.route) {
+            setBottomBarVisibility(Screen.EditTask.hasBottomNavBar)
+            EditTaskHandler(
                 onClose = {
                     navController.popBackStack()
                 }
