@@ -11,6 +11,8 @@ interface TaskRepository {
 
     suspend fun deleteTask(task: Task)
 
+    suspend fun getTaskById(id: Int): Task?
+
     fun observeTasks(): Flow<List<Task>>
 
 }

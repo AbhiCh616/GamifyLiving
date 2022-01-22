@@ -21,6 +21,9 @@ class TaskRepositoryImpl(
         taskDao.delete(task)
     }
 
+    override suspend fun getTaskById(id: Int): Task? = taskDao.getTaskById(id)
+
+
     override fun observeTasks(): Flow<List<Task>> = taskDao.getAll()
 
 }
