@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.screen.tasks
+package com.example.gamifyliving.ui.screen.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -15,10 +15,10 @@ import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 
 @ExperimentalMaterialApi
 @Composable
-fun IndividualTask(
+fun TaskCard(
     task: Task,
     modifier: Modifier = Modifier,
-    onCheckboxClicked: (Task) -> Unit,
+    onCheckboxClick: (Task) -> Unit,
     onClick: (Task) -> Unit
 ) {
     Card(
@@ -34,9 +34,9 @@ fun IndividualTask(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Checkbox(checked = task.status, onCheckedChange = { onCheckboxClicked(task) })
+            Checkbox(checked = task.status, onCheckedChange = { onCheckboxClick(task) })
             Spacer(modifier = Modifier.width(16.dp))
-            Text(task.name)
+            Text(text = task.name)
         }
     }
 }
@@ -45,8 +45,8 @@ fun IndividualTask(
 @Preview
 @Composable
 fun IndividualTaskPreview() {
-    val task = Task("Untitled Task", true)
+    val task = Task(name = "Untitled Task", status = true)
     GamifyLivingTheme {
-        IndividualTask(task, onCheckboxClicked = {}, onClick = {})
+        TaskCard(task, onCheckboxClick = {}, onClick = {})
     }
 }

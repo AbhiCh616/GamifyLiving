@@ -1,4 +1,4 @@
-package com.example.gamifyliving.ui.screen.tasks
+package com.example.gamifyliving.ui.screen.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,16 +15,16 @@ import com.example.gamifyliving.ui.theme.GamifyLivingTheme
 @Composable
 fun TasksList(
     tasks: List<Task>,
-    changeTaskStatus: (Task) -> Unit,
-    onIndividualTaskClick: (Task) -> Unit,
+    onCheckboxClick: (Task) -> Unit,
+    onTaskClick: (Task) -> Unit,
 ) {
     LazyColumn {
-        items(tasks) {
-            IndividualTask(
-                it,
-                Modifier.padding(vertical = 8.dp),
-                changeTaskStatus,
-                onIndividualTaskClick
+        items(tasks) { task ->
+            TaskCard(
+                task = task,
+                modifier = Modifier.padding(vertical = 8.dp),
+                onCheckboxClick = onCheckboxClick,
+                onClick = onTaskClick
             )
         }
     }
@@ -34,9 +34,13 @@ fun TasksList(
 @Preview
 @Composable
 fun TasksListPreview() {
-    val tasks = listOf(Task("abc"), Task("xyz 123"))
+    val tasks = listOf(Task(name = "abc"), Task(name = "xyz 123"))
 
     GamifyLivingTheme {
-        TasksList(tasks, {}, {})
+        TasksList(
+            tasks = tasks,
+            onCheckboxClick = {},
+            onTaskClick = {}
+        )
     }
 }
