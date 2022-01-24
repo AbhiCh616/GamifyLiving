@@ -24,6 +24,7 @@ fun StatCard(
     modifier: Modifier = Modifier,
     onClick: (Stat) -> Unit,
 ) {
+
     Card(
         modifier = modifier.fillMaxWidth(),
         onClick = {
@@ -41,10 +42,12 @@ fun StatCard(
             StatProgressBar(progress = getProgressFromStatValue(stat.value))
         }
     }
+
 }
 
 @Composable
 fun StatProgressBar(progress: Float) {
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -64,9 +67,11 @@ fun StatProgressBar(progress: Float) {
 @Preview
 @Composable
 fun StatCardPreview() {
+
     val statDetails = Stat(name = "health", getStatValueFromProgress(progress = 0.25F))
 
     GamifyLivingTheme {
         StatCard(stat = statDetails) {}
     }
+
 }

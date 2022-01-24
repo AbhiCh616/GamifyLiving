@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.gamifyliving.presentation.add_task.AddTaskHandler
 import com.example.gamifyliving.presentation.edit_task.EditTaskHandler
-import com.example.gamifyliving.presentation.tasks.TasksScreen
+import com.example.gamifyliving.presentation.tasks.TasksScreenHandler
 import com.example.gamifyliving.presentation.util.BottomNavigationScreen
 import com.example.gamifyliving.presentation.util.Screen
 
@@ -16,13 +16,14 @@ fun NavGraphBuilder.taskGraph(
     navController: NavHostController,
     setBottomBarVisibility: (Boolean) -> Unit
 ) {
+
     navigation(
         startDestination = Screen.Tasks.route,
         route = BottomNavigationScreen.TaskGroup.route
     ) {
         composable(Screen.Tasks.route) {
             setBottomBarVisibility(Screen.Tasks.hasBottomNavBar)
-            TasksScreen(
+            TasksScreenHandler(
                 onTaskClick = {
                     navController.navigate(Screen.EditTask.route)
                 },
@@ -48,4 +49,5 @@ fun NavGraphBuilder.taskGraph(
             )
         }
     }
+
 }

@@ -23,7 +23,7 @@ import com.example.gamifyliving.presentation.component.TasksList
 
 @ExperimentalMaterialApi
 @Composable
-fun TasksScreen(
+fun TasksScreenHandler(
     viewModel: TasksViewModel = viewModel(
         factory = TasksViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).taskRepository
@@ -32,7 +32,26 @@ fun TasksScreen(
     onAddButtonClick: () -> Unit,
     onTaskClick: (Task) -> Unit
 ) {
+
     val tasks by viewModel.tasks.collectAsState(initial = emptyList())
+
+    TasksScreen(
+        tasks = tasks,
+        changeTaskStatus = viewModel::changeTaskStatus,
+        onAddButtonClick = onAddButtonClick,
+        onTaskClick = onTaskClick
+    )
+
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun TasksScreen(
+    tasks: List<Task>,
+    changeTaskStatus: (Task) -> Unit,
+    onAddButtonClick: () -> Unit,
+    onTaskClick: (Task) -> Unit
+) {
 
     Scaffold(
         floatingActionButton = {
@@ -53,10 +72,11 @@ fun TasksScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 TasksList(
                     tasks = tasks,
-                    onCheckboxClick = viewModel::changeTaskStatus,
+                    onCheckboxClick = changeTaskStatus,
                     onTaskClick = onTaskClick
                 )
             }
         }
     }
+
 }

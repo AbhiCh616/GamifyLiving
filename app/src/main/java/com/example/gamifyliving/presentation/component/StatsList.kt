@@ -18,6 +18,7 @@ fun StatsList(
     stats: List<Stat>,
     onStatClick: (Stat) -> Unit,
 ) {
+
     LazyColumn {
         items(stats) { stat ->
             StatCard(
@@ -27,12 +28,14 @@ fun StatsList(
             )
         }
     }
+
 }
 
 @ExperimentalMaterialApi
 @Preview
 @Composable
 fun StatsListPreview() {
+
     val stats = listOf(
         Stat(name = "health", getStatValueFromProgress(progress = 0.25F)),
         Stat(name = "relationship", getStatValueFromProgress(progress = 0.50F))
@@ -41,4 +44,5 @@ fun StatsListPreview() {
     GamifyLivingTheme {
         StatsList(stats) {}
     }
+
 }

@@ -14,6 +14,7 @@ import com.example.gamifyliving.presentation.util.BottomNavigationScreen
 @ExperimentalComposeUiApi
 @Composable
 fun Navigation(navController: NavHostController, setBottomBarVisibility: (Boolean) -> Unit) {
+
     NavHost(navController = navController, startDestination = BottomNavigationScreen.Home.route) {
         composable(BottomNavigationScreen.Home.route) {
             setBottomBarVisibility(BottomNavigationScreen.Home.hasBottomNavBar)
@@ -32,4 +33,5 @@ fun Navigation(navController: NavHostController, setBottomBarVisibility: (Boolea
             navController = navController
         )
     }
+
 }

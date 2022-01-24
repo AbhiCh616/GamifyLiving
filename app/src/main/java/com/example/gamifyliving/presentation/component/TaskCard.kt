@@ -21,6 +21,7 @@ fun TaskCard(
     onCheckboxClick: (Task) -> Unit,
     onClick: (Task) -> Unit
 ) {
+
     Card(
         modifier = modifier.fillMaxWidth(),
         onClick = {
@@ -39,14 +40,17 @@ fun TaskCard(
             Text(text = task.name)
         }
     }
+
 }
 
 @ExperimentalMaterialApi
 @Preview
 @Composable
 fun IndividualTaskPreview() {
+
     val task = Task(name = "Untitled Task", status = true)
     GamifyLivingTheme {
         TaskCard(task, onCheckboxClick = {}, onClick = {})
     }
+
 }

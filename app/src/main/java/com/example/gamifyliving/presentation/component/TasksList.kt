@@ -18,6 +18,7 @@ fun TasksList(
     onCheckboxClick: (Task) -> Unit,
     onTaskClick: (Task) -> Unit,
 ) {
+
     LazyColumn {
         items(tasks) { task ->
             TaskCard(
@@ -28,12 +29,14 @@ fun TasksList(
             )
         }
     }
+
 }
 
 @ExperimentalMaterialApi
 @Preview
 @Composable
 fun TasksListPreview() {
+
     val tasks = listOf(Task(name = "abc"), Task(name = "xyz 123"))
 
     GamifyLivingTheme {
@@ -43,4 +46,5 @@ fun TasksListPreview() {
             onTaskClick = {}
         )
     }
+
 }

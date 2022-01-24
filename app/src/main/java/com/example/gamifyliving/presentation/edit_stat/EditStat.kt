@@ -15,6 +15,7 @@ import com.example.gamifyliving.R
 fun EditStatHandler(
     onClose: () -> Unit
 ) {
+
     EditStat(
         name = "",
         value = 0F,
@@ -26,6 +27,7 @@ fun EditStatHandler(
             onClose()
         }
     )
+
 }
 
 @Composable
@@ -38,6 +40,7 @@ fun EditStat(
     onClose: () -> Unit,
     onSave: () -> Unit
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -81,4 +84,5 @@ fun EditStat(
             }
         }
     }
+
 }

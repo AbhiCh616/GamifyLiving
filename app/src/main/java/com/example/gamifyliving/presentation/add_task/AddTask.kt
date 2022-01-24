@@ -16,7 +16,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 
-
 @Composable
 fun AddTaskHandler(
     onClose: () -> Unit,
@@ -26,6 +25,7 @@ fun AddTaskHandler(
         )
     )
 ) {
+
     AddTask(
         name = viewModel.name,
         onNameChange = viewModel::onNameChange,
@@ -35,6 +35,7 @@ fun AddTaskHandler(
             onClose()
         }
     )
+
 }
 
 @Composable
@@ -44,6 +45,7 @@ fun AddTask(
     onClose: () -> Unit,
     onSave: () -> Unit,
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -76,4 +78,5 @@ fun AddTask(
             }
         }
     }
+
 }

@@ -23,6 +23,7 @@ fun AddStatHandler(
         )
     )
 ) {
+
     AddStat(
         name = viewModel.name,
         value = viewModel.value,
@@ -34,6 +35,7 @@ fun AddStatHandler(
             onClose()
         }
     )
+
 }
 
 @Composable
@@ -45,6 +47,7 @@ fun AddStat(
     onClose: () -> Unit,
     onSave: () -> Unit,
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -84,4 +87,5 @@ fun AddStat(
             }
         }
     }
+
 }

@@ -21,6 +21,7 @@ fun EditTaskHandler(
             .editTaskViewModelFactory
             .create(EditTaskViewModel::class.java)
 ) {
+
     EditTask(
         name = viewModel.name,
         onNameChange = viewModel::onNameChange,
@@ -31,6 +32,7 @@ fun EditTaskHandler(
             onClose()
         }
     )
+
 }
 
 @Composable
@@ -41,6 +43,7 @@ fun EditTask(
     onClose: () -> Unit,
     onSave: () -> Unit
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,4 +80,5 @@ fun EditTask(
             }
         }
     }
+
 }

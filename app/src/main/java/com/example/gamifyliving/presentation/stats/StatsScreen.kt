@@ -25,7 +25,7 @@ import com.example.gamifyliving.presentation.component.StatsList
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
-fun StatsScreen(
+fun StatsScreenHandler(
     viewModel: StatsViewModel = viewModel(
         factory = StatsViewModelFactory(
             (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
@@ -34,7 +34,24 @@ fun StatsScreen(
     onAddButtonClick: () -> Unit,
     onStatClick: (Stat) -> Unit
 ) {
+
     val stats by viewModel.stats.collectAsState(initial = emptyList())
+
+    StatsScreen(
+        stats = stats,
+        onAddButtonClick = onAddButtonClick,
+        onStatClick = onStatClick
+    )
+
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun StatsScreen(
+    stats: List<Stat>,
+    onAddButtonClick: () -> Unit,
+    onStatClick: (Stat) -> Unit
+) {
 
     Scaffold(
         floatingActionButton = {
