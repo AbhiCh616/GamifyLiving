@@ -14,12 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.presentation.component.TasksList
+import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @ExperimentalMaterialApi
 @Composable
@@ -77,6 +79,29 @@ fun TasksScreen(
                 )
             }
         }
+    }
+
+}
+
+@ExperimentalMaterialApi
+@Preview
+@Composable
+fun TasksScreenPreview() {
+
+    val tasks = listOf(
+        Task(name = "Do this"),
+        Task(name = "Do that")
+    )
+
+    GamifyLivingTheme {
+
+        TasksScreen(
+            tasks = tasks,
+            changeTaskStatus = {},
+            onAddButtonClick = {},
+            onTaskClick = {}
+        )
+
     }
 
 }

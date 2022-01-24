@@ -68,10 +68,16 @@ fun StatProgressBar(progress: Float) {
 @Composable
 fun StatCardPreview() {
 
-    val statDetails = Stat(name = "health", getStatValueFromProgress(progress = 0.25F))
+    val statDetails = Stat(
+        name = "health",
+        getStatValueFromProgress(progress = 0.25F)
+    )
 
     GamifyLivingTheme {
-        StatCard(stat = statDetails) {}
+        StatCard(
+            stat = statDetails,
+            onClick = {}
+        )
     }
 
 }

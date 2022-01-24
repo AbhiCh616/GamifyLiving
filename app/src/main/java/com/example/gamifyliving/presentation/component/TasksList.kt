@@ -40,11 +40,13 @@ fun TasksListPreview() {
     val tasks = listOf(Task(name = "abc"), Task(name = "xyz 123"))
 
     GamifyLivingTheme {
+
         TasksList(
             tasks = tasks,
             onCheckboxClick = {},
             onTaskClick = {}
         )
+
     }
 
 }

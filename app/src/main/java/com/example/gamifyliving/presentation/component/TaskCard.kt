@@ -49,8 +49,15 @@ fun TaskCard(
 fun IndividualTaskPreview() {
 
     val task = Task(name = "Untitled Task", status = true)
+
     GamifyLivingTheme {
-        TaskCard(task, onCheckboxClick = {}, onClick = {})
+
+        TaskCard(
+            task = task,
+            onCheckboxClick = {},
+            onClick = {}
+        )
+
     }
 
 }

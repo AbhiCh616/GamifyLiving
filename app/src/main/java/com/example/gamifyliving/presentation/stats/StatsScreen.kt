@@ -15,12 +15,15 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gamifyliving.GamifyLivingApplication
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.StatsList
+import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
+import com.example.gamifyliving.presentation.util.getStatValueFromProgress
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -74,6 +77,28 @@ fun StatsScreen(
                 StatsList(stats = stats, onStatClick = onStatClick)
             }
         }
+    }
+
+}
+
+@ExperimentalMaterialApi
+@Preview
+@Composable
+fun StatsScreenPreview() {
+
+    val stats = listOf(
+        Stat(name = "health", value = getStatValueFromProgress(45F)),
+        Stat(name = "job", value = getStatValueFromProgress(67F))
+    )
+
+    GamifyLivingTheme {
+
+        StatsScreen(
+            stats = stats,
+            onAddButtonClick = {},
+            onStatClick = {}
+        )
+
     }
 
 }

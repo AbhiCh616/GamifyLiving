@@ -42,7 +42,12 @@ fun StatsListPreview() {
     )
 
     GamifyLivingTheme {
-        StatsList(stats) {}
+
+        StatsList(
+            stats = stats,
+            onStatClick = {}
+        )
+
     }
 
 }
