@@ -25,7 +25,10 @@ fun EditStatHandler(
         value = viewModel.value,
         onNameChange = viewModel::onNameChange,
         onValueChange = viewModel::onValueChange,
-        onDelete = viewModel::onDelete,
+        onDelete = {
+            viewModel.onDelete()
+            onClose()
+        },
         onClose = onClose,
         onSave = {
             viewModel.onSaveClicked()

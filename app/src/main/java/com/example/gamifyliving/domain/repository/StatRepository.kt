@@ -11,6 +11,8 @@ interface StatRepository {
 
     suspend fun deleteStat(stat: Stat)
 
+    suspend fun getStatById(id: Int): Stat?
+
     fun observeStats(): Flow<List<Stat>>
 
 }

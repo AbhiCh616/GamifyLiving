@@ -2,10 +2,8 @@ package com.example.gamifyliving.presentation.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.example.gamifyliving.presentation.add_stat.AddStatHandler
 import com.example.gamifyliving.presentation.edit_stat.EditStatHandler
 import com.example.gamifyliving.presentation.profile.Profile
@@ -34,8 +32,8 @@ fun NavGraphBuilder.profileGraph(
                 onAddButtonClick = {
                     navController.navigate(Screen.AddStat.route)
                 },
-                onStatClick = {
-                    navController.navigate(Screen.EditStat.route)
+                onStatClick = { stat ->
+                    navController.navigate("${Screen.EditStat.route}/${stat.uid}")
                 }
             )
         }
@@ -47,7 +45,10 @@ fun NavGraphBuilder.profileGraph(
                 }
             )
         }
-        composable(Screen.EditStat.route) {
+        composable(
+            "${Screen.EditStat.route}/{stat_id}",
+            arguments = listOf(navArgument("stat_id") { type = NavType.IntType })
+        ) {
             setBottomBarVisibility(Screen.EditStat.hasBottomNavBar)
             EditStatHandler(
                 onClose = {

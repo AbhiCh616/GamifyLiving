@@ -22,6 +22,8 @@ class StatRepositoryImpl @Inject constructor(
         statDao.delete(stat)
     }
 
+    override suspend fun getStatById(id: Int): Stat? = statDao.getStatById(id)
+
     override fun observeStats(): Flow<List<Stat>> = statDao.getAll()
 
 }

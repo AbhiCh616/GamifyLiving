@@ -16,6 +16,9 @@ interface StatDao {
     @Delete
     suspend fun delete(stat: Stat)
 
+    @Query("SELECT * FROM stat WHERE uid = :id")
+    suspend fun getStatById(id: Int): Stat?
+
     @Query("SELECT * FROM stat")
     fun getAll(): Flow<List<Stat>>
 
