@@ -1,13 +1,15 @@
 package com.example.gamifyliving.presentation.tasks
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TasksViewModel(
+@HiltViewModel
+class TasksViewModel @Inject constructor(
     private val taskRepository: TaskRepository
 ) : ViewModel() {
 
@@ -18,16 +20,4 @@ class TasksViewModel(
         taskRepository.updateTask(task = newTask)
     }
 
-}
-
-class TasksViewModelFactory(
-    private val taskRepository: TaskRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TasksViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return TasksViewModel(taskRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }

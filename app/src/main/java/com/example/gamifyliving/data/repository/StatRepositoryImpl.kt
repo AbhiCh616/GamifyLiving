@@ -4,8 +4,9 @@ import com.example.gamifyliving.data.data_source.StatDao
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.repository.StatRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class StatRepositoryImpl(
+class StatRepositoryImpl @Inject constructor(
     private val statDao: StatDao
 ) : StatRepository {
 

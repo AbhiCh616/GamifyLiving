@@ -12,12 +12,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.gamifyliving.GamifyLivingApplication
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.presentation.component.TasksList
@@ -26,13 +24,9 @@ import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 @ExperimentalMaterialApi
 @Composable
 fun TasksScreenHandler(
-    viewModel: TasksViewModel = viewModel(
-        factory = TasksViewModelFactory(
-            (LocalContext.current.applicationContext as GamifyLivingApplication).taskRepository
-        )
-    ),
     onAddButtonClick: () -> Unit,
-    onTaskClick: (Task) -> Unit
+    onTaskClick: (Task) -> Unit,
+    viewModel: TasksViewModel = hiltViewModel()
 ) {
 
     val tasks by viewModel.tasks.collectAsState(initial = emptyList())

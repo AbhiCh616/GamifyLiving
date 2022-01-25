@@ -15,7 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.gamifyliving.presentation.component.BottomNavigationBar
 import com.example.gamifyliving.presentation.navigation.Navigation
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @ExperimentalMaterialApi
     @ExperimentalComposeUiApi

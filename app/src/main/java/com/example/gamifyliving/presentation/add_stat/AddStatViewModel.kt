@@ -4,14 +4,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.repository.StatRepository
 import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddStatViewModel(
+@HiltViewModel
+class AddStatViewModel @Inject constructor(
     private val statRepository: StatRepository
 ) : ViewModel() {
 
@@ -33,16 +35,4 @@ class AddStatViewModel(
         statRepository.addStat(Stat(name = name, value = getStatValueFromProgress(value)))
     }
 
-}
-
-class AddStatViewModelFactory(
-    private val statRepository: StatRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AddStatViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return AddStatViewModel(statRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }

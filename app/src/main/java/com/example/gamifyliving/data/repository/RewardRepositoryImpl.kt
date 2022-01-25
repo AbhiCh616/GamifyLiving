@@ -3,8 +3,9 @@ package com.example.gamifyliving.data.repository
 import com.example.gamifyliving.data.data_source.RewardDAO
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.repository.RewardRepository
+import javax.inject.Inject
 
-class RewardRepositoryImpl(
+class RewardRepositoryImpl @Inject constructor(
     private val rewardDAO: RewardDAO
 ) : RewardRepository {
 

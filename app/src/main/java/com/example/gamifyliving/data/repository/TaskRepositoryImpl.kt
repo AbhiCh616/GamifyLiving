@@ -4,8 +4,9 @@ import com.example.gamifyliving.data.data_source.TaskDao
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class TaskRepositoryImpl(
+class TaskRepositoryImpl @Inject constructor(
     private val taskDao: TaskDao
 ) : TaskRepository {
 

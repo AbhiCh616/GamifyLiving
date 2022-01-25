@@ -4,10 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.gamifyliving.domain.repository.StatRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EditStatViewModel(
+@HiltViewModel
+class EditStatViewModel @Inject constructor(
     private val statRepository: StatRepository
 ) : ViewModel() {
 
@@ -33,16 +35,4 @@ class EditStatViewModel(
 
     }
 
-}
-
-class EditStatViewModelFactory(
-    private val statRepository: StatRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EditStatViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return EditStatViewModel(statRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }

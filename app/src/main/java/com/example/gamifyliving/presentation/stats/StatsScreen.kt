@@ -13,12 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.gamifyliving.GamifyLivingApplication
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.StatsList
@@ -29,13 +27,9 @@ import com.example.gamifyliving.presentation.util.getStatValueFromProgress
 @ExperimentalComposeUiApi
 @Composable
 fun StatsScreenHandler(
-    viewModel: StatsViewModel = viewModel(
-        factory = StatsViewModelFactory(
-            (LocalContext.current.applicationContext as GamifyLivingApplication).statRepository
-        )
-    ),
     onAddButtonClick: () -> Unit,
-    onStatClick: (Stat) -> Unit
+    onStatClick: (Stat) -> Unit,
+    viewModel: StatsViewModel = hiltViewModel()
 ) {
 
     val stats by viewModel.stats.collectAsState(initial = emptyList())

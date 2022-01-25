@@ -4,10 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.gamifyliving.domain.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EditTaskViewModel(
+@HiltViewModel
+class EditTaskViewModel @Inject constructor(
     private val taskRepository: TaskRepository
 ) : ViewModel() {
 
@@ -26,16 +28,4 @@ class EditTaskViewModel(
 
     }
 
-}
-
-class EditTaskViewModelFactory(
-    private val taskRepository: TaskRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EditTaskViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return EditTaskViewModel(taskRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }
