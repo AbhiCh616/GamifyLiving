@@ -1,10 +1,8 @@
 package com.example.gamifyliving.presentation.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.example.gamifyliving.presentation.add_task.AddTaskHandler
 import com.example.gamifyliving.presentation.edit_task.EditTaskHandler
 import com.example.gamifyliving.presentation.tasks.TasksScreenHandler
@@ -24,8 +22,8 @@ fun NavGraphBuilder.taskGraph(
         composable(Screen.Tasks.route) {
             setBottomBarVisibility(Screen.Tasks.hasBottomNavBar)
             TasksScreenHandler(
-                onTaskClick = {
-                    navController.navigate(Screen.EditTask.route)
+                onTaskClick = { task ->
+                    navController.navigate("${Screen.EditTask.route}/${task.uid}")
                 },
                 onAddButtonClick = {
                     navController.navigate(Screen.AddTask.route)
@@ -40,7 +38,10 @@ fun NavGraphBuilder.taskGraph(
                 }
             )
         }
-        composable(Screen.EditTask.route) {
+        composable(
+            "${Screen.EditTask.route}/{task_id}",
+            arguments = listOf(navArgument("task_id") { type = NavType.IntType })
+        ) {
             setBottomBarVisibility(Screen.EditTask.hasBottomNavBar)
             EditTaskHandler(
                 onClose = {
