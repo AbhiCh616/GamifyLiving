@@ -6,14 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.repository.TaskRepository
+import com.example.gamifyliving.domain.use_case.AddTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val addTask: AddTask
 ) : ViewModel() {
 
     var name by mutableStateOf("")
@@ -24,7 +24,7 @@ class AddTaskViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        taskRepository.addTask(Task(name = name))
+        addTask(Task(name = name))
     }
 
 }

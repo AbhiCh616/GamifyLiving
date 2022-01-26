@@ -7,14 +7,18 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.repository.TaskRepository
+import com.example.gamifyliving.domain.use_case.DeleteTask
+import com.example.gamifyliving.domain.use_case.GetTaskById
+import com.example.gamifyliving.domain.use_case.UpdateTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class EditTaskViewModel @Inject constructor(
-    private val taskRepository: TaskRepository,
+    private val getTaskById: GetTaskById,
+    private val deleteTask: DeleteTask,
+    private val updateTask: UpdateTask,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -26,7 +30,7 @@ class EditTaskViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
-                taskRepository.getTaskById(taskId)?.let { task ->
+                getTaskById(taskId)?.let { task ->
                     selectedTask = task
                     name = task.name
                 }
@@ -38,13 +42,13 @@ class EditTaskViewModel @Inject constructor(
         name = newName
     }
 
-    fun onDelete() = viewModelScope.launch {
-        selectedTask?.let { taskRepository.deleteTask(it) }
+    fun onDeleteClicked() = viewModelScope.launch {
+        selectedTask?.let { deleteTask(it) }
     }
 
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(name = name)
-        updatedTask?.let { taskRepository.updateTask(it) }
+        updatedTask?.let { updateTask(it) }
     }
 
 }

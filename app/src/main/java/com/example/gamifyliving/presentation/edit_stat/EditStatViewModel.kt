@@ -7,7 +7,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Stat
-import com.example.gamifyliving.domain.repository.StatRepository
+import com.example.gamifyliving.domain.use_case.DeleteStat
+import com.example.gamifyliving.domain.use_case.GetStatById
+import com.example.gamifyliving.domain.use_case.UpdateStat
 import com.example.gamifyliving.presentation.util.getProgressFromStatValue
 import com.example.gamifyliving.presentation.util.getStatValueFromProgress
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditStatViewModel @Inject constructor(
-    private val statRepository: StatRepository,
+    private val getStatById: GetStatById,
+    private val deleteStat: DeleteStat,
+    private val updateStat: UpdateStat,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -31,7 +35,7 @@ class EditStatViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>("stat_id")?.let { statId ->
             viewModelScope.launch {
-                statRepository.getStatById(statId)?.let { stat ->
+                getStatById(statId)?.let { stat ->
                     selectedStat = stat
                     name = stat.name
                     value = getProgressFromStatValue(stat.value)
@@ -48,13 +52,13 @@ class EditStatViewModel @Inject constructor(
         value = newValue
     }
 
-    fun onDelete() = viewModelScope.launch {
-        selectedStat?.let { statRepository.deleteStat(it) }
+    fun onDeleteClicked() = viewModelScope.launch {
+        selectedStat?.let { deleteStat(it) }
     }
 
     fun onSaveClicked() = viewModelScope.launch {
         val updatedStat = selectedStat?.copy(name = name, value = getStatValueFromProgress(value))
-        updatedStat?.let { statRepository.updateStat(it) }
+        updatedStat?.let { updateStat(it) }
     }
 
 }

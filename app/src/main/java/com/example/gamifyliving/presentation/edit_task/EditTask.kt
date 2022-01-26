@@ -24,7 +24,7 @@ fun EditTaskHandler(
         name = viewModel.name,
         onNameChange = viewModel::onNameChange,
         onDelete = {
-            viewModel.onDelete()
+            viewModel.onDeleteClicked()
             onClose()
         },
         onClose = onClose,

@@ -33,7 +33,7 @@ fun TasksScreenHandler(
 
     TasksScreen(
         tasks = tasks,
-        changeTaskStatus = viewModel::changeTaskStatus,
+        changeTaskStatus = viewModel::onCheckboxClicked,
         onAddButtonClick = onAddButtonClick,
         onTaskClick = onTaskClick
     )

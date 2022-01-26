@@ -4,10 +4,8 @@ import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.repository.StatRepository
 import javax.inject.Inject
 
-class DeleteStat @Inject constructor(
+class GetStatById @Inject constructor(
     private val repository: StatRepository
 ) {
-    suspend operator fun invoke(stat: Stat) {
-        repository.deleteStat(stat)
-    }
+    suspend operator fun invoke(id: Int): Stat? = repository.getStatById(id = id)
 }
