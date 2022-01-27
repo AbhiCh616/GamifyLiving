@@ -2,6 +2,7 @@ package com.example.gamifyliving.data.data_source
 
 import androidx.room.*
 import com.example.gamifyliving.domain.model.Reward
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RewardDAO {
@@ -14,5 +15,8 @@ interface RewardDAO {
 
     @Delete
     suspend fun delete(reward: Reward)
+
+    @Query("SELECT * FROM reward")
+    fun getAll(): Flow<List<Reward>>
 
 }
