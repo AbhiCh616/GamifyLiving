@@ -1,10 +1,15 @@
 package com.example.gamifyliving.presentation.edit_task
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
@@ -21,7 +26,7 @@ fun EditRewardCardHandler(
             stats.single { stat -> stat.uid == reward.statId }
         )
     }
-    var points by remember { mutableStateOf(reward.points) }
+    var points: Int? by remember { mutableStateOf(reward.points) }
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     EditRewardCard(
@@ -44,8 +49,8 @@ fun EditRewardCard(
     dismissDropdown: () -> Unit,
     selectedStat: Stat,
     onStatChange: (Stat) -> Unit,
-    points: Int,
-    onPointsChange: (Int) -> Unit,
+    points: Int?,
+    onPointsChange: (Int?) -> Unit,
     stats: List<Stat>,
     modifier: Modifier
 ) {
@@ -53,6 +58,7 @@ fun EditRewardCard(
         modifier = modifier.fillMaxWidth()
     ) {
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 16.dp)
@@ -67,9 +73,20 @@ fun EditRewardCard(
             )
             Spacer(modifier = Modifier.width(16.dp))
             TextField(
-                value = points.toString(),
-                onValueChange = { onPointsChange(it.toInt()) }
+                value = points?.toString().orEmpty(),
+                onValueChange = { onPointsChange(it.toIntOrNull()) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.width(88.dp)
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            IconButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(
+                    Icons.Rounded.Delete,
+                    contentDescription = null
+                )
+            }
         }
     }
 }
