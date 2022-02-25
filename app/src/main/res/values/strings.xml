@@ -16,4 +16,5 @@
     <string name="editTask">Edit Task</string>
     <string name="save">Save</string>
     <string name="addTask">Add Task</string>
+    <string name="stat">Stat</string>
 </resources>

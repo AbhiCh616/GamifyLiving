@@ -3,9 +3,10 @@ package com.example.gamifyliving.presentation.edit_task
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 
@@ -25,7 +26,7 @@ fun EditRewardCardHandler(
 
     EditRewardCard(
         isDropdownExpanded = isDropdownExpanded,
-        expandDropdown = { isDropdownExpanded = true },
+        dropDownExpandedChange = { isDropdownExpanded = !isDropdownExpanded },
         dismissDropdown = { isDropdownExpanded = false },
         selectedStat = selectedStat,
         onStatChange = { selectedStat = it },
@@ -39,7 +40,7 @@ fun EditRewardCardHandler(
 @Composable
 fun EditRewardCard(
     isDropdownExpanded: Boolean,
-    expandDropdown: () -> Unit,
+    dropDownExpandedChange: (Boolean) -> Unit,
     dismissDropdown: () -> Unit,
     selectedStat: Stat,
     onStatChange: (Stat) -> Unit,
@@ -57,9 +58,9 @@ fun EditRewardCard(
                 .padding(horizontal = 24.dp, vertical = 16.dp)
         ) {
             StatsDropdown(
-                isExpanded = isDropdownExpanded,
-                expandDropdown = expandDropdown,
-                dismissDropdown = dismissDropdown,
+                expanded = isDropdownExpanded,
+                onExpandedChange = dropDownExpandedChange,
+                onDismiss = dismissDropdown,
                 selectedStat = selectedStat,
                 onStatChange = onStatChange,
                 stats = stats
@@ -73,29 +74,42 @@ fun EditRewardCard(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StatsDropdown(
-    isExpanded: Boolean,
-    expandDropdown: () -> Unit,
-    dismissDropdown: () -> Unit,
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
+    onDismiss: () -> Unit,
     selectedStat: Stat,
     onStatChange: (Stat) -> Unit,
     stats: List<Stat>
 ) {
-    Box(
-        modifier = Modifier
-            .wrapContentSize(Alignment.TopStart)
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = onExpandedChange,
+        modifier = Modifier.width(160.dp)
     ) {
-        TextButton(onClick = expandDropdown) {
-            Text(text = selectedStat.name)
-        }
-        DropdownMenu(
-            expanded = isExpanded,
-            onDismissRequest = dismissDropdown
+        TextField(
+            readOnly = true,
+            value = selectedStat.name,
+            onValueChange = {},
+            label = { Text(text = stringResource(id = R.string.stat)) },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded
+                )
+            }
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = onDismiss
         ) {
             stats.forEach {
                 DropdownMenuItem(
-                    onClick = { onStatChange(it) }
+                    onClick = {
+                        onStatChange(it)
+                        onDismiss()
+                    }
                 ) {
                     Text(text = it.name)
                 }
