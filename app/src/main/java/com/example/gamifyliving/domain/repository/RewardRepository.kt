@@ -8,6 +8,8 @@ interface RewardRepository {
 
     suspend fun addReward(reward: Reward)
 
+    suspend fun addRewards(rewards: List<Reward>)
+
     suspend fun updateReward(reward: Reward)
 
     suspend fun deleteReward(reward: Reward)

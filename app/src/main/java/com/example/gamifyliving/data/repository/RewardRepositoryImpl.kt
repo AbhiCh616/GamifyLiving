@@ -16,6 +16,10 @@ class RewardRepositoryImpl @Inject constructor(
         rewardDAO.insert(reward)
     }
 
+    override suspend fun addRewards(rewards: List<Reward>) {
+        rewardDAO.insert(rewards)
+    }
+
     override suspend fun updateReward(reward: Reward) {
         rewardDAO.update(reward)
     }
