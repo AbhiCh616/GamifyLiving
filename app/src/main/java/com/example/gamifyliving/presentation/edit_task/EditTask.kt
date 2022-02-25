@@ -14,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
+import com.example.gamifyliving.domain.model.Reward
+import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @Composable
@@ -35,7 +37,9 @@ fun EditTaskHandler(
         onSave = {
             viewModel.onSaveClicked()
             onClose()
-        }
+        },
+        rewards = viewModel.rewards,
+        stats = stats
     )
 
 }
@@ -46,7 +50,9 @@ fun EditTask(
     onNameChange: (String) -> Unit,
     onDelete: () -> Unit,
     onClose: () -> Unit,
-    onSave: () -> Unit
+    onSave: () -> Unit,
+    rewards: List<Reward>,
+    stats: List<Stat>
 ) {
 
     Scaffold(
@@ -82,6 +88,8 @@ fun EditTask(
                 TextButton(onClick = onDelete) {
                     Text(stringResource(id = R.string.delete))
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                EditRewardsList(rewards = rewards, stats = stats)
             }
         }
     }
@@ -99,7 +107,9 @@ fun EditTaskPreview() {
             onNameChange = {},
             onDelete = {},
             onClose = {},
-            onSave = {}
+            onSave = {},
+            rewards = emptyList(),
+            stats = emptyList()
         )
 
     }
