@@ -5,6 +5,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,6 +21,8 @@ fun EditTaskHandler(
     onClose: () -> Unit,
     viewModel: EditTaskViewModel = hiltViewModel()
 ) {
+
+    val stats by viewModel.stats.collectAsState(initial = emptyList())
 
     EditTask(
         name = viewModel.name,

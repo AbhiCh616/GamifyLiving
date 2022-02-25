@@ -6,11 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.use_case.DeleteTask
-import com.example.gamifyliving.domain.use_case.GetTaskById
-import com.example.gamifyliving.domain.use_case.UpdateTask
+import com.example.gamifyliving.domain.use_case.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +19,8 @@ class EditTaskViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
     private val deleteTask: DeleteTask,
     private val updateTask: UpdateTask,
+    getStats: GetStats,
+    getRewardsForTask: GetRewardsForTask,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -27,12 +29,20 @@ class EditTaskViewModel @Inject constructor(
 
     private var selectedTask: Task? = null
 
+    val stats = getStats()
+
+    var rewards: List<Reward> = emptyList()
+        private set
+
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
                 getTaskById(taskId)?.let { task ->
                     selectedTask = task
                     name = task.name
+                    getRewardsForTask(task).collect {
+                        rewards = it
+                    }
                 }
             }
         }
