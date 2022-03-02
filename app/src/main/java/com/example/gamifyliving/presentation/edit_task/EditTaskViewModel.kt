@@ -68,10 +68,9 @@ class EditTaskViewModel @Inject constructor(
     }
 
     fun editReward(updatedReward: Reward) {
-        _rewards.single { it.uid == updatedReward.uid }.apply {
-            this.statId = updatedReward.statId
-            this.points = updatedReward.points
-        }
+        val reward = rewards.single { it.uid == updatedReward.uid }
+        val rewardIndex = rewards.indexOf(reward)
+        _rewards[rewardIndex] = updatedReward
     }
 
     fun addNewReward() = viewModelScope.launch {

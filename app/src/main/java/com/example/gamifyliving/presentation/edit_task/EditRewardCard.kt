@@ -45,7 +45,7 @@ fun EditRewardCard(
     dismissDropdown: () -> Unit,
     selectedStat: Stat,
     onStatChange: (Stat) -> Unit,
-    points: Int?,
+    points: Int,
     onPointsChange: (Int?) -> Unit,
     stats: List<Stat>,
     modifier: Modifier
@@ -69,7 +69,7 @@ fun EditRewardCard(
             )
             Spacer(modifier = Modifier.width(16.dp))
             TextField(
-                value = points?.toString().orEmpty(),
+                value = points.toString(),
                 onValueChange = { onPointsChange(it.toIntOrNull()) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(88.dp)

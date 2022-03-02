@@ -26,10 +26,10 @@ data class Reward(
     val taskId: Int,
 
     @ColumnInfo(name = "statId")
-    var statId: Int,
+    val statId: Int,
 
     @ColumnInfo(name = "points")
-    var points: Int,
+    val points: Int,
 
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0
