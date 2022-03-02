@@ -12,13 +12,15 @@ import com.example.gamifyliving.domain.model.Stat
 @Composable
 fun EditRewardsList(
     rewards: List<Reward>,
-    stats: List<Stat>
+    stats: List<Stat>,
+    editReward: (Reward) -> Unit
 ) {
     LazyColumn {
         items(rewards) { reward ->
             EditRewardCardHandler(
                 reward = reward,
                 stats = stats,
+                editReward = editReward,
                 modifier = Modifier.padding(vertical = 8.dp),
             )
         }

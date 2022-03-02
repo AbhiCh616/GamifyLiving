@@ -1,6 +1,7 @@
 package com.example.gamifyliving.presentation.edit_task
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
@@ -32,7 +33,7 @@ class EditTaskViewModel @Inject constructor(
 
     val stats = getStats()
 
-    private var _rewards = mutableListOf<Reward>()
+    private val _rewards = mutableStateListOf<Reward>()
 
     val rewards: List<Reward>
         get() = _rewards
@@ -44,7 +45,9 @@ class EditTaskViewModel @Inject constructor(
                     selectedTask = task
                     name = task.name
                     getRewardsForTask(task).collect {
-                        _rewards = it as MutableList<Reward>
+                        it.forEach { reward ->
+                            _rewards.add(reward)
+                        }
                     }
                 }
             }
@@ -62,6 +65,13 @@ class EditTaskViewModel @Inject constructor(
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(name = name)
         updatedTask?.let { updateTask(it, rewards) }
+    }
+
+    fun editReward(updatedReward: Reward) {
+        _rewards.single { it.uid == updatedReward.uid }.apply {
+            this.statId = updatedReward.statId
+            this.points = updatedReward.points
+        }
     }
 
     fun addNewReward() = viewModelScope.launch {

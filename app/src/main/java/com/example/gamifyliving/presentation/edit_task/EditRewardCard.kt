@@ -19,14 +19,10 @@ import com.example.gamifyliving.domain.model.Stat
 fun EditRewardCardHandler(
     reward: Reward,
     stats: List<Stat>,
+    editReward: (Reward) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var selectedStat by remember {
-        mutableStateOf(
-            stats.single { stat -> stat.uid == reward.statId }
-        )
-    }
-    var points: Int? by remember { mutableStateOf(reward.points) }
+    val selectedStat = stats.single { stat -> stat.uid == reward.statId }
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     EditRewardCard(
@@ -34,9 +30,9 @@ fun EditRewardCardHandler(
         dropDownExpandedChange = { isDropdownExpanded = !isDropdownExpanded },
         dismissDropdown = { isDropdownExpanded = false },
         selectedStat = selectedStat,
-        onStatChange = { selectedStat = it },
-        points = points,
-        onPointsChange = { points = it },
+        onStatChange = { editReward(reward.copy(statId = it.uid)) },
+        points = reward.points,
+        onPointsChange = { editReward(reward.copy(points = it ?: 0)) },
         stats = stats,
         modifier = modifier
     )
