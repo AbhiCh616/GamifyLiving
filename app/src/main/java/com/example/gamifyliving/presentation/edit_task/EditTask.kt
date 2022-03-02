@@ -33,6 +33,7 @@ fun EditTaskHandler(
             viewModel.onDeleteClicked()
             onClose()
         },
+        onAddReward = viewModel::addNewReward,
         onClose = onClose,
         onSave = {
             viewModel.onSaveClicked()
@@ -49,6 +50,7 @@ fun EditTask(
     name: String,
     onNameChange: (String) -> Unit,
     onDelete: () -> Unit,
+    onAddReward: () -> Unit,
     onClose: () -> Unit,
     onSave: () -> Unit,
     rewards: List<Reward>,
@@ -91,7 +93,7 @@ fun EditTask(
                 Spacer(modifier = Modifier.height(16.dp))
                 EditRewardsList(rewards = rewards, stats = stats)
                 Spacer(modifier = Modifier.height(8.dp))
-                TextButton(onClick = { /*TODO*/ }) {
+                TextButton(onClick = onAddReward) {
                     Text(stringResource(id = R.string.addReward))
                 }
             }
@@ -110,6 +112,7 @@ fun EditTaskPreview() {
             name = "",
             onNameChange = {},
             onDelete = {},
+            onAddReward = {},
             onClose = {},
             onSave = {},
             rewards = emptyList(),

@@ -11,6 +11,7 @@ import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.use_case.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,8 +32,10 @@ class EditTaskViewModel @Inject constructor(
 
     val stats = getStats()
 
-    var rewards: List<Reward> = emptyList()
-        private set
+    private var _rewards = mutableListOf<Reward>()
+
+    val rewards: List<Reward>
+        get() = _rewards
 
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
@@ -41,7 +44,7 @@ class EditTaskViewModel @Inject constructor(
                     selectedTask = task
                     name = task.name
                     getRewardsForTask(task).collect {
-                        rewards = it
+                        _rewards = it as MutableList<Reward>
                     }
                 }
             }
@@ -59,6 +62,16 @@ class EditTaskViewModel @Inject constructor(
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(name = name)
         updatedTask?.let { updateTask(it) }
+    }
+
+    fun addNewReward() = viewModelScope.launch {
+        _rewards.add(
+            Reward(
+                taskId = selectedTask!!.uid,
+                statId = stats.first().elementAt(0).uid,
+                points = 0
+            )
+        )
     }
 
 }
