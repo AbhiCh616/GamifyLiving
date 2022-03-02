@@ -28,6 +28,10 @@ class RewardRepositoryImpl @Inject constructor(
         rewardDAO.delete(reward)
     }
 
+    override suspend fun deleteRewardsForTask(taskId: Int) {
+        rewardDAO.deleteRewardsForTask(taskId)
+    }
+
     override fun getRewardsForTask(task: Task): Flow<List<Reward>> =
         rewardDAO.getAll().map {
             it.filter { reward -> reward.taskId == task.uid }

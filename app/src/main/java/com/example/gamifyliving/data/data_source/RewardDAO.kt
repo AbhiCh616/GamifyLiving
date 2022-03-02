@@ -19,6 +19,9 @@ interface RewardDAO {
     @Delete
     suspend fun delete(reward: Reward)
 
+    @Query("DELETE FROM reward WHERE taskId = :taskId")
+    suspend fun deleteRewardsForTask(taskId: Int)
+
     @Query("SELECT * FROM reward")
     fun getAll(): Flow<List<Reward>>
 
