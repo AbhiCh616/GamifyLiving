@@ -61,7 +61,7 @@ class EditTaskViewModel @Inject constructor(
 
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(name = name)
-        updatedTask?.let { updateTask(it) }
+        updatedTask?.let { updateTask(it, rewards) }
     }
 
     fun addNewReward() = viewModelScope.launch {
