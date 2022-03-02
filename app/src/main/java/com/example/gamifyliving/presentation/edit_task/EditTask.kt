@@ -41,7 +41,8 @@ fun EditTaskHandler(
         },
         rewards = viewModel.rewards,
         stats = stats,
-        editReward = viewModel::editReward
+        editReward = viewModel::editReward,
+        deleteReward = viewModel::onDeleteReward
     )
 
 }
@@ -56,7 +57,8 @@ fun EditTask(
     onSave: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
-    editReward: (Reward) -> Unit
+    editReward: (Reward) -> Unit,
+    deleteReward: (Reward) -> Unit
 ) {
 
     Scaffold(
@@ -93,7 +95,12 @@ fun EditTask(
                     Text(stringResource(id = R.string.delete))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                EditRewardsList(rewards = rewards, stats = stats, editReward = editReward)
+                EditRewardsList(
+                    rewards = rewards,
+                    stats = stats,
+                    editReward = editReward,
+                    deleteReward = deleteReward
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextButton(onClick = onAddReward) {
                     Text(stringResource(id = R.string.addReward))
@@ -119,7 +126,8 @@ fun EditTaskPreview() {
             onSave = {},
             rewards = emptyList(),
             stats = emptyList(),
-            editReward = {}
+            editReward = {},
+            deleteReward = {}
         )
 
     }

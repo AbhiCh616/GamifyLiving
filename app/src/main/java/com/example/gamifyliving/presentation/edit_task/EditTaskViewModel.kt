@@ -83,4 +83,8 @@ class EditTaskViewModel @Inject constructor(
         )
     }
 
+    fun onDeleteReward(reward: Reward) = viewModelScope.launch {
+        _rewards.remove(reward)
+    }
+
 }

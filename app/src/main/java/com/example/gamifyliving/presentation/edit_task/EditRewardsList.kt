@@ -13,7 +13,8 @@ import com.example.gamifyliving.domain.model.Stat
 fun EditRewardsList(
     rewards: List<Reward>,
     stats: List<Stat>,
-    editReward: (Reward) -> Unit
+    editReward: (Reward) -> Unit,
+    deleteReward: (Reward) -> Unit,
 ) {
     LazyColumn {
         items(rewards) { reward ->
@@ -21,6 +22,7 @@ fun EditRewardsList(
                 reward = reward,
                 stats = stats,
                 editReward = editReward,
+                onDelete = deleteReward,
                 modifier = Modifier.padding(vertical = 8.dp),
             )
         }

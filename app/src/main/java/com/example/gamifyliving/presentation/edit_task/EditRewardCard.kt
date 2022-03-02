@@ -20,6 +20,7 @@ fun EditRewardCardHandler(
     reward: Reward,
     stats: List<Stat>,
     editReward: (Reward) -> Unit,
+    onDelete: (Reward) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selectedStat = stats.single { stat -> stat.uid == reward.statId }
@@ -34,6 +35,7 @@ fun EditRewardCardHandler(
         points = reward.points,
         onPointsChange = { editReward(reward.copy(points = it ?: 0)) },
         stats = stats,
+        onDelete = { onDelete(reward) },
         modifier = modifier
     )
 }
@@ -48,6 +50,7 @@ fun EditRewardCard(
     points: Int,
     onPointsChange: (Int?) -> Unit,
     stats: List<Stat>,
+    onDelete: () -> Unit,
     modifier: Modifier
 ) {
     Card(
@@ -76,7 +79,7 @@ fun EditRewardCard(
             )
             Spacer(modifier = Modifier.width(16.dp))
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = onDelete
             ) {
                 Icon(
                     Icons.Rounded.Delete,
