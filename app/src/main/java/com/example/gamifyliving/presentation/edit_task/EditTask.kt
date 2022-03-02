@@ -90,6 +90,10 @@ fun EditTask(
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 EditRewardsList(rewards = rewards, stats = stats)
+                Spacer(modifier = Modifier.height(8.dp))
+                TextButton(onClick = { /*TODO*/ }) {
+                    Text(stringResource(id = R.string.addReward))
+                }
             }
         }
     }
