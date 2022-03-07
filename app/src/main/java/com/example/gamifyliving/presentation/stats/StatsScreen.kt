@@ -1,12 +1,10 @@
 package com.example.gamifyliving.presentation.stats
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,9 +31,11 @@ fun StatsScreenHandler(
 ) {
 
     val stats by viewModel.stats.collectAsState(initial = emptyList())
+    val coins by viewModel.coins.collectAsState(initial = 0)
 
     StatsScreen(
         stats = stats,
+        coins = coins,
         onAddButtonClick = onAddButtonClick,
         onStatClick = onStatClick
     )
@@ -46,6 +46,7 @@ fun StatsScreenHandler(
 @Composable
 fun StatsScreen(
     stats: List<Stat>,
+    coins: Int,
     onAddButtonClick: () -> Unit,
     onStatClick: (Stat) -> Unit
 ) {
@@ -68,11 +69,25 @@ fun StatsScreen(
                     style = MaterialTheme.typography.h5
                 )
                 Spacer(modifier = Modifier.height(16.dp))
+                CoinsChip(coins = coins)
+                Spacer(modifier = Modifier.height(8.dp))
                 StatsList(stats = stats, onStatClick = onStatClick)
             }
         }
     }
 
+}
+
+@Composable
+fun CoinsChip(coins: Int) {
+    Row {
+        Icon(
+            Icons.Rounded.Star,
+            contentDescription = null
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(text = coins.toString())
+    }
 }
 
 @ExperimentalMaterialApi
@@ -89,6 +104,7 @@ fun StatsScreenPreview() {
 
         StatsScreen(
             stats = stats,
+            coins = 0,
             onAddButtonClick = {},
             onStatClick = {}
         )
