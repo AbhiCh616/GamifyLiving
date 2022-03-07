@@ -8,6 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.domain.model.Task
@@ -37,7 +39,11 @@ fun TaskCard(
         ) {
             Checkbox(checked = task.status, onCheckedChange = { onCheckboxClick(task) })
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = task.name)
+            Text(
+                text = task.name,
+                style = if (task.status)
+                    TextStyle(textDecoration = TextDecoration.LineThrough) else TextStyle()
+            )
         }
     }
 
