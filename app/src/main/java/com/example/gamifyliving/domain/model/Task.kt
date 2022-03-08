@@ -13,6 +13,9 @@ data class Task(
     @ColumnInfo(name = "status")
     val status: Boolean = false,
 
+    @ColumnInfo(name = "coinsReward")
+    val coinsReward: Int = 0,
+
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0
 )
