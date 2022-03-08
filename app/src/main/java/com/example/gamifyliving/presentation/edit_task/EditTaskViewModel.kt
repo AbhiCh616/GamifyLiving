@@ -38,6 +38,9 @@ class EditTaskViewModel @Inject constructor(
     val rewards: List<Reward>
         get() = _rewards
 
+    var coins: Int? by mutableStateOf(0)
+        private set
+
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
@@ -85,6 +88,10 @@ class EditTaskViewModel @Inject constructor(
 
     fun onDeleteReward(reward: Reward) = viewModelScope.launch {
         _rewards.remove(reward)
+    }
+
+    fun onCoinsChange(updatedCoins: String) = viewModelScope.launch {
+        coins = updatedCoins.toIntOrNull()
     }
 
 }

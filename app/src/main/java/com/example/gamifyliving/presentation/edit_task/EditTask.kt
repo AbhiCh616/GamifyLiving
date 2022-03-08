@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -42,7 +43,9 @@ fun EditTaskHandler(
         rewards = viewModel.rewards,
         stats = stats,
         editReward = viewModel::editReward,
-        deleteReward = viewModel::onDeleteReward
+        deleteReward = viewModel::onDeleteReward,
+        coins = viewModel.coins,
+        onCoinsChange = viewModel::onCoinsChange
     )
 
 }
@@ -58,7 +61,9 @@ fun EditTask(
     rewards: List<Reward>,
     stats: List<Stat>,
     editReward: (Reward) -> Unit,
-    deleteReward: (Reward) -> Unit
+    deleteReward: (Reward) -> Unit,
+    coins: Int?,
+    onCoinsChange: (String) -> Unit
 ) {
 
     Scaffold(
@@ -95,6 +100,8 @@ fun EditTask(
                     Text(stringResource(id = R.string.delete))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
+                EditCoins(coins = coins, onCoinsChange = onCoinsChange)
+                Spacer(modifier = Modifier.height(16.dp))
                 EditRewardsList(
                     rewards = rewards,
                     stats = stats,
@@ -109,6 +116,21 @@ fun EditTask(
         }
     }
 
+}
+
+@Composable
+fun EditCoins(coins: Int?, onCoinsChange: (String) -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(imageVector = Icons.Rounded.Star, contentDescription = null)
+        Spacer(modifier = Modifier.width(8.dp))
+        TextField(
+            value = coins?.toString() ?: "",
+            onValueChange = onCoinsChange,
+            modifier = Modifier.width(80.dp)
+        )
+    }
 }
 
 @Preview
@@ -127,7 +149,9 @@ fun EditTaskPreview() {
             rewards = emptyList(),
             stats = emptyList(),
             editReward = {},
-            deleteReward = {}
+            deleteReward = {},
+            coins = 0,
+            onCoinsChange = {}
         )
 
     }
