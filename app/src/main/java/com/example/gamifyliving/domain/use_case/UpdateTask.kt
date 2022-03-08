@@ -11,7 +11,10 @@ class UpdateTask @Inject constructor(
     private val rewardRepository: RewardRepository
 ) {
     suspend operator fun invoke(task: Task, rewards: List<Reward>) {
+        // Update task
         taskRepository.updateTask(task)
+
+        // Update rewards for task
         rewardRepository.deleteRewardsForTask(taskId = task.uid)
         rewardRepository.addRewards(rewards)
     }

@@ -15,14 +15,17 @@ class ChangeTaskStatus @Inject constructor(
     private val coinRepository: CoinRepository
 ) {
     suspend operator fun invoke(task: Task) {
+        // Change (completion) status of task
         val newTask = task.copy(status = !task.status)
         taskRepository.updateTask(task = newTask)
 
+        // Increase or decrease the coins, that user has, based on (un)check status of task
         if (newTask.status)
             coinRepository.increaseCoinsBy(coinsAdded = task.coinsReward)
         else
             coinRepository.decreaseCoinsBy(coinsRemoved = task.coinsReward)
 
+        // Increase or decrease the stats based on (un)check status
         rewardRepository.getRewardsForTask(task).collect { rewards ->
             rewards.forEach { reward ->
                 val initialStat = statRepository.getStatById(reward.statId)!!
