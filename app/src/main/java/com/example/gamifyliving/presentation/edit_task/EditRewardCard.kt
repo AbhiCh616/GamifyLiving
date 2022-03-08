@@ -25,6 +25,8 @@ fun EditRewardCardHandler(
 ) {
     val selectedStat = stats.single { stat -> stat.uid == reward.statId }
     var isDropdownExpanded by remember { mutableStateOf(false) }
+    // Because points field of reward can't be null but the respective text-field can be empty
+    var isPointsFieldEmpty by remember { mutableStateOf(false) }
 
     EditRewardCard(
         isDropdownExpanded = isDropdownExpanded,
@@ -33,8 +35,12 @@ fun EditRewardCardHandler(
         selectedStat = selectedStat,
         onStatChange = { editReward(reward.copy(statId = it.uid)) },
         points = reward.points,
-        onPointsChange = { editReward(reward.copy(points = it ?: 0)) },
+        onPointsChange = {
+            isPointsFieldEmpty = it == null
+            editReward(reward.copy(points = it ?: 0))
+        },
         stats = stats,
+        isPointsFieldEmpty = isPointsFieldEmpty,
         onDelete = { onDelete(reward) },
         modifier = modifier
     )
@@ -49,6 +55,7 @@ fun EditRewardCard(
     onStatChange: (Stat) -> Unit,
     points: Int,
     onPointsChange: (Int?) -> Unit,
+    isPointsFieldEmpty: Boolean,
     stats: List<Stat>,
     onDelete: () -> Unit,
     modifier: Modifier
@@ -72,7 +79,10 @@ fun EditRewardCard(
             )
             Spacer(modifier = Modifier.width(16.dp))
             TextField(
-                value = points.toString(),
+                value =
+                if (isPointsFieldEmpty) ""
+                else
+                    points.toString(),
                 onValueChange = { onPointsChange(it.toIntOrNull()) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(88.dp)
