@@ -41,6 +41,8 @@ class EditTaskViewModel @Inject constructor(
     var coins: Int? by mutableStateOf(0)
         private set
 
+    private var numOfNewReward = 0
+
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
@@ -82,9 +84,11 @@ class EditTaskViewModel @Inject constructor(
             Reward(
                 taskId = selectedTask!!.uid,
                 statId = stats.first().elementAt(0).uid,
-                points = 0
+                points = 0,
+                uid = numOfNewReward
             )
         )
+        numOfNewReward++
     }
 
     fun onDeleteReward(reward: Reward) = viewModelScope.launch {
