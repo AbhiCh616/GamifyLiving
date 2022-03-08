@@ -12,20 +12,8 @@ class RewardRepositoryImpl @Inject constructor(
     private val rewardDAO: RewardDAO
 ) : RewardRepository {
 
-    override suspend fun addReward(reward: Reward) {
-        rewardDAO.insert(reward)
-    }
-
     override suspend fun addRewards(rewards: List<Reward>) {
         rewardDAO.insert(rewards)
-    }
-
-    override suspend fun updateReward(reward: Reward) {
-        rewardDAO.update(reward)
-    }
-
-    override suspend fun deleteReward(reward: Reward) {
-        rewardDAO.delete(reward)
     }
 
     override suspend fun deleteRewardsForTask(taskId: Int) {
