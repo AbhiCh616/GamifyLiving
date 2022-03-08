@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.util
+package com.example.gamifyliving.data.data_source
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
