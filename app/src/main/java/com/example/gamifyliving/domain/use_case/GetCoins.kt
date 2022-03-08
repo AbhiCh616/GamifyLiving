@@ -1,11 +1,11 @@
 package com.example.gamifyliving.domain.use_case
 
-import com.example.gamifyliving.domain.util.DataStoreManager
+import com.example.gamifyliving.domain.repository.CoinRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCoins @Inject constructor(
-    private val dataStoreManager: DataStoreManager
+    private val coinsRepository: CoinRepository
 ) {
-    operator fun invoke(): Flow<Int> = dataStoreManager.coins
+    operator fun invoke(): Flow<Int> = coinsRepository.getCoins()
 }

@@ -6,9 +6,11 @@ import com.example.gamifyliving.data.data_source.AppDatabase
 import com.example.gamifyliving.data.data_source.RewardDAO
 import com.example.gamifyliving.data.data_source.StatDao
 import com.example.gamifyliving.data.data_source.TaskDao
+import com.example.gamifyliving.data.repository.CoinRepositoryImpl
 import com.example.gamifyliving.data.repository.RewardRepositoryImpl
 import com.example.gamifyliving.data.repository.StatRepositoryImpl
 import com.example.gamifyliving.data.repository.TaskRepositoryImpl
+import com.example.gamifyliving.domain.repository.CoinRepository
 import com.example.gamifyliving.domain.repository.RewardRepository
 import com.example.gamifyliving.domain.repository.StatRepository
 import com.example.gamifyliving.domain.repository.TaskRepository
@@ -70,5 +72,11 @@ abstract class AppBindsModule {
     abstract fun bindTaskRepository(
         taskRepositoryImpl: TaskRepositoryImpl
     ): TaskRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindCoinRepository(
+        coinRepositoryImpl: CoinRepositoryImpl
+    ): CoinRepository
 
 }
