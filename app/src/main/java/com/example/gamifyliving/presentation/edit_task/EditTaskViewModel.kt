@@ -47,6 +47,7 @@ class EditTaskViewModel @Inject constructor(
                 getTaskById(taskId)?.let { task ->
                     selectedTask = task
                     name = task.name
+                    coins = task.coinsReward
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -66,7 +67,7 @@ class EditTaskViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        val updatedTask = selectedTask?.copy(name = name)
+        val updatedTask = selectedTask?.copy(name = name, coinsReward = coins ?: 0)
         updatedTask?.let { updateTask(it, rewards) }
     }
 
