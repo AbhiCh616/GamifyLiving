@@ -11,7 +11,7 @@ import com.example.gamifyliving.domain.use_case.DeleteStat
 import com.example.gamifyliving.domain.use_case.GetStatById
 import com.example.gamifyliving.domain.use_case.UpdateStat
 import com.example.gamifyliving.presentation.util.getProgressFromStatValue
-import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -57,7 +57,7 @@ class EditStatViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        val updatedStat = selectedStat?.copy(name = name, value = getStatValueFromProgress(value))
+        val updatedStat = selectedStat?.copy(name = name, value = getStatValueFromSliderValue(value))
         updatedStat?.let { updateStat(it) }
     }
 

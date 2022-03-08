@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.use_case.AddStat
-import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +32,7 @@ class AddStatViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        addStat(Stat(name = name, value = getStatValueFromProgress(value)))
+        addStat(Stat(name = name, value = getStatValueFromSliderValue(value)))
     }
 
 }

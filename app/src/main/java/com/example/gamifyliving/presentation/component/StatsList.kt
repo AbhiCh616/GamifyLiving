@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
-import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 
 @ExperimentalMaterialApi
 @Composable
@@ -37,8 +37,8 @@ fun StatsList(
 fun StatsListPreview() {
 
     val stats = listOf(
-        Stat(name = "health", getStatValueFromProgress(progress = 0.25F)),
-        Stat(name = "relationship", getStatValueFromProgress(progress = 0.50F))
+        Stat(name = "health", getStatValueFromSliderValue(progress = 0.25F)),
+        Stat(name = "relationship", getStatValueFromSliderValue(progress = 0.50F))
     )
 
     GamifyLivingTheme {

@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 import com.example.gamifyliving.presentation.util.getProgressFromStatValue
-import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 
 @ExperimentalMaterialApi
 @Composable
@@ -70,7 +70,7 @@ fun StatCardPreview() {
 
     val statDetails = Stat(
         name = "health",
-        getStatValueFromProgress(progress = 0.25F)
+        getStatValueFromSliderValue(progress = 0.25F)
     )
 
     GamifyLivingTheme {

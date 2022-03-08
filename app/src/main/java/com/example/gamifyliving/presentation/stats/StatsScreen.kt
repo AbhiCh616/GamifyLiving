@@ -19,7 +19,7 @@ import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.StatsList
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
-import com.example.gamifyliving.presentation.util.getStatValueFromProgress
+import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -96,8 +96,8 @@ fun CoinsChip(coins: Int) {
 fun StatsScreenPreview() {
 
     val stats = listOf(
-        Stat(name = "health", value = getStatValueFromProgress(45F)),
-        Stat(name = "job", value = getStatValueFromProgress(67F))
+        Stat(name = "health", value = getStatValueFromSliderValue(45F)),
+        Stat(name = "job", value = getStatValueFromSliderValue(67F))
     )
 
     GamifyLivingTheme {
