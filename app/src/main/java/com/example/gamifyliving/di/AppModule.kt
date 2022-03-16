@@ -3,14 +3,8 @@ package com.example.gamifyliving.di
 import android.content.Context
 import androidx.room.Room
 import com.example.gamifyliving.data.data_source.*
-import com.example.gamifyliving.data.repository.CoinRepositoryImpl
-import com.example.gamifyliving.data.repository.RewardRepositoryImpl
-import com.example.gamifyliving.data.repository.StatRepositoryImpl
-import com.example.gamifyliving.data.repository.TaskRepositoryImpl
-import com.example.gamifyliving.domain.repository.CoinRepository
-import com.example.gamifyliving.domain.repository.RewardRepository
-import com.example.gamifyliving.domain.repository.StatRepository
-import com.example.gamifyliving.domain.repository.TaskRepository
+import com.example.gamifyliving.data.repository.*
+import com.example.gamifyliving.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -80,5 +74,11 @@ abstract class AppBindsModule {
     abstract fun bindCoinRepository(
         coinRepositoryImpl: CoinRepositoryImpl
     ): CoinRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindStoreItemRepository(
+        storeItemRepositoryImpl: StoreItemRepositoryImpl
+    ): StoreItemRepository
 
 }
