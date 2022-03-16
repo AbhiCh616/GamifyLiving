@@ -2,10 +2,7 @@ package com.example.gamifyliving.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gamifyliving.data.data_source.AppDatabase
-import com.example.gamifyliving.data.data_source.RewardDAO
-import com.example.gamifyliving.data.data_source.StatDao
-import com.example.gamifyliving.data.data_source.TaskDao
+import com.example.gamifyliving.data.data_source.*
 import com.example.gamifyliving.data.repository.CoinRepositoryImpl
 import com.example.gamifyliving.data.repository.RewardRepositoryImpl
 import com.example.gamifyliving.data.repository.StatRepositoryImpl
@@ -47,6 +44,11 @@ object AppModule {
     @Provides
     fun provideTaskDao(appDatabase: AppDatabase): TaskDao {
         return appDatabase.taskDao()
+    }
+
+    @Provides
+    fun provideStoreItemDao(appDatabase: AppDatabase): StoreItemDAO {
+        return appDatabase.storeItemDao()
     }
 
 }
