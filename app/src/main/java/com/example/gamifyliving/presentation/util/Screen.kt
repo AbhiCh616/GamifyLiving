@@ -2,10 +2,7 @@ package com.example.gamifyliving.presentation.util
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.gamifyliving.R
 
@@ -47,11 +44,11 @@ sealed class BottomNavigationScreen(
             hasBottomNavBar = true
         )
 
-    object Rewards :
+    object Store :
         BottomNavigationScreen(
-            route = "rewards",
-            resourceId = R.string.rewards,
-            icon = Icons.Rounded.Star,
+            route = "store",
+            resourceId = R.string.store,
+            icon = Icons.Rounded.ShoppingCart,
             hasBottomNavBar = true
         )
 

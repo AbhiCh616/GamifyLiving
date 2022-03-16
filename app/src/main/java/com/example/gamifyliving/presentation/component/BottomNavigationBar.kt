@@ -21,7 +21,7 @@ fun BottomNavigationBar(
     val bottomNavigationItems = listOf(
         BottomNavigationScreen.Home,
         BottomNavigationScreen.TaskGroup,
-        BottomNavigationScreen.Rewards,
+        BottomNavigationScreen.Store,
         BottomNavigationScreen.ProfileGroup,
     )
 

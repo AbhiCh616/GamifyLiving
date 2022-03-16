@@ -1,4 +1,4 @@
-package com.example.gamifyliving.presentation.rewards
+package com.example.gamifyliving.presentation.store
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Rewards(
+fun Store(
 ) {
     Scaffold {
         Surface(color = MaterialTheme.colors.background) {
