@@ -65,3 +65,38 @@ fun Store(
         }
     }
 }
+
+@Composable
+fun ConfirmBuyDialog(
+    storeItem: StoreItem,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit
+) {
+
+    AlertDialog(
+        onDismissRequest = onCancel,
+        confirmButton = {
+            Button(onClick = onConfirm) {
+                Text(text = stringResource(id = R.string.buy))
+            }
+        },
+        title = {
+            Text(text = stringResource(id = R.string.confirmStoreItemBuyTitle))
+        },
+        text = {
+            Text(
+                text = stringResource(
+                    id = R.string.confirmStoreItemBuyDesc,
+                    storeItem.name,
+                    storeItem.costCoins
+                )
+            )
+        },
+        dismissButton = {
+            TextButton(onClick = onCancel) {
+                Text(text = stringResource(id = R.string.cancel))
+            }
+        }
+    )
+
+}

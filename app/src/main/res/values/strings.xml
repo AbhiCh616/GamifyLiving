@@ -23,4 +23,7 @@
     <string name="addStoreItem">Add Store Item</string>
     <string name="storeItemName">Store Item Name</string>
     <string name="costCoins">Cost Coins</string>
+    <string name="confirmStoreItemBuyTitle">Buy this item?</string>
+    <string name="confirmStoreItemBuyDesc">Buying \"%1$s\" will cost you %2$d coins.</string>
+    <string name="cancel">Cancel</string>
 </resources>
