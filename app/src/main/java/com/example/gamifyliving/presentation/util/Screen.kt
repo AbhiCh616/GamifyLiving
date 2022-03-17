@@ -23,6 +23,7 @@ sealed class Screen(
     object AddTask : Screen(route = "add_task")
     object EditTask : Screen(route = "edit_task")
     object AddStoreItem : Screen(route = "add_store_item")
+    object EditStoreItem : Screen(route = "edit_store_item")
 
 }
 

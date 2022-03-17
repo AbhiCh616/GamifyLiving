@@ -18,13 +18,14 @@ import com.example.gamifyliving.domain.model.StoreItem
 @Composable
 fun StoreHandler(
     addNewStoreItem: () -> Unit,
+    openEditStoreItemPage: (StoreItem) -> Unit,
     viewModel: StoreViewModel = hiltViewModel()
 ) {
     val storeItems by viewModel.storeItems.collectAsState(initial = emptyList())
 
     Store(
         storeItems = storeItems,
-        editStoreItem = {},
+        editStoreItem = openEditStoreItemPage,
         onBuyButtonClick = viewModel::onBuyButtonClick,
         addNewStoreItem = addNewStoreItem,
         isConfirmBuyDialogVisible = viewModel.isConfirmBuyDialogVisible,
