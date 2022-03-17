@@ -19,19 +19,19 @@ class AddStoreItemViewModel @Inject constructor(
     var name by mutableStateOf("")
         private set
 
-    var costCoins by mutableStateOf(0)
+    var costCoins by mutableStateOf("")
         private set
 
     fun onNameChange(newName: String) {
         name = newName
     }
 
-    fun onCostCoinsChange(newCostCoins: Int) {
+    fun onCostCoinsChange(newCostCoins: String) {
         costCoins = newCostCoins
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        addStoreItem(StoreItem(name = name, costCoins = costCoins))
+        addStoreItem(StoreItem(name = name, costCoins = costCoins.toInt()))
     }
 
 }

@@ -20,4 +20,7 @@
     <string name="addReward">Add Reward</string>
     <string name="store">store</string>
     <string name="buy">Buy</string>
+    <string name="addStoreItem">Add Store Item</string>
+    <string name="storeItemName">Store Item Name</string>
+    <string name="costCoins">Cost Coins</string>
 </resources>
