@@ -16,7 +16,10 @@ interface StoreItemDAO {
     @Delete
     suspend fun delete(storeItem: StoreItem)
 
-    @Query("SELECT * FROM storeitem")
+    @Query("SELECT * FROM storeItem WHERE uid = :id")
+    suspend fun getStoreItemById(id: Int): StoreItem?
+
+    @Query("SELECT * FROM storeItem")
     fun getAll(): Flow<List<StoreItem>>
 
 }
