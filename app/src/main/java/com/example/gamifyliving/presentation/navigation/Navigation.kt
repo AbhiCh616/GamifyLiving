@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.gamifyliving.presentation.home.Home
-import com.example.gamifyliving.presentation.store.StoreHandler
 import com.example.gamifyliving.presentation.util.BottomNavigationScreen
 
 @ExperimentalMaterialApi
@@ -20,12 +19,10 @@ fun Navigation(navController: NavHostController, setBottomBarVisibility: (Boolea
             setBottomBarVisibility(BottomNavigationScreen.Home.hasBottomNavBar)
             Home()
         }
-        composable(BottomNavigationScreen.Store.route) {
-            setBottomBarVisibility(BottomNavigationScreen.Store.hasBottomNavBar)
-            StoreHandler(
-                addNewStoreItem = {}
-            )
-        }
+        storeGraph(
+            setBottomBarVisibility = setBottomBarVisibility,
+            navController = navController
+        )
         profileGraph(
             setBottomBarVisibility = setBottomBarVisibility,
             navController = navController
