@@ -25,8 +25,12 @@ fun StoreHandler(
     Store(
         storeItems = storeItems,
         editStoreItem = {},
-        onBuyButtonClick = {},
-        addNewStoreItem = addNewStoreItem
+        onBuyButtonClick = viewModel::onBuyButtonClick,
+        addNewStoreItem = addNewStoreItem,
+        isConfirmBuyDialogVisible = viewModel.isConfirmBuyDialogVisible,
+        storeItemToBuy = viewModel.storeItemToBuy,
+        dismissConfirmBuyDialog = viewModel::dismissConfirmBuyDialog,
+        onAcceptConfirmBuyDialog = viewModel::onAcceptConfirmBuyDialog
     )
 }
 
@@ -35,7 +39,11 @@ fun Store(
     storeItems: List<StoreItem>,
     editStoreItem: (StoreItem) -> Unit,
     onBuyButtonClick: (StoreItem) -> Unit,
-    addNewStoreItem: () -> Unit
+    addNewStoreItem: () -> Unit,
+    isConfirmBuyDialogVisible: Boolean,
+    storeItemToBuy: StoreItem,
+    dismissConfirmBuyDialog: () -> Unit,
+    onAcceptConfirmBuyDialog: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -60,6 +68,13 @@ fun Store(
                     storeItems = storeItems,
                     editStoreItem = editStoreItem,
                     onBuyButtonClick = onBuyButtonClick
+                )
+            }
+            if (isConfirmBuyDialogVisible) {
+                ConfirmBuyDialog(
+                    storeItem = storeItemToBuy,
+                    onConfirm = onAcceptConfirmBuyDialog,
+                    onCancel = dismissConfirmBuyDialog
                 )
             }
         }
