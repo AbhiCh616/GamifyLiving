@@ -1,10 +1,9 @@
 package com.example.gamifyliving.presentation.store
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,6 +17,7 @@ import com.example.gamifyliving.domain.model.StoreItem
 
 @Composable
 fun StoreHandler(
+    addNewStoreItem: () -> Unit,
     viewModel: StoreViewModel = hiltViewModel()
 ) {
     val storeItems by viewModel.storeItems.collectAsState(initial = emptyList())
@@ -25,7 +25,8 @@ fun StoreHandler(
     Store(
         storeItems = storeItems,
         editStoreItem = {},
-        onBuyButtonClick = {}
+        onBuyButtonClick = {},
+        addNewStoreItem = addNewStoreItem
     )
 }
 
@@ -33,9 +34,16 @@ fun StoreHandler(
 fun Store(
     storeItems: List<StoreItem>,
     editStoreItem: (StoreItem) -> Unit,
-    onBuyButtonClick: (StoreItem) -> Unit
+    onBuyButtonClick: (StoreItem) -> Unit,
+    addNewStoreItem: () -> Unit
 ) {
-    Scaffold {
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = addNewStoreItem) {
+                Icon(Icons.Rounded.Add, null)
+            }
+        },
+    ) {
         Surface(color = MaterialTheme.colors.background) {
             Column(
                 modifier = Modifier

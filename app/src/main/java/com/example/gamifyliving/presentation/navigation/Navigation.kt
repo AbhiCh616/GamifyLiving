@@ -22,7 +22,9 @@ fun Navigation(navController: NavHostController, setBottomBarVisibility: (Boolea
         }
         composable(BottomNavigationScreen.Store.route) {
             setBottomBarVisibility(BottomNavigationScreen.Store.hasBottomNavBar)
-            StoreHandler()
+            StoreHandler(
+                addNewStoreItem = {}
+            )
         }
         profileGraph(
             setBottomBarVisibility = setBottomBarVisibility,
