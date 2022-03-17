@@ -11,6 +11,8 @@ interface StoreItemRepository {
 
     suspend fun deleteItem(item: StoreItem)
 
+    suspend fun getStoreItemById(id: Int): StoreItem?
+
     fun observeItems(): Flow<List<StoreItem>>
 
 }
