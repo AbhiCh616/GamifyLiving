@@ -41,7 +41,11 @@ fun NavGraphBuilder.storeGraph(
             arguments = listOf(navArgument("store_item_id") { type = NavType.IntType })
         ) {
             setBottomBarVisibility(Screen.EditStoreItem.hasBottomNavBar)
-            EditStoreItemHandler()
+            EditStoreItemHandler(
+                onClose = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 

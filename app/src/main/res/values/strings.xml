@@ -26,4 +26,5 @@
     <string name="confirmStoreItemBuyTitle">Buy this item?</string>
     <string name="confirmStoreItemBuyDesc">Buying \"%1$s\" will cost you %2$d coins.</string>
     <string name="cancel">Cancel</string>
+    <string name="editStoreItem">Edit Store Item</string>
 </resources>
