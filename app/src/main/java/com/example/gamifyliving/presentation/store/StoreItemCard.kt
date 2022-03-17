@@ -1,10 +1,9 @@
 package com.example.gamifyliving.presentation.store
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +33,18 @@ fun StoreItemCard(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 16.dp)
         ) {
-            Text(text = storeItem.name)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = storeItem.name)
+                Spacer(modifier = Modifier.width(16.dp))
+                Row {
+                    Icon(Icons.Rounded.Star, contentDescription = null)
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(text = storeItem.costCoins.toString())
+                }
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { onBuyButtonClick(storeItem) }
