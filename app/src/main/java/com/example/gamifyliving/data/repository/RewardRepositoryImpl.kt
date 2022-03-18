@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.repository
 
-import com.example.gamifyliving.data.data_source.local.RewardDAO
+import com.example.gamifyliving.data.data_source.local.RewardDao
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.RewardRepository
@@ -9,19 +9,19 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RewardRepositoryImpl @Inject constructor(
-    private val rewardDAO: RewardDAO
+    private val rewardDao: RewardDao
 ) : RewardRepository {
 
     override suspend fun addRewards(rewards: List<Reward>) {
-        rewardDAO.insert(rewards)
+        rewardDao.insert(rewards)
     }
 
     override suspend fun deleteRewardsForTask(taskId: Int) {
-        rewardDAO.deleteRewardsForTask(taskId)
+        rewardDao.deleteRewardsForTask(taskId)
     }
 
     override fun getRewardsForTask(task: Task): Flow<List<Reward>> =
-        rewardDAO.getAll().map {
+        rewardDao.getAll().map {
             it.filter { reward -> reward.taskId == task.uid }
         }
 

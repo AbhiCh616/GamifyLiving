@@ -5,7 +5,7 @@ import com.example.gamifyliving.domain.model.StoreItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface StoreItemDAO {
+interface StoreItemDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(storeItem: StoreItem)

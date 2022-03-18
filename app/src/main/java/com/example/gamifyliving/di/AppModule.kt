@@ -26,7 +26,7 @@ object AppModule {
     }
 
     @Provides
-    fun provideRewardDao(appDatabase: AppDatabase): RewardDAO {
+    fun provideRewardDao(appDatabase: AppDatabase): RewardDao {
         return appDatabase.rewardDao()
     }
 
@@ -41,7 +41,7 @@ object AppModule {
     }
 
     @Provides
-    fun provideStoreItemDao(appDatabase: AppDatabase): StoreItemDAO {
+    fun provideStoreItemDao(appDatabase: AppDatabase): StoreItemDao {
         return appDatabase.storeItemDao()
     }
 
