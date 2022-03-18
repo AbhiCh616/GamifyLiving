@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.repository
 
-import com.example.gamifyliving.data.data_source.local.StatDao
+import com.example.gamifyliving.data.data_source.local.dao.StatDao
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.repository.StatRepository
 import kotlinx.coroutines.flow.Flow

@@ -3,6 +3,10 @@ package com.example.gamifyliving.di
 import android.content.Context
 import androidx.room.Room
 import com.example.gamifyliving.data.data_source.local.*
+import com.example.gamifyliving.data.data_source.local.dao.RewardDao
+import com.example.gamifyliving.data.data_source.local.dao.StatDao
+import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
+import com.example.gamifyliving.data.data_source.local.dao.TaskDao
 import com.example.gamifyliving.data.repository.*
 import com.example.gamifyliving.domain.repository.*
 import dagger.Binds

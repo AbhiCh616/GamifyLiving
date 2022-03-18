@@ -2,6 +2,10 @@ package com.example.gamifyliving.data.data_source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.gamifyliving.data.data_source.local.dao.RewardDao
+import com.example.gamifyliving.data.data_source.local.dao.StatDao
+import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
+import com.example.gamifyliving.data.data_source.local.dao.TaskDao
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.domain.model.StoreItem

@@ -1,4 +1,4 @@
-package com.example.gamifyliving.data.data_source.local
+package com.example.gamifyliving.data.data_source.local.dao
 
 import androidx.room.*
 import com.example.gamifyliving.domain.model.StoreItem

@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.repository
 
-import com.example.gamifyliving.data.data_source.local.RewardDao
+import com.example.gamifyliving.data.data_source.local.dao.RewardDao
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.RewardRepository
