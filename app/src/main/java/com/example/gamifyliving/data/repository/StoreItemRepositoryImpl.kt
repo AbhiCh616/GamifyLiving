@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.repository
 
-import com.example.gamifyliving.data.data_source.StoreItemDAO
+import com.example.gamifyliving.data.data_source.local.StoreItemDAO
 import com.example.gamifyliving.domain.model.StoreItem
 import com.example.gamifyliving.domain.repository.StoreItemRepository
 import kotlinx.coroutines.flow.Flow

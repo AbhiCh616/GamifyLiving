@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.repository
 
-import com.example.gamifyliving.data.data_source.TaskDao
+import com.example.gamifyliving.data.data_source.local.TaskDao
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow

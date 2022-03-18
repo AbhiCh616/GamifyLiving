@@ -2,7 +2,7 @@ package com.example.gamifyliving.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gamifyliving.data.data_source.*
+import com.example.gamifyliving.data.data_source.local.*
 import com.example.gamifyliving.data.repository.*
 import com.example.gamifyliving.domain.repository.*
 import dagger.Binds
