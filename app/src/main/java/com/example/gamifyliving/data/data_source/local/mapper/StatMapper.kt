@@ -16,3 +16,9 @@ fun Stat.toDataModel() =
         value = this.value,
         uid = this.uid
     )
+
+fun List<StatEntity>.toDomainModel() =
+    this.map { statEntity -> statEntity.toDomainModel() }
+
+fun List<Stat>.toDataModel() =
+    this.map { stat -> stat.toDataModel() }

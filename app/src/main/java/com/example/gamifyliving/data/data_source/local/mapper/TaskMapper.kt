@@ -18,3 +18,9 @@ fun Task.toDataModel() =
         coinsReward = this.coinsReward,
         uid = this.uid
     )
+
+fun List<TaskEntity>.toDomainModel() =
+    this.map { taskEntity -> taskEntity.toDomainModel() }
+
+fun List<Task>.toDataModel() =
+    this.map { task -> task.toDataModel() }

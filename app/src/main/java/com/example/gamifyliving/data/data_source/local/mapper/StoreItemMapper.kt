@@ -16,3 +16,9 @@ fun StoreItem.toDataModel() =
         costCoins = this.costCoins,
         uid = this.uid
     )
+
+fun List<StoreItemEntity>.toDomainModel() =
+    this.map { storeItemEntity -> storeItemEntity.toDomainModel() }
+
+fun List<StoreItem>.toDataModel() =
+    this.map { storeItem -> storeItem.toDataModel() }

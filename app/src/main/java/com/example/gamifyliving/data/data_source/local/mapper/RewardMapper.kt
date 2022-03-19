@@ -18,3 +18,9 @@ fun Reward.toDataModel() =
         points = this.points,
         uid = this.uid
     )
+
+fun List<RewardEntity>.toDomainModel() =
+    this.map { rewardEntity -> rewardEntity.toDomainModel() }
+
+fun List<Reward>.toDataModel() =
+    this.map { reward -> reward.toDataModel() }
