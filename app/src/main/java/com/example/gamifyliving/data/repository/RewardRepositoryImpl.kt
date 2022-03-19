@@ -1,6 +1,8 @@
 package com.example.gamifyliving.data.repository
 
 import com.example.gamifyliving.data.data_source.local.dao.RewardDao
+import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
+import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.RewardRepository
@@ -13,7 +15,7 @@ class RewardRepositoryImpl @Inject constructor(
 ) : RewardRepository {
 
     override suspend fun addRewards(rewards: List<Reward>) {
-        rewardDao.insert(rewards)
+        rewardDao.insert(rewards.toDataModel())
     }
 
     override suspend fun deleteRewardsForTask(taskId: Int) {
@@ -22,7 +24,7 @@ class RewardRepositoryImpl @Inject constructor(
 
     override fun getRewardsForTask(task: Task): Flow<List<Reward>> =
         rewardDao.getAll().map {
-            it.filter { reward -> reward.taskId == task.uid }
+            it.filter { reward -> reward.taskId == task.uid }.toDomainModel()
         }
 
 }
