@@ -24,7 +24,8 @@ class AddTaskViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        addTask(Task(name = name))
+        val newTask = Task(name = name)
+        addTask(newTask)
     }
 
 }

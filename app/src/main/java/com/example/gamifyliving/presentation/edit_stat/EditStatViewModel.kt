@@ -27,8 +27,11 @@ class EditStatViewModel @Inject constructor(
     var name by mutableStateOf("")
         private set
 
-    var value by mutableStateOf(0F)
+    var sliderValue by mutableStateOf(0F)
         private set
+
+    val sliderText
+        get() = (sliderValue * 100).toInt().toString()
 
     private var selectedStat: Stat? = null
 
@@ -38,7 +41,7 @@ class EditStatViewModel @Inject constructor(
                 getStatById(statId)?.let { stat ->
                     selectedStat = stat
                     name = stat.name
-                    value = getProgressFromStatValue(stat.value)
+                    sliderValue = getProgressFromStatValue(stat.value)
                 }
             }
         }
@@ -49,7 +52,7 @@ class EditStatViewModel @Inject constructor(
     }
 
     fun onValueChange(newValue: Float) {
-        value = newValue
+        sliderValue = newValue
     }
 
     fun onDeleteClicked() = viewModelScope.launch {
@@ -57,7 +60,8 @@ class EditStatViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        val updatedStat = selectedStat?.copy(name = name, value = getStatValueFromSliderValue(value))
+        val statValue = getStatValueFromSliderValue(sliderValue)
+        val updatedStat = selectedStat?.copy(name = name, value = statValue)
         updatedStat?.let { updateStat(it) }
     }
 

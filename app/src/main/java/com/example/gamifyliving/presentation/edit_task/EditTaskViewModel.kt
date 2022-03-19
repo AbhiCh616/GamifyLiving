@@ -26,20 +26,20 @@ class EditTaskViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private var selectedTask: Task? = null
+
     var name by mutableStateOf("")
         private set
 
-    private var selectedTask: Task? = null
-
-    val stats = getStats()
+    var coins by mutableStateOf("")
+        private set
 
     private val _rewards = mutableStateListOf<Reward>()
 
     val rewards: List<Reward>
         get() = _rewards
 
-    var coins: Int? by mutableStateOf(0)
-        private set
+    val stats = getStats()
 
     private var numOfNewReward = 0
 
@@ -49,7 +49,7 @@ class EditTaskViewModel @Inject constructor(
                 getTaskById(taskId)?.let { task ->
                     selectedTask = task
                     name = task.name
-                    coins = task.coinsReward
+                    coins = task.coinsReward.toString()
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -64,39 +64,38 @@ class EditTaskViewModel @Inject constructor(
         name = newName
     }
 
+    fun onCoinsChange(updatedCoins: String) {
+        coins = updatedCoins
+    }
+
+    fun onSaveClicked() = viewModelScope.launch {
+        val updatedTask = selectedTask?.copy(name = name, coinsReward = coins.toInt())
+        updatedTask?.let { updateTask(it, rewards) }
+    }
+
     fun onDeleteClicked() = viewModelScope.launch {
         selectedTask?.let { deleteTask(it) }
     }
 
-    fun onSaveClicked() = viewModelScope.launch {
-        val updatedTask = selectedTask?.copy(name = name, coinsReward = coins ?: 0)
-        updatedTask?.let { updateTask(it, rewards) }
-    }
-
     fun editReward(updatedReward: Reward) {
-        val reward = rewards.single { it.uid == updatedReward.uid }
-        val rewardIndex = rewards.indexOf(reward)
+        val rewardToChange = rewards.single { it.uid == updatedReward.uid }
+        val rewardIndex = rewards.indexOf(rewardToChange)
         _rewards[rewardIndex] = updatedReward
     }
 
     fun addNewReward() = viewModelScope.launch {
-        _rewards.add(
-            Reward(
-                taskId = selectedTask!!.uid,
-                statId = stats.first().elementAt(0).uid,
-                points = 0,
-                uid = numOfNewReward
-            )
+        val newReward = Reward(
+            taskId = selectedTask!!.uid,
+            statId = stats.first().elementAt(0).uid,
+            points = 0,
+            uid = numOfNewReward
         )
+        _rewards.add(newReward)
         numOfNewReward++
     }
 
-    fun onDeleteReward(reward: Reward) = viewModelScope.launch {
+    fun onDeleteReward(reward: Reward) {
         _rewards.remove(reward)
-    }
-
-    fun onCoinsChange(updatedCoins: String) = viewModelScope.launch {
-        coins = updatedCoins.toIntOrNull()
     }
 
 }

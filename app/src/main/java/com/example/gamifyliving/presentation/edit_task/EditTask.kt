@@ -28,42 +28,42 @@ fun EditTaskHandler(
     val stats by viewModel.stats.collectAsState(initial = emptyList())
 
     EditTask(
-        name = viewModel.name,
-        onNameChange = viewModel::onNameChange,
-        onDelete = {
-            viewModel.onDeleteClicked()
-            onClose()
-        },
-        onAddReward = viewModel::addNewReward,
         onClose = onClose,
         onSave = {
             viewModel.onSaveClicked()
             onClose()
         },
+        name = viewModel.name,
+        coins = viewModel.coins,
+        onNameChange = viewModel::onNameChange,
+        onCoinsChange = viewModel::onCoinsChange,
+        onDelete = {
+            viewModel.onDeleteClicked()
+            onClose()
+        },
         rewards = viewModel.rewards,
         stats = stats,
+        onAddReward = viewModel::addNewReward,
         editReward = viewModel::editReward,
         deleteReward = viewModel::onDeleteReward,
-        coins = viewModel.coins,
-        onCoinsChange = viewModel::onCoinsChange
     )
 
 }
 
 @Composable
 fun EditTask(
-    name: String,
-    onNameChange: (String) -> Unit,
-    onDelete: () -> Unit,
-    onAddReward: () -> Unit,
     onClose: () -> Unit,
     onSave: () -> Unit,
+    name: String,
+    coins: String,
+    onNameChange: (String) -> Unit,
+    onCoinsChange: (String) -> Unit,
+    onDelete: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
+    onAddReward: () -> Unit,
     editReward: (Reward) -> Unit,
     deleteReward: (Reward) -> Unit,
-    coins: Int?,
-    onCoinsChange: (String) -> Unit
 ) {
 
     Scaffold(
@@ -119,14 +119,14 @@ fun EditTask(
 }
 
 @Composable
-fun EditCoins(coins: Int?, onCoinsChange: (String) -> Unit) {
+fun EditCoins(coins: String, onCoinsChange: (String) -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(imageVector = Icons.Rounded.Star, contentDescription = null)
         Spacer(modifier = Modifier.width(8.dp))
         TextField(
-            value = coins?.toString() ?: "",
+            value = coins,
             onValueChange = onCoinsChange,
             modifier = Modifier.width(80.dp)
         )
@@ -150,7 +150,7 @@ fun EditTaskPreview() {
             stats = emptyList(),
             editReward = {},
             deleteReward = {},
-            coins = 0,
+            coins = "",
             onCoinsChange = {}
         )
 

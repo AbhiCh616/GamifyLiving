@@ -22,7 +22,8 @@ fun EditStatHandler(
 
     EditStat(
         name = viewModel.name,
-        value = viewModel.value,
+        sliderValue = viewModel.sliderValue,
+        sliderText = viewModel.sliderText,
         onNameChange = viewModel::onNameChange,
         onValueChange = viewModel::onValueChange,
         onDelete = {
@@ -41,7 +42,8 @@ fun EditStatHandler(
 @Composable
 fun EditStat(
     name: String,
-    value: Float,
+    sliderValue: Float,
+    sliderText: String,
     onNameChange: (String) -> Unit,
     onValueChange: (Float) -> Unit,
     onDelete: () -> Unit,
@@ -80,11 +82,11 @@ fun EditStat(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Slider(
-                    value = value,
+                    value = sliderValue,
                     onValueChange = onValueChange
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "${(value * 100).toInt()}%")
+                Text(text = sliderText)
                 Spacer(modifier = Modifier.height(16.dp))
                 TextButton(onClick = onDelete) {
                     Text(stringResource(id = R.string.delete))
@@ -103,7 +105,8 @@ fun EditStatPreview() {
 
         EditStat(
             name = "",
-            value = 0F,
+            sliderValue = 0F,
+            sliderText = "",
             onNameChange = {},
             onValueChange = {},
             onDelete = {},
