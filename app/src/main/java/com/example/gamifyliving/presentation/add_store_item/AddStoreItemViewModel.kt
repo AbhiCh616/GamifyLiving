@@ -31,7 +31,9 @@ class AddStoreItemViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        addStoreItem(StoreItem(name = name, costCoins = costCoins.toInt()))
+        val newCostCoins = costCoins.toInt()
+        val newStoreItem = StoreItem(name = name, costCoins = newCostCoins)
+        addStoreItem(newStoreItem)
     }
 
 }
