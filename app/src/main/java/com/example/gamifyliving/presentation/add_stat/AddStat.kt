@@ -22,7 +22,8 @@ fun AddStatHandler(
 
     AddStat(
         name = viewModel.name,
-        value = viewModel.value,
+        sliderValue = viewModel.sliderValue,
+        sliderText = viewModel.sliderText,
         onNameChange = viewModel::onNameChange,
         onValueChange = viewModel::onValueChange,
         onClose = onClose,
@@ -37,7 +38,8 @@ fun AddStatHandler(
 @Composable
 fun AddStat(
     name: String,
-    value: Float,
+    sliderValue: Float,
+    sliderText: String,
     onNameChange: (String) -> Unit,
     onValueChange: (Float) -> Unit,
     onClose: () -> Unit,
@@ -75,11 +77,11 @@ fun AddStat(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Slider(
-                    value = value,
+                    value = sliderValue,
                     onValueChange = onValueChange
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "${(value * 100).toInt()}%")
+                Text(text = sliderText)
             }
         }
     }
@@ -94,7 +96,8 @@ fun AddStatPreview() {
 
         AddStat(
             name = "",
-            value = 0F,
+            sliderValue = 0F,
+            sliderText = "0",
             onNameChange = {},
             onValueChange = {},
             onClose = {},

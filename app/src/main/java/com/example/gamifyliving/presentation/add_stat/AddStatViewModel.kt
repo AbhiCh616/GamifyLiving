@@ -20,19 +20,24 @@ class AddStatViewModel @Inject constructor(
     var name by mutableStateOf("")
         private set
 
-    var value by mutableStateOf(0F)
+    var sliderValue by mutableStateOf(0F)
         private set
+
+    val sliderText
+        get() = (sliderValue * 100).toInt().toString()
 
     fun onNameChange(newName: String) {
         name = newName
     }
 
     fun onValueChange(newValue: Float) {
-        value = newValue
+        sliderValue = newValue
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        addStat(Stat(name = name, value = getStatValueFromSliderValue(value)))
+        val statValue = getStatValueFromSliderValue(sliderValue)
+        val newStat = Stat(name = name, value = statValue)
+        addStat(newStat)
     }
 
 }
