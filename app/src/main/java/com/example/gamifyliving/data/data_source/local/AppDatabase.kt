@@ -2,6 +2,8 @@ package com.example.gamifyliving.data.data_source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.gamifyliving.data.data_source.local.converter.LocalDateConverter
 import com.example.gamifyliving.data.data_source.local.dao.RewardDao
 import com.example.gamifyliving.data.data_source.local.dao.StatDao
 import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
@@ -16,6 +18,7 @@ import com.example.gamifyliving.data.data_source.local.model.TaskEntity
     entities = [StatEntity::class, TaskEntity::class, RewardEntity::class, StoreItemEntity::class],
     exportSchema = true
 )
+@TypeConverters(LocalDateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun statDao(): StatDao

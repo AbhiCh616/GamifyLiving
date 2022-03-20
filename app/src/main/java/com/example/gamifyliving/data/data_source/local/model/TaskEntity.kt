@@ -3,6 +3,7 @@ package com.example.gamifyliving.data.data_source.local.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 
 @Entity(tableName = "Task")
 
@@ -15,6 +16,9 @@ data class TaskEntity(
 
     @ColumnInfo(name = "coinsReward")
     val coinsReward: Int = 0,
+
+    @ColumnInfo(name = "scheduledDate")
+    val date: LocalDate? = null,
 
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0
