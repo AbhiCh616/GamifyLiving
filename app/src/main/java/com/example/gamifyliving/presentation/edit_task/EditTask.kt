@@ -1,6 +1,8 @@
 package com.example.gamifyliving.presentation.edit_task
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -17,7 +19,6 @@ import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
-import com.example.gamifyliving.presentation.component.AppTimePicker
 
 @Composable
 fun EditTaskHandler(
@@ -88,56 +89,51 @@ fun EditTask(
         }
     ) {
         Surface(color = MaterialTheme.colors.background) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
-                TextField(
-                    value = name,
-                    onValueChange = onNameChange,
-                    label = { Text(stringResource(id = R.string.taskName)) }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                TextButton(onClick = onDelete) {
-                    Text(stringResource(id = R.string.delete))
+                item {
+                    Column {
+                        TextField(
+                            value = name,
+                            onValueChange = onNameChange,
+                            label = { Text(stringResource(id = R.string.taskName)) }
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = onDelete) {
+                            Text(stringResource(id = R.string.delete))
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        EditCoins(coins = coins, onCoinsChange = onCoinsChange)
+                        Spacer(modifier = Modifier.height(32.dp))
+                        Text(stringResource(id = R.string.start_date))
+                        Spacer(modifier = Modifier.height(4.dp))
+                        AppDatePicker(
+                            dateText = scheduledDate,
+                            updateDate = onStartDateChange,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                EditCoins(coins = coins, onCoinsChange = onCoinsChange)
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(stringResource(id = R.string.start_date))
-                Spacer(modifier = Modifier.height(4.dp))
-                AppDatePicker(
-                    dateText = scheduledDate,
-                    updateDate = onStartDateChange,
-                    modifier = Modifier.padding(16.dp)
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(stringResource(id = R.string.start_time))
-                Spacer(modifier = Modifier.height(4.dp))
-                AppTimePicker(
-                    timeText = null,
-                    updateTime = {}
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(stringResource(id = R.string.end_time))
-                Spacer(modifier = Modifier.height(4.dp))
-                AppTimePicker(
-                    timeText = null,
-                    updateTime = {}
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                EditRewardsList(
-                    rewards = rewards,
-                    stats = stats,
-                    editReward = editReward,
-                    deleteReward = deleteReward
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                TextButton(onClick = onAddReward) {
-                    Text(stringResource(id = R.string.addReward))
+                items(rewards) { reward ->
+                    EditRewardCardHandler(
+                        reward = reward,
+                        stats = stats,
+                        editReward = editReward,
+                        onDelete = deleteReward,
+                        modifier = Modifier.padding(vertical = 8.dp),
+                    )
+                }
+                item {
+                    Column {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        TextButton(onClick = onAddReward) {
+                            Text(stringResource(id = R.string.addReward))
+                        }
+                    }
                 }
             }
         }
