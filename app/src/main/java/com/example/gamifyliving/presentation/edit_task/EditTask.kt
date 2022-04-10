@@ -17,6 +17,7 @@ import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
+import com.example.gamifyliving.presentation.component.AppTimePicker
 
 @Composable
 fun EditTaskHandler(
@@ -134,6 +135,20 @@ fun EditTask(
                     dateText = endDate,
                     updateDate = onEndDateChange,
                     modifier = Modifier.padding(16.dp)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(stringResource(id = R.string.start_time))
+                Spacer(modifier = Modifier.height(4.dp))
+                AppTimePicker(
+                    timeText = null,
+                    updateTime = {}
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(stringResource(id = R.string.end_time))
+                Spacer(modifier = Modifier.height(4.dp))
+                AppTimePicker(
+                    timeText = null,
+                    updateTime = {}
                 )
             }
         }
