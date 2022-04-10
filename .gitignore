@@ -16,3 +16,4 @@ local.properties
 /.idea/vcs.xml
 /app/schemas/com.example.gamifyliving.data.data_source.AppDatabase/1.json
 /app/schemas/com.example.gamifyliving.data.data_source.AppDatabase/2.json
+/app/schemas/com.example.gamifyliving.data.data_source.local.AppDatabase/1.json
