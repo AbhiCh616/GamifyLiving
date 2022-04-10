@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
+import java.time.LocalTime
 
 @Entity(tableName = "Task")
 
@@ -22,6 +23,12 @@ data class TaskEntity(
 
     @ColumnInfo(name = "endDate")
     val endDate: LocalDate? = null,
+
+    @ColumnInfo(name = "startTime")
+    val startTime: LocalTime? = null,
+
+    @ColumnInfo(name = "endTime")
+    val endTime: LocalTime? = null,
 
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0
