@@ -36,10 +36,7 @@ class EditTaskViewModel @Inject constructor(
     var coins by mutableStateOf("")
         private set
 
-    var startDate: String? by mutableStateOf(null)
-        private set
-
-    var endDate: String? by mutableStateOf(null)
+    var scheduledDate: String? by mutableStateOf(null)
         private set
 
     private val _rewards = mutableStateListOf<Reward>()
@@ -58,8 +55,7 @@ class EditTaskViewModel @Inject constructor(
                     selectedTask = task
                     name = task.name
                     coins = task.coinsReward.toString()
-                    startDate = task.startDate.toDateString()
-                    endDate = task.endDate.toDateString()
+                    scheduledDate = task.scheduledDate.toDateString()
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -78,20 +74,15 @@ class EditTaskViewModel @Inject constructor(
         coins = updatedCoins
     }
 
-    fun onStartDateChange(dateLong: Long?) {
-        startDate = dateLong.toDateString()
-    }
-
-    fun onEndDateChange(dateLong: Long?) {
-        endDate = dateLong.toDateString()
+    fun onScheduledDateChange(dateLong: Long?) {
+        scheduledDate = dateLong.toDateString()
     }
 
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(
             name = name,
             coinsReward = coins.toInt(),
-            startDate = startDate.toLocalDate(),
-            endDate = endDate.toLocalDate()
+            scheduledDate = scheduledDate.toLocalDate(),
         )
         updatedTask?.let { updateTask(it, rewards) }
     }

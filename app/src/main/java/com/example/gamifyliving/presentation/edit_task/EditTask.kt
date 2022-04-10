@@ -35,12 +35,10 @@ fun EditTaskHandler(
         },
         name = viewModel.name,
         coins = viewModel.coins,
-        startDate = viewModel.startDate,
-        endDate = viewModel.endDate,
+        scheduledDate = viewModel.scheduledDate,
         onNameChange = viewModel::onNameChange,
         onCoinsChange = viewModel::onCoinsChange,
-        onStartDateChange = viewModel::onStartDateChange,
-        onEndDateChange = viewModel::onEndDateChange,
+        onStartDateChange = viewModel::onScheduledDateChange,
         onDelete = {
             viewModel.onDeleteClicked()
             onClose()
@@ -60,12 +58,10 @@ fun EditTask(
     onSave: () -> Unit,
     name: String,
     coins: String,
-    startDate: String?,
-    endDate: String?,
+    scheduledDate: String?,
     onNameChange: (String) -> Unit,
     onCoinsChange: (String) -> Unit,
     onStartDateChange: (Long?) -> Unit,
-    onEndDateChange: (Long?) -> Unit,
     onDelete: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
@@ -113,18 +109,11 @@ fun EditTask(
                 Text(stringResource(id = R.string.start_date))
                 Spacer(modifier = Modifier.height(4.dp))
                 AppDatePicker(
-                    dateText = startDate,
+                    dateText = scheduledDate,
                     updateDate = onStartDateChange,
                     modifier = Modifier.padding(16.dp)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(stringResource(id = R.string.end_date))
-                Spacer(modifier = Modifier.height(4.dp))
-                AppDatePicker(
-                    dateText = endDate,
-                    updateDate = onEndDateChange,
-                    modifier = Modifier.padding(16.dp)
-                )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(stringResource(id = R.string.start_time))
                 Spacer(modifier = Modifier.height(4.dp))

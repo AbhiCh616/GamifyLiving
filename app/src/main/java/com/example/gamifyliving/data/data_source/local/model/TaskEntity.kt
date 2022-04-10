@@ -18,11 +18,8 @@ data class TaskEntity(
     @ColumnInfo(name = "coinsReward")
     val coinsReward: Int = 0,
 
-    @ColumnInfo(name = "startDate")
-    val startDate: LocalDate? = null,
-
-    @ColumnInfo(name = "endDate")
-    val endDate: LocalDate? = null,
+    @ColumnInfo(name = "scheduledDate")
+    val scheduledDate: LocalDate? = null,
 
     @ColumnInfo(name = "startTime")
     val startTime: LocalTime? = null,
