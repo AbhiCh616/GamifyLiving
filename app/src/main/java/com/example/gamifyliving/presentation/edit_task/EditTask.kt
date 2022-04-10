@@ -110,17 +110,6 @@ fun EditTask(
                 Spacer(modifier = Modifier.height(16.dp))
                 EditCoins(coins = coins, onCoinsChange = onCoinsChange)
                 Spacer(modifier = Modifier.height(16.dp))
-                EditRewardsList(
-                    rewards = rewards,
-                    stats = stats,
-                    editReward = editReward,
-                    deleteReward = deleteReward
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                TextButton(onClick = onAddReward) {
-                    Text(stringResource(id = R.string.addReward))
-                }
-                Spacer(modifier = Modifier.height(16.dp))
                 Text(stringResource(id = R.string.start_date))
                 Spacer(modifier = Modifier.height(4.dp))
                 AppDatePicker(
@@ -150,6 +139,17 @@ fun EditTask(
                     timeText = null,
                     updateTime = {}
                 )
+                Spacer(modifier = Modifier.height(16.dp))
+                EditRewardsList(
+                    rewards = rewards,
+                    stats = stats,
+                    editReward = editReward,
+                    deleteReward = deleteReward
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                TextButton(onClick = onAddReward) {
+                    Text(stringResource(id = R.string.addReward))
+                }
             }
         }
     }
