@@ -7,5 +7,6 @@ data class Task(
     val status: Boolean = false,
     val coinsReward: Int = 0,
     val uid: Int = 0,
-    val date: LocalDate? = null,
+    val startDate: LocalDate? = null,
+    val endDate: LocalDate? = null
 )

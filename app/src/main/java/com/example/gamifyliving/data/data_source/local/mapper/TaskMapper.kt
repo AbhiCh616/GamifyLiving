@@ -8,7 +8,8 @@ fun TaskEntity.toDomainModel() =
         name = this.name,
         status = this.status,
         coinsReward = this.coinsReward,
-        date = this.date,
+        startDate = this.startDate,
+        endDate = this.endDate,
         uid = this.uid
     )
 
@@ -17,7 +18,8 @@ fun Task.toDataModel() =
         name = this.name,
         status = this.status,
         coinsReward = this.coinsReward,
-        date = this.date,
+        startDate = this.startDate,
+        endDate = this.endDate,
         uid = this.uid
     )
 
