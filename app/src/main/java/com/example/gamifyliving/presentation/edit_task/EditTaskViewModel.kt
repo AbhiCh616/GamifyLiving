@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.use_case.*
+import com.example.gamifyliving.presentation.util.toDateString
+import com.example.gamifyliving.presentation.util.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -34,6 +36,12 @@ class EditTaskViewModel @Inject constructor(
     var coins by mutableStateOf("")
         private set
 
+    var startDate: String? by mutableStateOf(null)
+        private set
+
+    var endDate: String? by mutableStateOf(null)
+        private set
+
     private val _rewards = mutableStateListOf<Reward>()
 
     val rewards: List<Reward>
@@ -50,6 +58,8 @@ class EditTaskViewModel @Inject constructor(
                     selectedTask = task
                     name = task.name
                     coins = task.coinsReward.toString()
+                    startDate = task.startDate.toDateString()
+                    endDate = task.endDate.toDateString()
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -68,8 +78,21 @@ class EditTaskViewModel @Inject constructor(
         coins = updatedCoins
     }
 
+    fun onStartDateChange(dateLong: Long?) {
+        startDate = dateLong.toDateString()
+    }
+
+    fun onEndDateChange(dateLong: Long?) {
+        endDate = dateLong.toDateString()
+    }
+
     fun onSaveClicked() = viewModelScope.launch {
-        val updatedTask = selectedTask?.copy(name = name, coinsReward = coins.toInt())
+        val updatedTask = selectedTask?.copy(
+            name = name,
+            coinsReward = coins.toInt(),
+            startDate = startDate.toLocalDate(),
+            endDate = endDate.toLocalDate()
+        )
         updatedTask?.let { updateTask(it, rewards) }
     }
 

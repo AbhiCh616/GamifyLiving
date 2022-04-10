@@ -11,14 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
-import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @Composable
 fun EditTaskHandler(
@@ -36,8 +34,12 @@ fun EditTaskHandler(
         },
         name = viewModel.name,
         coins = viewModel.coins,
+        startDate = viewModel.startDate,
+        endDate = viewModel.endDate,
         onNameChange = viewModel::onNameChange,
         onCoinsChange = viewModel::onCoinsChange,
+        onStartDateChange = viewModel::onStartDateChange,
+        onEndDateChange = viewModel::onEndDateChange,
         onDelete = {
             viewModel.onDeleteClicked()
             onClose()
@@ -57,8 +59,12 @@ fun EditTask(
     onSave: () -> Unit,
     name: String,
     coins: String,
+    startDate: String?,
+    endDate: String?,
     onNameChange: (String) -> Unit,
     onCoinsChange: (String) -> Unit,
+    onStartDateChange: (Long?) -> Unit,
+    onEndDateChange: (Long?) -> Unit,
     onDelete: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
@@ -114,9 +120,19 @@ fun EditTask(
                     Text(stringResource(id = R.string.addReward))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
+                Text(stringResource(id = R.string.start_date))
+                Spacer(modifier = Modifier.height(4.dp))
                 AppDatePicker(
-                    dateText = "Not Selected",
-                    updateDate = {},
+                    dateText = startDate,
+                    updateDate = onStartDateChange,
+                    modifier = Modifier.padding(16.dp)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(stringResource(id = R.string.end_date))
+                Spacer(modifier = Modifier.height(4.dp))
+                AppDatePicker(
+                    dateText = endDate,
+                    updateDate = onEndDateChange,
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -138,29 +154,4 @@ fun EditCoins(coins: String, onCoinsChange: (String) -> Unit) {
             modifier = Modifier.width(80.dp)
         )
     }
-}
-
-@Preview
-@Composable
-fun EditTaskPreview() {
-
-    GamifyLivingTheme {
-
-        EditTask(
-            name = "",
-            onNameChange = {},
-            onDelete = {},
-            onAddReward = {},
-            onClose = {},
-            onSave = {},
-            rewards = emptyList(),
-            stats = emptyList(),
-            editReward = {},
-            deleteReward = {},
-            coins = "",
-            onCoinsChange = {}
-        )
-
-    }
-
 }

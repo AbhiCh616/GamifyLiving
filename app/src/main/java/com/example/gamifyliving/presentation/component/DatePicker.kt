@@ -1,6 +1,5 @@
 package com.example.gamifyliving.presentation.component
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,15 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
+import com.example.gamifyliving.R
 import com.example.gamifyliving.presentation.theme.Shapes
 import com.google.android.material.datepicker.MaterialDatePicker
 
 @Composable
 fun AppDatePicker(
-    dateText: String,
+    dateText: String?,
     updateDate: (Long?) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,7 +48,7 @@ fun AppDatePicker(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(dateText)
+        Text(dateText ?: stringResource(id = R.string.nothing_selected))
         Icon(
             Icons.Rounded.DateRange,
             contentDescription = null
@@ -64,24 +63,4 @@ private fun showDatePicker(
     val datePicker = MaterialDatePicker.Builder.datePicker().build()
     datePicker.show(activity.supportFragmentManager, datePicker.toString())
     datePicker.addOnPositiveButtonClickListener(updateDate)
-}
-
-@Preview(
-    name = "Night Mode",
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_YES
-)
-@Preview(
-    name = "Light Mode",
-    showBackground = true
-)
-@Composable
-fun AppDatePickerPreview() {
-    GamifyLivingTheme {
-        AppDatePicker(
-            dateText = "Not Selected",
-            updateDate = {},
-            modifier = Modifier.padding(16.dp)
-        )
-    }
 }
