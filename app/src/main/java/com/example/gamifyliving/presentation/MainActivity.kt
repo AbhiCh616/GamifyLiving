@@ -1,8 +1,8 @@
 package com.example.gamifyliving.presentation
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
@@ -18,7 +18,7 @@ import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     @OptIn(
         ExperimentalMaterialApi::class,
         ExperimentalComposeUiApi::class

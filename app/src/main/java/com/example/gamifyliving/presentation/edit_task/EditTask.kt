@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
+import com.example.gamifyliving.presentation.component.AppDatePicker
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @Composable
@@ -112,6 +113,12 @@ fun EditTask(
                 TextButton(onClick = onAddReward) {
                     Text(stringResource(id = R.string.addReward))
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                AppDatePicker(
+                    dateText = "Not Selected",
+                    updateDate = {},
+                    modifier = Modifier.padding(16.dp)
+                )
             }
         }
     }
