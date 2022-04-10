@@ -19,6 +19,8 @@ import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
+import com.example.gamifyliving.presentation.component.AppTimePicker
+import java.time.LocalTime
 
 @Composable
 fun EditTaskHandler(
@@ -37,9 +39,13 @@ fun EditTaskHandler(
         name = viewModel.name,
         coins = viewModel.coins,
         scheduledDate = viewModel.scheduledDate,
+        startTime = viewModel.startTime,
+        endTime = viewModel.endTime,
         onNameChange = viewModel::onNameChange,
         onCoinsChange = viewModel::onCoinsChange,
         onStartDateChange = viewModel::onScheduledDateChange,
+        onStartTimeChange = viewModel::onStartTimeChange,
+        onEndTimeChange = viewModel::onEndTimeChange,
         onDelete = {
             viewModel.onDeleteClicked()
             onClose()
@@ -60,9 +66,13 @@ fun EditTask(
     name: String,
     coins: String,
     scheduledDate: String?,
+    startTime: String?,
+    endTime: String?,
     onNameChange: (String) -> Unit,
     onCoinsChange: (String) -> Unit,
     onStartDateChange: (Long?) -> Unit,
+    onStartTimeChange: (LocalTime?) -> Unit,
+    onEndTimeChange: (LocalTime?) -> Unit,
     onDelete: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
@@ -115,6 +125,27 @@ fun EditTask(
                             updateDate = onStartDateChange,
                             modifier = Modifier.padding(16.dp)
                         )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(stringResource(id = R.string.time))
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            AppTimePicker(
+                                timeText = startTime,
+                                updateTime = onStartTimeChange,
+                                displayWhenNotSelected = stringResource(id = R.string.start_time)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("-")
+                            Spacer(modifier = Modifier.width(8.dp))
+                            AppTimePicker(
+                                timeText = endTime,
+                                updateTime = onEndTimeChange,
+                                displayWhenNotSelected = stringResource(id = R.string.end_time),
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                     }
                 }

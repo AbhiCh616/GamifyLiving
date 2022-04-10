@@ -16,6 +16,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,6 +41,12 @@ class EditTaskViewModel @Inject constructor(
     var scheduledDate: String? by mutableStateOf(null)
         private set
 
+    var startTime: String? by mutableStateOf(null)
+        private set
+
+    var endTime: String? by mutableStateOf(null)
+        private set
+
     private val _rewards = mutableStateListOf<Reward>()
 
     val rewards: List<Reward>
@@ -56,6 +64,8 @@ class EditTaskViewModel @Inject constructor(
                     name = task.name
                     coins = task.coinsReward.toString()
                     scheduledDate = task.scheduledDate.toDateString()
+                    startTime = task.startTime?.toString()
+                    endTime = task.endTime?.toString()
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -78,11 +88,21 @@ class EditTaskViewModel @Inject constructor(
         scheduledDate = dateLong.toDateString()
     }
 
+    fun onStartTimeChange(updatedStartTime: LocalTime?) {
+        startTime = updatedStartTime.toString()
+    }
+
+    fun onEndTimeChange(updatedEndTime: LocalTime?) {
+        endTime = updatedEndTime.toString()
+    }
+
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(
             name = name,
             coinsReward = coins.toInt(),
             scheduledDate = scheduledDate.toLocalDate(),
+            startTime = LocalTime.parse(startTime),
+            endTime = LocalTime.parse(endTime)
         )
         updatedTask?.let { updateTask(it, rewards) }
     }

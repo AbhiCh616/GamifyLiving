@@ -16,9 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.R
 import com.example.gamifyliving.presentation.theme.Shapes
 import com.google.android.material.timepicker.MaterialTimePicker
 import java.time.LocalTime
@@ -27,14 +25,14 @@ import java.time.LocalTime
 fun AppTimePicker(
     timeText: String?,
     updateTime: (LocalTime?) -> Unit,
+    displayWhenNotSelected: String,
+    modifier: Modifier = Modifier,
     initialTime: LocalTime? = null,
-    modifier: Modifier = Modifier
 ) {
     val activity = LocalContext.current as AppCompatActivity
 
     Row(
         modifier = modifier
-            .fillMaxWidth()
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colors.onSurface,
@@ -51,11 +49,7 @@ fun AppTimePicker(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(timeText ?: stringResource(id = R.string.nothing_selected))
-        Icon(
-            Icons.Rounded.DateRange,
-            contentDescription = null
-        )
+        Text(timeText ?: displayWhenNotSelected)
     }
 }
 
