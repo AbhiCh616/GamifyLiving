@@ -1,5 +1,6 @@
 package com.example.gamifyliving.presentation.edit_task
 
+import android.text.method.TextKeyListener.clear
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -46,6 +47,8 @@ fun EditTaskHandler(
         onStartDateChange = viewModel::onScheduledDateChange,
         onStartTimeChange = viewModel::onStartTimeChange,
         onEndTimeChange = viewModel::onEndTimeChange,
+        onDateClear = viewModel::onDateClear,
+        onTimeClear = viewModel::onTimeClear,
         onDelete = {
             viewModel.onDeleteClicked()
             onClose()
@@ -71,8 +74,10 @@ fun EditTask(
     onNameChange: (String) -> Unit,
     onCoinsChange: (String) -> Unit,
     onStartDateChange: (Long?) -> Unit,
+    onDateClear: () -> Unit,
     onStartTimeChange: (LocalTime?) -> Unit,
     onEndTimeChange: (LocalTime?) -> Unit,
+    onTimeClear: () -> Unit,
     onDelete: () -> Unit,
     rewards: List<Reward>,
     stats: List<Stat>,
@@ -118,13 +123,23 @@ fun EditTask(
                         Spacer(modifier = Modifier.height(16.dp))
                         EditCoins(coins = coins, onCoinsChange = onCoinsChange)
                         Spacer(modifier = Modifier.height(32.dp))
-                        Text(stringResource(id = R.string.start_date))
+                        Text(stringResource(id = R.string.date))
                         Spacer(modifier = Modifier.height(4.dp))
-                        AppDatePicker(
-                            dateText = scheduledDate,
-                            updateDate = onStartDateChange,
-                            modifier = Modifier.padding(16.dp)
-                        )
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                                ) {
+                            AppDatePicker(
+                                dateText = scheduledDate,
+                                updateDate = onStartDateChange,
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .width(200.dp)
+                            )
+                            Spacer(modifier = Modifier.width(24.dp))
+                            TextButton(onClick = onDateClear) {
+                                Text(stringResource(id = R.string.clear))
+                            }
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(stringResource(id = R.string.time))
                         Spacer(modifier = Modifier.height(4.dp))
@@ -134,7 +149,8 @@ fun EditTask(
                             AppTimePicker(
                                 timeText = startTime,
                                 updateTime = onStartTimeChange,
-                                displayWhenNotSelected = stringResource(id = R.string.start_time)
+                                displayWhenNotSelected = stringResource(id = R.string.start),
+                                        modifier = Modifier.padding(16.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text("-")
@@ -142,9 +158,13 @@ fun EditTask(
                             AppTimePicker(
                                 timeText = endTime,
                                 updateTime = onEndTimeChange,
-                                displayWhenNotSelected = stringResource(id = R.string.end_time),
+                                displayWhenNotSelected = stringResource(id = R.string.end),
                                 modifier = Modifier.padding(16.dp)
                             )
+                            Spacer(modifier = Modifier.width(24.dp))
+                            TextButton(onClick = onTimeClear) {
+                                Text(stringResource(id = R.string.clear))
+                            }
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                     }

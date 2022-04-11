@@ -16,7 +16,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalTime
 import javax.inject.Inject
 
@@ -88,6 +87,10 @@ class EditTaskViewModel @Inject constructor(
         scheduledDate = dateLong.toDateString()
     }
 
+    fun onDateClear() {
+        scheduledDate = null
+    }
+
     fun onStartTimeChange(updatedStartTime: LocalTime?) {
         startTime = updatedStartTime.toString()
     }
@@ -96,13 +99,18 @@ class EditTaskViewModel @Inject constructor(
         endTime = updatedEndTime.toString()
     }
 
+    fun onTimeClear() {
+        startTime = null
+        endTime = null
+    }
+
     fun onSaveClicked() = viewModelScope.launch {
         val updatedTask = selectedTask?.copy(
             name = name,
             coinsReward = coins.toInt(),
             scheduledDate = scheduledDate.toLocalDate(),
-            startTime = LocalTime.parse(startTime),
-            endTime = LocalTime.parse(endTime)
+            startTime = startTime?.let { LocalTime.parse(startTime) },
+            endTime = endTime?.let { LocalTime.parse(endTime) }
         )
         updatedTask?.let { updateTask(it, rewards) }
     }
