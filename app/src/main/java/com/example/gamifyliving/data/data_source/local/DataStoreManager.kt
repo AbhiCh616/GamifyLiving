@@ -26,12 +26,6 @@ class DataStoreManager @Inject constructor(@ApplicationContext private val conte
             preferences[COINS] ?: 0
         }
 
-    suspend fun updateCoins(updatedCoins: Int) {
-        userDataStore.edit { preferences ->
-            preferences[COINS] = updatedCoins
-        }
-    }
-
     suspend fun increaseCoinsBy(coinsAdded: Int) {
         userDataStore.edit { preferences ->
             val currentCoinsAmount = preferences[COINS] ?: 0
