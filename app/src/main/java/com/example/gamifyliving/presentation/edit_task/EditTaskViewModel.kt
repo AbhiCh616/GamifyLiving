@@ -11,11 +11,11 @@ import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.use_case.*
 import com.example.gamifyliving.presentation.util.toDateString
-import com.example.gamifyliving.presentation.util.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalTime
 import javax.inject.Inject
 
@@ -37,14 +37,20 @@ class EditTaskViewModel @Inject constructor(
     var coins by mutableStateOf("")
         private set
 
-    var scheduledDate: String? by mutableStateOf(null)
-        private set
+    private var scheduledDate: LocalDate? by mutableStateOf(null)
 
-    var startTime: String? by mutableStateOf(null)
-        private set
+    val scheduledDateText
+        get() = scheduledDate?.toDateString()
 
-    var endTime: String? by mutableStateOf(null)
-        private set
+    private var startTime: LocalTime? by mutableStateOf(null)
+
+    val startTimeText
+        get() = startTime?.toString()
+
+    private var endTime: LocalTime? by mutableStateOf(null)
+
+    val endTimeText
+        get() = endTime?.toString()
 
     private val _rewards = mutableStateListOf<Reward>()
 
@@ -62,9 +68,9 @@ class EditTaskViewModel @Inject constructor(
                     selectedTask = task
                     name = task.name
                     coins = task.coinsReward.toString()
-                    scheduledDate = task.scheduledDate.toDateString()
-                    startTime = task.startTime?.toString()
-                    endTime = task.endTime?.toString()
+                    scheduledDate = task.scheduledDate
+                    startTime = task.startTime
+                    endTime = task.endTime
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -83,8 +89,8 @@ class EditTaskViewModel @Inject constructor(
         coins = updatedCoins
     }
 
-    fun onScheduledDateChange(dateLong: Long?) {
-        scheduledDate = dateLong.toDateString()
+    fun onScheduledDateChange(dateLong: LocalDate?) {
+        scheduledDate = dateLong
     }
 
     fun onDateClear() {
@@ -92,11 +98,11 @@ class EditTaskViewModel @Inject constructor(
     }
 
     fun onStartTimeChange(updatedStartTime: LocalTime?) {
-        startTime = updatedStartTime.toString()
+        startTime = updatedStartTime
     }
 
     fun onEndTimeChange(updatedEndTime: LocalTime?) {
-        endTime = updatedEndTime.toString()
+        endTime = updatedEndTime
     }
 
     fun onTimeClear() {
@@ -108,9 +114,9 @@ class EditTaskViewModel @Inject constructor(
         val updatedTask = selectedTask?.copy(
             name = name,
             coinsReward = coins.toInt(),
-            scheduledDate = scheduledDate.toLocalDate(),
-            startTime = startTime?.let { LocalTime.parse(startTime) },
-            endTime = endTime?.let { LocalTime.parse(endTime) }
+            scheduledDate = scheduledDate,
+            startTime = startTime,
+            endTime = endTime
         )
         updatedTask?.let { updateTask(it, rewards) }
     }

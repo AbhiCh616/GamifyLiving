@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -21,11 +20,15 @@ import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
 import com.example.gamifyliving.presentation.theme.Shapes
 import com.google.android.material.datepicker.MaterialDatePicker
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 @Composable
 fun AppDatePicker(
     dateText: String?,
-    updateDate: (Long?) -> Unit,
+    updateDate: (LocalDate?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val activity = LocalContext.current as AppCompatActivity
@@ -57,9 +60,13 @@ fun AppDatePicker(
 
 private fun showDatePicker(
     activity: AppCompatActivity,
-    updateDate: (Long?) -> Unit
+    updateDate: (LocalDate?) -> Unit
 ) {
-    val datePicker = MaterialDatePicker.Builder.datePicker().build()
+    val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
+    val datePicker = datePickerBuilder.build()
     datePicker.show(activity.supportFragmentManager, datePicker.toString())
-    datePicker.addOnPositiveButtonClickListener(updateDate)
+    datePicker.addOnPositiveButtonClickListener {
+        val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneId.systemDefault())
+        updateDate(date.toLocalDate())
+    }
 }

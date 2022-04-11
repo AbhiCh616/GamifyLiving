@@ -1,6 +1,5 @@
 package com.example.gamifyliving.presentation.edit_task
 
-import android.text.method.TextKeyListener.clear
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,6 +20,7 @@ import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
 import com.example.gamifyliving.presentation.component.AppTimePicker
+import java.time.LocalDate
 import java.time.LocalTime
 
 @Composable
@@ -39,9 +39,9 @@ fun EditTaskHandler(
         },
         name = viewModel.name,
         coins = viewModel.coins,
-        scheduledDate = viewModel.scheduledDate,
-        startTime = viewModel.startTime,
-        endTime = viewModel.endTime,
+        scheduledDate = viewModel.scheduledDateText,
+        startTime = viewModel.startTimeText,
+        endTime = viewModel.endTimeText,
         onNameChange = viewModel::onNameChange,
         onCoinsChange = viewModel::onCoinsChange,
         onStartDateChange = viewModel::onScheduledDateChange,
@@ -73,7 +73,7 @@ fun EditTask(
     endTime: String?,
     onNameChange: (String) -> Unit,
     onCoinsChange: (String) -> Unit,
-    onStartDateChange: (Long?) -> Unit,
+    onStartDateChange: (LocalDate?) -> Unit,
     onDateClear: () -> Unit,
     onStartTimeChange: (LocalTime?) -> Unit,
     onEndTimeChange: (LocalTime?) -> Unit,
@@ -125,9 +125,9 @@ fun EditTask(
                         Spacer(modifier = Modifier.height(32.dp))
                         Text(stringResource(id = R.string.date))
                         Spacer(modifier = Modifier.height(4.dp))
-                        Row (
+                        Row(
                             verticalAlignment = Alignment.CenterVertically
-                                ) {
+                        ) {
                             AppDatePicker(
                                 dateText = scheduledDate,
                                 updateDate = onStartDateChange,
@@ -150,7 +150,7 @@ fun EditTask(
                                 timeText = startTime,
                                 updateTime = onStartTimeChange,
                                 displayWhenNotSelected = stringResource(id = R.string.start),
-                                        modifier = Modifier.padding(16.dp)
+                                modifier = Modifier.padding(16.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text("-")
