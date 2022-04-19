@@ -10,6 +10,6 @@ interface RewardRepository {
 
     suspend fun deleteRewardsForTask(taskId: Int)
 
-    fun getRewardsForTask(task: Task): Flow<List<Reward>>
+    fun getRewardsForTask(taskId: Int): Flow<List<Reward>>
 
 }

@@ -9,5 +9,5 @@ import javax.inject.Inject
 class GetRewardsForTask @Inject constructor(
     private val repository: RewardRepository
 ) {
-    operator fun invoke(task: Task): Flow<List<Reward>> = repository.getRewardsForTask(task)
+    operator fun invoke(task: Task): Flow<List<Reward>> = repository.getRewardsForTask(task.uid)
 }

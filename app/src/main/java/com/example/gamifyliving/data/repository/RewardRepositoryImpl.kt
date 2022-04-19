@@ -22,9 +22,9 @@ class RewardRepositoryImpl @Inject constructor(
         rewardDao.deleteRewardsForTask(taskId)
     }
 
-    override fun getRewardsForTask(task: Task): Flow<List<Reward>> =
+    override fun getRewardsForTask(taskId: Int): Flow<List<Reward>> =
         rewardDao.getAll().map {
-            it.filter { reward -> reward.taskId == task.uid }.toDomainModel()
+            it.filter { reward -> reward.taskId == taskId }.toDomainModel()
         }
 
 }

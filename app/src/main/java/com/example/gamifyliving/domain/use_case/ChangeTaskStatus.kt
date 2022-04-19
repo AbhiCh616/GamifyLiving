@@ -26,7 +26,7 @@ class ChangeTaskStatus @Inject constructor(
             coinRepository.decreaseCoinsBy(coinsRemoved = task.coinsReward)
 
         // Increase or decrease the stats based on (un)check status
-        rewardRepository.getRewardsForTask(task).collect { rewards ->
+        rewardRepository.getRewardsForTask(task.uid).collect { rewards ->
             rewards.forEach { reward ->
                 val initialStat = statRepository.getStatById(reward.statId)!!
                 val finalStat =
