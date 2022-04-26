@@ -5,7 +5,10 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Stat", indices = [Index(value = ["name"], unique = true)])
+@Entity(
+    tableName = "stat",
+    indices = [Index(value = ["name"], unique = true)]
+)
 
 data class StatEntity(
     @ColumnInfo(name = "name")
@@ -15,5 +18,5 @@ data class StatEntity(
     val value: Int,
 
     @PrimaryKey(autoGenerate = true)
-    val uid: Int = 0
+    val id: Int
 )

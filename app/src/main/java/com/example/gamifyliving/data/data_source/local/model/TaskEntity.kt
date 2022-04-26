@@ -6,27 +6,27 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalTime
 
-@Entity(tableName = "Task")
+@Entity(tableName = "task")
 
 data class TaskEntity(
     @ColumnInfo(name = "name")
     val name: String,
 
     @ColumnInfo(name = "status")
-    val status: Boolean = false,
+    val status: Boolean,
 
-    @ColumnInfo(name = "coinsReward")
-    val coinsReward: Int = 0,
+    @ColumnInfo(name = "coins_reward")
+    val coinsReward: Int,
 
-    @ColumnInfo(name = "scheduledDate")
-    val scheduledDate: LocalDate? = null,
+    @ColumnInfo(name = "scheduled_date")
+    val scheduledDate: LocalDate?,
 
-    @ColumnInfo(name = "startTime")
-    val startTime: LocalTime? = null,
+    @ColumnInfo(name = "start_time")
+    val startTime: LocalTime?,
 
-    @ColumnInfo(name = "endTime")
-    val endTime: LocalTime? = null,
+    @ColumnInfo(name = "end_time")
+    val endTime: LocalTime?,
 
     @PrimaryKey(autoGenerate = true)
-    val uid: Int = 0
+    val id: Int
 )

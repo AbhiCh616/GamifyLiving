@@ -16,7 +16,7 @@ interface StatDao {
     @Delete
     suspend fun delete(stat: StatEntity)
 
-    @Query("SELECT * FROM stat WHERE uid = :id")
+    @Query("SELECT * FROM stat WHERE id = :id")
     suspend fun getStatById(id: Int): StatEntity?
 
     @Query("SELECT * FROM stat")

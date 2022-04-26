@@ -13,7 +13,7 @@ interface RewardDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(rewards: List<RewardEntity>)
 
-    @Query("DELETE FROM reward WHERE taskId = :taskId")
+    @Query("DELETE FROM reward WHERE task_id = :taskId")
     suspend fun deleteRewardsForTask(taskId: Int)
 
     @Query("SELECT * FROM reward")

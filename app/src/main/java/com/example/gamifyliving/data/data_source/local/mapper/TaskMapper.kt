@@ -11,7 +11,7 @@ fun TaskEntity.toDomainModel() =
         scheduledDate = this.scheduledDate,
         startTime = this.startTime,
         endTime = this.endTime,
-        uid = this.uid
+        uid = this.id
     )
 
 fun Task.toDataModel() =
@@ -22,7 +22,7 @@ fun Task.toDataModel() =
         scheduledDate = this.scheduledDate,
         startTime = this.startTime,
         endTime = this.endTime,
-        uid = this.uid
+        id = this.uid
     )
 
 fun List<TaskEntity>.toDomainModel() =

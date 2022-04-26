@@ -7,14 +7,14 @@ fun StatEntity.toDomainModel() =
     Stat(
         name = this.name,
         value = this.value,
-        uid = this.uid
+        uid = this.id
     )
 
 fun Stat.toDataModel() =
     StatEntity(
         name = this.name,
         value = this.value,
-        uid = this.uid
+        id = this.uid
     )
 
 fun List<StatEntity>.toDomainModel() =
