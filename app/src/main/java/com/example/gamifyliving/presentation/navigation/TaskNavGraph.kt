@@ -23,7 +23,7 @@ fun NavGraphBuilder.taskGraph(
             setBottomBarVisibility(Screen.Tasks.hasBottomNavBar)
             TasksScreenHandler(
                 onTaskClick = { task ->
-                    navController.navigate("${Screen.EditTask.route}/${task.uid}")
+                    navController.navigate("${Screen.EditTask.route}/${task.id}")
                 },
                 onAddButtonClick = {
                     navController.navigate(Screen.AddTask.route)

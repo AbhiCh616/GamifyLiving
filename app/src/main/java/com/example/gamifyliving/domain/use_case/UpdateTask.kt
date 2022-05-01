@@ -15,7 +15,7 @@ class UpdateTask @Inject constructor(
         taskRepository.updateTask(task)
 
         // Update rewards for task
-        rewardRepository.deleteRewardsForTask(taskId = task.uid)
+        rewardRepository.deleteRewardsForTask(taskId = task.id)
         rewardRepository.addRewards(rewards)
     }
 }
