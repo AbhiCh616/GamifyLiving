@@ -1,39 +1,123 @@
 package com.example.gamifyliving.data.data_source.local.mapper
 
-import com.example.gamifyliving.data.data_source.local.model.TaskEntity
-import com.example.gamifyliving.data.data_source.local.model.TaskWithDetailsEntity
-import com.example.gamifyliving.data.data_source.local.model.TodoEntity
-import com.example.gamifyliving.data.data_source.local.model.TodoWithScheduleEntity
-import com.example.gamifyliving.domain.model.DateSchedule
-import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.model.TimeSpan
-import com.example.gamifyliving.domain.model.Todo
+import com.example.gamifyliving.data.data_source.local.model.*
+import com.example.gamifyliving.domain.model.*
+
+fun Task.toTaskEntity() =
+    TaskEntity(
+        name = this.name,
+        status = this.status,
+        id = this.id
+    )
+
+fun Todo.toTodoEntity(taskId: Int) =
+    TodoEntity(
+        coinsReward = this.coinsReward,
+        taskId = taskId
+    )
+
+fun Habit.toHabitEntity(taskId: Int) =
+    HabitEntity(
+        taskId = taskId
+    )
+
+fun TimeSpan?.toTimeSpanEntity() =
+    this?.let { timeSpan ->
+        TimeSpanEntity(
+            startTime = timeSpan.startTime,
+            endTime = timeSpan.endTime
+        )
+    }
+
+fun DateSchedule.toTodoScheduleEntity(todoId: Int) =
+    TodoScheduleEntity(
+        scheduledDate = this.date,
+        timeSpan = this.timeSpan.toTimeSpanEntity(),
+        todoId = todoId
+    )
+
+fun EverydaySchedule.toEverydayScheduleEntity(habitId: Int) =
+    EverydayScheduleEntity(
+        timeSpan = this.timeSpan.toTimeSpanEntity(),
+        habitId = habitId
+    )
+
+fun RepeatAfterSchedule.toRepeatAfterScheduleEntity(habitId: Int) =
+    RepeatAfterScheduleEntity(
+        startDate = this.startDate,
+        repeatAfter = this.interval,
+        timeSpan = this.timeSpan.toTimeSpanEntity(),
+        habitId = habitId
+    )
+
+fun WeekDaySchedule.toWeekDayScheduleEntity(habitId: Int) =
+    WeekDayScheduleEntity(
+        sunday = this.sunday,
+        monday = this.monday,
+        tuesday = this.tuesday,
+        wednesday = this.wednesday,
+        thursday = this.thursday,
+        friday = this.friday,
+        saturday = this.saturday,
+        timeSpan = this.timeSpan.toTimeSpanEntity(),
+        habitId = habitId
+    )
+
+fun TimeSpanEntity?.toTimeSpan() = this?.let { timeSpanEntity ->
+    TimeSpan(
+        startTime = timeSpanEntity.startTime,
+        endTime = timeSpanEntity.endTime
+    )
+}
 
 fun TaskWithDetailsEntity.toDomainModel(): Task =
-    this.todoWithSchedule?.let {
-
+    when {
+        this.todoWithSchedule != null -> Todo(
+            name = this.task.name,
+            coinsReward = todoWithSchedule.todo.coinsReward,
+            schedule = todoWithSchedule.todoSchedule?.let { todoScheduleEntity ->
+                DateSchedule(
+                    date = todoScheduleEntity.scheduledDate,
+                    timeSpan = todoScheduleEntity.timeSpan.toTimeSpan()
+                )
+            },
+            status = this.task.status,
+            id = this.task.id
+        )
+        this.habitWithSchedule != null -> Habit(
+            name = this.task.name,
+            schedule =
+            when {
+                habitWithSchedule.everydaySchedule != null -> EverydaySchedule(
+                    timeSpan = habitWithSchedule.everydaySchedule.timeSpan.toTimeSpan()
+                )
+                habitWithSchedule.repeatAfterSchedule != null ->
+                    habitWithSchedule.repeatAfterSchedule.let { repeatAfterScheduleEntity ->
+                        RepeatAfterSchedule(
+                            startDate = repeatAfterScheduleEntity.startDate,
+                            interval = repeatAfterScheduleEntity.repeatAfter,
+                            timeSpan = repeatAfterScheduleEntity.timeSpan.toTimeSpan()
+                        )
+                    }
+                habitWithSchedule.weekDaySchedule != null ->
+                    habitWithSchedule.weekDaySchedule.let { weekDayScheduleEntity ->
+                        WeekDaySchedule(
+                            sunday = weekDayScheduleEntity.sunday,
+                            monday = weekDayScheduleEntity.monday,
+                            tuesday = weekDayScheduleEntity.tuesday,
+                            wednesday = weekDayScheduleEntity.wednesday,
+                            thursday = weekDayScheduleEntity.thursday,
+                            friday = weekDayScheduleEntity.friday,
+                            saturday = weekDayScheduleEntity.saturday,
+                            timeSpan = weekDayScheduleEntity.timeSpan.toTimeSpan()
+                        )
+                    }
+                else -> null
+            },
+            status = task.status
+        )
+        else -> throw TypeCastException()
     }
-Todo(
-name = this.task.name,
-status = this.task.status,
-coinsReward = this.todoWithSchedule!!.todo.coinsReward,
-schedule = this.todoWithSchedule.todoSchedule?.scheduledDate.let {
-    scheduledDate ->
-    DateSchedule(
-        date = scheduledDate,
-        timeSpan = startTime?.let {
-            TimeSpan(
-                startTime = this.startTime,
-                endTime = this.endTime!!
-            )
-        }
-    )
-},
-id = this.id
-)
 
-
-
-
-fun List<Task>.toDataModel() =
-    this.map { task -> task.toDataModel() }
+fun List<TaskWithDetailsEntity>.toDomainModel() =
+    this.map { taskWithDetailsEntity -> taskWithDetailsEntity.toDomainModel() }

@@ -1,8 +1,7 @@
 package com.example.gamifyliving.data.repository
 
 import com.example.gamifyliving.data.data_source.local.dao.TaskDao
-import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
-import com.example.gamifyliving.data.data_source.local.model.*
+import com.example.gamifyliving.data.data_source.local.mapper.*
 import com.example.gamifyliving.domain.model.*
 import com.example.gamifyliving.domain.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,95 +13,84 @@ class TaskRepositoryImpl @Inject constructor(
 ) : TaskRepository {
 
     override suspend fun addTask(task: Task) {
-        val taskEntity = TaskEntity(
-            name = task.name,
-            status = task.status
-        )
-        val taskId = taskDao.insert(taskEntity)
-        if (task is Todo) {
-            val todoEntity = TodoEntity(
-                coinsReward = task.coinsReward,
-                taskId = taskId.toInt()
-            )
-            val todoId = taskDao.insert(todoEntity)
-            if (task.schedule is DateSchedule) {
-                val todoScheduleEntity = TodoScheduleEntity(
-                    scheduledDate = task.schedule.date,
-                    timeSpan =
-                    if (task.schedule.timeSpan != null) {
-                        TimeSpanEntity(
-                            startTime = task.schedule.timeSpan.startTime,
-                            endTime = task.schedule.timeSpan.endTime
-                        )
-                    } else {
-                        null
-                    },
-                    todoId = todoId.toInt()
-                )
+        val taskEntity = task.toTaskEntity()
+        val taskId = taskDao.insert(taskEntity).toInt()
+        when (task) {
+            is Todo -> {
+                val todoEntity = task.toTodoEntity(taskId = taskId)
+                val todoId = taskDao.insert(todoEntity).toInt()
+                task.schedule?.let { schedule ->
+                    val todoScheduleEntity = schedule.toTodoScheduleEntity(todoId = todoId)
+                    taskDao.insert(todoScheduleEntity)
+                }
             }
-        }
-        if (task is Habit) {
-            val habitEntity = HabitEntity(
-                taskId = taskId.toInt()
-            )
-            val habitId = taskDao.insert(habitEntity)
-            if (task.schedule is EverydaySchedule) {
-                val everydayScheduleEntity = EverydayScheduleEntity(
-                    timeSpan = if ((task.schedule as EverydaySchedule).timeSpan != null) {
-                        TimeSpanEntity(
-                            startTime = (task.schedule as EverydaySchedule).timeSpan!!.startTime,
-                            endTime = (task.schedule as EverydaySchedule).timeSpan!!.endTime,
-                        )
-                    } else {
-                        null
-                    },
-                    habitId = habitId.toInt()
-                )
-            }
-            if (task.schedule is RepeatAfterSchedule) {
-                val repeatAfterScheduleEntity = RepeatAfterScheduleEntity(
-                    startDate = (task.schedule as RepeatAfterSchedule).startDate,
-                    repeatAfter = (task.schedule as RepeatAfterSchedule).interval,
-                    timeSpan = if ((task.schedule as EverydaySchedule).timeSpan != null) {
-                        TimeSpanEntity(
-                            startTime = (task.schedule as EverydaySchedule).timeSpan!!.startTime,
-                            endTime = (task.schedule as EverydaySchedule).timeSpan!!.endTime,
-                        )
-                    } else {
-                        null
-                    },
-                    habitId = habitId.toInt()
-                )
-            }
-            if (task.schedule is WeekDaySchedule) {
-                val weekDayScheduleEntity = WeekDayScheduleEntity(
-                    sunday = (task.schedule as WeekDaySchedule).sunday,
-                    monday = (task.schedule as WeekDaySchedule).monday,
-                    tuesday = (task.schedule as WeekDaySchedule).tuesday,
-                    wednesday = (task.schedule as WeekDaySchedule).wednesday,
-                    thursday = (task.schedule as WeekDaySchedule).thursday,
-                    friday = (task.schedule as WeekDaySchedule).friday,
-                    saturday = (task.schedule as WeekDaySchedule).saturday,
-                    timeSpan = if ((task.schedule as EverydaySchedule).timeSpan != null) {
-                        TimeSpanEntity(
-                            startTime = (task.schedule as EverydaySchedule).timeSpan!!.startTime,
-                            endTime = (task.schedule as EverydaySchedule).timeSpan!!.endTime,
-                        )
-                    } else {
-                        null
-                    },
-                    habitId = habitId.toInt()
-                )
+            is Habit -> {
+                val habitEntity = task.toHabitEntity(taskId = taskId)
+                val habitId = taskDao.insert(habitEntity).toInt()
+                task.schedule?.let { schedule ->
+                    when (schedule) {
+                        is EverydaySchedule -> {
+                            val everydayScheduleEntity =
+                                schedule.toEverydayScheduleEntity(habitId = habitId)
+                            taskDao.insert(everydayScheduleEntity)
+                        }
+                        is RepeatAfterSchedule -> {
+                            val repeatAfterScheduleEntity =
+                                schedule.toRepeatAfterScheduleEntity(habitId = habitId)
+                            taskDao.insert(repeatAfterScheduleEntity)
+                        }
+                        is WeekDaySchedule -> {
+                            val weekDayScheduleEntity =
+                                schedule.toWeekDayScheduleEntity(habitId = habitId)
+                            taskDao.insert(weekDayScheduleEntity)
+                        }
+                    }
+                }
             }
         }
     }
 
     override suspend fun updateTask(task: Task) {
-        taskDao.update(task.toDataModel())
+        val taskEntity = task.toTaskEntity()
+        val taskId = taskDao.update(taskEntity).toInt()
+        when (task) {
+            is Todo -> {
+                val todoEntity = task.toTodoEntity(taskId = taskId)
+                val todoId = taskDao.update(todoEntity).toInt()
+                task.schedule?.let { schedule ->
+                    val todoScheduleEntity = schedule.toTodoScheduleEntity(todoId = todoId)
+                    taskDao.update(todoScheduleEntity)
+                }
+            }
+            is Habit -> {
+                val habitEntity = task.toHabitEntity(taskId = taskId)
+                val habitId = taskDao.update(habitEntity).toInt()
+                task.schedule?.let { schedule ->
+                    when (schedule) {
+                        is EverydaySchedule -> {
+                            val everydayScheduleEntity =
+                                schedule.toEverydayScheduleEntity(habitId = habitId)
+                            taskDao.update(everydayScheduleEntity)
+                        }
+                        is RepeatAfterSchedule -> {
+                            val repeatAfterScheduleEntity =
+                                schedule.toRepeatAfterScheduleEntity(habitId = habitId)
+                            taskDao.update(repeatAfterScheduleEntity)
+                        }
+                        is WeekDaySchedule -> {
+                            val weekDayScheduleEntity =
+                                schedule.toWeekDayScheduleEntity(habitId = habitId)
+                            taskDao.update(weekDayScheduleEntity)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override suspend fun deleteTask(task: Task) {
-        taskDao.delete(task.toDataModel())
+        // Other relevant entities have direct or transitive dependency
+        taskDao.delete(task.toTaskEntity())
     }
 
     override suspend fun getTaskById(id: Int): Task? =
