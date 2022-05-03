@@ -8,13 +8,15 @@ data class TaskWithDetailsEntity(
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "task_id"
+        entityColumn = "task_id",
+        entity = TodoEntity::class
     )
     val todoWithSchedule: TodoWithScheduleEntity?,
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "task_id"
+        entityColumn = "task_id",
+        entity = HabitEntity::class
     )
     val habitWithSchedule: HabitWithScheduleEntity?,
 )

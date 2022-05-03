@@ -9,17 +9,17 @@ import com.example.gamifyliving.data.data_source.local.dao.RewardDao
 import com.example.gamifyliving.data.data_source.local.dao.StatDao
 import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
 import com.example.gamifyliving.data.data_source.local.dao.TaskDao
-import com.example.gamifyliving.data.data_source.local.model.RewardEntity
-import com.example.gamifyliving.data.data_source.local.model.StatEntity
-import com.example.gamifyliving.data.data_source.local.model.StoreItemEntity
-import com.example.gamifyliving.data.data_source.local.model.TaskEntity
+import com.example.gamifyliving.data.data_source.local.model.*
 
 @Database(
     version = 1,
-    entities = [StatEntity::class, TaskEntity::class, RewardEntity::class, StoreItemEntity::class],
+    entities = [StatEntity::class, RewardEntity::class, StoreItemEntity::class, TaskEntity::class,
+        TodoEntity::class, HabitEntity::class, TodoScheduleEntity::class, EverydayScheduleEntity::class,
+        WeekDayScheduleEntity::class, RepeatAfterScheduleEntity::class],
     exportSchema = true
 )
 @TypeConverters(LocalDateConverter::class, LocalTimeConverter::class)
+
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun statDao(): StatDao

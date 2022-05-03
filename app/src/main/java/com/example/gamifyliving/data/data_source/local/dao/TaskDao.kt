@@ -29,16 +29,16 @@ interface TaskDao {
     suspend fun insert(weekDaySchedule: WeekDayScheduleEntity)
 
     @Update
-    suspend fun update(task: TaskEntity): Long
+    suspend fun update(task: TaskEntity): Int
 
     @Update
-    suspend fun update(todo: TodoEntity): Long
+    suspend fun update(todo: TodoEntity): Int
 
     @Update
     suspend fun update(todoSchedule: TodoScheduleEntity)
 
     @Update
-    suspend fun update(habit: HabitEntity): Long
+    suspend fun update(habit: HabitEntity): Int
 
     @Update
     suspend fun update(everydaySchedule: EverydayScheduleEntity)
@@ -70,9 +70,11 @@ interface TaskDao {
     @Delete
     suspend fun delete(weekDaySchedule: WeekDayScheduleEntity)
 
+    @Transaction
     @Query("SELECT * FROM task WHERE id = :id")
     suspend fun getTaskWithDetails(id: Int): TaskWithDetailsEntity?
 
+    @Transaction
     @Query("SELECT * FROM task")
     fun getAll(): Flow<List<TaskWithDetailsEntity>>
 
