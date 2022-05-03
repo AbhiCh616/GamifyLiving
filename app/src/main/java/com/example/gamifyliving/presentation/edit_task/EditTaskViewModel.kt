@@ -7,8 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.model.Reward
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.model.*
 import com.example.gamifyliving.domain.use_case.*
 import com.example.gamifyliving.presentation.util.toDateString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -65,12 +64,13 @@ class EditTaskViewModel @Inject constructor(
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
                 getTaskById(taskId)?.let { task ->
+                    task as Todo
                     selectedTask = task
                     name = task.name
                     coins = task.coinsReward.toString()
-                    scheduledDate = task.scheduledDate
-                    startTime = task.startTime
-                    endTime = task.endTime
+                    scheduledDate = task.schedule?.date
+                    startTime = task.schedule?.timeSpan?.startTime
+                    endTime = task.schedule?.timeSpan?.startTime
                     getRewardsForTask(task).collect {
                         it.forEach { reward ->
                             _rewards.add(reward)
@@ -111,14 +111,22 @@ class EditTaskViewModel @Inject constructor(
     }
 
     fun onSaveClicked() = viewModelScope.launch {
-        val updatedTask = selectedTask?.copy(
+        val updatedTask = (selectedTask as Todo).copy(
             name = name,
             coinsReward = coins.toInt(),
-            scheduledDate = scheduledDate,
-            startTime = startTime,
-            endTime = endTime
+            schedule = scheduledDate?.let {
+                DateSchedule(
+                    date = it,
+                    timeSpan = startTime?.let { startTime ->
+                        TimeSpan(
+                            startTime = startTime,
+                            endTime = endTime!!
+                        )
+                    }
+                )
+            }
         )
-        updatedTask?.let { updateTask(it, rewards) }
+        updateTask(updatedTask, rewards)
     }
 
     fun onDeleteClicked() = viewModelScope.launch {

@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.model.Todo
 import com.example.gamifyliving.presentation.component.TasksList
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
@@ -83,8 +84,8 @@ fun TasksScreen(
 fun TasksScreenPreview() {
 
     val tasks = listOf(
-        Task(name = "Do this"),
-        Task(name = "Do that")
+        Todo(name = "Do this"),
+        Todo(name = "Do that")
     )
 
     GamifyLivingTheme {
