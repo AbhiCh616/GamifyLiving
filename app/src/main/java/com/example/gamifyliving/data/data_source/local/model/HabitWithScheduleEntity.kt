@@ -22,5 +22,5 @@ data class HabitWithScheduleEntity(
         parentColumn = "id",
         entityColumn = "habit_id"
     )
-    val repeatAfterSchedule: RepeatAfterScheduleEntity?
+    val repeatSchedule: RepeatScheduleEntity?
 )

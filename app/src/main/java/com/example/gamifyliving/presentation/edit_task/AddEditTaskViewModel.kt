@@ -111,7 +111,8 @@ class AddEditTaskViewModel @Inject constructor(
                             scheduleType = when (task.schedule) {
                                 is EverydaySchedule -> ScheduleType.EVERYDAY
                                 is RepeatAfterSchedule -> {
-                                    repeatInterval = (task.schedule as RepeatAfterSchedule).interval.toString()
+                                    repeatInterval =
+                                        (task.schedule as RepeatAfterSchedule).interval.toString()
                                     ScheduleType.REPEAT_AFTER
                                 }
                                 is WeekDaySchedule -> ScheduleType.DAY_OF_WEEK
@@ -314,6 +315,7 @@ class AddEditTaskViewModel @Inject constructor(
             addTask(newTask, rewards)
         }
     }
+
 
     fun onDeleteClicked() = viewModelScope.launch {
         selectedTask?.let { deleteTask(it) }

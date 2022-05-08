@@ -2,11 +2,8 @@ package com.example.gamifyliving.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gamifyliving.data.data_source.local.*
-import com.example.gamifyliving.data.data_source.local.dao.RewardDao
-import com.example.gamifyliving.data.data_source.local.dao.StatDao
-import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
-import com.example.gamifyliving.data.data_source.local.dao.TaskDao
+import com.example.gamifyliving.data.data_source.local.AppDatabase
+import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.repository.*
 import com.example.gamifyliving.domain.repository.*
 import dagger.Binds
@@ -42,6 +39,36 @@ object AppModule {
     @Provides
     fun provideTaskDao(appDatabase: AppDatabase): TaskDao {
         return appDatabase.taskDao()
+    }
+
+    @Provides
+    fun provideTodoDao(appDatabase: AppDatabase): TodoDao {
+        return appDatabase.todoDao()
+    }
+
+    @Provides
+    fun provideHabitDao(appDatabase: AppDatabase): HabitDao {
+        return appDatabase.habitDao()
+    }
+
+    @Provides
+    fun provideTodoScheduleDao(appDatabase: AppDatabase): TodoScheduleDao {
+        return appDatabase.todoScheduleDao()
+    }
+
+    @Provides
+    fun provideEverydayScheduleDao(appDatabase: AppDatabase): EverydayScheduleDao {
+        return appDatabase.everydayScheduleDao()
+    }
+
+    @Provides
+    fun provideRepeatScheduleDao(appDatabase: AppDatabase): RepeatScheduleDao {
+        return appDatabase.repeatScheduleDao()
+    }
+
+    @Provides
+    fun provideWeekDayScheduleDao(appDatabase: AppDatabase): WeekDayScheduleDao {
+        return appDatabase.weekDayDao()
     }
 
     @Provides

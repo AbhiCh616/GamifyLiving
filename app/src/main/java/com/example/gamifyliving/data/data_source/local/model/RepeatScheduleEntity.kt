@@ -16,7 +16,7 @@ import java.time.LocalDate
     indices = [Index(value = ["habit_id"], unique = true)],
 )
 
-data class RepeatAfterScheduleEntity(
+data class RepeatScheduleEntity(
 
     @ColumnInfo(name = "start_date")
     val startDate: LocalDate,

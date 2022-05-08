@@ -10,17 +10,17 @@ fun Task.toTaskEntity() =
         id = this.id
     )
 
-fun Todo.toTodoEntity(taskId: Int) =
+fun Todo.toTodoEntity(taskId: Int, todoId: Int = 0) =
     TodoEntity(
         coinsReward = this.coinsReward,
         taskId = taskId,
-        id = this.id
+        id = todoId
     )
 
-fun Habit.toHabitEntity(taskId: Int) =
+fun Habit.toHabitEntity(taskId: Int, habitId: Int = 0) =
     HabitEntity(
         taskId = taskId,
-        id = this.id
+        id = habitId
     )
 
 fun TimeSpan?.toTimeSpanEntity() =
@@ -31,28 +31,31 @@ fun TimeSpan?.toTimeSpanEntity() =
         )
     }
 
-fun DateSchedule.toTodoScheduleEntity(todoId: Int) =
+fun DateSchedule.toTodoScheduleEntity(todoId: Int, todoScheduleId: Int = 0) =
     TodoScheduleEntity(
         scheduledDate = this.date,
         timeSpan = this.timeSpan.toTimeSpanEntity(),
-        todoId = todoId
+        todoId = todoId,
+        id = todoScheduleId
     )
 
-fun EverydaySchedule.toEverydayScheduleEntity(habitId: Int) =
+fun EverydaySchedule.toEverydayScheduleEntity(habitId: Int, everydayScheduleId: Int = 0) =
     EverydayScheduleEntity(
         timeSpan = this.timeSpan.toTimeSpanEntity(),
-        habitId = habitId
+        habitId = habitId,
+        id = everydayScheduleId
     )
 
-fun RepeatAfterSchedule.toRepeatAfterScheduleEntity(habitId: Int) =
-    RepeatAfterScheduleEntity(
+fun RepeatAfterSchedule.toRepeatAfterScheduleEntity(habitId: Int, repeatScheduleId: Int = 0) =
+    RepeatScheduleEntity(
         startDate = this.startDate,
         repeatAfter = this.interval,
         timeSpan = this.timeSpan.toTimeSpanEntity(),
-        habitId = habitId
+        habitId = habitId,
+        id = repeatScheduleId
     )
 
-fun WeekDaySchedule.toWeekDayScheduleEntity(habitId: Int) =
+fun WeekDaySchedule.toWeekDayScheduleEntity(habitId: Int, weekDayScheduleId: Int = 0) =
     WeekDayScheduleEntity(
         sunday = this.sunday,
         monday = this.monday,
@@ -62,7 +65,8 @@ fun WeekDaySchedule.toWeekDayScheduleEntity(habitId: Int) =
         friday = this.friday,
         saturday = this.saturday,
         timeSpan = this.timeSpan.toTimeSpanEntity(),
-        habitId = habitId
+        habitId = habitId,
+        id = weekDayScheduleId
     )
 
 fun TimeSpanEntity?.toTimeSpan() = this?.let { timeSpanEntity ->
@@ -93,8 +97,8 @@ fun TaskWithDetailsEntity.toDomainModel(): Task =
                 habitWithSchedule.everydaySchedule != null -> EverydaySchedule(
                     timeSpan = habitWithSchedule.everydaySchedule.timeSpan.toTimeSpan()
                 )
-                habitWithSchedule.repeatAfterSchedule != null ->
-                    habitWithSchedule.repeatAfterSchedule.let { repeatAfterScheduleEntity ->
+                habitWithSchedule.repeatSchedule != null ->
+                    habitWithSchedule.repeatSchedule.let { repeatAfterScheduleEntity ->
                         RepeatAfterSchedule(
                             startDate = repeatAfterScheduleEntity.startDate,
                             interval = repeatAfterScheduleEntity.repeatAfter,
