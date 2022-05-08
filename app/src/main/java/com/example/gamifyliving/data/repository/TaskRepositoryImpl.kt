@@ -52,11 +52,11 @@ class TaskRepositoryImpl @Inject constructor(
 
     override suspend fun updateTask(task: Task) {
         val taskEntity = task.toTaskEntity()
-        val taskId = taskDao.update(taskEntity).toInt()
+        val taskId = taskDao.update(taskEntity)
         when (task) {
             is Todo -> {
                 val todoEntity = task.toTodoEntity(taskId = taskId)
-                val todoId = taskDao.update(todoEntity).toInt()
+                val todoId = taskDao.update(todoEntity)
                 task.schedule?.let { schedule ->
                     val todoScheduleEntity = schedule.toTodoScheduleEntity(todoId = todoId)
                     taskDao.update(todoScheduleEntity)
@@ -64,7 +64,7 @@ class TaskRepositoryImpl @Inject constructor(
             }
             is Habit -> {
                 val habitEntity = task.toHabitEntity(taskId = taskId)
-                val habitId = taskDao.update(habitEntity).toInt()
+                val habitId = taskDao.update(habitEntity)
                 task.schedule?.let { schedule ->
                     when (schedule) {
                         is EverydaySchedule -> {

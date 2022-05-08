@@ -1,4 +1,4 @@
-package com.example.gamifyliving.presentation.component
+package com.example.gamifyliving.presentation.tasks
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn

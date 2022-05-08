@@ -37,4 +37,7 @@
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="date">Date</string>
+    <string name="everyday">Everyday</string>
+    <string name="repeat_after">Repeat After</string>
+    <string name="day_of_week">Day of Week</string>
 </resources>

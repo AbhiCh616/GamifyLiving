@@ -1,4 +1,4 @@
-package com.example.gamifyliving.presentation.component
+package com.example.gamifyliving.presentation.tasks
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card

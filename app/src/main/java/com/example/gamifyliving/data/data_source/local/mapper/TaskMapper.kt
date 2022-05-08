@@ -13,12 +13,14 @@ fun Task.toTaskEntity() =
 fun Todo.toTodoEntity(taskId: Int) =
     TodoEntity(
         coinsReward = this.coinsReward,
-        taskId = taskId
+        taskId = taskId,
+        id = this.id
     )
 
 fun Habit.toHabitEntity(taskId: Int) =
     HabitEntity(
-        taskId = taskId
+        taskId = taskId,
+        id = this.id
     )
 
 fun TimeSpan?.toTimeSpanEntity() =
@@ -114,7 +116,8 @@ fun TaskWithDetailsEntity.toDomainModel(): Task =
                     }
                 else -> null
             },
-            status = task.status
+            status = task.status,
+            id = task.id
         )
         else -> throw TypeCastException()
     }

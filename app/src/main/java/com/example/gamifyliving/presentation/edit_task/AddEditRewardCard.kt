@@ -16,7 +16,7 @@ import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Stat
 
 @Composable
-fun EditRewardCardHandler(
+fun AddEditRewardCardHandler(
     reward: Reward,
     stats: List<Stat>,
     editReward: (Reward) -> Unit,
@@ -28,7 +28,7 @@ fun EditRewardCardHandler(
     // Because points field of reward can't be null but the respective text-field can be empty
     var isPointsFieldEmpty by remember { mutableStateOf(false) }
 
-    EditRewardCard(
+    AddEditRewardCard(
         isDropdownExpanded = isDropdownExpanded,
         dropDownExpandedChange = { isDropdownExpanded = !isDropdownExpanded },
         dismissDropdown = { isDropdownExpanded = false },
@@ -47,7 +47,7 @@ fun EditRewardCardHandler(
 }
 
 @Composable
-fun EditRewardCard(
+fun AddEditRewardCard(
     isDropdownExpanded: Boolean,
     dropDownExpandedChange: (Boolean) -> Unit,
     dismissDropdown: () -> Unit,

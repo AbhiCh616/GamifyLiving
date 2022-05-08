@@ -1,5 +1,6 @@
 package com.example.gamifyliving.presentation.tasks
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Task
@@ -18,6 +19,7 @@ class TasksViewModel @Inject constructor(
     val tasks = getTasks()
 
     fun onCheckboxClicked(task: Task) = viewModelScope.launch {
+        Log.d("VALE", task.toString())
         changeTaskStatus(task)
     }
 
