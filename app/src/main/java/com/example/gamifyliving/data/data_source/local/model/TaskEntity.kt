@@ -15,6 +15,6 @@ data class TaskEntity(
     val status: Boolean,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 
 )

@@ -24,6 +24,6 @@ data class EverydayScheduleEntity(
     val habitId: Int,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 
 )

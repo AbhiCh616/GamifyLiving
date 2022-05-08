@@ -24,5 +24,5 @@ data class TodoEntity(
     val taskId: Int,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 )

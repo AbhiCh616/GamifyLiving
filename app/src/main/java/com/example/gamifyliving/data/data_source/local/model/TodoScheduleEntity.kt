@@ -28,6 +28,6 @@ data class TodoScheduleEntity(
     val todoId: Int,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 
 )

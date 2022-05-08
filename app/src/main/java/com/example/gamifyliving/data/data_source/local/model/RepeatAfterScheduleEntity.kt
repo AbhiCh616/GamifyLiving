@@ -31,6 +31,6 @@ data class RepeatAfterScheduleEntity(
     val habitId: Int,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 
 )
