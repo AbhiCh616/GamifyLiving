@@ -1,6 +1,7 @@
 package com.example.gamifyliving.presentation.add_store_item
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -8,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
@@ -75,7 +77,8 @@ fun AddStoreItem(
                 TextField(
                     value = costCoins,
                     onValueChange = onCostCoinsChange,
-                    label = { Text(stringResource(id = R.string.costCoins)) }
+                    label = { Text(stringResource(id = R.string.costCoins)) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
             }
         }
