@@ -76,26 +76,3 @@ fun TasksScreen(
     }
 
 }
-
-@ExperimentalMaterialApi
-@Preview
-@Composable
-fun TasksScreenPreview() {
-
-    val tasks = listOf(
-        Todo(name = "Do this"),
-        Todo(name = "Do that")
-    )
-
-    GamifyLivingTheme {
-
-        TasksScreen(
-            tasks = tasks,
-            changeTaskStatus = {},
-            onAddButtonClick = {},
-            onTaskClick = {}
-        )
-
-    }
-
-}
