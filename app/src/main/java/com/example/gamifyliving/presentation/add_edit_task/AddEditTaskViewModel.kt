@@ -118,7 +118,21 @@ class AddEditTaskViewModel @Inject constructor(
                                         (task.schedule as RepeatAfterSchedule).interval.toString()
                                     ScheduleType.REPEAT_AFTER
                                 }
-                                is WeekDaySchedule -> ScheduleType.DAY_OF_WEEK
+                                is WeekDaySchedule -> {
+                                    daysOfWeek =
+                                        (task.schedule as WeekDaySchedule).let {
+                                            DaysOfWeek(
+                                                sunday = it.sunday,
+                                                monday = it.monday,
+                                                tuesday = it.tuesday,
+                                                wednesday = it.wednesday,
+                                                thursday = it.thursday,
+                                                friday = it.friday,
+                                                saturday = it.saturday
+                                            )
+                                        }
+                                    ScheduleType.DAY_OF_WEEK
+                                }
                                 else -> null
                             }
                             startTime = task.schedule?.timeSpan?.startTime

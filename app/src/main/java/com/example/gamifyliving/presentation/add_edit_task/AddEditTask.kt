@@ -384,5 +384,71 @@ fun DaysOfWeekSelector(
     daysOfWeek: DaysOfWeek,
     onDaysOfWeekChange: (WeekDay) -> Unit
 ) {
-
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.sunday,
+                onClick = { onDaysOfWeekChange(WeekDay.SUNDAY) }
+            )
+            Text(text = "S")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.monday,
+                onClick = { onDaysOfWeekChange(WeekDay.MONDAY) }
+            )
+            Text(text = "M")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.tuesday,
+                onClick = { onDaysOfWeekChange(WeekDay.TUESDAY) }
+            )
+            Text(text = "T")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.wednesday,
+                onClick = { onDaysOfWeekChange(WeekDay.WEDNESDAY) }
+            )
+            Text(text = "W")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.thursday,
+                onClick = { onDaysOfWeekChange(WeekDay.THURSDAY) }
+            )
+            Text(text = "T")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.friday,
+                onClick = { onDaysOfWeekChange(WeekDay.FRIDAY) }
+            )
+            Text(text = "F")
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RadioButton(
+                selected = daysOfWeek.saturday,
+                onClick = { onDaysOfWeekChange(WeekDay.SATURDAY) }
+            )
+            Text(text = "S")
+        }
+    }
 }
