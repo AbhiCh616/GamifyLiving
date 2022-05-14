@@ -46,4 +46,7 @@
     <string name="coins">Coins</string>
     <string name="select_schedule">Select Schedule</string>
     <string name="no_selection">No Selection</string>
+    <string name="habits">Habits</string>
+    <string name="todos">Todos</string>
+    <string name="view">View</string>
 </resources>
