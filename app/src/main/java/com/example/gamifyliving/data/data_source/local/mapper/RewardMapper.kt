@@ -16,7 +16,7 @@ fun Reward.toDataModel() =
         taskId = this.taskId,
         statId = this.statId,
         points = this.points,
-        id = this.uid
+        id = 0
     )
 
 fun List<RewardEntity>.toDomainModel() =
