@@ -1,4 +1,4 @@
-package com.example.gamifyliving.presentation.edit_task
+package com.example.gamifyliving.presentation.add_edit_task
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions

@@ -3,7 +3,7 @@ package com.example.gamifyliving.presentation.navigation
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.example.gamifyliving.presentation.edit_task.AddEditTaskHandler
+import com.example.gamifyliving.presentation.add_edit_task.AddEditTaskHandler
 import com.example.gamifyliving.presentation.tasks.TasksScreenHandler
 import com.example.gamifyliving.presentation.util.BottomNavigationScreen
 import com.example.gamifyliving.presentation.util.Screen
