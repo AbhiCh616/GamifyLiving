@@ -12,7 +12,7 @@ import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.model.Todo
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
-@ExperimentalMaterialApi
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TasksList(
     tasks: List<Task>,

@@ -6,8 +6,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.gamifyliving.presentation.home.Home
+import com.example.gamifyliving.presentation.home.HomeHandler
 import com.example.gamifyliving.presentation.util.BottomNavigationScreen
+import com.example.gamifyliving.presentation.util.Screen
 
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -17,7 +18,11 @@ fun Navigation(navController: NavHostController, setBottomBarVisibility: (Boolea
     NavHost(navController = navController, startDestination = BottomNavigationScreen.Home.route) {
         composable(BottomNavigationScreen.Home.route) {
             setBottomBarVisibility(BottomNavigationScreen.Home.hasBottomNavBar)
-            Home()
+            HomeHandler(
+                onTaskClick = { task ->
+                    navController.navigate("${Screen.EditTask.route}/${task.id}")
+                }
+            )
         }
         storeGraph(
             setBottomBarVisibility = setBottomBarVisibility,
