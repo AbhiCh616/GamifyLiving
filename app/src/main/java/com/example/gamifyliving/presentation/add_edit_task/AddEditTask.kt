@@ -322,7 +322,7 @@ fun ScheduleTypeSelector(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = onExpandedChange,
-        modifier = Modifier.width(160.dp)
+        modifier = Modifier.width(240.dp)
     ) {
         TextField(
             readOnly = true,
