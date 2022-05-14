@@ -3,6 +3,7 @@ package com.example.gamifyliving.presentation.add_edit_task
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -13,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
@@ -196,7 +198,8 @@ fun AddEditTask(
                                     value = repeatInterval!!,
                                     onValueChange = onRepeatIntervalChange,
                                     label = { Text(stringResource(id = R.string.interval)) },
-                                    modifier = Modifier.width(140.dp)
+                                    modifier = Modifier.width(140.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 )
                             } else if (scheduleType == ScheduleType.DAY_OF_WEEK) {
                                 Spacer(modifier = Modifier.height(16.dp))
@@ -301,7 +304,8 @@ fun EditCoins(coins: String, onCoinsChange: (String) -> Unit) {
             value = coins,
             onValueChange = onCoinsChange,
             modifier = Modifier.width(80.dp),
-            label = { Text(stringResource(id = R.string.coins)) }
+            label = { Text(stringResource(id = R.string.coins)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         )
     }
 }
