@@ -18,7 +18,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val weekDayScheduleDao: WeekDayScheduleDao,
 ) : TaskRepository {
 
-    override suspend fun addTask(task: Task) {
+    override suspend fun addTask(task: Task): Int {
         // Add Task
         val taskEntity = task.toTaskEntity()
         val taskId = taskDao.insert(taskEntity = taskEntity).toInt()
@@ -66,6 +66,8 @@ class TaskRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+        return taskId
     }
 
     override suspend fun updateTask(task: Task) {

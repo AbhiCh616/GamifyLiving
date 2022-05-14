@@ -186,7 +186,8 @@ fun AddEditTask(
                                 TextField(
                                     value = repeatInterval!!,
                                     onValueChange = onRepeatIntervalChange,
-                                    modifier = Modifier.width(80.dp)
+                                    label = { Text(stringResource(id = R.string.interval)) },
+                                    modifier = Modifier.width(140.dp)
                                 )
                             } else if (scheduleType == ScheduleType.DAY_OF_WEEK) {
                                 Spacer(modifier = Modifier.height(16.dp))
@@ -255,14 +256,29 @@ fun AddEditTask(
 
 @Composable
 fun TaskTypeSelector(taskType: TaskType, onTaskTypeChange: (TaskType) -> Unit) {
-    RadioButton(
-        selected = taskType == TaskType.TODO,
-        onClick = { onTaskTypeChange(TaskType.TODO) }
-    )
-    RadioButton(
-        selected = taskType == TaskType.HABIT,
-        onClick = { onTaskTypeChange(TaskType.HABIT) }
-    )
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = taskType == TaskType.TODO,
+                onClick = { onTaskTypeChange(TaskType.TODO) }
+            )
+            Text(text = stringResource(id = R.string.todo))
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = taskType == TaskType.HABIT,
+                onClick = { onTaskTypeChange(TaskType.HABIT) }
+            )
+            Text(text = stringResource(id = R.string.habit))
+        }
+    }
 }
 
 @Composable
@@ -275,7 +291,8 @@ fun EditCoins(coins: String, onCoinsChange: (String) -> Unit) {
         TextField(
             value = coins,
             onValueChange = onCoinsChange,
-            modifier = Modifier.width(80.dp)
+            modifier = Modifier.width(80.dp),
+            label = { Text(stringResource(id = R.string.coins)) }
         )
     }
 }
@@ -286,23 +303,30 @@ fun ScheduleTypeSelector(
     onScheduleTypeChange: (ScheduleType) -> Unit
 ) {
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(
                 selected = scheduleType == ScheduleType.EVERYDAY,
                 onClick = { onScheduleTypeChange(ScheduleType.EVERYDAY) }
             )
             Text(text = stringResource(id = R.string.everyday))
         }
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(
                 selected = scheduleType == ScheduleType.REPEAT_AFTER,
                 onClick = { onScheduleTypeChange(ScheduleType.REPEAT_AFTER) }
             )
             Text(text = stringResource(id = R.string.repeat_after))
         }
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(
                 selected = scheduleType == ScheduleType.DAY_OF_WEEK,
                 onClick = { onScheduleTypeChange(ScheduleType.DAY_OF_WEEK) }

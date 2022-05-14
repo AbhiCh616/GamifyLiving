@@ -40,4 +40,8 @@
     <string name="everyday">Everyday</string>
     <string name="repeat_after">Repeat After</string>
     <string name="day_of_week">Day of Week</string>
+    <string name="todo">Todo</string>
+    <string name="habit">Habit</string>
+    <string name="interval">Interval</string>
+    <string name="coins">Coins</string>
 </resources>
