@@ -57,6 +57,9 @@ fun AddEditTaskHandler(
         onDateClear = viewModelAdd::onDateClear,
         scheduleType = viewModelAdd.scheduleType,
         onScheduleTypeChange = viewModelAdd::onScheduleTypeChange,
+        isScheduleDropdownExpanded = viewModelAdd.isScheduleDropdownExpanded,
+        scheduleDropdownExpandedChange = viewModelAdd::scheduleDropdownExpandedChange,
+        dismissScheduleDropdown = viewModelAdd::dismissScheduleDropdown,
         repeatInterval = viewModelAdd.repeatInterval,
         onRepeatIntervalChange = viewModelAdd::onRepeatIntervalChange,
         daysOfWeek = viewModelAdd.daysOfWeek,
@@ -92,6 +95,9 @@ fun AddEditTask(
     onDateClear: () -> Unit,
     scheduleType: ScheduleType?,
     onScheduleTypeChange: (ScheduleType) -> Unit,
+    isScheduleDropdownExpanded: Boolean,
+    scheduleDropdownExpandedChange: (Boolean) -> Unit,
+    dismissScheduleDropdown: () -> Unit,
     repeatInterval: String?,
     onRepeatIntervalChange: (String) -> Unit,
     daysOfWeek: DaysOfWeek,
@@ -176,6 +182,9 @@ fun AddEditTask(
                         if (taskType == TaskType.HABIT) {
                             Spacer(modifier = Modifier.height(16.dp))
                             ScheduleTypeSelector(
+                                expanded = isScheduleDropdownExpanded,
+                                onExpandedChange = scheduleDropdownExpandedChange,
+                                onDismiss = dismissScheduleDropdown,
                                 scheduleType = scheduleType,
                                 onScheduleTypeChange = onScheduleTypeChange
                             )
@@ -297,41 +306,67 @@ fun EditCoins(coins: String, onCoinsChange: (String) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ScheduleTypeSelector(
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
+    onDismiss: () -> Unit,
     scheduleType: ScheduleType?,
     onScheduleTypeChange: (ScheduleType) -> Unit
 ) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = onExpandedChange,
+        modifier = Modifier.width(160.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
+        TextField(
+            readOnly = true,
+            value = stringResource(
+                id =
+                when (scheduleType) {
+                    ScheduleType.EVERYDAY -> R.string.everyday
+                    ScheduleType.REPEAT_AFTER -> R.string.repeat_after
+                    ScheduleType.DAY_OF_WEEK -> R.string.day_of_week
+                    null -> R.string.select_schedule
+                }
+            ),
+            onValueChange = {},
+            label = { Text(text = stringResource(id = R.string.stat)) },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded
+                )
+            }
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = onDismiss
         ) {
-            RadioButton(
-                selected = scheduleType == ScheduleType.EVERYDAY,
-                onClick = { onScheduleTypeChange(ScheduleType.EVERYDAY) }
-            )
-            Text(text = stringResource(id = R.string.everyday))
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RadioButton(
-                selected = scheduleType == ScheduleType.REPEAT_AFTER,
-                onClick = { onScheduleTypeChange(ScheduleType.REPEAT_AFTER) }
-            )
-            Text(text = stringResource(id = R.string.repeat_after))
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RadioButton(
-                selected = scheduleType == ScheduleType.DAY_OF_WEEK,
-                onClick = { onScheduleTypeChange(ScheduleType.DAY_OF_WEEK) }
-            )
-            Text(text = stringResource(id = R.string.day_of_week))
+            DropdownMenuItem(
+                onClick = {
+                    onScheduleTypeChange(ScheduleType.EVERYDAY)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.everyday))
+            }
+            DropdownMenuItem(
+                onClick = {
+                    onScheduleTypeChange(ScheduleType.REPEAT_AFTER)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.repeat_after))
+            }
+            DropdownMenuItem(
+                onClick = {
+                    onScheduleTypeChange(ScheduleType.DAY_OF_WEEK)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.day_of_week))
+            }
         }
     }
 }

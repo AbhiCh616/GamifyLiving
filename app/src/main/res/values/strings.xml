@@ -44,4 +44,5 @@
     <string name="habit">Habit</string>
     <string name="interval">Interval</string>
     <string name="coins">Coins</string>
+    <string name="select_schedule">Select Schedule</string>
 </resources>

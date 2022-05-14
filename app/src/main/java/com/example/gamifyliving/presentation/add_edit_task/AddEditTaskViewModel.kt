@@ -56,6 +56,9 @@ class AddEditTaskViewModel @Inject constructor(
     var scheduleType: ScheduleType? by mutableStateOf(null)
         private set
 
+    var isScheduleDropdownExpanded by mutableStateOf(false)
+        private set
+
     var repeatInterval by mutableStateOf("")
         private set
 
@@ -146,6 +149,15 @@ class AddEditTaskViewModel @Inject constructor(
 
     fun onScheduleTypeChange(scheduleType: ScheduleType) {
         this.scheduleType = scheduleType
+    }
+
+    fun scheduleDropdownExpandedChange(currentState: Boolean)
+    {
+        isScheduleDropdownExpanded = !isScheduleDropdownExpanded
+    }
+
+    fun dismissScheduleDropdown() {
+        isScheduleDropdownExpanded = false
     }
 
     fun onScheduledDateChange(dateLong: LocalDate?) {
