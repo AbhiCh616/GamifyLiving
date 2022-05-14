@@ -45,4 +45,5 @@
     <string name="interval">Interval</string>
     <string name="coins">Coins</string>
     <string name="select_schedule">Select Schedule</string>
+    <string name="no_selection">No Selection</string>
 </resources>

@@ -147,7 +147,7 @@ class AddEditTaskViewModel @Inject constructor(
         newTaskType = taskType
     }
 
-    fun onScheduleTypeChange(scheduleType: ScheduleType) {
+    fun onScheduleTypeChange(scheduleType: ScheduleType?) {
         this.scheduleType = scheduleType
     }
 

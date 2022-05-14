@@ -94,7 +94,7 @@ fun AddEditTask(
     onDateChange: (LocalDate?) -> Unit,
     onDateClear: () -> Unit,
     scheduleType: ScheduleType?,
-    onScheduleTypeChange: (ScheduleType) -> Unit,
+    onScheduleTypeChange: (ScheduleType?) -> Unit,
     isScheduleDropdownExpanded: Boolean,
     scheduleDropdownExpandedChange: (Boolean) -> Unit,
     dismissScheduleDropdown: () -> Unit,
@@ -313,7 +313,7 @@ fun ScheduleTypeSelector(
     onExpandedChange: (Boolean) -> Unit,
     onDismiss: () -> Unit,
     scheduleType: ScheduleType?,
-    onScheduleTypeChange: (ScheduleType) -> Unit
+    onScheduleTypeChange: (ScheduleType?) -> Unit
 ) {
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -343,6 +343,14 @@ fun ScheduleTypeSelector(
             expanded = expanded,
             onDismissRequest = onDismiss
         ) {
+            DropdownMenuItem(
+                onClick = {
+                    onScheduleTypeChange(null)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.no_selection))
+            }
             DropdownMenuItem(
                 onClick = {
                     onScheduleTypeChange(ScheduleType.EVERYDAY)
