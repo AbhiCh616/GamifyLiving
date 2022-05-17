@@ -101,7 +101,7 @@ class AddEditTaskViewModel @Inject constructor(
                             coins = task.coinsReward.toString()
                             scheduledDate = task.schedule?.date
                             startTime = task.schedule?.timeSpan?.startTime
-                            endTime = task.schedule?.timeSpan?.startTime
+                            endTime = task.schedule?.timeSpan?.endTime
                             getRewardsForTask(task).collect {
                                 it.forEach { reward ->
                                     _rewards.add(reward)
@@ -136,7 +136,7 @@ class AddEditTaskViewModel @Inject constructor(
                                 else -> null
                             }
                             startTime = task.schedule?.timeSpan?.startTime
-                            endTime = task.schedule?.timeSpan?.startTime
+                            endTime = task.schedule?.timeSpan?.endTime
                             getRewardsForTask(task).collect {
                                 it.forEach { reward ->
                                     _rewards.add(reward)
