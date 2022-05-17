@@ -34,7 +34,7 @@ class GetTasks @Inject constructor(
             updatedList = when (sort.sortCriteria) {
                 SortCriteria.TIME -> updatedList.sortedBy { it.schedule?.timeSpan?.startTime }
                 SortCriteria.UNDONE -> updatedList.sortedBy { it.status }
-                SortCriteria.WITHOUT_TIME -> updatedList.sortedBy { it.schedule?.timeSpan == null }
+                SortCriteria.WITH_TIME -> updatedList.sortedBy { it.schedule?.timeSpan == null }
             }
             if (sort.sortOrder == SortOrder.DESC) {
                 updatedList = updatedList.reversed()

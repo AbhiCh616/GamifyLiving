@@ -1,7 +1,7 @@
 package com.example.gamifyliving.domain.util
 
 enum class SortCriteria {
-    TIME, UNDONE, WITHOUT_TIME
+    TIME, UNDONE, WITH_TIME
 }
 
 enum class SortOrder {
