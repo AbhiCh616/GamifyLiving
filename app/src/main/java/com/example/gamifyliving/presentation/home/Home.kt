@@ -83,7 +83,7 @@ fun ViewDropDown(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = onExpandedChange,
-        modifier = Modifier.width(160.dp)
+        modifier = Modifier.width(180.dp)
     ) {
         TextField(
             readOnly = true,
