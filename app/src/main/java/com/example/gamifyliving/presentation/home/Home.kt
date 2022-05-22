@@ -112,6 +112,14 @@ fun ViewDropDown(
             ) {
                 Text(text = stringResource(id = R.string.list_view))
             }
+            DropdownMenuItem(
+                onClick = {
+                    onViewChange(HomeViewType.CALENDAR)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.calendar_view))
+            }
         }
     }
 }
