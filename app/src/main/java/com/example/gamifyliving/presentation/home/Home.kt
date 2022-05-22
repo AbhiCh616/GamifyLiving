@@ -48,7 +48,9 @@ fun Home(
         Surface(color = MaterialTheme.colors.background) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
             ) {
                 ViewDropDown(
                     expanded = isViewDropDownExpanded,
@@ -58,11 +60,16 @@ fun Home(
                     onViewChange = onViewChange
                 )
                 Spacer(modifier = Modifier.height(32.dp))
-                TasksList(
-                    tasks = tasks,
-                    onCheckboxClick = changeTaskStatus,
-                    onTaskClick = onTaskClick
-                )
+                if(view == HomeViewType.LIST) {
+                    TasksList(
+                        tasks = tasks,
+                        onCheckboxClick = changeTaskStatus,
+                        onTaskClick = onTaskClick
+                    )
+                }
+                if(view == HomeViewType.CALENDAR) {
+
+                }
             }
         }
     }
@@ -80,7 +87,7 @@ fun ViewDropDown(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = onExpandedChange,
-        modifier = Modifier.width(160.dp)
+        modifier = Modifier.width(180.dp)
     ) {
         TextField(
             readOnly = true,
@@ -108,6 +115,14 @@ fun ViewDropDown(
                 }
             ) {
                 Text(text = stringResource(id = R.string.list_view))
+            }
+            DropdownMenuItem(
+                onClick = {
+                    onViewChange(HomeViewType.CALENDAR)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.calendar_view))
             }
         }
     }
