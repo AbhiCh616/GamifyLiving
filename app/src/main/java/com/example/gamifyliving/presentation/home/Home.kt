@@ -58,11 +58,14 @@ fun Home(
                     onViewChange = onViewChange
                 )
                 Spacer(modifier = Modifier.height(32.dp))
-                TasksList(
-                    tasks = tasks,
-                    onCheckboxClick = changeTaskStatus,
-                    onTaskClick = onTaskClick
-                )
+                if (view == HomeViewType.LIST)
+                    TasksList(
+                        tasks = tasks,
+                        onCheckboxClick = changeTaskStatus,
+                        onTaskClick = onTaskClick
+                    )
+                if (view == HomeViewType.CALENDAR)
+                    CalendarView()
             }
         }
     }
