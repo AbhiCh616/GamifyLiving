@@ -1,5 +1,6 @@
 package com.example.gamifyliving.presentation.home
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -18,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    getTasks: GetTasks,
+    private val getTasks: GetTasks,
     private val changeTaskStatus: ChangeTaskStatus
 ) : ViewModel() {
 
@@ -36,6 +37,16 @@ class HomeViewModel @Inject constructor(
     var isViewDropDownExpanded by mutableStateOf(false)
         private set
 
+    private fun updateTasks() {
+        getTasks(
+            sorts = listOf(
+                SortTasksBy(sortCriteria = SortCriteria.TIME),
+                SortTasksBy(sortCriteria = SortCriteria.WITH_TIME, sortOrder = SortOrder.DESC)
+            ),
+            filterForDate = LocalDate.now()
+        )
+    }
+
     fun onViewDropDownExpandedChange(updatedValue: Boolean) {
         isViewDropDownExpanded = updatedValue
     }
@@ -46,6 +57,7 @@ class HomeViewModel @Inject constructor(
 
     fun onViewChange(updatedView: HomeViewType) {
         view = updatedView
+        updateTasks()
     }
 
     fun onTaskStatusChange(task: Task) = viewModelScope.launch {
