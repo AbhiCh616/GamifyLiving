@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
         filterForDate = LocalDate.now()
     )
 
-    var view by mutableStateOf(HomeViewType.LIST)
+    var view by mutableStateOf(HomeViewType.CALENDAR)
         private set
 
     var isViewDropDownExpanded by mutableStateOf(false)
