@@ -13,6 +13,7 @@ import com.example.gamifyliving.domain.util.SortOrder
 import com.example.gamifyliving.domain.util.SortTasksBy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +26,8 @@ class HomeViewModel @Inject constructor(
         sorts = listOf(
             SortTasksBy(sortCriteria = SortCriteria.TIME),
             SortTasksBy(sortCriteria = SortCriteria.WITH_TIME, sortOrder = SortOrder.DESC)
-        )
+        ),
+        filterForDate = LocalDate.now()
     )
 
     var view by mutableStateOf(HomeViewType.LIST)
