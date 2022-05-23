@@ -19,7 +19,8 @@ fun HomeHandler(
     onTaskClick: (Task) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val tasks by viewModel.tasks.collectAsState(initial = emptyList())
+    val listTasks by viewModel.listTasks.collectAsState(initial = emptyList())
+    val calendarTasks by viewModel.calendarTasks.collectAsState(initial = emptyList())
 
     Home(
         isViewDropDownExpanded = viewModel.isViewDropDownExpanded,
@@ -27,7 +28,8 @@ fun HomeHandler(
         onViewDropDownDismiss = viewModel::onViewDropDownDismiss,
         view = viewModel.view,
         onViewChange = viewModel::onViewChange,
-        tasks = tasks,
+        listTasks = listTasks,
+        calendarTasks = calendarTasks,
         changeTaskStatus = viewModel::onTaskStatusChange,
         onTaskClick = onTaskClick
     )
@@ -40,7 +42,8 @@ fun Home(
     onViewDropDownDismiss: () -> Unit,
     view: HomeViewType,
     onViewChange: (HomeViewType) -> Unit,
-    tasks: List<Task>,
+    listTasks: List<Task>,
+    calendarTasks: List<Task>,
     changeTaskStatus: (Task) -> Unit,
     onTaskClick: (Task) -> Unit,
 ) {
@@ -60,12 +63,16 @@ fun Home(
                 Spacer(modifier = Modifier.height(32.dp))
                 if (view == HomeViewType.LIST)
                     TasksList(
-                        tasks = tasks,
+                        tasks = listTasks,
                         onCheckboxClick = changeTaskStatus,
                         onTaskClick = onTaskClick
                     )
                 if (view == HomeViewType.CALENDAR)
-                    CalendarView()
+                    CalendarView(
+                        tasks = calendarTasks,
+                        onCheckboxClick = changeTaskStatus,
+                        onTaskClick = onTaskClick
+                    )
             }
         }
     }
