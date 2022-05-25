@@ -24,9 +24,6 @@ class HomeViewModel @Inject constructor(
 
     var listTasks =
         getTasks(
-            filters = setOf(
-                FilterTaskOn.WITH_TIME
-            ),
             sorts = listOf(
                 SortTasksBy(sortCriteria = SortCriteria.TIME),
             ),
