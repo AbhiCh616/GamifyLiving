@@ -4,6 +4,7 @@ import com.example.gamifyliving.domain.model.Reward
 import com.example.gamifyliving.domain.model.Task
 import com.example.gamifyliving.domain.repository.RewardRepository
 import com.example.gamifyliving.domain.repository.TaskRepository
+import com.example.gamifyliving.domain.util.runSuspendCatching
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class UpdateTask @Inject constructor(
     private val taskRepository: TaskRepository,
     private val rewardRepository: RewardRepository
 ) {
-    suspend operator fun invoke(task: Task, rewards: List<Reward>) =
+    suspend operator fun invoke(task: Task, rewards: List<Reward>) = runSuspendCatching {
         withContext(NonCancellable) {
             // Update task
             taskRepository.updateTask(task)
@@ -21,4 +22,5 @@ class UpdateTask @Inject constructor(
             rewardRepository.deleteRewardsForTask(taskId = task.id)
             rewardRepository.addRewards(rewards)
         }
+    }
 }

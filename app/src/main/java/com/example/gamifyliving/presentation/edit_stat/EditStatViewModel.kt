@@ -38,11 +38,14 @@ class EditStatViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>("stat_id")?.let { statId ->
             viewModelScope.launch {
-                getStatById(statId)?.let { stat ->
-                    selectedStat = stat
-                    name = stat.name
-                    sliderValue = getProgressFromStatValue(stat.value)
-                }
+                getStatById(statId)
+                    .onSuccess { stat ->
+                        stat?.let {
+                            selectedStat = stat
+                            name = stat.name
+                            sliderValue = getProgressFromStatValue(stat.value)
+                        }
+                    }
             }
         }
     }

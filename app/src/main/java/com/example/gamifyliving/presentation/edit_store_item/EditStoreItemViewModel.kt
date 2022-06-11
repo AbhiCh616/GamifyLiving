@@ -33,11 +33,15 @@ class EditStoreItemViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>("store_item_id")?.let { storeItemId ->
             viewModelScope.launch {
-                getStoreItemById(id = storeItemId)?.let { storeItem ->
-                    selectedStoreItem = storeItem
-                    name = storeItem.name
-                    costCoins = storeItem.costCoins.toString()
-                }
+                getStoreItemById(id = storeItemId)
+                    .onSuccess { storeItem ->
+                        storeItem?.let {
+                            selectedStoreItem = storeItem
+                            name = storeItem.name
+                            costCoins = storeItem.costCoins.toString()
+                        }
+
+                    }
             }
         }
     }

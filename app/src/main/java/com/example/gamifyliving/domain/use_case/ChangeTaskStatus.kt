@@ -7,6 +7,7 @@ import com.example.gamifyliving.domain.repository.CoinRepository
 import com.example.gamifyliving.domain.repository.RewardRepository
 import com.example.gamifyliving.domain.repository.StatRepository
 import com.example.gamifyliving.domain.repository.TaskRepository
+import com.example.gamifyliving.domain.util.runSuspendCatching
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class ChangeTaskStatus @Inject constructor(
     private val statRepository: StatRepository,
     private val coinRepository: CoinRepository
 ) {
-    suspend operator fun invoke(task: Task) {
+    suspend operator fun invoke(task: Task) = runSuspendCatching {
         if (task is Todo) {
             // Change (completion) status of task
             val newTask = task.copy(status = !task.status)

@@ -1,6 +1,5 @@
 package com.example.gamifyliving.presentation.add_edit_task
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +11,6 @@ import com.example.gamifyliving.domain.model.*
 import com.example.gamifyliving.domain.use_case.*
 import com.example.gamifyliving.presentation.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -92,59 +90,61 @@ class AddEditTaskViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>("task_id")?.let { taskId ->
             viewModelScope.launch {
-                getTaskById(taskId)?.let { task ->
-                    Log.d("VALE", task.toString())
-                    when (task) {
-                        is Todo -> {
-                            selectedTask = task
-                            name = task.name
-                            coins = task.coinsReward.toString()
-                            scheduledDate = task.schedule?.date
-                            startTime = task.schedule?.timeSpan?.startTime
-                            endTime = task.schedule?.timeSpan?.endTime
-                            getRewardsForTask(task).collect {
-                                it.forEach { reward ->
-                                    _rewards.add(reward)
-                                }
-                            }
-                        }
-                        is Habit -> {
-                            selectedTask = task
-                            name = task.name
-                            scheduleType = when (task.schedule) {
-                                is EverydaySchedule -> ScheduleType.EVERYDAY
-                                is RepeatAfterSchedule -> {
-                                    repeatInterval =
-                                        (task.schedule as RepeatAfterSchedule).interval.toString()
-                                    ScheduleType.REPEAT_AFTER
-                                }
-                                is WeekDaySchedule -> {
-                                    daysOfWeek =
-                                        (task.schedule as WeekDaySchedule).let {
-                                            DaysOfWeek(
-                                                sunday = it.sunday,
-                                                monday = it.monday,
-                                                tuesday = it.tuesday,
-                                                wednesday = it.wednesday,
-                                                thursday = it.thursday,
-                                                friday = it.friday,
-                                                saturday = it.saturday
-                                            )
+                getTaskById(taskId)
+                    .onSuccess { task ->
+                        task?.let {
+                            when (task) {
+                                is Todo -> {
+                                    selectedTask = task
+                                    name = task.name
+                                    coins = task.coinsReward.toString()
+                                    scheduledDate = task.schedule?.date
+                                    startTime = task.schedule?.timeSpan?.startTime
+                                    endTime = task.schedule?.timeSpan?.endTime
+                                    getRewardsForTask(task).collect {
+                                        it.forEach { reward ->
+                                            _rewards.add(reward)
                                         }
-                                    ScheduleType.DAY_OF_WEEK
+                                    }
                                 }
-                                else -> null
-                            }
-                            startTime = task.schedule?.timeSpan?.startTime
-                            endTime = task.schedule?.timeSpan?.endTime
-                            getRewardsForTask(task).collect {
-                                it.forEach { reward ->
-                                    _rewards.add(reward)
+                                is Habit -> {
+                                    selectedTask = task
+                                    name = task.name
+                                    scheduleType = when (task.schedule) {
+                                        is EverydaySchedule -> ScheduleType.EVERYDAY
+                                        is RepeatAfterSchedule -> {
+                                            repeatInterval =
+                                                (task.schedule as RepeatAfterSchedule).interval.toString()
+                                            ScheduleType.REPEAT_AFTER
+                                        }
+                                        is WeekDaySchedule -> {
+                                            daysOfWeek =
+                                                (task.schedule as WeekDaySchedule).let {
+                                                    DaysOfWeek(
+                                                        sunday = it.sunday,
+                                                        monday = it.monday,
+                                                        tuesday = it.tuesday,
+                                                        wednesday = it.wednesday,
+                                                        thursday = it.thursday,
+                                                        friday = it.friday,
+                                                        saturday = it.saturday
+                                                    )
+                                                }
+                                            ScheduleType.DAY_OF_WEEK
+                                        }
+                                        else -> null
+                                    }
+                                    startTime = task.schedule?.timeSpan?.startTime
+                                    endTime = task.schedule?.timeSpan?.endTime
+                                    getRewardsForTask(task).collect {
+                                        it.forEach { reward ->
+                                            _rewards.add(reward)
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                }
             }
         }
     }
@@ -165,8 +165,7 @@ class AddEditTaskViewModel @Inject constructor(
         this.scheduleType = scheduleType
     }
 
-    fun scheduleDropdownExpandedChange(currentState: Boolean)
-    {
+    fun scheduleDropdownExpandedChange(currentState: Boolean) {
         isScheduleDropdownExpanded = !isScheduleDropdownExpanded
     }
 
