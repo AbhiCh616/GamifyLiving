@@ -1,6 +1,6 @@
 package com.example.gamifyliving.presentation.util
 
-import com.example.gamifyliving.domain.model.entity.Reward
+import com.example.gamifyliving.domain.model.value_object.Reward
 
 data class RewardUIModel(
     val taskId: Int,

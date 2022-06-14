@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.model.entity
+package com.example.gamifyliving.domain.model.value_object
 
 data class Reward(
     val statId: Int,

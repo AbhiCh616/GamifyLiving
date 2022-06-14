@@ -1,6 +1,9 @@
 package com.example.gamifyliving.domain.use_case
 
 import com.example.gamifyliving.domain.model.entity.*
+import com.example.gamifyliving.domain.model.value_object.EverydaySchedule
+import com.example.gamifyliving.domain.model.value_object.RepeatAfterSchedule
+import com.example.gamifyliving.domain.model.value_object.WeekDaySchedule
 import com.example.gamifyliving.domain.repository.TaskRepository
 import com.example.gamifyliving.domain.util.FilterTaskOn
 import com.example.gamifyliving.domain.util.SortCriteria

@@ -4,6 +4,9 @@ import com.example.gamifyliving.domain.repository.TaskRepository
 import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.data_source.local.mapper.*
 import com.example.gamifyliving.domain.model.entity.*
+import com.example.gamifyliving.domain.model.value_object.EverydaySchedule
+import com.example.gamifyliving.domain.model.value_object.RepeatAfterSchedule
+import com.example.gamifyliving.domain.model.value_object.WeekDaySchedule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

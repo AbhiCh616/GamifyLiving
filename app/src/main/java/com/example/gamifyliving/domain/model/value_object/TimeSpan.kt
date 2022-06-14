@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.model.entity
+package com.example.gamifyliving.domain.model.value_object
 
 import com.example.gamifyliving.domain.exception.StartTimeGreaterThanEndTimeException
 import java.time.LocalTime
