@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.use_case
+package com.example.gamifyliving.domain.use_case.command
 
 import com.example.gamifyliving.domain.repository.TaskRepository
 import com.example.gamifyliving.domain.util.runSuspendCatching

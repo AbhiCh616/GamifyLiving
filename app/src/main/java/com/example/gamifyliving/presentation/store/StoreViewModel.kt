@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.entity.StoreItem
-import com.example.gamifyliving.domain.use_case.BuyStoreItem
-import com.example.gamifyliving.domain.use_case.GetStoreItems
+import com.example.gamifyliving.domain.use_case.command.BuyStoreItem
+import com.example.gamifyliving.domain.use_case.query.GetStoreItems
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.use_case
+package com.example.gamifyliving.domain.use_case.query
 
 import com.example.gamifyliving.domain.model.entity.*
 import com.example.gamifyliving.domain.model.value_object.EverydaySchedule

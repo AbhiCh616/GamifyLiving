@@ -1,0 +1,1 @@
+package com.example.gamifyliving.domain.use_case.query

@@ -7,8 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.entity.Task
-import com.example.gamifyliving.domain.use_case.ChangeTaskStatus
-import com.example.gamifyliving.domain.use_case.GetTasks
+import com.example.gamifyliving.domain.use_case.command.ChangeTaskStatus
+import com.example.gamifyliving.domain.use_case.query.GetTasks
 import com.example.gamifyliving.domain.util.FilterTaskOn
 import com.example.gamifyliving.domain.util.SortCriteria
 import com.example.gamifyliving.domain.util.SortTasksBy
