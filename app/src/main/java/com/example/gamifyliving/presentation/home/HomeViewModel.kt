@@ -6,11 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.use_case.ChangeTaskStatus
-import com.example.gamifyliving.domain.use_case.GetTasks
-import com.example.gamifyliving.domain.util.FilterTaskOn
-import com.example.gamifyliving.domain.util.SortCriteria
-import com.example.gamifyliving.domain.util.SortTasksBy
+import com.example.gamifyliving.application.use_case.ChangeTaskStatus
+import com.example.gamifyliving.application.use_case.GetTasks
+import com.example.gamifyliving.application.util.FilterTaskOn
+import com.example.gamifyliving.application.util.SortCriteria
+import com.example.gamifyliving.application.util.SortTasksBy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate

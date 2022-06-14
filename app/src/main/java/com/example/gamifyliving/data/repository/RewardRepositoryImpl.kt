@@ -4,8 +4,7 @@ import com.example.gamifyliving.data.data_source.local.dao.RewardDao
 import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
 import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
 import com.example.gamifyliving.domain.model.Reward
-import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.repository.RewardRepository
+import com.example.gamifyliving.application.repository.RewardRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamifyliving.domain.model.Stat
-import com.example.gamifyliving.domain.use_case.AddStat
+import com.example.gamifyliving.application.use_case.AddStat
 import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

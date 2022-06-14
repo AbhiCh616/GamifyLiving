@@ -4,7 +4,7 @@ import com.example.gamifyliving.data.data_source.local.dao.StatDao
 import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
 import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
 import com.example.gamifyliving.domain.model.Stat
-import com.example.gamifyliving.domain.repository.StatRepository
+import com.example.gamifyliving.application.repository.StatRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

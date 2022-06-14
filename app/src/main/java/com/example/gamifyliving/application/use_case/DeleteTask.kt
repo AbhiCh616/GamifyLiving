@@ -1,0 +1,14 @@
+package com.example.gamifyliving.application.use_case
+
+import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.application.repository.TaskRepository
+import com.example.gamifyliving.application.util.runSuspendCatching
+import javax.inject.Inject
+
+class DeleteTask @Inject constructor(
+    private val repository: TaskRepository
+) {
+    suspend operator fun invoke(task: Task) = runSuspendCatching {
+        repository.deleteTask(task)
+    }
+}

@@ -4,7 +4,7 @@ import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
 import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
 import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
 import com.example.gamifyliving.domain.model.StoreItem
-import com.example.gamifyliving.domain.repository.StoreItemRepository
+import com.example.gamifyliving.application.repository.StoreItemRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
