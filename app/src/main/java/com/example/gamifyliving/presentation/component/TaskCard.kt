@@ -12,8 +12,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.model.Todo
+import com.example.gamifyliving.domain.entity.Task
+import com.example.gamifyliving.domain.entity.Todo
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @ExperimentalMaterialApi

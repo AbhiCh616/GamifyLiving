@@ -1,7 +1,7 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.model.Reward
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.entity.Reward
+import com.example.gamifyliving.domain.entity.Task
 import com.example.gamifyliving.application.repository.RewardRepository
 import com.example.gamifyliving.application.repository.TaskRepository
 import com.example.gamifyliving.application.util.runSuspendCatching

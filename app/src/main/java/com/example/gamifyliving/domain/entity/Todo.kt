@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.model
+package com.example.gamifyliving.domain.entity
 
 data class Todo(
     override val name: String,

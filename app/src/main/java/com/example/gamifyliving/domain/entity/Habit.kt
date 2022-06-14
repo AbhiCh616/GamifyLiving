@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.model
+package com.example.gamifyliving.domain.entity
 
 data class Habit(
     override val name: String,

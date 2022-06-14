@@ -1,4 +1,4 @@
-package com.example.gamifyliving.domain.model
+package com.example.gamifyliving.domain.entity
 
 import java.time.LocalDate
 

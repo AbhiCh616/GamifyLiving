@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.repository
 
-import com.example.gamifyliving.domain.model.Stat
+import com.example.gamifyliving.domain.entity.Stat
 import kotlinx.coroutines.flow.Flow
 
 interface StatRepository {

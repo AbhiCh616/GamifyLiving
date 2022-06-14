@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.model.*
+import com.example.gamifyliving.domain.entity.*
 import com.example.gamifyliving.application.repository.TaskRepository
 import com.example.gamifyliving.application.util.FilterTaskOn
 import com.example.gamifyliving.application.util.SortCriteria

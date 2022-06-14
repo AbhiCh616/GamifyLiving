@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.model.StoreItem
+import com.example.gamifyliving.domain.entity.StoreItem
 import com.example.gamifyliving.application.repository.StoreItemRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

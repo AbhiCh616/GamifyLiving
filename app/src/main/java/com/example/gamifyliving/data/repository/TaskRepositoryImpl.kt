@@ -2,7 +2,7 @@ package com.example.gamifyliving.data.repository
 
 import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.data_source.local.mapper.*
-import com.example.gamifyliving.domain.model.*
+import com.example.gamifyliving.domain.entity.*
 import com.example.gamifyliving.application.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

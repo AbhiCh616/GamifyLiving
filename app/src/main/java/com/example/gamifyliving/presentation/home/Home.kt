@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.entity.Task
 import com.example.gamifyliving.presentation.tasks.TasksList
 
 @Composable

@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.entity.Task
 import com.example.gamifyliving.application.repository.TaskRepository
 import com.example.gamifyliving.application.util.runSuspendCatching
 import javax.inject.Inject

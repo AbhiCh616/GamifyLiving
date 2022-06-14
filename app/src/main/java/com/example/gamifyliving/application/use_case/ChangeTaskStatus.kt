@@ -1,8 +1,8 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.model.Habit
-import com.example.gamifyliving.domain.model.Task
-import com.example.gamifyliving.domain.model.Todo
+import com.example.gamifyliving.domain.entity.Habit
+import com.example.gamifyliving.domain.entity.Task
+import com.example.gamifyliving.domain.entity.Todo
 import com.example.gamifyliving.application.repository.CoinRepository
 import com.example.gamifyliving.application.repository.RewardRepository
 import com.example.gamifyliving.application.repository.StatRepository

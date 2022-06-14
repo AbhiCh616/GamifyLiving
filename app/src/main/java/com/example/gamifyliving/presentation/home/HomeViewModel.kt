@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.entity.Task
 import com.example.gamifyliving.application.use_case.ChangeTaskStatus
 import com.example.gamifyliving.application.use_case.GetTasks
 import com.example.gamifyliving.application.util.FilterTaskOn

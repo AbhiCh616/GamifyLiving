@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.model.StoreItem
+import com.example.gamifyliving.domain.entity.StoreItem
 
 @Composable
 fun StoreHandler(

@@ -3,7 +3,7 @@ package com.example.gamifyliving.data.repository
 import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
 import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
 import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
-import com.example.gamifyliving.domain.model.StoreItem
+import com.example.gamifyliving.domain.entity.StoreItem
 import com.example.gamifyliving.application.repository.StoreItemRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

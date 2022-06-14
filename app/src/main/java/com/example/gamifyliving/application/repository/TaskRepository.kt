@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.repository
 
-import com.example.gamifyliving.domain.model.Task
+import com.example.gamifyliving.domain.entity.Task
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {

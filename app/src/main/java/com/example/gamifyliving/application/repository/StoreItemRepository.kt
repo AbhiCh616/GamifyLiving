@@ -1,6 +1,6 @@
 package com.example.gamifyliving.application.repository
 
-import com.example.gamifyliving.domain.model.StoreItem
+import com.example.gamifyliving.domain.entity.StoreItem
 import kotlinx.coroutines.flow.Flow
 
 interface StoreItemRepository {
