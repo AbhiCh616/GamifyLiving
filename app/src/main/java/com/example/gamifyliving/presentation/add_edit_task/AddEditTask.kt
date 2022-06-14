@@ -22,10 +22,7 @@ import com.example.gamifyliving.domain.entity.Reward
 import com.example.gamifyliving.domain.entity.Stat
 import com.example.gamifyliving.presentation.component.AppDatePicker
 import com.example.gamifyliving.presentation.component.AppTimePicker
-import com.example.gamifyliving.presentation.util.DaysOfWeek
-import com.example.gamifyliving.presentation.util.ScheduleType
-import com.example.gamifyliving.presentation.util.TaskType
-import com.example.gamifyliving.presentation.util.WeekDay
+import com.example.gamifyliving.presentation.util.*
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -109,11 +106,11 @@ fun AddEditTask(
     endTime: String?,
     onEndTimeChange: (LocalTime?) -> Unit,
     onTimeClear: () -> Unit,
-    rewards: List<Reward>,
+    rewards: List<RewardUIModel>,
     stats: List<Stat>,
     onAddReward: () -> Unit,
-    editReward: (Reward) -> Unit,
-    deleteReward: (Reward) -> Unit,
+    editReward: (RewardUIModel) -> Unit,
+    deleteReward: (RewardUIModel) -> Unit,
 ) {
 
     Scaffold(

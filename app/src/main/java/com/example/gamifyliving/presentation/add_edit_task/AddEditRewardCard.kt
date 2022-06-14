@@ -14,13 +14,14 @@ import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
 import com.example.gamifyliving.domain.entity.Reward
 import com.example.gamifyliving.domain.entity.Stat
+import com.example.gamifyliving.presentation.util.RewardUIModel
 
 @Composable
 fun AddEditRewardCardHandler(
-    reward: Reward,
+    reward: RewardUIModel,
     stats: List<Stat>,
-    editReward: (Reward) -> Unit,
-    onDelete: (Reward) -> Unit,
+    editReward: (RewardUIModel) -> Unit,
+    onDelete: (RewardUIModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selectedStat = stats.single { stat -> stat.uid == reward.statId }

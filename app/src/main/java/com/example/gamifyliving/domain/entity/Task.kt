@@ -5,4 +5,5 @@ interface Task {
     val name: String
     val status: Boolean
     val schedule: Schedule?
+    val rewards: List<Reward>?
 }

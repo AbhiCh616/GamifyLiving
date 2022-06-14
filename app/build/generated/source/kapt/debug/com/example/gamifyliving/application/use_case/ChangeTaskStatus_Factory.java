@@ -2,7 +2,6 @@
 package com.example.gamifyliving.application.use_case;
 
 import com.example.gamifyliving.application.repository.CoinRepository;
-import com.example.gamifyliving.application.repository.RewardRepository;
 import com.example.gamifyliving.application.repository.StatRepository;
 import com.example.gamifyliving.application.repository.TaskRepository;
 import dagger.internal.DaggerGenerated;
@@ -21,37 +20,31 @@ import javax.inject.Provider;
 public final class ChangeTaskStatus_Factory implements Factory<ChangeTaskStatus> {
   private final Provider<TaskRepository> taskRepositoryProvider;
 
-  private final Provider<RewardRepository> rewardRepositoryProvider;
-
   private final Provider<StatRepository> statRepositoryProvider;
 
   private final Provider<CoinRepository> coinRepositoryProvider;
 
   public ChangeTaskStatus_Factory(Provider<TaskRepository> taskRepositoryProvider,
-      Provider<RewardRepository> rewardRepositoryProvider,
       Provider<StatRepository> statRepositoryProvider,
       Provider<CoinRepository> coinRepositoryProvider) {
     this.taskRepositoryProvider = taskRepositoryProvider;
-    this.rewardRepositoryProvider = rewardRepositoryProvider;
     this.statRepositoryProvider = statRepositoryProvider;
     this.coinRepositoryProvider = coinRepositoryProvider;
   }
 
   @Override
   public ChangeTaskStatus get() {
-    return newInstance(taskRepositoryProvider.get(), rewardRepositoryProvider.get(), statRepositoryProvider.get(), coinRepositoryProvider.get());
+    return newInstance(taskRepositoryProvider.get(), statRepositoryProvider.get(), coinRepositoryProvider.get());
   }
 
   public static ChangeTaskStatus_Factory create(Provider<TaskRepository> taskRepositoryProvider,
-      Provider<RewardRepository> rewardRepositoryProvider,
       Provider<StatRepository> statRepositoryProvider,
       Provider<CoinRepository> coinRepositoryProvider) {
-    return new ChangeTaskStatus_Factory(taskRepositoryProvider, rewardRepositoryProvider, statRepositoryProvider, coinRepositoryProvider);
+    return new ChangeTaskStatus_Factory(taskRepositoryProvider, statRepositoryProvider, coinRepositoryProvider);
   }
 
   public static ChangeTaskStatus newInstance(TaskRepository taskRepository,
-      RewardRepository rewardRepository, StatRepository statRepository,
-      CoinRepository coinRepository) {
-    return new ChangeTaskStatus(taskRepository, rewardRepository, statRepository, coinRepository);
+      StatRepository statRepository, CoinRepository coinRepository) {
+    return new ChangeTaskStatus(taskRepository, statRepository, coinRepository);
   }
 }

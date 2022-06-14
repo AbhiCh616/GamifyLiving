@@ -84,12 +84,6 @@ abstract class AppBindsModule {
 
     @Singleton
     @Binds
-    abstract fun bindRewardRepository(
-        rewardRepositoryImpl: RewardRepositoryImpl
-    ): RewardRepository
-
-    @Singleton
-    @Binds
     abstract fun bindStatRepository(
         statRepositoryImpl: StatRepositoryImpl
     ): StatRepository

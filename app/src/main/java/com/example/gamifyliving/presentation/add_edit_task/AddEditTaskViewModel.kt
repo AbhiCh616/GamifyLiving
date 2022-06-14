@@ -7,8 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.entity.*
 import com.example.gamifyliving.application.use_case.*
+import com.example.gamifyliving.domain.entity.*
 import com.example.gamifyliving.presentation.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -24,7 +24,6 @@ class AddEditTaskViewModel @Inject constructor(
     private val updateTask: UpdateTask,
     private val addTask: AddTask,
     getStats: GetStats,
-    getRewardsForTask: GetRewardsForTask,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -78,9 +77,9 @@ class AddEditTaskViewModel @Inject constructor(
     val endTimeText
         get() = endTime?.toString()
 
-    private val _rewards = mutableStateListOf<Reward>()
+    private val _rewards = mutableStateListOf<RewardUIModel>()
 
-    val rewards: List<Reward>
+    val rewards: List<RewardUIModel>
         get() = _rewards
 
     val stats = getStats()
@@ -101,9 +100,11 @@ class AddEditTaskViewModel @Inject constructor(
                                     scheduledDate = task.schedule?.date
                                     startTime = task.schedule?.timeSpan?.startTime
                                     endTime = task.schedule?.timeSpan?.endTime
-                                    getRewardsForTask(task).collect {
+                                    task.rewards?.let {
+                                        var index = 0
                                         it.forEach { reward ->
-                                            _rewards.add(reward)
+                                            _rewards.add(reward.toUIModel(taskId, index))
+                                            index++
                                         }
                                     }
                                 }
@@ -136,9 +137,11 @@ class AddEditTaskViewModel @Inject constructor(
                                     }
                                     startTime = task.schedule?.timeSpan?.startTime
                                     endTime = task.schedule?.timeSpan?.endTime
-                                    getRewardsForTask(task).collect {
+                                    task.rewards?.let {
+                                        var index = 0
                                         it.forEach { reward ->
-                                            _rewards.add(reward)
+                                            _rewards.add(reward.toUIModel(taskId, index))
+                                            index++
                                         }
                                     }
                                 }
@@ -217,6 +220,7 @@ class AddEditTaskViewModel @Inject constructor(
                     is Todo -> {
                         (selectedTask as Todo).copy(
                             name = name,
+                            rewards = rewards.toDomainModel(),
                             coinsReward = coins.toInt(),
                             schedule = scheduledDate?.let {
                                 DateSchedule(
@@ -234,6 +238,7 @@ class AddEditTaskViewModel @Inject constructor(
                     is Habit -> {
                         (selectedTask as Habit).copy(
                             name = name,
+                            rewards = rewards.toDomainModel(),
                             schedule = when (scheduleType) {
                                 ScheduleType.EVERYDAY -> EverydaySchedule(
                                     timeSpan = startTime?.let {
@@ -274,7 +279,7 @@ class AddEditTaskViewModel @Inject constructor(
                     }
                     else -> throw TypeCastException()
                 }
-                updateTask(updatedTask, rewards)
+                updateTask(updatedTask)
             }
         } else {
             val newTask = when (taskType) {
@@ -282,6 +287,7 @@ class AddEditTaskViewModel @Inject constructor(
                     Todo(
                         name = name,
                         coinsReward = coins.toInt(),
+                        rewards = rewards.toDomainModel(),
                         schedule = scheduledDate?.let {
                             DateSchedule(
                                 date = it,
@@ -298,6 +304,7 @@ class AddEditTaskViewModel @Inject constructor(
                 TaskType.HABIT -> {
                     Habit(
                         name = name,
+                        rewards = rewards.toDomainModel(),
                         schedule = when (scheduleType) {
                             ScheduleType.EVERYDAY -> EverydaySchedule(
                                 timeSpan = startTime?.let {
@@ -337,7 +344,7 @@ class AddEditTaskViewModel @Inject constructor(
                     )
                 }
             }
-            addTask(newTask, rewards)
+            addTask(newTask)
         }
     }
 
@@ -346,14 +353,14 @@ class AddEditTaskViewModel @Inject constructor(
         selectedTask?.let { deleteTask(it) }
     }
 
-    fun editReward(updatedReward: Reward) {
+    fun editReward(updatedReward: RewardUIModel) {
         val rewardToChange = rewards.single { it.uid == updatedReward.uid }
         val rewardIndex = rewards.indexOf(rewardToChange)
         _rewards[rewardIndex] = updatedReward
     }
 
     fun addNewReward() = viewModelScope.launch {
-        val newReward = Reward(
+        val newReward = RewardUIModel(
             taskId = selectedTask?.id ?: 0,
             statId = stats.first().elementAt(0).uid,
             points = 0,
@@ -363,7 +370,7 @@ class AddEditTaskViewModel @Inject constructor(
         numOfNewReward++
     }
 
-    fun onDeleteReward(reward: Reward) {
+    fun onDeleteReward(reward: RewardUIModel) {
         _rewards.remove(reward)
     }
 

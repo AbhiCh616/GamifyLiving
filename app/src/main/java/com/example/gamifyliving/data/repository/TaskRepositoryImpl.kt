@@ -1,9 +1,9 @@
 package com.example.gamifyliving.data.repository
 
+import com.example.gamifyliving.application.repository.TaskRepository
 import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.data_source.local.mapper.*
 import com.example.gamifyliving.domain.entity.*
-import com.example.gamifyliving.application.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -12,6 +12,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val taskDao: TaskDao,
     private val todoDao: TodoDao,
     private val habitDao: HabitDao,
+    private val rewardDao: RewardDao,
     private val todoScheduleDao: TodoScheduleDao,
     private val everydayScheduleDao: EverydayScheduleDao,
     private val repeatScheduleDao: RepeatScheduleDao,
@@ -33,6 +34,10 @@ class TaskRepositoryImpl @Inject constructor(
                     //Add Todo_Schedule
                     val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
                     todoScheduleDao.insert(todoScheduleEntity = todoScheduleEntity)
+                }
+
+                if (task.rewards != null) {
+                    rewardDao.insert(task.toRewardDataModel())
                 }
             }
 
@@ -62,6 +67,10 @@ class TaskRepositoryImpl @Inject constructor(
                                 schedule.toWeekDayScheduleEntity(habitId = habitId)
                             weekDayScheduleDao.insert(weekDayScheduleEntity = weekDayScheduleEntity)
                         }
+                    }
+
+                    if (task.rewards != null) {
+                        rewardDao.insert(task.toRewardDataModel())
                     }
                 }
             }
@@ -101,6 +110,11 @@ class TaskRepositoryImpl @Inject constructor(
                     val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
                     todoScheduleDao.insert(todoScheduleEntity = todoScheduleEntity)
                 }
+
+                rewardDao.deleteRewardsForTask(task.id)
+                if (task.rewards != null) {
+                    rewardDao.insert(task.toRewardDataModel())
+                }
             }
 
             is Habit -> {
@@ -136,6 +150,11 @@ class TaskRepositoryImpl @Inject constructor(
                             weekDayScheduleDao.insert(weekDayScheduleEntity = weekDayScheduleEntity)
                         }
                     }
+                }
+
+                rewardDao.deleteRewardsForTask(task.id)
+                if (task.rewards != null) {
+                    rewardDao.insert(task.toRewardDataModel())
                 }
             }
         }

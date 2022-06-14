@@ -1,27 +1,18 @@
 package com.example.gamifyliving.application.use_case
 
-import com.example.gamifyliving.domain.entity.Reward
-import com.example.gamifyliving.domain.entity.Task
-import com.example.gamifyliving.application.repository.RewardRepository
 import com.example.gamifyliving.application.repository.TaskRepository
 import com.example.gamifyliving.application.util.runSuspendCatching
+import com.example.gamifyliving.domain.entity.Task
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AddTask @Inject constructor(
-    private val taskRepository: TaskRepository,
-    private val rewardRepository: RewardRepository
+    private val taskRepository: TaskRepository
 ) {
-    suspend operator fun invoke(task: Task, rewards: List<Reward>? = null) = runSuspendCatching {
+    suspend operator fun invoke(task: Task) = runSuspendCatching {
         withContext(NonCancellable) {
             val taskId = taskRepository.addTask(task)
-            if (rewards != null) {
-                val updatedRewards = rewards.map { reward ->
-                    reward.copy(taskId = taskId)
-                }
-                rewardRepository.addRewards(updatedRewards)
-            }
         }
     }
 }

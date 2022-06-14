@@ -5,5 +5,6 @@ data class Todo(
     val coinsReward: Int = 0,
     override val schedule: DateSchedule? = null,
     override val status: Boolean = false,
+    override val rewards: List<Reward>? = null,
     override val id: Int = 0
 ) : Task

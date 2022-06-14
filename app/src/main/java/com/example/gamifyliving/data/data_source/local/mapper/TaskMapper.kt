@@ -76,6 +76,28 @@ fun TimeSpanEntity?.toTimeSpan() = this?.let { timeSpanEntity ->
     )
 }
 
+fun Task.toRewardDataModel() =
+    this.let {
+        val list = mutableListOf<RewardEntity>()
+        for (reward in this.rewards!!) {
+            list.add(
+                RewardEntity(
+                    taskId = this.id,
+                    statId = reward.statId,
+                    points = reward.points
+                )
+            )
+        }
+        list.toList()
+    }
+
+fun RewardEntity.toDomainModel() =
+    Reward(
+        statId = this.statId,
+        points = this.points
+    )
+
+
 fun TaskWithDetailsEntity.toDomainModel(): Task =
     when {
         this.todoWithSchedule != null -> Todo(
@@ -88,6 +110,7 @@ fun TaskWithDetailsEntity.toDomainModel(): Task =
                 )
             },
             status = this.task.status,
+            rewards = this.rewards?.toDomainModel(),
             id = this.task.id
         )
         this.habitWithSchedule != null -> Habit(
@@ -120,6 +143,7 @@ fun TaskWithDetailsEntity.toDomainModel(): Task =
                     }
                 else -> null
             },
+            rewards = this.rewards?.toDomainModel(),
             status = task.status,
             id = task.id
         )

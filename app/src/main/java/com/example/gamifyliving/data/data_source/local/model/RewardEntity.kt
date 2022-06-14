@@ -5,6 +5,7 @@ import androidx.room.*
 @Entity(
     tableName = "reward",
     indices = [Index(value = ["task_id", "stat_id"], unique = true)],
+    primaryKeys = ["task_id", "stat_id"],
     foreignKeys = [
         ForeignKey(
             entity = TaskEntity::class,
@@ -29,8 +30,5 @@ data class RewardEntity(
     val statId: Int,
 
     @ColumnInfo(name = "points")
-    val points: Int,
-
-    @PrimaryKey(autoGenerate = true)
-    val id: Int
+    val points: Int
 )
