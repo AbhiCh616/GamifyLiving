@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.domain.entity.Stat
+import com.example.gamifyliving.domain.model.entity.Stat
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 

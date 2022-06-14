@@ -2,7 +2,6 @@ package com.example.gamifyliving.data.data_source.local.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.gamifyliving.domain.entity.Reward
 
 data class TaskWithDetailsEntity(
     @Embedded val task: TaskEntity,

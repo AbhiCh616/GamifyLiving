@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.example.gamifyliving.data.data_source.local.AppDatabase
 import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.repository.*
-import com.example.gamifyliving.application.repository.*
+import com.example.gamifyliving.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.entity.StoreItem
+import com.example.gamifyliving.domain.model.entity.StoreItem
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @OptIn(ExperimentalMaterialApi::class)

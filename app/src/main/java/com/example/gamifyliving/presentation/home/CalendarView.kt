@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.domain.entity.Task
+import com.example.gamifyliving.domain.model.entity.Task
 
 @Composable
 fun CalendarView(tasks: List<Task>, onCheckboxClick: (Task) -> Unit, onTaskClick: (Task) -> Unit) {

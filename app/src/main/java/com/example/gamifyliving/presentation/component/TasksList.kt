@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.gamifyliving.domain.entity.Task
-import com.example.gamifyliving.domain.entity.Todo
+import com.example.gamifyliving.domain.model.entity.Task
+import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 
 @OptIn(ExperimentalMaterialApi::class)

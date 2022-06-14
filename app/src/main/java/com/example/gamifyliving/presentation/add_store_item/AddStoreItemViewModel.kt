@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.entity.StoreItem
-import com.example.gamifyliving.application.use_case.AddStoreItem
+import com.example.gamifyliving.domain.model.entity.StoreItem
+import com.example.gamifyliving.domain.use_case.AddStoreItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

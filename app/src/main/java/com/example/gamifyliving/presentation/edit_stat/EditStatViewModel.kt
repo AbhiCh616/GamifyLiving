@@ -6,10 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.entity.Stat
-import com.example.gamifyliving.application.use_case.DeleteStat
-import com.example.gamifyliving.application.use_case.GetStatById
-import com.example.gamifyliving.application.use_case.UpdateStat
+import com.example.gamifyliving.domain.model.entity.Stat
+import com.example.gamifyliving.domain.use_case.DeleteStat
+import com.example.gamifyliving.domain.use_case.GetStatById
+import com.example.gamifyliving.domain.use_case.UpdateStat
 import com.example.gamifyliving.presentation.util.getProgressFromStatValue
 import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue
 import dagger.hilt.android.lifecycle.HiltViewModel

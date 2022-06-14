@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.entity.Stat
+import com.example.gamifyliving.domain.model.entity.Stat
 import com.example.gamifyliving.presentation.component.StatsList
 import com.example.gamifyliving.presentation.theme.GamifyLivingTheme
 import com.example.gamifyliving.presentation.util.getStatValueFromSliderValue

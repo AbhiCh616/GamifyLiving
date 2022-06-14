@@ -12,8 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.gamifyliving.R
-import com.example.gamifyliving.domain.entity.Reward
-import com.example.gamifyliving.domain.entity.Stat
+import com.example.gamifyliving.domain.model.entity.Stat
 import com.example.gamifyliving.presentation.util.RewardUIModel
 
 @Composable
