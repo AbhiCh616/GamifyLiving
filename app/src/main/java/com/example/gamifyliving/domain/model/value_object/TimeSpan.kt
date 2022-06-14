@@ -8,7 +8,7 @@ data class TimeSpan(
     val endTime: LocalTime
 ) {
     init {
-        if(startTime > endTime) {
+        if (startTime > endTime) {
             throw StartTimeGreaterThanEndTimeException(startTime, endTime)
         }
     }
