@@ -23,7 +23,7 @@ fun AddEditRewardCardHandler(
     onDelete: (RewardUIModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val selectedStat = stats.single { stat -> stat.uid == reward.statId }
+    val selectedStat = stats.single { stat -> stat.id == reward.statId }
     var isDropdownExpanded by remember { mutableStateOf(false) }
     // Because points field of reward can't be null but the respective text-field can be empty
     var isPointsFieldEmpty by remember { mutableStateOf(false) }
@@ -33,7 +33,7 @@ fun AddEditRewardCardHandler(
         dropDownExpandedChange = { isDropdownExpanded = !isDropdownExpanded },
         dismissDropdown = { isDropdownExpanded = false },
         selectedStat = selectedStat,
-        onStatChange = { editReward(reward.copy(statId = it.uid)) },
+        onStatChange = { editReward(reward.copy(statId = it.id)) },
         points = reward.points,
         onPointsChange = {
             isPointsFieldEmpty = it == null

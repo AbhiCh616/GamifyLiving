@@ -7,14 +7,14 @@ fun StoreItemEntity.toDomainModel() =
     StoreItem(
         name = this.name,
         costCoins = this.costCoins,
-        uid = this.id
+        id = this.id
     )
 
 fun StoreItem.toDataModel() =
     StoreItemEntity(
         name = this.name,
         costCoins = this.costCoins,
-        id = this.uid
+        id = this.id
     )
 
 fun List<StoreItemEntity>.toDomainModel() =

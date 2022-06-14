@@ -24,7 +24,7 @@ fun NavGraphBuilder.storeGraph(
                     navController.navigate(Screen.AddStoreItem.route)
                 },
                 openEditStoreItemPage = { storeItem ->
-                    navController.navigate("${Screen.EditStoreItem.route}/${storeItem.uid}")
+                    navController.navigate("${Screen.EditStoreItem.route}/${storeItem.id}")
                 }
             )
         }

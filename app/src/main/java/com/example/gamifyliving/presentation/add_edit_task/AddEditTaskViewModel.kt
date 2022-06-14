@@ -367,7 +367,7 @@ class AddEditTaskViewModel @Inject constructor(
     fun addNewReward() = viewModelScope.launch {
         val newReward = RewardUIModel(
             taskId = selectedTask?.id ?: 0,
-            statId = stats.first().elementAt(0).uid,
+            statId = stats.first().elementAt(0).id,
             points = 0,
             uid = numOfNewReward
         )

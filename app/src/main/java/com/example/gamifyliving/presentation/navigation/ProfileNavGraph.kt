@@ -33,7 +33,7 @@ fun NavGraphBuilder.profileGraph(
                     navController.navigate(Screen.AddStat.route)
                 },
                 onStatClick = { stat ->
-                    navController.navigate("${Screen.EditStat.route}/${stat.uid}")
+                    navController.navigate("${Screen.EditStat.route}/${stat.id}")
                 }
             )
         }
