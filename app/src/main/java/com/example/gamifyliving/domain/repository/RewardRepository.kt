@@ -1,6 +1,6 @@
 package com.example.gamifyliving.domain.repository
 
-import com.example.gamifyliving.domain.model.value_object.Reward
+import com.example.gamifyliving.domain.model.entity.Reward
 import kotlinx.coroutines.flow.Flow
 
 interface RewardRepository {

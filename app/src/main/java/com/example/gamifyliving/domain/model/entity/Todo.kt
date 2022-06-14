@@ -1,7 +1,6 @@
 package com.example.gamifyliving.domain.model.entity
 
 import com.example.gamifyliving.domain.model.value_object.DateSchedule
-import com.example.gamifyliving.domain.model.value_object.Reward
 
 data class Todo(
     override val name: String,
