@@ -4,7 +4,7 @@ import androidx.room.*
 import com.example.gamifyliving.data.data_source.local.model.DateScheduleEntity
 
 @Dao
-interface TodoScheduleDao {
+interface DateScheduleDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(dateScheduleEntity: DateScheduleEntity)

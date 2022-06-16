@@ -25,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
     abstract fun todoDao(): TodoDao
     abstract fun habitDao(): HabitDao
-    abstract fun todoScheduleDao(): TodoScheduleDao
+    abstract fun todoScheduleDao(): DateScheduleDao
     abstract fun everydayScheduleDao(): EverydayScheduleDao
     abstract fun repeatScheduleDao(): RepeatScheduleDao
     abstract fun weekDayDao(): WeekDayScheduleDao

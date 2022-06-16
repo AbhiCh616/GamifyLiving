@@ -16,7 +16,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val todoDao: TodoDao,
     private val habitDao: HabitDao,
     private val rewardDao: RewardDao,
-    private val todoScheduleDao: TodoScheduleDao,
+    private val dateScheduleDao: DateScheduleDao,
     private val everydayScheduleDao: EverydayScheduleDao,
     private val repeatScheduleDao: RepeatScheduleDao,
     private val weekDayScheduleDao: WeekDayScheduleDao,
@@ -27,57 +27,7 @@ class TaskRepositoryImpl @Inject constructor(
         val taskEntity = task.toTaskEntity()
         val taskId = taskDao.insert(taskEntity = taskEntity).toInt()
 
-        when (task) {
-            is Todo -> {
-                // Add Todo_Entity
-                val todoEntity = task.toTodoEntity(taskId = taskId)
-                val todoId = todoDao.insert(todoEntity = todoEntity).toInt()
 
-                task.schedule?.let { dateSchedule ->
-                    //Add Todo_Schedule
-                    val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
-                    todoScheduleDao.insert(dateScheduleEntity = todoScheduleEntity)
-                }
-
-                if (task.rewards != null) {
-                    rewardDao.insert(task.toRewardDataModel())
-                }
-            }
-
-            is Habit -> {
-                // Add Habit
-                val habitEntity = task.toHabitEntity(taskId = taskId)
-                val habitId = habitDao.insert(habitEntity = habitEntity).toInt()
-
-                task.schedule?.let { schedule ->
-                    // Add Schedule
-                    when (schedule) {
-                        is EverydaySchedule -> {
-                            // Add Everyday_Schedule
-                            val everydayScheduleEntity =
-                                schedule.toEverydayScheduleEntity(habitId = habitId)
-                            everydayScheduleDao.insert(everydayScheduleEntity = everydayScheduleEntity)
-                        }
-                        is RepeatAfterSchedule -> {
-                            // Add Repeat_Schedule
-                            val repeatScheduleEntity =
-                                schedule.toRepeatAfterScheduleEntity(habitId = habitId)
-                            repeatScheduleDao.insert(repeatScheduleEntity = repeatScheduleEntity)
-                        }
-                        is WeekDaySchedule -> {
-                            // Add Week_Day_Schedule
-                            val weekDayScheduleEntity =
-                                schedule.toWeekDayScheduleEntity(habitId = habitId)
-                            weekDayScheduleDao.insert(weekDayScheduleEntity = weekDayScheduleEntity)
-                        }
-                    }
-
-                    if (task.rewards != null) {
-                        rewardDao.insert(task.toRewardDataModel())
-                    }
-                }
-            }
-        }
 
         return taskId
     }
@@ -88,79 +38,8 @@ class TaskRepositoryImpl @Inject constructor(
         val taskId = taskEntity.id
         taskDao.update(taskEntity = taskEntity)
 
-        when (task) {
-            is Todo -> {
-                // Update Todo_Entity
-                val todoId = todoDao.getId(taskId = taskId)!!
-                val todoEntity = task.toTodoEntity(taskId = taskId, todoId = todoId)
-                todoDao.update(todoEntity = todoEntity)
 
-                /*task.schedule?.let { dateSchedule ->
-                    // Update Todo_Schedule
-                    val todoScheduleId = todoScheduleDao.getId(todoId = todoId)!!
-                    val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(
-                        todoId = todoId,
-                        todoScheduleId = 1
-                    )
-                    todoScheduleDao.update(todoScheduleEntity = todoScheduleEntity)
-                }*/
 
-                // Delete schedule
-                todoScheduleDao.delete(todoId = todoId)
-
-                task.schedule?.let { dateSchedule ->
-                    //Add Todo_Schedule
-                    val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
-                    todoScheduleDao.insert(dateScheduleEntity = todoScheduleEntity)
-                }
-
-                rewardDao.deleteRewardsForTask(task.id)
-                if (task.rewards != null) {
-                    rewardDao.insert(task.toRewardDataModel())
-                }
-            }
-
-            is Habit -> {
-                // Update Habit
-                val habitId = habitDao.getId(taskId = taskId)!!
-                val habitEntity = task.toHabitEntity(taskId = taskId, habitId = habitId)
-                habitDao.update(habitEntity = habitEntity)
-
-                // Delete all schedules
-                everydayScheduleDao.delete(habitId = habitId)
-                repeatScheduleDao.delete(habitId = habitId)
-                weekDayScheduleDao.delete(habitId = habitId)
-
-                task.schedule?.let { schedule ->
-                    // Add Schedule
-                    when (schedule) {
-                        is EverydaySchedule -> {
-                            // Add Everyday_Schedule
-                            val everydayScheduleEntity =
-                                schedule.toEverydayScheduleEntity(habitId = habitId)
-                            everydayScheduleDao.insert(everydayScheduleEntity = everydayScheduleEntity)
-                        }
-                        is RepeatAfterSchedule -> {
-                            // Add Repeat_Schedule
-                            val repeatScheduleEntity =
-                                schedule.toRepeatAfterScheduleEntity(habitId = habitId)
-                            repeatScheduleDao.insert(repeatScheduleEntity = repeatScheduleEntity)
-                        }
-                        is WeekDaySchedule -> {
-                            // Add Week_Day_Schedule
-                            val weekDayScheduleEntity =
-                                schedule.toWeekDayScheduleEntity(habitId = habitId)
-                            weekDayScheduleDao.insert(weekDayScheduleEntity = weekDayScheduleEntity)
-                        }
-                    }
-                }
-
-                rewardDao.deleteRewardsForTask(task.id)
-                if (task.rewards != null) {
-                    rewardDao.insert(task.toRewardDataModel())
-                }
-            }
-        }
     }
 
     override suspend fun deleteTask(task: Task) {

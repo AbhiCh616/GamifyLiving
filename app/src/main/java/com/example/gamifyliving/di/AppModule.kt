@@ -52,7 +52,7 @@ object AppModule {
     }
 
     @Provides
-    fun provideTodoScheduleDao(appDatabase: AppDatabase): TodoScheduleDao {
+    fun provideTodoScheduleDao(appDatabase: AppDatabase): DateScheduleDao {
         return appDatabase.todoScheduleDao()
     }
 
