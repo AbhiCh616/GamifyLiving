@@ -10,12 +10,12 @@ fun StoreItemEntity.toStoreItem() =
         id = this.id
     )
 
+fun List<StoreItemEntity>.toStoreItemList() =
+    this.map { storeItemEntity -> storeItemEntity.toStoreItem() }
+
 fun StoreItem.toStoreItemEntity() =
     StoreItemEntity(
         name = this.name,
         costCoins = this.costCoins,
         id = this.id
     )
-
-fun List<StoreItemEntity>.toStoreItemList() =
-    this.map { storeItemEntity -> storeItemEntity.toStoreItem() }

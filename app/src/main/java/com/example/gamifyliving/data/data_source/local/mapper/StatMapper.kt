@@ -10,12 +10,12 @@ fun StatEntity.toStat() =
         id = this.id
     )
 
+fun List<StatEntity>.toStatList() =
+    this.map { statEntity -> statEntity.toStat() }
+
 fun Stat.toStatEntity() =
     StatEntity(
         name = this.name,
         value = this.value,
         id = this.id
     )
-
-fun List<StatEntity>.toStatList() =
-    this.map { statEntity -> statEntity.toStat() }
