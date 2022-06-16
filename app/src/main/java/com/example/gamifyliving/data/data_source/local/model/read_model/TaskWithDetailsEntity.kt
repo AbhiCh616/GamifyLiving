@@ -2,10 +2,7 @@ package com.example.gamifyliving.data.data_source.local.model.read_model
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.gamifyliving.data.data_source.local.model.table.TodoEntity
-import com.example.gamifyliving.data.data_source.local.model.table.HabitEntity
-import com.example.gamifyliving.data.data_source.local.model.table.RewardEntity
-import com.example.gamifyliving.data.data_source.local.model.table.TaskEntity
+import com.example.gamifyliving.data.data_source.local.model.table.*
 
 data class TaskWithDetailsEntity(
 
@@ -31,5 +28,41 @@ data class TaskWithDetailsEntity(
         entity = RewardEntity::class
     )
     val rewards: List<RewardEntity>?
+
+)
+
+data class TodoWithScheduleEntity(
+
+    @Embedded val todo: TodoEntity,
+
+    @Relation(
+        parentColumn = "task_id",
+        entityColumn = "todo_id"
+    )
+    val todoSchedule: DateScheduleEntity?
+
+)
+
+data class HabitWithScheduleEntity(
+
+    @Embedded val habit: HabitEntity,
+
+    @Relation(
+        parentColumn = "task_id",
+        entityColumn = "habit_id"
+    )
+    val everydaySchedule: EverydayScheduleEntity?,
+
+    @Relation(
+        parentColumn = "task_id",
+        entityColumn = "habit_id"
+    )
+    val weekDaySchedule: WeekDayScheduleEntity?,
+
+    @Relation(
+        parentColumn = "task_id",
+        entityColumn = "habit_id"
+    )
+    val repeatSchedule: RepeatScheduleEntity?
 
 )
