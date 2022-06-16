@@ -90,9 +90,15 @@ abstract class AppBindsModule {
 
     @Singleton
     @Binds
-    abstract fun bindTaskRepository(
-        taskRepositoryImpl: TaskRepositoryImpl
-    ): TaskRepository
+    abstract fun bindTodoRepository(
+        todoRepositoryImpl: TodoRepositoryImpl
+    ): TodoRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindHabitRepository(
+        habitRepositoryImpl: HabitRepositoryImpl
+    ): HabitRepository
 
     @Singleton
     @Binds
