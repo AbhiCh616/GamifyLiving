@@ -17,42 +17,41 @@ fun Task.toTaskEntity() =
         id = id
     )
 
-
-fun Todo.toDataModel() =
+fun Todo.toTodoEntity() =
     TodoEntity(
         coinsReward = coinsReward,
         taskId = id
     )
 
-fun Habit.toDataModel() =
+fun Habit.toHabitEntity() =
     HabitEntity(
         taskId = id
     )
 
-fun TimeSpan.toDataModel() =
+fun TimeSpan.toTimeSpanEntity() =
     TimeSpanEntity(
         startTime = startTime,
         endTime = endTime
     )
 
-fun DateSchedule.toDataModel(todoId: Int) =
+fun DateSchedule.toDateScheduleEntity(todoId: Int) =
     DateScheduleEntity(
         scheduledDate = this.date,
-        timeSpan = this.timeSpan?.toDataModel(),
+        timeSpan = this.timeSpan?.toTimeSpanEntity(),
         todoId = todoId
     )
 
 fun EverydaySchedule.toEverydayScheduleEntity(habitId: Int) =
     EverydayScheduleEntity(
-        timeSpan = this.timeSpan?.toDataModel(),
+        timeSpan = this.timeSpan?.toTimeSpanEntity(),
         habitId = habitId
     )
 
-fun RepeatSchedule.toRepeatAfterScheduleEntity(habitId: Int) =
+fun RepeatSchedule.toRepeatScheduleEntity(habitId: Int) =
     RepeatScheduleEntity(
         startDate = this.startDate,
         repeatAfter = this.interval,
-        timeSpan = this.timeSpan?.toDataModel(),
+        timeSpan = this.timeSpan?.toTimeSpanEntity(),
         habitId = habitId
     )
 
@@ -65,7 +64,7 @@ fun WeekDaySchedule.toWeekDayScheduleEntity(habitId: Int) =
         thursday = this.thursday,
         friday = this.friday,
         saturday = this.saturday,
-        timeSpan = this.timeSpan?.toDataModel(),
+        timeSpan = this.timeSpan?.toTimeSpanEntity(),
         habitId = habitId
     )
 
@@ -75,82 +74,68 @@ fun TimeSpanEntity.toTimeSpan() =
         endTime = endTime
     )
 
-fun Reward.toDataModel(taskId: Int) =
-    RewardEntity(
-        taskId = taskId,
-        statId = statId,
-        points = points
-    )
 
-fun List<Reward>.toDataModel(taskId: Int) =
-    this.map { reward -> reward.toDataModel(taskId) }
 
-fun RewardEntity.toDomainModel() =
-    Reward(
-        statId = this.statId,
-        points = this.points
-    )
-
-fun DateScheduleEntity.toDomainModel() =
+fun DateScheduleEntity.toDateSchedule() =
     DateSchedule(
         date = scheduledDate,
         timeSpan = timeSpan?.toTimeSpan()
     )
 
-fun TaskWithDetailsEntity.toTodoModel(): Todo =
+fun TaskWithDetailsEntity.toTodo(): Todo =
     Todo(
         id = task.id,
         name = task.name,
         coinsReward = todoWithSchedule!!.todo.coinsReward,
-        schedule = todoWithSchedule.todoSchedule?.toDomainModel(),
+        schedule = todoWithSchedule.todoSchedule?.toDateSchedule(),
         status = task.status,
-        rewards = rewards?.toDomainModel()
+        rewards = rewards?.toRewardList()
     )
 
-fun List<TaskWithDetailsEntity>.toTodoModel(): List<Todo> =
+fun List<TaskWithDetailsEntity>.toTodoList(): List<Todo> =
     this.filter { taskWithDetailsEntity ->
         taskWithDetailsEntity.todoWithSchedule != null
     }.map { taskWithDetailsEntity ->
-        taskWithDetailsEntity.toTodoModel()
+        taskWithDetailsEntity.toTodo()
     }
 
-fun TaskWithDetailsEntity.toHabitModel() =
+fun TaskWithDetailsEntity.toHabit() =
     Habit(
         id = task.id,
         name = task.name,
         status = task.status,
-        rewards = rewards?.toDomainModel(),
-        schedule = habitWithSchedule!!.toScheduleModel()
+        rewards = rewards?.toRewardList(),
+        schedule = habitWithSchedule!!.toSchedule()
     )
 
-fun List<TaskWithDetailsEntity>.toHabitModel() =
+fun List<TaskWithDetailsEntity>.toHabitList() =
     this.filter { taskWithDetailsEntity ->
         taskWithDetailsEntity.habitWithSchedule != null
     }.map { taskWithDetailsEntity ->
-        taskWithDetailsEntity.toHabitModel()
+        taskWithDetailsEntity.toHabit()
     }
 
-fun HabitWithScheduleEntity.toScheduleModel(): Schedule? =
+fun HabitWithScheduleEntity.toSchedule(): Schedule? =
     when {
-        everydaySchedule != null -> everydaySchedule.toDomainModel()
-        repeatSchedule != null -> repeatSchedule.toDomainModel()
-        weekDaySchedule != null -> weekDaySchedule.toDomainModel()
+        everydaySchedule != null -> everydaySchedule.toEverydaySchedule()
+        repeatSchedule != null -> repeatSchedule.toRepeatSchedule()
+        weekDaySchedule != null -> weekDaySchedule.toWeekDaySchedule()
         else -> null
     }
 
-fun EverydayScheduleEntity.toDomainModel() =
+fun EverydayScheduleEntity.toEverydaySchedule() =
     EverydaySchedule(
         timeSpan = timeSpan?.toTimeSpan()
     )
 
-fun RepeatScheduleEntity.toDomainModel() =
+fun RepeatScheduleEntity.toRepeatSchedule() =
     RepeatSchedule(
         startDate = startDate,
         interval = repeatAfter,
         timeSpan = timeSpan?.toTimeSpan()
     )
 
-fun WeekDayScheduleEntity.toDomainModel() =
+fun WeekDayScheduleEntity.toWeekDaySchedule() =
     WeekDaySchedule(
         sunday = sunday,
         monday = monday,

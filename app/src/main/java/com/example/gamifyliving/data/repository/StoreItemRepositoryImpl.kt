@@ -1,8 +1,9 @@
 package com.example.gamifyliving.data.repository
 
 import com.example.gamifyliving.data.data_source.local.dao.StoreItemDao
-import com.example.gamifyliving.data.data_source.local.mapper.toDataModel
-import com.example.gamifyliving.data.data_source.local.mapper.toDomainModel
+import com.example.gamifyliving.data.data_source.local.mapper.toStoreItemEntity
+import com.example.gamifyliving.data.data_source.local.mapper.toStoreItemList
+import com.example.gamifyliving.data.data_source.local.mapper.toStoreItem
 import com.example.gamifyliving.domain.model.entity.StoreItem
 import com.example.gamifyliving.domain.repository.StoreItemRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,22 +15,22 @@ class StoreItemRepositoryImpl @Inject constructor(
 ) : StoreItemRepository {
 
     override suspend fun addItem(item: StoreItem) {
-        storeItemDao.insert(item.toDataModel())
+        storeItemDao.insert(item.toStoreItemEntity())
     }
 
     override suspend fun updateItem(item: StoreItem) {
-        storeItemDao.update(item.toDataModel())
+        storeItemDao.update(item.toStoreItemEntity())
     }
 
     override suspend fun deleteItem(item: StoreItem) {
-        storeItemDao.delete(item.toDataModel())
+        storeItemDao.delete(item.toStoreItemEntity())
     }
 
     override suspend fun getStoreItemById(id: Int): StoreItem? =
-        storeItemDao.getStoreItemById(id)?.toDomainModel()
+        storeItemDao.getStoreItemById(id)?.toStoreItem()
 
     override fun observeItems(): Flow<List<StoreItem>> = storeItemDao.getAll().map {
-        it.toDomainModel()
+        it.toStoreItemList()
     }
 
 }
