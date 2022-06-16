@@ -29,5 +29,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun everydayScheduleDao(): EverydayScheduleDao
     abstract fun repeatScheduleDao(): RepeatScheduleDao
     abstract fun weekDayDao(): WeekDayScheduleDao
+    abstract fun taskWithDetailsDao(): TaskWithDetailsDao
 
 }

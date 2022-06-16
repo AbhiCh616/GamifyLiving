@@ -1,6 +1,9 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
 import com.example.gamifyliving.data.data_source.local.model.table.DateScheduleEntity
 
 @Dao
@@ -11,14 +14,5 @@ interface DateScheduleDao {
 
     @Update
     suspend fun update(dateScheduleEntity: DateScheduleEntity)
-
-    @Delete
-    suspend fun delete(dateScheduleEntity: DateScheduleEntity)
-
-    @Query("SELECT * FROM date_schedule WHERE todo_id = :todoId")
-    suspend fun get(todoId: Int): DateScheduleEntity?
-
-    @Query("DELETE FROM date_schedule WHERE todo_id = :todoId")
-    suspend fun delete(todoId: Int)
 
 }

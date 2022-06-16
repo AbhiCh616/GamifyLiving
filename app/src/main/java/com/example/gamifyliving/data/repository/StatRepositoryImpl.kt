@@ -26,7 +26,7 @@ class StatRepositoryImpl @Inject constructor(
         statDao.delete(stat.toStatEntity())
     }
 
-    override suspend fun getStatById(id: Int): Stat? = statDao.getStatById(id)?.toStat()
+    override suspend fun getStatById(id: Int): Stat? = statDao.getById(id)?.toStat()
 
     override fun observeStats(): Flow<List<Stat>> = statDao.getAll().map {
         it.toStatList()

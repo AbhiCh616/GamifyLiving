@@ -27,7 +27,7 @@ class StoreItemRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStoreItemById(id: Int): StoreItem? =
-        storeItemDao.getStoreItemById(id)?.toStoreItem()
+        storeItemDao.getById(id)?.toStoreItem()
 
     override fun observeItems(): Flow<List<StoreItem>> = storeItemDao.getAll().map {
         it.toStoreItemList()

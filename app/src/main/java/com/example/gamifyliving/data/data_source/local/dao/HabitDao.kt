@@ -1,24 +1,18 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
 import com.example.gamifyliving.data.data_source.local.model.table.HabitEntity
 
 @Dao
 interface HabitDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(habitEntity: HabitEntity): Long
+    suspend fun insert(habitEntity: HabitEntity)
 
     @Update
-    suspend fun update(habitEntity: HabitEntity): Int
-
-    @Delete
-    suspend fun delete(habitEntity: HabitEntity)
-
-    @Query("SELECT * FROM habit WHERE task_id = :taskId")
-    suspend fun get(taskId: Int): HabitEntity?
-
-    @Query("SELECT task_id FROM habit WHERE task_id = :taskId")
-    suspend fun getId(taskId: Int): Int?
+    suspend fun update(habitEntity: HabitEntity)
 
 }

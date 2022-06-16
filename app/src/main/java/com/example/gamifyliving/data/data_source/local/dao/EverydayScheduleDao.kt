@@ -1,23 +1,18 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.gamifyliving.data.data_source.local.model.table.EverydayScheduleEntity
 
 @Dao
 interface EverydayScheduleDao {
 
+    @Query("DELETE FROM everyday_schedule WHERE habit_id = :habitId")
+    suspend fun deleteByHabitId(habitId: Int)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(everydayScheduleEntity: EverydayScheduleEntity)
 
-    @Update
-    suspend fun update(everydayScheduleEntity: EverydayScheduleEntity)
-
-    @Delete
-    suspend fun delete(everydayScheduleEntity: EverydayScheduleEntity)
-
-    @Query("SELECT * FROM everyday_schedule WHERE habit_id = :habitId")
-    suspend fun get(habitId: Int): EverydayScheduleEntity?
-
-    @Query("DELETE FROM everyday_schedule WHERE habit_id = :habitId")
-    suspend fun delete(habitId: Int)
 }

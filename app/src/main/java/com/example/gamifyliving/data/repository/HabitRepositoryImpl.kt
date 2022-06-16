@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class HabitRepositoryImpl @Inject constructor(
     private val taskDao: TaskDao,
+    private val taskWithDetailsDao: TaskWithDetailsDao,
     private val habitDao: HabitDao,
     private val everydayScheduleDao: EverydayScheduleDao,
     private val repeatScheduleDao: RepeatScheduleDao,
@@ -20,12 +21,12 @@ class HabitRepositoryImpl @Inject constructor(
     private val rewardDao: RewardDao
 ) : HabitRepository {
 
-    override fun observe(): Flow<List<Habit>> = taskDao.getAll().map {
+    override fun observe(): Flow<List<Habit>> = taskWithDetailsDao.getAll().map {
         it.toHabitList()
     }
 
     override suspend fun getById(id: Int): Habit? =
-        taskDao.getTaskWithDetails(id = id)?.toHabit()
+        taskWithDetailsDao.getById(id = id)?.toHabit()
 
     override suspend fun add(habit: Habit) {
 
@@ -68,8 +69,8 @@ class HabitRepositoryImpl @Inject constructor(
         val habitEntity = habit.toHabitEntity()
         habitDao.update(habitEntity = habitEntity)
 
-        everydayScheduleDao.delete(habitId = habit.id)
-        repeatScheduleDao.delete(habitId = habit.id)
+        everydayScheduleDao.deleteByHabitId(habitId = habit.id)
+        repeatScheduleDao.deleteByHabitId(habitId = habit.id)
         weekDayScheduleDao.delete(habitId = habit.id)
         when (habit.schedule) {
             is EverydaySchedule -> {
@@ -89,7 +90,7 @@ class HabitRepositoryImpl @Inject constructor(
             }
         }
 
-        rewardDao.deleteRewardsForTask(taskId = habit.id)
+        rewardDao.deleteByTaskId(taskId = habit.id)
         habit.rewards?.let { rewards ->
             val rewardsEntity = rewards.toRewardEntityList(taskId = habit.id)
             rewardDao.insert(rewardsEntity)
