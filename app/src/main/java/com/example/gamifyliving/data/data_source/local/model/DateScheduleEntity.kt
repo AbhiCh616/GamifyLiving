@@ -4,19 +4,18 @@ import androidx.room.*
 import java.time.LocalDate
 
 @Entity(
-    tableName = "todo_schedule",
+    tableName = "date_schedule",
     foreignKeys = [
         ForeignKey(
             entity = TodoEntity::class,
-            parentColumns = arrayOf("id"),
+            parentColumns = arrayOf("task_id"),
             childColumns = arrayOf("todo_id"),
             onDelete = ForeignKey.CASCADE
         )
-    ],
-    indices = [Index(value = ["todo_id"], unique = true)],
+    ]
 )
 
-data class TodoScheduleEntity(
+data class DateScheduleEntity(
 
     @ColumnInfo(name = "scheduled_date")
     val scheduledDate: LocalDate,
@@ -24,10 +23,8 @@ data class TodoScheduleEntity(
     @Embedded
     val timeSpan: TimeSpanEntity?,
 
+    @PrimaryKey
     @ColumnInfo(name = "todo_id")
-    val todoId: Int,
-
-    @PrimaryKey(autoGenerate = true)
-    val id: Int
+    val todoId: Int
 
 )

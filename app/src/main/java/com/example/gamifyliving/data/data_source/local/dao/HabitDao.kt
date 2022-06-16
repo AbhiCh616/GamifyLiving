@@ -18,7 +18,7 @@ interface HabitDao {
     @Query("SELECT * FROM habit WHERE task_id = :taskId")
     suspend fun get(taskId: Int): HabitEntity?
 
-    @Query("SELECT id FROM habit WHERE task_id = :taskId")
+    @Query("SELECT task_id FROM habit WHERE task_id = :taskId")
     suspend fun getId(taskId: Int): Int?
 
 }

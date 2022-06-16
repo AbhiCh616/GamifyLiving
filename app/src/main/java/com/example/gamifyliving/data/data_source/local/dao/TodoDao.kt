@@ -18,7 +18,7 @@ interface TodoDao {
     @Query("SELECT * FROM todo WHERE task_id = :taskId")
     suspend fun get(taskId: Int): TodoEntity?
 
-    @Query("SELECT id FROM todo WHERE task_id = :taskId")
+    @Query("SELECT task_id FROM todo WHERE task_id = :taskId")
     suspend fun getId(taskId: Int): Int?
 
 }

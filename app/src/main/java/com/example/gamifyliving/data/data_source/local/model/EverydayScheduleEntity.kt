@@ -7,12 +7,11 @@ import androidx.room.*
     foreignKeys = [
         ForeignKey(
             entity = HabitEntity::class,
-            parentColumns = arrayOf("id"),
+            parentColumns = arrayOf("task_id"),
             childColumns = arrayOf("habit_id"),
             onDelete = ForeignKey.CASCADE
         )
-    ],
-    indices = [Index(value = ["habit_id"], unique = true)],
+    ]
 )
 
 data class EverydayScheduleEntity(
@@ -20,10 +19,8 @@ data class EverydayScheduleEntity(
     @Embedded
     val timeSpan: TimeSpanEntity?,
 
+    @PrimaryKey
     @ColumnInfo(name = "habit_id")
-    val habitId: Int,
-
-    @PrimaryKey(autoGenerate = true)
-    val id: Int
+    val habitId: Int
 
 )

@@ -1,11 +1,14 @@
 package com.example.gamifyliving.data.data_source.local.model
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(
     tableName = "reward",
-    indices = [Index(value = ["task_id", "stat_id"], unique = true)],
     primaryKeys = ["task_id", "stat_id"],
+    indices = [Index(value = ["stat_id"])],
     foreignKeys = [
         ForeignKey(
             entity = TaskEntity::class,
@@ -23,6 +26,7 @@ import androidx.room.*
 )
 
 data class RewardEntity(
+
     @ColumnInfo(name = "task_id")
     val taskId: Int,
 
@@ -31,4 +35,5 @@ data class RewardEntity(
 
     @ColumnInfo(name = "points")
     val points: Int
+
 )

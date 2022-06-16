@@ -4,11 +4,13 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class TodoWithScheduleEntity(
+
     @Embedded val todo: TodoEntity,
 
     @Relation(
-        parentColumn = "id",
+        parentColumn = "task_id",
         entityColumn = "todo_id"
     )
-    val todoSchedule: TodoScheduleEntity?
+    val todoSchedule: DateScheduleEntity?
+
 )

@@ -15,10 +15,10 @@ interface RepeatScheduleDao {
     @Delete
     suspend fun delete(repeatScheduleEntity: RepeatScheduleEntity)
 
-    @Query("SELECT * FROM repeat_after_schedule WHERE habit_id = :habitId")
+    @Query("SELECT * FROM repeat_schedule WHERE habit_id = :habitId")
     suspend fun getByHabitId(habitId: Int): RepeatScheduleEntity?
 
-    @Query("DELETE FROM repeat_after_schedule WHERE habit_id = :habitId")
+    @Query("DELETE FROM repeat_schedule WHERE habit_id = :habitId")
     suspend fun delete(habitId: Int)
 
 }

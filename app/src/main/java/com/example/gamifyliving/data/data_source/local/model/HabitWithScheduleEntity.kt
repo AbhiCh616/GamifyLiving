@@ -4,23 +4,25 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class HabitWithScheduleEntity(
+
     @Embedded val habit: HabitEntity,
 
     @Relation(
-        parentColumn = "id",
+        parentColumn = "task_id",
         entityColumn = "habit_id"
     )
     val everydaySchedule: EverydayScheduleEntity?,
 
     @Relation(
-        parentColumn = "id",
+        parentColumn = "task_id",
         entityColumn = "habit_id"
     )
     val weekDaySchedule: WeekDayScheduleEntity?,
 
     @Relation(
-        parentColumn = "id",
+        parentColumn = "task_id",
         entityColumn = "habit_id"
     )
     val repeatSchedule: RepeatScheduleEntity?
+
 )

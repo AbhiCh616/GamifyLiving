@@ -11,7 +11,7 @@ import com.example.gamifyliving.data.data_source.local.model.*
 @Database(
     version = 1,
     entities = [StatEntity::class, RewardEntity::class, StoreItemEntity::class, TaskEntity::class,
-        TodoEntity::class, HabitEntity::class, TodoScheduleEntity::class, EverydayScheduleEntity::class,
+        TodoEntity::class, HabitEntity::class, DateScheduleEntity::class, EverydayScheduleEntity::class,
         WeekDayScheduleEntity::class, RepeatScheduleEntity::class],
     exportSchema = true
 )

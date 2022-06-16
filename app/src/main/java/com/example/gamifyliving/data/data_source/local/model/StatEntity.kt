@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
 )
 
 data class StatEntity(
+
     @ColumnInfo(name = "name")
     val name: String,
 
@@ -19,4 +20,5 @@ data class StatEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int
+
 )

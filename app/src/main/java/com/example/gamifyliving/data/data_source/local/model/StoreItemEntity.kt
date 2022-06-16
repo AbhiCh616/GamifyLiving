@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "store_item")
 
 data class StoreItemEntity(
+
     @ColumnInfo(name = "name")
     val name: String,
 
@@ -15,4 +16,5 @@ data class StoreItemEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int
+
 )

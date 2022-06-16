@@ -36,7 +36,7 @@ class TaskRepositoryImpl @Inject constructor(
                 task.schedule?.let { dateSchedule ->
                     //Add Todo_Schedule
                     val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
-                    todoScheduleDao.insert(todoScheduleEntity = todoScheduleEntity)
+                    todoScheduleDao.insert(dateScheduleEntity = todoScheduleEntity)
                 }
 
                 if (task.rewards != null) {
@@ -111,7 +111,7 @@ class TaskRepositoryImpl @Inject constructor(
                 task.schedule?.let { dateSchedule ->
                     //Add Todo_Schedule
                     val todoScheduleEntity = dateSchedule.toTodoScheduleEntity(todoId = todoId)
-                    todoScheduleDao.insert(todoScheduleEntity = todoScheduleEntity)
+                    todoScheduleDao.insert(dateScheduleEntity = todoScheduleEntity)
                 }
 
                 rewardDao.deleteRewardsForTask(task.id)

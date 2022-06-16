@@ -1,6 +1,9 @@
 package com.example.gamifyliving.data.data_source.local.model
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "todo",
@@ -11,8 +14,7 @@ import androidx.room.*
             childColumns = arrayOf("task_id"),
             onDelete = ForeignKey.CASCADE
         )
-    ],
-    indices = [Index(value = ["task_id"], unique = true)],
+    ]
 )
 
 data class TodoEntity(
@@ -20,9 +22,8 @@ data class TodoEntity(
     @ColumnInfo(name = "coins_reward")
     val coinsReward: Int,
 
+    @PrimaryKey
     @ColumnInfo(name = "task_id")
-    val taskId: Int,
+    val taskId: Int
 
-    @PrimaryKey(autoGenerate = true)
-    val id: Int
 )

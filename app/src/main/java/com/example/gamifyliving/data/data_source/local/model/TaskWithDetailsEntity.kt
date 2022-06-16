@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class TaskWithDetailsEntity(
+
     @Embedded val task: TaskEntity,
 
     @Relation(
@@ -26,4 +27,5 @@ data class TaskWithDetailsEntity(
         entity = RewardEntity::class
     )
     val rewards: List<RewardEntity>?
+
 )
