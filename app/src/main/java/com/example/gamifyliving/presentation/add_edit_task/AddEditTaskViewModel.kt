@@ -118,9 +118,9 @@ class AddEditTaskViewModel @Inject constructor(
                                     name = task.name
                                     scheduleType = when (task.schedule) {
                                         is EverydaySchedule -> ScheduleType.EVERYDAY
-                                        is RepeatAfterSchedule -> {
+                                        is RepeatSchedule -> {
                                             repeatInterval =
-                                                (task.schedule as RepeatAfterSchedule).interval.toString()
+                                                (task.schedule as RepeatSchedule).interval.toString()
                                             ScheduleType.REPEAT_AFTER
                                         }
                                         is WeekDaySchedule -> {
@@ -253,7 +253,7 @@ class AddEditTaskViewModel @Inject constructor(
                                         )
                                     }
                                 )
-                                ScheduleType.REPEAT_AFTER -> RepeatAfterSchedule(
+                                ScheduleType.REPEAT_AFTER -> RepeatSchedule(
                                     startDate = LocalDate.now(),
                                     interval = repeatInterval.toInt(),
                                     timeSpan = startTime?.let {
@@ -319,7 +319,7 @@ class AddEditTaskViewModel @Inject constructor(
                                     )
                                 }
                             )
-                            ScheduleType.REPEAT_AFTER -> RepeatAfterSchedule(
+                            ScheduleType.REPEAT_AFTER -> RepeatSchedule(
                                 startDate = LocalDate.now(),
                                 interval = repeatInterval.toInt(),
                                 timeSpan = startTime?.let {

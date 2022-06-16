@@ -4,7 +4,7 @@ import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.data_source.local.mapper.*
 import com.example.gamifyliving.domain.model.entity.Habit
 import com.example.gamifyliving.domain.model.value_object.EverydaySchedule
-import com.example.gamifyliving.domain.model.value_object.RepeatAfterSchedule
+import com.example.gamifyliving.domain.model.value_object.RepeatSchedule
 import com.example.gamifyliving.domain.model.value_object.WeekDaySchedule
 import com.example.gamifyliving.domain.repository.HabitRepository
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +41,7 @@ class HabitRepositoryImpl @Inject constructor(
                     habit.schedule.toEverydayScheduleEntity(habitId = habit.id)
                 everydayScheduleDao.insert(everydayScheduleEntity = everydayScheduleEntity)
             }
-            is RepeatAfterSchedule -> {
+            is RepeatSchedule -> {
                 val repeatAfterScheduleEntity =
                     habit.schedule.toRepeatAfterScheduleEntity(habitId = habit.id)
                 repeatScheduleDao.insert(repeatScheduleEntity = repeatAfterScheduleEntity)
@@ -77,7 +77,7 @@ class HabitRepositoryImpl @Inject constructor(
                     habit.schedule.toEverydayScheduleEntity(habitId = habit.id)
                 everydayScheduleDao.insert(everydayScheduleEntity = everydayScheduleEntity)
             }
-            is RepeatAfterSchedule -> {
+            is RepeatSchedule -> {
                 val repeatAfterScheduleEntity =
                     habit.schedule.toRepeatAfterScheduleEntity(habitId = habit.id)
                 repeatScheduleDao.insert(repeatScheduleEntity = repeatAfterScheduleEntity)

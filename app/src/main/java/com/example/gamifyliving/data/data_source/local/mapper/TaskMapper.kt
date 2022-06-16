@@ -45,7 +45,7 @@ fun EverydaySchedule.toEverydayScheduleEntity(habitId: Int) =
         habitId = habitId
     )
 
-fun RepeatAfterSchedule.toRepeatAfterScheduleEntity(habitId: Int) =
+fun RepeatSchedule.toRepeatAfterScheduleEntity(habitId: Int) =
     RepeatScheduleEntity(
         startDate = this.startDate,
         repeatAfter = this.interval,
@@ -157,7 +157,7 @@ fun EverydayScheduleEntity.toDomainModel() =
     )
 
 fun RepeatScheduleEntity.toDomainModel() =
-    RepeatAfterSchedule(
+    RepeatSchedule(
         startDate = startDate,
         interval = repeatAfter,
         timeSpan = timeSpan?.toTimeSpan()
@@ -199,7 +199,7 @@ fun TaskWithDetailsEntity.toDomainModel(): Task =
                 )
                 habitWithSchedule.repeatSchedule != null ->
                     habitWithSchedule.repeatSchedule.let { repeatAfterScheduleEntity ->
-                        RepeatAfterSchedule(
+                        RepeatSchedule(
                             startDate = repeatAfterScheduleEntity.startDate,
                             interval = repeatAfterScheduleEntity.repeatAfter,
                             timeSpan = repeatAfterScheduleEntity.timeSpan?.toTimeSpan()

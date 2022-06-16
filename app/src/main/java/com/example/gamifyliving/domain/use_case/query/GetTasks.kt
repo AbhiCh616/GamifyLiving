@@ -4,7 +4,7 @@ import com.example.gamifyliving.domain.model.entity.Habit
 import com.example.gamifyliving.domain.model.entity.Task
 import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.model.value_object.EverydaySchedule
-import com.example.gamifyliving.domain.model.value_object.RepeatAfterSchedule
+import com.example.gamifyliving.domain.model.value_object.RepeatSchedule
 import com.example.gamifyliving.domain.model.value_object.WeekDaySchedule
 import com.example.gamifyliving.domain.repository.HabitRepository
 import com.example.gamifyliving.domain.repository.TodoRepository
@@ -51,21 +51,21 @@ class GetTasks @Inject constructor(
                         is Todo -> task.schedule?.date == filterDate
                         is Habit -> when (task.schedule) {
                             is EverydaySchedule -> true
-                            is RepeatAfterSchedule -> {
-                                if ((task.schedule as RepeatAfterSchedule).startDate.isBefore(
+                            is RepeatSchedule -> {
+                                if ((task.schedule as RepeatSchedule).startDate.isBefore(
                                         filterDate
                                     )
                                 ) {
                                     false
                                 } else {
                                     val diffOfDates = Period.between(
-                                        (task.schedule as RepeatAfterSchedule).startDate,
+                                        (task.schedule as RepeatSchedule).startDate,
                                         filterDate
                                     ).days
                                     if (diffOfDates == 0) {
-                                        (task.schedule as RepeatAfterSchedule).interval == 0
+                                        (task.schedule as RepeatSchedule).interval == 0
                                     } else {
-                                        (diffOfDates % (task.schedule as RepeatAfterSchedule).interval).toInt() == 0
+                                        (diffOfDates % (task.schedule as RepeatSchedule).interval).toInt() == 0
                                     }
                                 }
                             }
