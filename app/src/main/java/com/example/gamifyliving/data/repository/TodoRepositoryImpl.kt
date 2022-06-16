@@ -26,18 +26,18 @@ class TodoRepositoryImpl @Inject constructor(
     override suspend fun add(todo: Todo) {
 
         val taskEntity = todo.toTaskEntity()
-        taskDao.insert(taskEntity = taskEntity)
+        val taskId = taskDao.insert(taskEntity = taskEntity).toInt()
 
-        val todoEntity = todo.toTodoEntity()
+        val todoEntity = todo.toTodoEntity(taskId = taskId)
         todoDao.insert(todoEntity)
 
         todo.schedule?.let { dateSchedule ->
-            val dateScheduleEntity = dateSchedule.toDateScheduleEntity(todoId = todo.id)
+            val dateScheduleEntity = dateSchedule.toDateScheduleEntity(todoId = taskId)
             dateScheduleDao.insert(dateScheduleEntity)
         }
 
         todo.rewards?.let { rewards ->
-            val rewardsEntity = rewards.toRewardEntityList(taskId = todo.id)
+            val rewardsEntity = rewards.toRewardEntityList(taskId = taskId)
             rewardDao.insert(rewardsEntity)
         }
 

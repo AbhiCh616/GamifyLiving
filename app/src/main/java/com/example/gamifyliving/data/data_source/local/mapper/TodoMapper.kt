@@ -21,8 +21,8 @@ fun List<TaskWithDetailsEntity>.toTodoList() =
         taskWithDetailsEntity.toTodo()
     }
 
-fun Todo.toTodoEntity() =
+fun Todo.toTodoEntity(taskId: Int? = null) =
     TodoEntity(
         coinsReward = coinsReward,
-        taskId = id
+        taskId = taskId ?: id
     )

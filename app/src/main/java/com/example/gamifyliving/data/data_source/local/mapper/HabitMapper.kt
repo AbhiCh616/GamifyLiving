@@ -20,7 +20,7 @@ fun List<TaskWithDetailsEntity>.toHabitList() =
         taskWithDetailsEntity.toHabit()
     }
 
-fun Habit.toHabitEntity() =
+fun Habit.toHabitEntity(taskId: Int? = null) =
     HabitEntity(
-        taskId = id
+        taskId = taskId ?: id
     )

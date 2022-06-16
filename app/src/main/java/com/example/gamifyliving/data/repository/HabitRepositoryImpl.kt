@@ -31,31 +31,31 @@ class HabitRepositoryImpl @Inject constructor(
     override suspend fun add(habit: Habit) {
 
         val taskEntity = habit.toTaskEntity()
-        taskDao.insert(taskEntity = taskEntity)
+        val taskId = taskDao.insert(taskEntity = taskEntity).toInt()
 
-        val habitEntity = habit.toHabitEntity()
+        val habitEntity = habit.toHabitEntity(taskId = taskId)
         habitDao.insert(habitEntity = habitEntity)
 
         when (habit.schedule) {
             is EverydaySchedule -> {
                 val everydayScheduleEntity =
-                    habit.schedule.toEverydayScheduleEntity(habitId = habit.id)
+                    habit.schedule.toEverydayScheduleEntity(habitId = taskId)
                 everydayScheduleDao.insert(everydayScheduleEntity = everydayScheduleEntity)
             }
             is RepeatSchedule -> {
                 val repeatAfterScheduleEntity =
-                    habit.schedule.toRepeatScheduleEntity(habitId = habit.id)
+                    habit.schedule.toRepeatScheduleEntity(habitId = taskId)
                 repeatScheduleDao.insert(repeatScheduleEntity = repeatAfterScheduleEntity)
             }
             is WeekDaySchedule -> {
                 val weekDayScheduleEntity =
-                    habit.schedule.toWeekDayScheduleEntity(habitId = habit.id)
+                    habit.schedule.toWeekDayScheduleEntity(habitId = taskId)
                 weekDayScheduleDao.insert(weekDayScheduleEntity = weekDayScheduleEntity)
             }
         }
 
         habit.rewards?.let { rewards ->
-            val rewardsEntity = rewards.toRewardEntityList(taskId = habit.id)
+            val rewardsEntity = rewards.toRewardEntityList(taskId = taskId)
             rewardDao.insert(rewardsEntity)
         }
 
