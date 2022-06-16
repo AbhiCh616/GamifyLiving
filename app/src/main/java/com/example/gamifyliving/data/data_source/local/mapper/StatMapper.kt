@@ -1,6 +1,6 @@
 package com.example.gamifyliving.data.data_source.local.mapper
 
-import com.example.gamifyliving.data.data_source.local.model.StatEntity
+import com.example.gamifyliving.data.data_source.local.model.table.StatEntity
 import com.example.gamifyliving.domain.model.entity.Stat
 
 fun StatEntity.toDomainModel() =

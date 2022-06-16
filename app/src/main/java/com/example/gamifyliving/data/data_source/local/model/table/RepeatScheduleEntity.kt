@@ -1,9 +1,11 @@
-package com.example.gamifyliving.data.data_source.local.model
+package com.example.gamifyliving.data.data_source.local.model.table
 
 import androidx.room.*
+import com.example.gamifyliving.data.data_source.local.model.embedded.TimeSpanEntity
+import java.time.LocalDate
 
 @Entity(
-    tableName = "everyday_schedule",
+    tableName = "repeat_schedule",
     foreignKeys = [
         ForeignKey(
             entity = HabitEntity::class,
@@ -14,7 +16,13 @@ import androidx.room.*
     ]
 )
 
-data class EverydayScheduleEntity(
+data class RepeatScheduleEntity(
+
+    @ColumnInfo(name = "start_date")
+    val startDate: LocalDate,
+
+    @ColumnInfo(name = "repeat_after")
+    val repeatAfter: Int,
 
     @Embedded
     val timeSpan: TimeSpanEntity?,

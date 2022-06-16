@@ -1,6 +1,9 @@
 package com.example.gamifyliving.data.data_source.local.mapper
 
-import com.example.gamifyliving.data.data_source.local.model.*
+import com.example.gamifyliving.data.data_source.local.model.embedded.TimeSpanEntity
+import com.example.gamifyliving.data.data_source.local.model.read_model.HabitWithScheduleEntity
+import com.example.gamifyliving.data.data_source.local.model.read_model.TaskWithDetailsEntity
+import com.example.gamifyliving.data.data_source.local.model.table.*
 import com.example.gamifyliving.domain.model.entity.Habit
 import com.example.gamifyliving.domain.model.entity.Reward
 import com.example.gamifyliving.domain.model.entity.Task

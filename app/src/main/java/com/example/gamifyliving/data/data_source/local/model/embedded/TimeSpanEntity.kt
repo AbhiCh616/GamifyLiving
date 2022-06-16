@@ -1,4 +1,4 @@
-package com.example.gamifyliving.data.data_source.local.model
+package com.example.gamifyliving.data.data_source.local.model.embedded
 
 import androidx.room.ColumnInfo
 import java.time.LocalTime

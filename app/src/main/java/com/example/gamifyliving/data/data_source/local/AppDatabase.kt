@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.gamifyliving.data.data_source.local.converter.LocalDateConverter
 import com.example.gamifyliving.data.data_source.local.converter.LocalTimeConverter
 import com.example.gamifyliving.data.data_source.local.dao.*
-import com.example.gamifyliving.data.data_source.local.model.*
+import com.example.gamifyliving.data.data_source.local.model.table.*
 
 @Database(
     version = 1,

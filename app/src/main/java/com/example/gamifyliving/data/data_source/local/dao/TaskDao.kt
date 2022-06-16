@@ -1,8 +1,8 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
 import androidx.room.*
-import com.example.gamifyliving.data.data_source.local.model.TaskEntity
-import com.example.gamifyliving.data.data_source.local.model.TaskWithDetailsEntity
+import com.example.gamifyliving.data.data_source.local.model.table.TaskEntity
+import com.example.gamifyliving.data.data_source.local.model.read_model.TaskWithDetailsEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

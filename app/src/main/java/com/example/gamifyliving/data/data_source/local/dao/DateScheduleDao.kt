@@ -1,7 +1,7 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
 import androidx.room.*
-import com.example.gamifyliving.data.data_source.local.model.DateScheduleEntity
+import com.example.gamifyliving.data.data_source.local.model.table.DateScheduleEntity
 
 @Dao
 interface DateScheduleDao {

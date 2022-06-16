@@ -1,7 +1,7 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
 import androidx.room.*
-import com.example.gamifyliving.data.data_source.local.model.TodoEntity
+import com.example.gamifyliving.data.data_source.local.model.table.TodoEntity
 
 @Dao
 interface TodoDao {

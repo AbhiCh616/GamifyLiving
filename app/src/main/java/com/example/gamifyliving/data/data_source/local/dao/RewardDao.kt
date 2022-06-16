@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.gamifyliving.data.data_source.local.model.RewardEntity
+import com.example.gamifyliving.data.data_source.local.model.table.RewardEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
