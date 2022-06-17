@@ -5,14 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface StatRepository {
 
-    suspend fun add(stat: Stat)
-
-    suspend fun update(stat: Stat)
-
-    suspend fun delete(stat: Stat)
-
+    fun observe(): Flow<List<Stat>>
     suspend fun getById(id: Int): Stat?
 
-    fun observe(): Flow<List<Stat>>
+    suspend fun add(stat: Stat)
+    suspend fun update(stat: Stat)
+    suspend fun delete(stat: Stat)
 
 }

@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoinRepository {
 
-    suspend fun update(coins: Int)
-
     fun observe(): Flow<Int>
+
+    suspend fun update(coins: Int)
 
 }
