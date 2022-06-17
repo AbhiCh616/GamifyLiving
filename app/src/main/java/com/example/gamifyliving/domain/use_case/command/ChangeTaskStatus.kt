@@ -23,10 +23,15 @@ class ChangeTaskStatus @Inject constructor(
             todoRepository.update(todo = newTask)
 
             // Increase or decrease the coins, that user has, based on (un)check status of task
-            if (newTask.status)
-                coinRepository.increaseCoinsBy(coinsAdded = task.coinsReward)
-            else
-                coinRepository.decreaseCoinsBy(coinsRemoved = task.coinsReward)
+            coinRepository.get().collect { coins ->
+                var updatedCoins = coins
+                if (newTask.status) {
+                    updatedCoins += task.coinsReward
+                } else {
+                    updatedCoins -= task.coinsReward
+                }
+                coinRepository.update(updatedCoins)
+            }
 
             // Increase or decrease the stats based on (un)check status
 

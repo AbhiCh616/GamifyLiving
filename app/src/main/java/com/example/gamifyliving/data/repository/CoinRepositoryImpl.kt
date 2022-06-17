@@ -9,14 +9,10 @@ class CoinRepositoryImpl @Inject constructor(
     private val dataStoreManager: DataStoreManager
 ) : CoinRepository {
 
-    override suspend fun increaseCoinsBy(coinsAdded: Int) {
-        dataStoreManager.increaseCoinsBy(coinsAdded)
+    override suspend fun update(coins: Int) {
+        dataStoreManager.update(coins)
     }
 
-    override suspend fun decreaseCoinsBy(coinsRemoved: Int) {
-        dataStoreManager.decreaseCoinsBy(coinsRemoved)
-    }
-
-    override fun getCoins(): Flow<Int> = dataStoreManager.coins
+    override fun get(): Flow<Int> = dataStoreManager.coins
 
 }
