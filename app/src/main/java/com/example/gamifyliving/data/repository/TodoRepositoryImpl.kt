@@ -4,7 +4,6 @@ import com.example.gamifyliving.data.data_source.local.dao.*
 import com.example.gamifyliving.data.data_source.local.mapper.*
 import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.repository.TodoRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -16,11 +15,11 @@ class TodoRepositoryImpl @Inject constructor(
     private val rewardDao: RewardDao,
 ) : TodoRepository {
 
-    override fun observe(): Flow<List<Todo>> = taskWithDetailsDao.getAll().map {
+    override fun observe() = taskWithDetailsDao.getAll().map {
         it.toTodoList()
     }
 
-    override suspend fun getById(id: Int): Todo? =
+    override suspend fun getById(id: Int) =
         taskWithDetailsDao.getById(id = id)?.toTodo()
 
     override suspend fun add(todo: Todo) {
@@ -51,9 +50,10 @@ class TodoRepositoryImpl @Inject constructor(
         val todoEntity = todo.toTodoEntity()
         todoDao.update(todoEntity)
 
+        dateScheduleDao.deleteByTodoId(todoId = todo.id)
         todo.schedule?.let { dateSchedule ->
             val dateScheduleEntity = dateSchedule.toDateScheduleEntity(todoId = todo.id)
-            dateScheduleDao.update(dateScheduleEntity)
+            dateScheduleDao.update(dateScheduleEntity = dateScheduleEntity)
         }
 
         rewardDao.deleteByTaskId(taskId = todo.id)

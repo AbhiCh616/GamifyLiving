@@ -7,7 +7,6 @@ import com.example.gamifyliving.domain.model.value_object.EverydaySchedule
 import com.example.gamifyliving.domain.model.value_object.RepeatSchedule
 import com.example.gamifyliving.domain.model.value_object.WeekDaySchedule
 import com.example.gamifyliving.domain.repository.HabitRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -21,11 +20,11 @@ class HabitRepositoryImpl @Inject constructor(
     private val rewardDao: RewardDao
 ) : HabitRepository {
 
-    override fun observe(): Flow<List<Habit>> = taskWithDetailsDao.getAll().map {
+    override fun observe() = taskWithDetailsDao.getAll().map {
         it.toHabitList()
     }
 
-    override suspend fun getById(id: Int): Habit? =
+    override suspend fun getById(id: Int) =
         taskWithDetailsDao.getById(id = id)?.toHabit()
 
     override suspend fun add(habit: Habit) {
@@ -71,7 +70,7 @@ class HabitRepositoryImpl @Inject constructor(
 
         everydayScheduleDao.deleteByHabitId(habitId = habit.id)
         repeatScheduleDao.deleteByHabitId(habitId = habit.id)
-        weekDayScheduleDao.delete(habitId = habit.id)
+        weekDayScheduleDao.deleteByHabitId(habitId = habit.id)
         when (habit.schedule) {
             is EverydaySchedule -> {
                 val everydayScheduleEntity =

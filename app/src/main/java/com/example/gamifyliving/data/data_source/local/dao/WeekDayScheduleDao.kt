@@ -10,7 +10,7 @@ import com.example.gamifyliving.data.data_source.local.model.table.WeekDaySchedu
 interface WeekDayScheduleDao {
 
     @Query("DELETE FROM week_day_schedule WHERE habit_id = :habitId")
-    suspend fun delete(habitId: Int)
+    suspend fun deleteByHabitId(habitId: Int)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(weekDayScheduleEntity: WeekDayScheduleEntity)
