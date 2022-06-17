@@ -6,6 +6,6 @@ interface CoinRepository {
 
     suspend fun update(coins: Int)
 
-    fun get(): Flow<Int>
+    fun observe(): Flow<Int>
 
 }

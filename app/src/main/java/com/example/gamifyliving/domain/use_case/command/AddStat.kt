@@ -9,6 +9,6 @@ class AddStat @Inject constructor(
     private val repository: StatRepository
 ) {
     suspend operator fun invoke(stat: Stat) = runSuspendCatching {
-        repository.addStat(stat)
+        repository.add(stat)
     }
 }

@@ -23,7 +23,7 @@ class ChangeTaskStatus @Inject constructor(
             todoRepository.update(todo = newTask)
 
             // Increase or decrease the coins, that user has, based on (un)check status of task
-            coinRepository.get().collect { coins ->
+            coinRepository.observe().collect { coins ->
                 var updatedCoins = coins
                 if (newTask.status) {
                     updatedCoins += task.coinsReward
@@ -36,14 +36,14 @@ class ChangeTaskStatus @Inject constructor(
             // Increase or decrease the stats based on (un)check status
 
             task.rewards?.forEach { reward ->
-                val initialStat = statRepository.getStatById(reward.statId)!!
+                val initialStat = statRepository.getById(reward.statId)!!
                 val finalStat =
                     if (newTask.status) {
                         initialStat.copy(value = initialStat.value + reward.points)
                     } else {
                         initialStat.copy(value = initialStat.value - reward.points)
                     }
-                statRepository.updateStat(finalStat)
+                statRepository.update(finalStat)
             }
 
         }
@@ -54,14 +54,14 @@ class ChangeTaskStatus @Inject constructor(
 
             // Increase or decrease the stats based on (un)check status
             task.rewards?.forEach { reward ->
-                val initialStat = statRepository.getStatById(reward.statId)!!
+                val initialStat = statRepository.getById(reward.statId)!!
                 val finalStat =
                     if (newTask.status) {
                         initialStat.copy(value = initialStat.value + reward.points)
                     } else {
                         initialStat.copy(value = initialStat.value - reward.points)
                     }
-                statRepository.updateStat(finalStat)
+                statRepository.update(finalStat)
             }
 
         }

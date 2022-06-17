@@ -5,14 +5,14 @@ import kotlinx.coroutines.flow.Flow
 
 interface StoreItemRepository {
 
-    suspend fun addItem(item: StoreItem)
+    suspend fun add(item: StoreItem)
 
-    suspend fun updateItem(item: StoreItem)
+    suspend fun update(item: StoreItem)
 
-    suspend fun deleteItem(item: StoreItem)
+    suspend fun delete(item: StoreItem)
 
-    suspend fun getStoreItemById(id: Int): StoreItem?
+    suspend fun getById(id: Int): StoreItem?
 
-    fun observeItems(): Flow<List<StoreItem>>
+    fun observe(): Flow<List<StoreItem>>
 
 }
