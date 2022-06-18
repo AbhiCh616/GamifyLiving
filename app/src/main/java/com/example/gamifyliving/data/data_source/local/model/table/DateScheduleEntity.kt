@@ -1,6 +1,7 @@
-package com.example.gamifyliving.data.data_source.local.model
+package com.example.gamifyliving.data.data_source.local.model.table
 
 import androidx.room.*
+import com.example.gamifyliving.data.data_source.local.model.embedded.TimeSpanEntity
 import java.time.LocalDate
 
 @Entity(

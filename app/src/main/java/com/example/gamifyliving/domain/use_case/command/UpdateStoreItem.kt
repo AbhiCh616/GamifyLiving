@@ -9,6 +9,6 @@ class UpdateStoreItem @Inject constructor(
     private val repository: StoreItemRepository
 ) {
     suspend operator fun invoke(item: StoreItem) = runSuspendCatching {
-        repository.updateItem(item)
+        repository.update(item)
     }
 }

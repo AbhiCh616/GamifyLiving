@@ -76,6 +76,11 @@ object AppModule {
         return appDatabase.storeItemDao()
     }
 
+    @Provides
+    fun provideTaskWithDetailsDao(appDatabase: AppDatabase): TaskWithDetailsDao {
+        return appDatabase.taskWithDetailsDao()
+    }
+
 }
 
 @Module

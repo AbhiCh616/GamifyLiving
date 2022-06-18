@@ -4,10 +4,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoinRepository {
 
-    suspend fun increaseCoinsBy(coinsAdded: Int)
+    fun observe(): Flow<Int>
 
-    suspend fun decreaseCoinsBy(coinsRemoved: Int)
-
-    fun getCoins(): Flow<Int>
+    suspend fun update(coins: Int)
 
 }

@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetCoins @Inject constructor(
     private val coinsRepository: CoinRepository
 ) {
-    operator fun invoke(): Flow<Int> = coinsRepository.getCoins()
+    operator fun invoke(): Flow<Int> = coinsRepository.observe()
 }

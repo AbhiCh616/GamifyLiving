@@ -1,4 +1,4 @@
-package com.example.gamifyliving.data.data_source.local.model
+package com.example.gamifyliving.data.data_source.local.model.table
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "todo",
+    tableName = "habit",
     foreignKeys = [
         ForeignKey(
             entity = TaskEntity::class,
@@ -17,10 +17,7 @@ import androidx.room.PrimaryKey
     ]
 )
 
-data class TodoEntity(
-
-    @ColumnInfo(name = "coins_reward")
-    val coinsReward: Int,
+data class HabitEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "task_id")

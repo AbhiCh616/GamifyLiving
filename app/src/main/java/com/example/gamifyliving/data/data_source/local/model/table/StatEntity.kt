@@ -1,4 +1,4 @@
-package com.example.gamifyliving.data.data_source.local.model
+package com.example.gamifyliving.data.data_source.local.model.table
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

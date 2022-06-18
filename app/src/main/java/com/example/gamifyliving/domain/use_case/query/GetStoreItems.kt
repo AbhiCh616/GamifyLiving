@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetStoreItems @Inject constructor(
     private val repository: StoreItemRepository
 ) {
-    operator fun invoke(): Flow<List<StoreItem>> = repository.observeItems()
+    operator fun invoke(): Flow<List<StoreItem>> = repository.observe()
 }

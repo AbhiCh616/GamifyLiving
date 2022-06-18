@@ -1,9 +1,7 @@
 package com.example.gamifyliving.data.data_source.local.dao
 
 import androidx.room.*
-import com.example.gamifyliving.data.data_source.local.model.TaskEntity
-import com.example.gamifyliving.data.data_source.local.model.TaskWithDetailsEntity
-import kotlinx.coroutines.flow.Flow
+import com.example.gamifyliving.data.data_source.local.model.table.TaskEntity
 
 @Dao
 interface TaskDao {
@@ -12,17 +10,9 @@ interface TaskDao {
     suspend fun insert(taskEntity: TaskEntity): Long
 
     @Update
-    suspend fun update(taskEntity: TaskEntity): Int
+    suspend fun update(taskEntity: TaskEntity)
 
     @Delete
     suspend fun delete(taskEntity: TaskEntity)
-
-    @Transaction
-    @Query("SELECT * FROM task WHERE id = :id")
-    suspend fun getTaskWithDetails(id: Int): TaskWithDetailsEntity?
-
-    @Transaction
-    @Query("SELECT * FROM task")
-    fun getAll(): Flow<List<TaskWithDetailsEntity>>
 
 }
