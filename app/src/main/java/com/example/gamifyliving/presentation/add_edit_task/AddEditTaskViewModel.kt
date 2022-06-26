@@ -27,7 +27,8 @@ class AddEditTaskViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
     private val deleteTodo: DeleteTodo,
     private val deleteHabit: DeleteHabit,
-    private val updateTask: UpdateTask,
+    private val updateTodo: UpdateTodo,
+    private val updateHabit: UpdateHabit,
     private val addTodo: AddTodo,
     private val addHabit: AddHabit,
     getStats: GetStats,
@@ -225,68 +226,71 @@ class AddEditTaskViewModel @Inject constructor(
             selectedTask.let { task ->
                 val updatedTask = when (task) {
                     is Todo -> {
-                        (selectedTask as Todo).copy(
-                            name = name,
-                            rewards = rewards.toDomainModel(),
-                            coinsReward = coins.toInt(),
-                            schedule = scheduledDate?.let {
-                                DateSchedule(
-                                    date = it,
-                                    timeSpan = startTime?.let { startTime ->
-                                        TimeSpan(
-                                            startTime = startTime,
-                                            endTime = endTime!!
-                                        )
-                                    }
-                                )
-                            }
+                        updateTodo(
+                            (selectedTask as Todo).copy(
+                                name = name,
+                                rewards = rewards.toDomainModel(),
+                                coinsReward = coins.toInt(),
+                                schedule = scheduledDate?.let {
+                                    DateSchedule(
+                                        date = it,
+                                        timeSpan = startTime?.let { startTime ->
+                                            TimeSpan(
+                                                startTime = startTime,
+                                                endTime = endTime!!
+                                            )
+                                        }
+                                    )
+                                }
+                            )
                         )
                     }
                     is Habit -> {
-                        (selectedTask as Habit).copy(
-                            name = name,
-                            rewards = rewards.toDomainModel(),
-                            schedule = when (scheduleType) {
-                                ScheduleType.EVERYDAY -> EverydaySchedule(
-                                    timeSpan = startTime?.let {
-                                        TimeSpan(
-                                            startTime = startTime!!,
-                                            endTime = endTime!!,
-                                        )
-                                    }
-                                )
-                                ScheduleType.REPEAT_AFTER -> RepeatSchedule(
-                                    startDate = LocalDate.now(),
-                                    interval = repeatInterval.toInt(),
-                                    timeSpan = startTime?.let {
-                                        TimeSpan(
-                                            startTime = startTime!!,
-                                            endTime = endTime!!,
-                                        )
-                                    }
-                                )
-                                ScheduleType.DAY_OF_WEEK -> WeekDaySchedule(
-                                    sunday = daysOfWeek.sunday,
-                                    monday = daysOfWeek.monday,
-                                    tuesday = daysOfWeek.tuesday,
-                                    wednesday = daysOfWeek.wednesday,
-                                    thursday = daysOfWeek.thursday,
-                                    friday = daysOfWeek.friday,
-                                    saturday = daysOfWeek.saturday,
-                                    timeSpan = startTime?.let {
-                                        TimeSpan(
-                                            startTime = startTime!!,
-                                            endTime = endTime!!,
-                                        )
-                                    }
-                                )
-                                null -> null
-                            },
+                        updateHabit(
+                            (selectedTask as Habit).copy(
+                                name = name,
+                                rewards = rewards.toDomainModel(),
+                                schedule = when (scheduleType) {
+                                    ScheduleType.EVERYDAY -> EverydaySchedule(
+                                        timeSpan = startTime?.let {
+                                            TimeSpan(
+                                                startTime = startTime!!,
+                                                endTime = endTime!!,
+                                            )
+                                        }
+                                    )
+                                    ScheduleType.REPEAT_AFTER -> RepeatSchedule(
+                                        startDate = LocalDate.now(),
+                                        interval = repeatInterval.toInt(),
+                                        timeSpan = startTime?.let {
+                                            TimeSpan(
+                                                startTime = startTime!!,
+                                                endTime = endTime!!,
+                                            )
+                                        }
+                                    )
+                                    ScheduleType.DAY_OF_WEEK -> WeekDaySchedule(
+                                        sunday = daysOfWeek.sunday,
+                                        monday = daysOfWeek.monday,
+                                        tuesday = daysOfWeek.tuesday,
+                                        wednesday = daysOfWeek.wednesday,
+                                        thursday = daysOfWeek.thursday,
+                                        friday = daysOfWeek.friday,
+                                        saturday = daysOfWeek.saturday,
+                                        timeSpan = startTime?.let {
+                                            TimeSpan(
+                                                startTime = startTime!!,
+                                                endTime = endTime!!,
+                                            )
+                                        }
+                                    )
+                                    null -> null
+                                },
+                            )
                         )
                     }
                     else -> throw TypeCastException()
                 }
-                updateTask(updatedTask)
             }
         } else {
             val newTask = when (taskType) {
