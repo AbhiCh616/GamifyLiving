@@ -7,9 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gamifyliving.domain.model.entity.*
+import com.example.gamifyliving.domain.model.entity.Habit
+import com.example.gamifyliving.domain.model.entity.Task
+import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.model.value_object.*
-import com.example.gamifyliving.domain.use_case.command.AddTask
+import com.example.gamifyliving.domain.use_case.command.AddHabit
+import com.example.gamifyliving.domain.use_case.command.AddTodo
 import com.example.gamifyliving.domain.use_case.command.DeleteTask
 import com.example.gamifyliving.domain.use_case.command.UpdateTask
 import com.example.gamifyliving.domain.use_case.query.GetStats
@@ -27,7 +30,8 @@ class AddEditTaskViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
     private val deleteTask: DeleteTask,
     private val updateTask: UpdateTask,
-    private val addTask: AddTask,
+    private val addTodo: AddTodo,
+    private val addHabit: AddHabit,
     getStats: GetStats,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -289,7 +293,7 @@ class AddEditTaskViewModel @Inject constructor(
         } else {
             val newTask = when (taskType) {
                 TaskType.TODO -> {
-                    Todo(
+                    val todo = Todo(
                         name = name,
                         coinsReward = coins.toInt(),
                         rewards = rewards.toDomainModel(),
@@ -305,9 +309,10 @@ class AddEditTaskViewModel @Inject constructor(
                             )
                         }
                     )
+                    addTodo(todo)
                 }
                 TaskType.HABIT -> {
-                    Habit(
+                    val habit = Habit(
                         name = name,
                         rewards = rewards.toDomainModel(),
                         schedule = when (scheduleType) {
@@ -347,9 +352,9 @@ class AddEditTaskViewModel @Inject constructor(
                             null -> null
                         },
                     )
+                    addHabit(habit)
                 }
             }
-            addTask(newTask)
         }
     }
 
