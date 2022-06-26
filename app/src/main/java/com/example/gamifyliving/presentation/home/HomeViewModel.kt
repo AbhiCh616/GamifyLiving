@@ -5,8 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gamifyliving.domain.model.entity.Habit
 import com.example.gamifyliving.domain.model.entity.Task
-import com.example.gamifyliving.domain.use_case.command.ChangeTaskStatus
+import com.example.gamifyliving.domain.model.entity.Todo
+import com.example.gamifyliving.domain.use_case.command.ChangeHabitStatus
+import com.example.gamifyliving.domain.use_case.command.ChangeTodoStatus
 import com.example.gamifyliving.domain.use_case.query.GetTasks
 import com.example.gamifyliving.domain.util.FilterTaskOn
 import com.example.gamifyliving.domain.util.SortCriteria
@@ -19,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getTasks: GetTasks,
-    private val changeTaskStatus: ChangeTaskStatus
+    private val changeTodoStatus: ChangeTodoStatus,
+    private val changeHabitStatus: ChangeHabitStatus
 ) : ViewModel() {
 
     var listTasks =
@@ -60,7 +64,12 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onTaskStatusChange(task: Task) = viewModelScope.launch {
-        changeTaskStatus(task)
+        if (task is Todo) {
+            changeTodoStatus(task)
+        }
+        if (task is Habit) {
+            changeHabitStatus(task)
+        }
     }
 
 }
