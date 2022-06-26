@@ -11,10 +11,7 @@ import com.example.gamifyliving.domain.model.entity.Habit
 import com.example.gamifyliving.domain.model.entity.Task
 import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.model.value_object.*
-import com.example.gamifyliving.domain.use_case.command.AddHabit
-import com.example.gamifyliving.domain.use_case.command.AddTodo
-import com.example.gamifyliving.domain.use_case.command.DeleteTask
-import com.example.gamifyliving.domain.use_case.command.UpdateTask
+import com.example.gamifyliving.domain.use_case.command.*
 import com.example.gamifyliving.domain.use_case.query.GetStats
 import com.example.gamifyliving.domain.use_case.query.GetTaskById
 import com.example.gamifyliving.presentation.util.*
@@ -28,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddEditTaskViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
-    private val deleteTask: DeleteTask,
+    private val deleteTodo: DeleteTodo,
+    private val deleteHabit: DeleteHabit,
     private val updateTask: UpdateTask,
     private val addTodo: AddTodo,
     private val addHabit: AddHabit,
@@ -360,7 +358,14 @@ class AddEditTaskViewModel @Inject constructor(
 
 
     fun onDeleteClicked() = viewModelScope.launch {
-        selectedTask?.let { deleteTask(it) }
+        selectedTask?.let {
+            if (it is Todo) {
+                deleteTodo(it)
+            }
+            if (it is Habit) {
+                deleteHabit(it)
+            }
+        }
     }
 
     fun editReward(updatedReward: RewardUIModel) {
