@@ -17,20 +17,21 @@ class ChangeTaskStatus @Inject constructor(
     private val habitRepository: HabitRepository
 ) {
     suspend operator fun invoke(task: Task) = runSuspendCatching {
+
         if (task is Todo) {
             // Change (completion) status of task
-            val newTask = task.copy(status = !task.status)
-            todoRepository.update(todo = newTask)
+            val updatedTask = task.copy(status = !task.status)
+            todoRepository.update(todo = updatedTask)
 
             // Increase or decrease the coins, that user has, based on (un)check status of task
             coinRepository.observe().collect { coins ->
                 var updatedCoins = coins
-                if (newTask.status) {
+                if (updatedTask.status) {
                     updatedCoins += task.coinsReward
                 } else {
                     updatedCoins -= task.coinsReward
                 }
-                coinRepository.update(updatedCoins)
+                coinRepository.update(coins = updatedCoins)
             }
 
             // Increase or decrease the stats based on (un)check status
@@ -38,32 +39,34 @@ class ChangeTaskStatus @Inject constructor(
             task.rewards?.forEach { reward ->
                 val initialStat = statRepository.getById(reward.statId)!!
                 val finalStat =
-                    if (newTask.status) {
+                    if (updatedTask.status) {
                         initialStat.copy(value = initialStat.value + reward.points)
                     } else {
                         initialStat.copy(value = initialStat.value - reward.points)
                     }
-                statRepository.update(finalStat)
+                statRepository.update(stat = finalStat)
             }
 
         }
+
         if (task is Habit) {
             // Change (completion) status of task
-            val newTask = task.copy(status = !task.status)
-            habitRepository.update(habit = newTask)
+            val updatedTask = task.copy(status = !task.status)
+            habitRepository.update(habit = updatedTask)
 
             // Increase or decrease the stats based on (un)check status
             task.rewards?.forEach { reward ->
                 val initialStat = statRepository.getById(reward.statId)!!
                 val finalStat =
-                    if (newTask.status) {
+                    if (updatedTask.status) {
                         initialStat.copy(value = initialStat.value + reward.points)
                     } else {
                         initialStat.copy(value = initialStat.value - reward.points)
                     }
-                statRepository.update(finalStat)
+                statRepository.update(stat = finalStat)
             }
 
         }
+
     }
 }

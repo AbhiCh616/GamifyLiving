@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetStoreItemById @Inject constructor(
     private val repository: StoreItemRepository
 ) {
-    suspend operator fun invoke(id: Int) = runSuspendCatching { repository.getById(id) }
+    suspend operator fun invoke(id: Int) = runSuspendCatching { repository.getById(id = id) }
 }

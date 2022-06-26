@@ -18,11 +18,11 @@ class UpdateTask @Inject constructor(
         withContext(NonCancellable) {
             if(task is Todo)
             {
-                todoRepository.add(task)
+                todoRepository.add(todo = task)
             }
             if(task is Habit)
             {
-                habitRepository.add(task)
+                habitRepository.add(habit = task)
             }
         }
     }

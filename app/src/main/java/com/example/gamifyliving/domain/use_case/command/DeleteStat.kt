@@ -9,6 +9,6 @@ class DeleteStat @Inject constructor(
     private val repository: StatRepository
 ) {
     suspend operator fun invoke(stat: Stat) = runSuspendCatching {
-        repository.delete(stat)
+        repository.delete(stat = stat)
     }
 }

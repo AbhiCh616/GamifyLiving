@@ -13,11 +13,13 @@ class AddTask @Inject constructor(
     private val habitRepository: HabitRepository
 ) {
     suspend operator fun invoke(task: Task) = runSuspendCatching {
+
         if (task is Todo) {
-            todoRepository.add(task)
+            todoRepository.add(todo = task)
         }
         if (task is Habit) {
-            habitRepository.add(task)
+            habitRepository.add(habit = task)
         }
+
     }
 }

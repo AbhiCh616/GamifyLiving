@@ -9,6 +9,8 @@ class AddStoreItem @Inject constructor(
     private val repository: StoreItemRepository
 ) {
     suspend operator fun invoke(item: StoreItem) = runSuspendCatching {
-        repository.add(item)
+
+        repository.add(item = item)
+
     }
 }

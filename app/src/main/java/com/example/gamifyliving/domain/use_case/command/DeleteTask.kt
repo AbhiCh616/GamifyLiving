@@ -15,11 +15,11 @@ class DeleteTask @Inject constructor(
     suspend operator fun invoke(task: Task) = runSuspendCatching {
         if(task is Todo)
         {
-            todoRepository.delete(task)
+            todoRepository.delete(todo = task)
         }
         if(task is Habit)
         {
-            habitRepository.delete(task)
+            habitRepository.delete(habit = task)
         }
     }
 }
