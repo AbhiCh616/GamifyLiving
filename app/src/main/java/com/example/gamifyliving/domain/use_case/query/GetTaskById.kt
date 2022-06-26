@@ -10,6 +10,8 @@ class GetTaskById @Inject constructor(
     private val habitRepository: HabitRepository
 ) {
     suspend operator fun invoke(id: Int) = runSuspendCatching {
+
         todoRepository.getById(id = id) ?: habitRepository.getById(id = id)
+
     }
 }

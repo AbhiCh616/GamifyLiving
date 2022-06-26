@@ -9,6 +9,8 @@ class DeleteStoreItem @Inject constructor(
     private val repository: StoreItemRepository
 ) {
     suspend operator fun invoke(item: StoreItem) = runSuspendCatching {
+
         repository.delete(item = item)
+
     }
 }

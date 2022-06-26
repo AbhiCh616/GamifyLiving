@@ -9,6 +9,8 @@ class UpdateStat @Inject constructor(
     private val repository: StatRepository
 ) {
     suspend operator fun invoke(stat: Stat) = runSuspendCatching {
+
         repository.update(stat = stat)
+
     }
 }

@@ -7,5 +7,9 @@ import javax.inject.Inject
 class GetStatById @Inject constructor(
     private val repository: StatRepository
 ) {
-    suspend operator fun invoke(id: Int) = runSuspendCatching { repository.getById(id = id) }
+    suspend operator fun invoke(id: Int) = runSuspendCatching {
+
+        repository.getById(id = id)
+
+    }
 }
