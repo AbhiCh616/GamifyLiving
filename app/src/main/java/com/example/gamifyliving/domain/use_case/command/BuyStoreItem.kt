@@ -10,7 +10,8 @@ class BuyStoreItem @Inject constructor(
 ) {
     suspend operator fun invoke(storeItem: StoreItem) = runSuspendCatching {
         coinRepository.observe().collect { coins ->
-            coinRepository.update(coins - storeItem.costCoins)
+            val updatedCoins = coins - storeItem.costCoins
+            coinRepository.update(updatedCoins)
         }
     }
 }
