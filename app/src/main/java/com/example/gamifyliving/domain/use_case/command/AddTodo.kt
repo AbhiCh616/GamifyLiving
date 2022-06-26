@@ -6,11 +6,11 @@ import com.example.gamifyliving.domain.util.runSuspendCatching
 import javax.inject.Inject
 
 class AddTodo @Inject constructor(
-    private val todoRepository: TodoRepository
+    private val repository: TodoRepository
 ) {
     suspend operator fun invoke(todo: Todo) = runSuspendCatching {
 
-        todoRepository.add(todo = todo)
+        repository.add(todo = todo)
 
     }
 }

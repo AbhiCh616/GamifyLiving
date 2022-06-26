@@ -6,11 +6,11 @@ import com.example.gamifyliving.domain.util.runSuspendCatching
 import javax.inject.Inject
 
 class DeleteHabit @Inject constructor(
-    private val habitRepository: HabitRepository
+    private val repository: HabitRepository
 ) {
     suspend operator fun invoke(habit: Habit) = runSuspendCatching {
 
-        habitRepository.delete(habit = habit)
+        repository.delete(habit = habit)
 
     }
 }

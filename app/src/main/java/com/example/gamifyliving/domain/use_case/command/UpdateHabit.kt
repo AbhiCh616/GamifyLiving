@@ -6,11 +6,11 @@ import com.example.gamifyliving.domain.util.runSuspendCatching
 import javax.inject.Inject
 
 class UpdateHabit @Inject constructor(
-    private val habitRepository: HabitRepository
+    private val repository: HabitRepository
 ) {
     suspend operator fun invoke(habit: Habit) = runSuspendCatching {
 
-        habitRepository.update(habit = habit)
+        repository.update(habit = habit)
 
     }
 }
