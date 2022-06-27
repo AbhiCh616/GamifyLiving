@@ -1,18 +1,18 @@
 package com.example.gamifyliving.domain.util
 
-enum class SortCriteria {
-    TIME, UNDONE, WITH_TIME
+enum class TaskSortCriteria {
+    TIME, NOT_DONE, WITH_TIME
 }
 
-enum class SortOrder {
+enum class TaskSortOrder {
     ASC, DESC
 }
 
-data class SortTasksBy(
-    val sortCriteria: SortCriteria,
-    val sortOrder: SortOrder = SortOrder.ASC
+data class TaskSort(
+    val sortCriteria: TaskSortCriteria,
+    val sortOrder: TaskSortOrder = TaskSortOrder.ASC
 )
 
-enum class FilterTaskOn {
+enum class TaskFilter {
     TODO, HABIT, WITH_TIME
 }

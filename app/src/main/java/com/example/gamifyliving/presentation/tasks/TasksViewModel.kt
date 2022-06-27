@@ -12,9 +12,9 @@ import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.use_case.command.ChangeHabitStatus
 import com.example.gamifyliving.domain.use_case.command.ChangeTodoStatus
 import com.example.gamifyliving.domain.use_case.query.GetTasks
-import com.example.gamifyliving.domain.util.FilterTaskOn
-import com.example.gamifyliving.domain.util.SortCriteria
-import com.example.gamifyliving.domain.util.SortTasksBy
+import com.example.gamifyliving.domain.util.TaskFilter
+import com.example.gamifyliving.domain.util.TaskSortCriteria
+import com.example.gamifyliving.domain.util.TaskSort
 import com.example.gamifyliving.presentation.util.TaskType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -35,12 +35,12 @@ class TasksViewModel @Inject constructor(
         private set
 
     var tasks = getTasks(
-        sorts = listOf(SortTasksBy(sortCriteria = SortCriteria.UNDONE)),
+        sorts = listOf(TaskSort(sortCriteria = TaskSortCriteria.NOT_DONE)),
         filters = taskView?.let {
             setOf(
                 when (it) {
-                    TaskType.TODO -> FilterTaskOn.TODO
-                    TaskType.HABIT -> FilterTaskOn.HABIT
+                    TaskType.TODO -> TaskFilter.TODO
+                    TaskType.HABIT -> TaskFilter.HABIT
                 }
             )
         }
@@ -58,12 +58,12 @@ class TasksViewModel @Inject constructor(
     fun onTasksViewDropDownDismiss() {
         isTasksViewDropDownExpanded = false
         tasks = getTasks(
-            sorts = listOf(SortTasksBy(sortCriteria = SortCriteria.UNDONE)),
+            sorts = listOf(TaskSort(sortCriteria = TaskSortCriteria.NOT_DONE)),
             filters = taskView?.let {
                 setOf(
                     when (it) {
-                        TaskType.TODO -> FilterTaskOn.TODO
-                        TaskType.HABIT -> FilterTaskOn.HABIT
+                        TaskType.TODO -> TaskFilter.TODO
+                        TaskType.HABIT -> TaskFilter.HABIT
                     }
                 )
             }
