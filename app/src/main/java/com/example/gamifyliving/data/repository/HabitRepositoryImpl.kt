@@ -25,7 +25,11 @@ class HabitRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getById(id: Int) =
-        taskWithDetailsDao.getById(id = id)?.toHabit()
+        taskWithDetailsDao.getById(id = id)?.let { taskWithDetails ->
+            if (taskWithDetails.habitWithSchedule != null) {
+                taskWithDetails.toHabit()
+            } else null
+        }
 
     override suspend fun add(habit: Habit) {
 

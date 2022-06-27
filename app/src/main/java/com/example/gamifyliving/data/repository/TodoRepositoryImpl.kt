@@ -20,7 +20,11 @@ class TodoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getById(id: Int) =
-        taskWithDetailsDao.getById(id = id)?.toTodo()
+        taskWithDetailsDao.getById(id = id)?.let { taskWithDetails ->
+            if (taskWithDetails.todoWithSchedule != null) {
+                taskWithDetails.toTodo()
+            } else null
+        }
 
     override suspend fun add(todo: Todo) {
 
