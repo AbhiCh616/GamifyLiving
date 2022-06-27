@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCoins @Inject constructor(
-    private val coinsRepository: CoinRepository
+    private val repository: CoinRepository
 ) {
-    operator fun invoke(): Flow<Int> = coinsRepository.observe()
+    operator fun invoke(): Flow<Int> = repository.observe()
 }
