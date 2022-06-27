@@ -11,9 +11,9 @@ import com.example.gamifyliving.domain.model.entity.Todo
 import com.example.gamifyliving.domain.use_case.command.ChangeHabitStatus
 import com.example.gamifyliving.domain.use_case.command.ChangeTodoStatus
 import com.example.gamifyliving.domain.use_case.query.GetTasks
-import com.example.gamifyliving.domain.util.FilterTaskOn
-import com.example.gamifyliving.domain.util.SortCriteria
-import com.example.gamifyliving.domain.util.SortTasksBy
+import com.example.gamifyliving.domain.util.TaskFilter
+import com.example.gamifyliving.domain.util.TaskSortCriteria
+import com.example.gamifyliving.domain.util.TaskSort
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -29,20 +29,20 @@ class HomeViewModel @Inject constructor(
     var listTasks =
         getTasks(
             sorts = listOf(
-                SortTasksBy(sortCriteria = SortCriteria.TIME),
+                TaskSort(sortCriteria = TaskSortCriteria.TIME),
             ),
-            filterForDate = LocalDate.now()
+            filterOnDate = LocalDate.now()
         )
 
     var calendarTasks =
         getTasks(
             filters = setOf(
-                FilterTaskOn.WITH_TIME
+                TaskFilter.WITH_TIME
             ),
             sorts = listOf(
-                SortTasksBy(sortCriteria = SortCriteria.TIME),
+                TaskSort(sortCriteria = TaskSortCriteria.TIME),
             ),
-            filterForDate = LocalDate.now()
+            filterOnDate = LocalDate.now()
         )
 
     var view by mutableStateOf(HomeViewType.CALENDAR)
