@@ -8,7 +8,7 @@ Game elements that the app has as of now:
 3. Users can create custom rewards which they can buy using coins.
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/59159601/189849178-68b13c3e-2a94-4c94-acc3-b28ef06da02f.png" width="270" height="570" style="padding-right:30px" />
+  <img src="https://user-images.githubusercontent.com/59159601/189849178-68b13c3e-2a94-4c94-acc3-b28ef06da02f.png" width="270" height="570" style="padding-right:30px;" />
   <img src="https://user-images.githubusercontent.com/59159601/189849189-6ce3bf91-8200-4d3c-9a7f-56bcbc63499e.png" width="270" height="570" style="padding-right:10px" />
   <img src="https://user-images.githubusercontent.com/59159601/189849192-9502b358-b226-4d37-a882-b5f7f731e152.png" width="270" height="570" style="padding-right:10px" />
   <img src="https://user-images.githubusercontent.com/59159601/189849194-a5a2f994-223f-4ec8-8b36-7e44a85e6767.png" width="270" height="570" style="padding-right:10px" />
